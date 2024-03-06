@@ -14,7 +14,7 @@
 | 2      | 22520506      | Lê Minh Hùng        |Thành viên |[LeMinhHung120204](https://github.com/LeMinhHung120204)            |22520506@gm.uit.edu.vn   |
 | 3      | 22520830      | Văn Công Gia Luật        |Thành viên |[zalaw1610](https://github.com/zalaw1610)|22520830@gm.uit.edu.vn   |
 | 4      | 22521189      | Thái Ngọc Quân            |Thành viên |[QuanThaiX](https://github.com/QuanThaiX)                    |22521189@gm.uit.edu.vn   |
-| 5      | 225221708     | Trần Phương Vy       |Thành viên |[tranphuongVy](https://github.com/tranphuongVy)    |225221708@gm.uit.edu.vn   |
+| 5      | 225221708     | Trần Phương Vy       |Thành viên |[tranphuongVy](https://github.com/tranphuongVy)    |22521708@gm.uit.edu.vn   |
 
 # GIỚI THIỆU MÔN HỌC
 * **Tên môn học:** Nhập môn công nghệ phần mềm
