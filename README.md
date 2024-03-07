@@ -26,5 +26,3 @@
 # ĐỒ ÁN CUỐI KÌ
 * **Đề tài:** Phần mềm quản lý thư bán vé máy bay
 
-<!-- Footer -->
-<p align='center'>Copyright © 2021 - Đỗ Trọng Khánh</p>
