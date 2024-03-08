@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-03-07T17:20:29.831Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="fSu8oQPBBpS6CNzrEQxu" version="24.0.2" type="device">
+<mxfile host="Electron" modified="2024-03-08T01:11:02.860Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="r3YfSVY07WdXkvlxMfjF" version="23.1.5" type="device">
   <diagram name="Page-1" id="ERcGBdOeoa0EKov4Dhyk">
-    <mxGraphModel dx="1050" dy="587" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -106,10 +106,10 @@
         <mxCell id="0HJ5qdZpC-n_4IhRVBek-26" value="D6: Không có" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="110" y="740" width="100" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="0HJ5qdZpC-n_4IhRVBek-27" value="&lt;b&gt;&lt;u&gt;Mô tả các luồng dữ liệu&lt;/u&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="0HJ5qdZpC-n_4IhRVBek-27" value="&lt;b&gt;&lt;u&gt;Mô tả các luồng dữ liệu&lt;/u&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
           <mxGeometry x="110" y="498" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="0HJ5qdZpC-n_4IhRVBek-28" value="&lt;b&gt;&lt;u&gt;Thuật toán&lt;/u&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="0HJ5qdZpC-n_4IhRVBek-28" value="&lt;b&gt;&lt;u&gt;Thuật toán&lt;/u&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#6F0000;fillColor=#a20025;fontColor=#ffffff;" parent="1" vertex="1">
           <mxGeometry x="110" y="780" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="0HJ5qdZpC-n_4IhRVBek-29" value="B1: Nhận D1 từ người dùng" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
