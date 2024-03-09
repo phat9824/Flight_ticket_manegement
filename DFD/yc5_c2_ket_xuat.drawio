@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-03-07T13:55:34.399Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="goytYgOyuzn_96GUvBFj" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-09T05:58:00.388Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="RvpccXTtcjMHgxO6fp5D" version="23.1.5" type="device">
   <diagram name="Page-1" id="xLjHKsNrHLuWE1qr0acg">
-    <mxGraphModel dx="1276" dy="606" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -112,14 +112,14 @@
         <mxCell id="mU2m3KYlCyOI-BAkA-Vx-48" value="B3: Đọc D3 từ bộ nhớ phụ" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="80" y="892" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mU2m3KYlCyOI-BAkA-Vx-49" value="B4: Đếm số chuyến bay theo từng Tháng từ danh sách các vé đã bán trong năm (D3)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="77.5" y="930" width="480" height="30" as="geometry" />
+        <mxCell id="mU2m3KYlCyOI-BAkA-Vx-49" value="B4: Đếm số chuyến bay theo từng Tháng từ danh sách các vé đã bán (D3) trong năm (D1)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="77.5" y="930" width="500" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mU2m3KYlCyOI-BAkA-Vx-50" value="B5: Tính tổng doanh thu của của tổng tất cả các chuyến bay trong tháng đó theo danh sách các vé đã bán trong năm" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="77.5" y="970" width="650" height="30" as="geometry" />
+        <mxCell id="mU2m3KYlCyOI-BAkA-Vx-50" value="B5: Tính tổng doanh thu của của tổng tất cả các chuyến bay trong tháng đó theo danh sách các vé đã bán trong năm D1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="77.5" y="970" width="660" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mU2m3KYlCyOI-BAkA-Vx-51" value="B6: Tính tỉ lệ doanh thu bán vé các chuyến bay dựa vào số doanh thu tháng&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;và tổng doanh thu của tất cả các tháng của tất cả các chuyến bay trong năm&amp;nbsp;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="80" y="1007" width="460" height="40" as="geometry" />
+        <mxCell id="mU2m3KYlCyOI-BAkA-Vx-51" value="B6: Tính tỉ lệ doanh thu bán vé các chuyến bay dựa vào số doanh thu tháng&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;so với&amp;nbsp;tổng doanh thu của tất cả các tháng của tất cả các chuyến bay trong năm&amp;nbsp;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1007" width="480" height="40" as="geometry" />
         </mxCell>
         <mxCell id="mU2m3KYlCyOI-BAkA-Vx-52" value="B7: lưu D4 xuống bộ nhớ phụ" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="80" y="1052" width="180" height="30" as="geometry" />
