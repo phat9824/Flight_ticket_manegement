@@ -1,5 +1,5 @@
-﻿CREATE DATABASE QUANLYVE
-USE QUANLYVE
+﻿CREATE DATABASE Flight_ticket_database
+USE Flight_ticket_database
 
 CREATE TABLE NGUOIDUNG
 (

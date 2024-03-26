@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-03-09T06:21:52.296Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="Ef_5t_UquIptfxgB6dYl" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-26T20:54:21.034Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="VVGy0-F5cdpjWyd_rXhR" version="23.1.5" type="device">
   <diagram name="Trang-1" id="kYHfyQUYchHKSgXVpSWh">
     <mxGraphModel dx="1050" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -24,7 +24,7 @@
         <mxCell id="psD6yAt_yMws2ZLbCAb7-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="psD6yAt_yMws2ZLbCAb7-2" target="psD6yAt_yMws2ZLbCAb7-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="psD6yAt_yMws2ZLbCAb7-2" value="&lt;font size=&quot;1&quot; style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 24px;&quot;&gt;Tra cứu vé&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
+        <mxCell id="psD6yAt_yMws2ZLbCAb7-2" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot; style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 24px; background-color: rgb(255, 255, 255);&quot;&gt;Tra cứu chuyến bay&lt;/b&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
           <mxGeometry x="285" y="180" width="240" height="80" as="geometry" />
         </mxCell>
         <mxCell id="psD6yAt_yMws2ZLbCAb7-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" parent="1" source="psD6yAt_yMws2ZLbCAb7-3" target="psD6yAt_yMws2ZLbCAb7-2" edge="1">
