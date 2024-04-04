@@ -172,6 +172,7 @@
                 <PasswordBox x:Name="txtRePassword" PasswordChanged="txtRePassword_PasswordChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
+        <Image Source="/Images/return.jpg" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" Margin="0,192,409,0" Height="27" Width="31"/>
         <Label Content="First Name" HorizontalAlignment="Left" Margin="30,272,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="264,273,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
         <Label Content="Mail Address" HorizontalAlignment="Left" Margin="30,341,0,0" VerticalAlignment="Top" Width="80" Foreground="#FFFFFDFD"/>
