@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for SignUp.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class SignUp : Window
     {
-        public Login()
+        public SignUp()
         {
             InitializeComponent();
         }
 
-      
+
     }
 }
