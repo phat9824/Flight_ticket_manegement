@@ -137,39 +137,39 @@
             <TextBlock TextWrapping="Wrap" Text="Sign Up" Margin="115,26,116,528" FontSize="40" Style="{StaticResource titleText1}"  Foreground="#ffffff"/>
 
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,299,265,467" Background="White" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,299,265,461" Background="White" >
             <Grid Margin="7 9">
 
-                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                <TextBox   Style="{StaticResource textBox}"/>
+                <TextBlock x:Name="textFName"  MouseDown="textFName_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtFName"  TextChanged="txtFName_TextChanged"  Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="266,299,29,467" Background="White" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="266,299,29,461" Background="White" >
             <Grid Margin="7 9">
 
-                <TextBlock Style="{StaticResource textHint}" Margin="-6,0,-6,0"/>
-                <TextBox   Style="{StaticResource textBox}"/>
+                <TextBlock x:Name="textLName"  MouseDown="textLName_MouseDown" Style="{StaticResource textHint}" Margin="-6,0,-6,0"/>
+                <TextBox  x:Name="txtLName" TextChanged="txtLName_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,367,30,399" Background="White" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,367,30,392" Background="White" >
             <Grid Margin="7 9">
 
-                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                <TextBox   Style="{StaticResource textBox}"/>
+                <TextBlock x:Name="textMailAdd"  MouseDown="textMailAdd_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtMailAdd" TextChanged="txtMailAdd_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,563,30,203" Background="White" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,563,30,196" Background="White" >
             <Grid Margin="7 9">
 
-                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                <TextBox   Style="{StaticResource textBox}"/>
+                <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged"  Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,640,30,126" Background="White" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,640,30,119" Background="White" >
             <Grid Margin="7 9">
 
-                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                <TextBox   Style="{StaticResource textBox}"/>
+                <TextBlock x:Name="textRePassword" MouseDown="textRePassword_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <PasswordBox x:Name="txtRePassword" PasswordChanged="txtRePassword_PasswordChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
         <Label Content="First Name" HorizontalAlignment="Left" Margin="30,272,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
@@ -181,9 +181,9 @@
         <Label Content="Repeat Password" HorizontalAlignment="Left" Margin="30,614,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
         <RadioButton Content="Admin" HorizontalAlignment="Left" Margin="103,456,0,0" VerticalAlignment="Top" Foreground="White"/>
         <RadioButton Content="Staff" HorizontalAlignment="Left" Margin="291,457,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <ComboBox HorizontalAlignment="Left" Margin="40,507,0,0" VerticalAlignment="Top" Width="96"/>
-        <ComboBox HorizontalAlignment="Left" Margin="175,507,0,0" VerticalAlignment="Top" Width="96"/>
-        <ComboBox HorizontalAlignment="Left" Margin="313,508,0,0" VerticalAlignment="Top" Width="96"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="40,507,0,0" VerticalAlignment="Top" Width="96"  />
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="175,507,0,0" VerticalAlignment="Top" Width="96"/>
+        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="313,508,0,0" VerticalAlignment="Top" Width="96"/>
         <Button Content="Sign Up"
          Style="{StaticResource mainbutton}"
          IsDefault="True" Background="#FFD8EFFF" Margin="119,705,135,41" Foreground="#FF73AFC0" />
