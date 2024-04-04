@@ -136,7 +136,7 @@
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Sign Up" Style="{StaticResource titleText1}"/>
                     <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
-                    <Button Content="Sign Up" Style="{StaticResource button}" Click="Button_Click_1"/>
+                    <Button Content="Sign Up" Style="{StaticResource button}"/>
                 </StackPanel>
                 <Image Source="/Images/Slice 1.png" Width="500" Margin="-1,4,311,-5"/>
                 <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="473,163,18,205">
@@ -166,7 +166,6 @@
                     </Grid>
                 </Border>
                 <Button Content="Sign In"
-                        Click="Button_Click"
                         Style="{StaticResource mainbutton}"
                         IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54"/>
                 <Label Margin="530,356,134,16" FontFamily="Book Antiqua">
