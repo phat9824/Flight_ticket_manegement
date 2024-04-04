@@ -19,11 +19,45 @@ namespace GUI
     /// </summary>
     public partial class Login : Window
     {
+
         public Login()
         {
             InitializeComponent();
         }
 
-      
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
