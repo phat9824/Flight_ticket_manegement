@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"  WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Title="Login" Height="500" Width="800">
+        Title="Login" Height="400" Width="810">
     <Window.Resources>
         <Style x:Key="titleText1" TargetType="TextBlock">
             <Setter Property="FontSize" Value="36"/>
@@ -117,39 +117,104 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
-        </Grid.ColumnDefinitions>
-
+    <Grid >
         <Image Source="/Images/close.jpg" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
 
-        <Border CornerRadius="10 0 0 10">
+
+        <Border CornerRadius="20 20 20 20">
+
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#FFA3D2F3" Offset="0"/>
-                    <GradientStop Color="#FFA3D2F3" Offset="1"/>
+                    <GradientStop Color="#FFffff" Offset="0"/>
+                    <GradientStop Color="#ffffff" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
 
-            <Grid>
-                <Canvas>
-                    <Polygon Points="0,20,230,140,0,270" Fill="#FFB8DFF9"/>
-                    <Polygon Points="100,400,200,370,180,470" Fill="#FFB8DFF9"/>
-                    <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#FFB8DFF9"/>
-                    <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#FFB8DFF9"/>
-                </Canvas>
+            <Grid Margin="0,-8,0,0">
+
 
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Sign Up" Style="{StaticResource titleText1}"/>
                     <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
                     <Button Content="Sign Up" Style="{StaticResource button}" Click="Button_Click_1"/>
                 </StackPanel>
+                <Image Source="/Images/Slice 1.png" Width="500" Margin="-1,4,311,-5"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="473,163,18,205">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/gmail2.png" Height="20"/>
+                        <TextBlock x:Name="textEmail"  MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}"/>
+                        <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
+
+                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="474,224,19,144" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="41*"/>
+                            <ColumnDefinition Width="263*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/key2.png" Height="20" Margin="0,0,0,1"/>
+                        <TextBlock x:Name="textPassword"  MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+                        <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+                    </Grid>
+                </Border>
+                <Button Content="Sign In"
+                        Click="Button_Click"
+                        Style="{StaticResource mainbutton}"
+                        IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54"/>
+                <Label Margin="504,354,160,18" FontFamily="Book Antiqua">
+                    <Label Content="Don't have an account?"/>
+                </Label>
+            </Grid>
+
+        </Border>
+        <TextBlock HorizontalAlignment="Left" Margin="502,32,0,0" TextWrapping="Wrap" Text="Quản lý vé   máy bay" Style="{StaticResource titleText1}" Foreground="#FFA3D2F3" VerticalAlignment="Top" Width="274" Height="104"/>
+
+
+
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="310"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="/Images/close.jpg" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+
+        <Border CornerRadius="20 0 0 20">
+            
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FFffff" Offset="0"/>
+                    <GradientStop Color="#ffffff" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid Margin="0,-8,0,0">
+                -->
+        <!--<Canvas>
+                    <Polygon Points="0,20,230,140,0,270" Fill="#FFB8DFF9"/>
+                    <Polygon Points="100,400,200,370,180,470" Fill="#FFB8DFF9"/>
+                    <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#FFB8DFF9"/>
+                    <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#FFB8DFF9"/>
+                </Canvas>-->
+        <!--
+
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Sign Up" Style="{StaticResource titleText1}"/>
+                    <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
+                    <Button Content="Sign Up" Style="{StaticResource button}" Click="Button_Click_1"/>
+                </StackPanel>
+                <Image Source="/Images/Slice 1.png" Width="500" Margin="0,2,0,-3"/>
             </Grid>
         </Border>
 
-        <Border Background="#ffffff" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
+        <Border Background="#ffffff" Grid.Column="1" CornerRadius="0 20 20 0" MouseDown="Border_MouseDown">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Sign in to App" Style="{StaticResource titleText1}" Foreground="#FFA3D2F3"/>
 
@@ -180,6 +245,7 @@
                         <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}"/>
                     </Grid>
                 </Border>
+                
 
                 <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
@@ -194,13 +260,12 @@
                         <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
                     </Grid>
                 </Border>
-
                 <Button Content="Sign In"
                 Click="Button_Click"
                 Style="{StaticResource mainbutton}"
                 IsDefault="True" Background="#FFA3D2F3"/>
 
             </StackPanel>
-        </Border>
+        </Border>-->
     </Grid>
 </Window>
