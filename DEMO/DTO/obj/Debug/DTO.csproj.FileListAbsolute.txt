@@ -1,0 +1,6 @@
+D:\Năm 2(HK2)\Nhập môn CNPM\Đồ án\Flight_ticket_manegement\DEMO\DTO\bin\Debug\DTO.dll
+D:\Năm 2(HK2)\Nhập môn CNPM\Đồ án\Flight_ticket_manegement\DEMO\DTO\bin\Debug\DTO.pdb
+D:\Năm 2(HK2)\Nhập môn CNPM\Đồ án\Flight_ticket_manegement\DEMO\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+D:\Năm 2(HK2)\Nhập môn CNPM\Đồ án\Flight_ticket_manegement\DEMO\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\Năm 2(HK2)\Nhập môn CNPM\Đồ án\Flight_ticket_manegement\DEMO\DTO\obj\Debug\DTO.dll
+D:\Năm 2(HK2)\Nhập môn CNPM\Đồ án\Flight_ticket_manegement\DEMO\DTO\obj\Debug\DTO.pdb
