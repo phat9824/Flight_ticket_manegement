@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="SignUp" Height="520" Width="1109"  WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        Title="SignUp" Height="684" Width="1110"  WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
         <Style x:Key="titleText1" TargetType="TextBlock">
             <Setter Property="FontSize" Value="36"/>
@@ -117,34 +117,75 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Margin="0,-115,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="413"/>
-            <ColumnDefinition Width="696"/>
+            <ColumnDefinition Width="454"/>
+            <ColumnDefinition Width="655"/>
         </Grid.ColumnDefinitions>
-        <Image Source="/Images/Rectangle 24.png" Margin="54,-64,203,62" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+        <Image Source="/Images/Rectangle 24.png" Margin="59,-50,198,20" RenderTransformOrigin="0.512,0.426" Grid.ColumnSpan="2">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="-0.026"/>
-                    <TranslateTransform/>
+                    <TranslateTransform X="-0.028" Y="-0.004"/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Border CornerRadius="20 20 20 20">
+        <Border CornerRadius="20 20 20 20" Margin="0,183,0,1" Background="#FFA3D2F3">
 
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#FFffff" Offset="0"/>
-                    <GradientStop Color="#ffffff" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-
-            <Grid Margin="0,-8,0,0">
-
-            </Grid>
+            <TextBlock TextWrapping="Wrap" Text="Sign Up" Margin="115,26,116,528" FontSize="40" Style="{StaticResource titleText1}"  Foreground="#ffffff"/>
 
         </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,299,265,467" Background="White" >
+            <Grid Margin="7 9">
+
+                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox   Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="266,299,29,467" Background="White" >
+            <Grid Margin="7 9">
+
+                <TextBlock Style="{StaticResource textHint}" Margin="-6,0,-6,0"/>
+                <TextBox   Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,367,30,399" Background="White" >
+            <Grid Margin="7 9">
+
+                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox   Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,563,30,203" Background="White" >
+            <Grid Margin="7 9">
+
+                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox   Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="30,640,30,126" Background="White" >
+            <Grid Margin="7 9">
+
+                <TextBlock Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox   Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Label Content="First Name" HorizontalAlignment="Left" Margin="30,272,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
+        <Label Content="Last Name" HorizontalAlignment="Left" Margin="264,273,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
+        <Label Content="Mail Address" HorizontalAlignment="Left" Margin="30,341,0,0" VerticalAlignment="Top" Width="80" Foreground="#FFFFFDFD"/>
+        <Label Content="Enter Password" HorizontalAlignment="Left" Margin="30,537,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
+        <Label Content="What best describes what do you do?" HorizontalAlignment="Left" Margin="30,416,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFFFDFD"/>
+        <Label Content="Date of birth" HorizontalAlignment="Left" Margin="30,472,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
+        <Label Content="Repeat Password" HorizontalAlignment="Left" Margin="30,614,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
+        <RadioButton Content="Admin" HorizontalAlignment="Left" Margin="103,456,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <RadioButton Content="Staff" HorizontalAlignment="Left" Margin="291,457,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <ComboBox HorizontalAlignment="Left" Margin="40,507,0,0" VerticalAlignment="Top" Width="96"/>
+        <ComboBox HorizontalAlignment="Left" Margin="175,507,0,0" VerticalAlignment="Top" Width="96"/>
+        <ComboBox HorizontalAlignment="Left" Margin="313,508,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Content="Sign Up"
+         Style="{StaticResource mainbutton}"
+         IsDefault="True" Background="#FFD8EFFF" Margin="119,705,135,41" Foreground="#FF73AFC0" />
     </Grid>
 </Window>
