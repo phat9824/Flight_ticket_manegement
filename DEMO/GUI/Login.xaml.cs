@@ -71,5 +71,18 @@ namespace GUI
             Application.Current.Shutdown();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow f = new MainWindow();
+            f.Show();
+            Window.GetWindow(this).Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SignUp f = new SignUp();
+            f.Show();
+            Window.GetWindow(this).Close();
+        }
     }
 }
