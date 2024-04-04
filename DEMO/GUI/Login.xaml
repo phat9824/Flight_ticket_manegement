@@ -169,9 +169,16 @@
                         Click="Button_Click"
                         Style="{StaticResource mainbutton}"
                         IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54"/>
-                <Label Margin="504,354,160,18" FontFamily="Book Antiqua">
-                    <Label Content="Don't have an account?"/>
+                <Label Margin="530,356,134,16" FontFamily="Book Antiqua">
+                    <Label Content="Don't have an account?" Foreground="#FFCBCACA"/>
                 </Label>
+
+                <Button Content="Sign Up" HorizontalAlignment="Left" Margin="662,361,0,0" VerticalAlignment="Top" Height="24" Width="58" FontFamily="Arial Rounded MT Bold" Foreground="#FFA3D2F3" Background="{x:Null}" BorderBrush="{x:Null}"/>
+              
+                <TextBlock Margin="583,277,135,111">
+       <Hyperlink NavigateUri="http://example.com">Forget Password</Hyperlink>
+                </TextBlock>
+
             </Grid>
 
         </Border>
