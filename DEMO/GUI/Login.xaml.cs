@@ -24,40 +24,52 @@ namespace GUI
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            throw new NotImplementedException();
+            txtEmail.Focus();
         }
 
         private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
+            {
+                textEmail.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textEmail.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtPassword.Focus();
         }
 
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(txtPassword.Password) && txtPassword.Password.Length > 0)
+            {
+                textPassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textPassword.Visibility = Visibility.Visible;
+            }
         }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
     }
 }
