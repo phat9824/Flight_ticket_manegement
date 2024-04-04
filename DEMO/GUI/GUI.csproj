@@ -214,5 +214,10 @@
   <ItemGroup>
     <Resource Include="Images\Rectangle 24.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\return.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
