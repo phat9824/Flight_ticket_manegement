@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for SignUp.xaml
+    /// Interaction logic for SignUp1.xaml
     /// </summary>
-    public partial class SignUp : Window
+    public partial class SignUp1 : Window
     {
-        public SignUp()
+        public SignUp1()
         {
             InitializeComponent();
             //Day
@@ -28,8 +28,6 @@ namespace GUI
             {
                 days.Add(i);
             }
-
-            // Thiết lập dữ liệu cho ComboBox
             comboBox.ItemsSource = days;
             //Month
             List<int> months = new List<int>();
@@ -38,23 +36,18 @@ namespace GUI
                 months.Add(i);
             }
 
-            // Thiết lập dữ liệu cho ComboBox
             comboBox1.ItemsSource = months;
             //Year
-            // Lấy năm hiện tại
             int currentYear = DateTime.Now.Year;
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear + 50; i++) // Lấy 10 năm trước và sau năm hiện tại
+            for (int i = currentYear - 120; i <= currentYear + 50; i++) 
             {
                 years.Add(i);
             }
-
-            // Thiết lập dữ liệu cho ComboBox
             comboBox2.ItemsSource = years;
         }
-
         private void textFName_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtFName.Focus();
