@@ -168,9 +168,6 @@
     </EmbeddedResource>
     <Resource Include="Fonts\Rubik-Medium.ttf" />
     <Resource Include="Fonts\Rubik-Regular.ttf" />
-    <Resource Include="Images\online-signup.webp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -219,11 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\return.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\signup.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
