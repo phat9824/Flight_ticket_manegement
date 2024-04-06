@@ -3,8 +3,23 @@
                     xmlns:vm="clr-namespace:GUI.ViewModel"
                     xmlns:view="clr-namespace:GUI.View">
 
-    <!--<DataTemplate DataType="{x:Type vm:Window1VM}">
-        <view:Window1 />
-    </DataTemplate>-->
+    <DataTemplate DataType="{x:Type vm:Window1VM}">
+        <view:Window1/>
+    </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:Window2VM}">
+        <view:Window2/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window3VM}">
+        <view:Window3/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window4VM}">
+        <view:Window4/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window5VM}">
+        <view:Window5/>
+    </DataTemplate>
 </ResourceDictionary>

@@ -80,7 +80,7 @@ namespace GUI
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SignUp f = new SignUp();
+            SignUp1 f = new SignUp1();
             f.Show();
             Window.GetWindow(this).Close();
         }
