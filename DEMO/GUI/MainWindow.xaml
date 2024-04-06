@@ -77,11 +77,11 @@
                 <StackPanel Height="500"
                             Width="220" Margin="0,110,0,110" Grid.RowSpan="2">
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-               Command="{Binding Window1Command}"
+                              Command="{Binding Window1Command}"
                IsChecked="True" >
                         <Grid>
 
-                            <Image Style="{StaticResource Image_Style}"/>
+                            
                             <TextBlock Text="Window1" Style="{StaticResource Text_Style}"/>
 
                         </Grid>
@@ -91,7 +91,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window2Command}">
                         <Grid>
-                            <Image Style="{StaticResource Image_Style}"/>
+                           
                             <TextBlock Text="Window2" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -99,7 +99,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window3Command}">
                         <Grid>
-                            <Image Style="{StaticResource Image_Style}"/>
+                            
                             <TextBlock Text="Window3" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -107,7 +107,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window4Command}">
                         <Grid>
-                            <Image Style="{StaticResource Image_Style}"/>
+                           
                             <TextBlock Text="Window4" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -115,7 +115,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window5Command}">
                         <Grid>
-                            <Image Style="{StaticResource Image_Style}"/>
+                            
                             <TextBlock Text="Window5" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -123,6 +123,14 @@
 
                 
             </Grid>
+
+            <Grid Grid.Column="1">
+
+                <ContentControl x:Name="Pages"
+                     Content="{Binding CurrentView}" />
+
+            </Grid>
+
         </Grid>
     </Grid>
 </Window>

@@ -24,5 +24,16 @@ namespace GUI
         {
             InitializeComponent();
         }
+        private void CloseApp_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Btn_Checked(object sender, RoutedEventArgs e)
+        {
+            Login f = new Login();
+            f.Show();
+            Window.GetWindow(this).Close();
+        }
     }
 }
