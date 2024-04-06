@@ -4,11 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Menu="clr-namespace:GUI.Ultilities"
+        xmlns:vm="clr-namespace:GUI.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1080"
         Background="Transparent"
         AllowsTransparency="True" WindowStartupLocation="CenterScreen"
         WindowStyle="None">
+    <Window.DataContext>
+        <vm:NavigationVM/>
+    </Window.DataContext>
+    
     <Grid>
         <Border Background="#f8f7fc"
                 CornerRadius="20">
@@ -71,8 +76,52 @@
 
                 <StackPanel Height="500"
                             Width="220" Margin="0,110,0,110" Grid.RowSpan="2">
-                   
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+               Command="{Binding Window1Command}"
+               IsChecked="True" >
+                        <Grid>
+
+                            <Image Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Window1" Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+
+                    </Menu:Btn>
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding Window2Command}">
+                        <Grid>
+                            <Image Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Window2" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </Menu:Btn>
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding Window3Command}">
+                        <Grid>
+                            <Image Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Window3" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </Menu:Btn>
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding Window4Command}">
+                        <Grid>
+                            <Image Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Window4" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </Menu:Btn>
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding Window5Command}">
+                        <Grid>
+                            <Image Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Window5" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </Menu:Btn>
                 </StackPanel>
+
+                
             </Grid>
         </Grid>
     </Grid>
