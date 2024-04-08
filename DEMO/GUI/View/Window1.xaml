@@ -12,11 +12,8 @@
         <vm:Window1VM/>
     </UserControl.DataContext>
     
-    <Grid Background="AliceBlue">
-        <DatePicker HorizontalAlignment="Left" Margin="298,241,0,0" VerticalAlignment="Top" Height="29" Width="183"/>
-        <Expander HorizontalAlignment="Left" Height="100" Header="Expander" Margin="356,158,0,0" VerticalAlignment="Top" Width="100">
-            <Grid Background="#FFE5E5E5"/>
-        </Expander>
+    <Grid>
+       
 
     </Grid>
 </UserControl>
