@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace DTO
 {
-    public class Class1
+    public class Quyen
     {
+        public int MaQuyen { get; set; }
+        public string TenQuyen { get; set; }
     }
 }
