@@ -70,6 +70,32 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="tabButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#121518"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF1DA2ED"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Border>
         <Grid>
@@ -105,6 +131,19 @@
                         <TextBlock Text="Add"/>
                     </StackPanel>
                 </Button>
+                
+                <!--Seprator-->
+                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 1 0 10"/>
+                
+                <!--Tab Button-->
+                <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,10,642,12" Grid.RowSpan="10" >
+                    <Button Content="Flying From" Click="Button_Click"/>
+                    <TextBox x:Name="textInput" Visibility="Collapsed" TextChanged="textInput_TextChanged"
+             Width="110" Margin="0,10,0,0"/>
+                    <ListBox x:Name="suggestionListBox" Visibility="Collapsed"
+             Width="110" Margin="0,5,0,0"/>
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Border>
