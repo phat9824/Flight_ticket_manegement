@@ -20,9 +20,30 @@ namespace GUI.View
     /// </summary>
     public partial class Window2 : UserControl
     {
+        private List<string> suggestions = new List<string> { "Gợi ý 1", "Gợi ý 2", "Gợi ý 3" };
         public Window2()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            textInput.Visibility = Visibility.Visible;
+            textInput.Focus();
+        }
+
+        private void textInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string input = textInput.Text.ToLower();
+            suggestionListBox.Items.Clear();
+            foreach (string suggestion in suggestions)
+            {
+                if (suggestion.ToLower().Contains(input))
+                {
+                    suggestionListBox.Items.Add(suggestion);
+                }
+            }
+            suggestionListBox.Visibility = Visibility.Visible;
         }
     }
 }
