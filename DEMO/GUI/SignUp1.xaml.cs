@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DTO;
 
 namespace GUI
 {
@@ -19,6 +21,8 @@ namespace GUI
     /// </summary>
     public partial class SignUp1 : Window
     {
+        NguoiDungBLL ndbll = new NguoiDungBLL();
+        NguoiDung User = new NguoiDung();
         public SignUp1()
         {
             InitializeComponent();
@@ -28,7 +32,7 @@ namespace GUI
             {
                 days.Add(i);
             }
-            comboBox.ItemsSource = days;
+            D_comboBox.ItemsSource = days;
             //Month
             List<int> months = new List<int>();
             for (int i = 1; i <= 12; i++)
@@ -36,7 +40,7 @@ namespace GUI
                 months.Add(i);
             }
 
-            comboBox1.ItemsSource = months;
+            M_comboBox.ItemsSource = months;
             //Year
             int currentYear = DateTime.Now.Year;
 
@@ -46,7 +50,7 @@ namespace GUI
             {
                 years.Add(i);
             }
-            comboBox2.ItemsSource = years;
+            Y_comboBox.ItemsSource = years;
         }
         private void textFName_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -138,6 +142,34 @@ namespace GUI
             Login f = new Login();
             f.Show();
             Window.GetWindow(this).Close();
+        }
+
+        private void SignU_Button_Click(object sender, RoutedEventArgs e)
+        {
+            User.TenNguoiDung = "asdfasdf";
+            User.Email = txtMailAdd.Text.Trim();
+            User.NgaySinh = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
+            User.PasswordND = txtRePassword.Password.Trim();
+
+            int kq = 0;
+            ndbll.SignUp(User, ref kq);
+
+            if (kq > 0)
+            {
+                MessageBox.Show("Sign Up Success");
+                Login f = new Login();
+                f.Show();
+                Window.GetWindow(this).Close();
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void Admin_bt_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -12,12 +12,11 @@ using DTO;
 
 namespace DAL
 {
-
     public class SqlConnectionData
     {
         public static SqlConnection Connect()
         {
-            string strcon = @"Data Source=SPIDEY;Initial Catalog=Flight_ticket_database;Integrated Security=True";
+            string strcon = @"Data Source=HUNG;Initial Catalog=Flight_ticket_database;Integrated Security=True;Encrypt=True";
             SqlConnection conn = new SqlConnection(strcon); // khởi tạo connect
             return conn;
         }
