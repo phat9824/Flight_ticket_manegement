@@ -14,7 +14,7 @@ namespace GUI.ViewModel
         public string Window2
         {
             get { return _pageModel.Window2; }
-            set { _pageModel.Window1 = value; OnPropertyChanged(); }
+            set { _pageModel.Window2 = value; OnPropertyChanged(); }
         }
 
         public Window2VM()

@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Data;
+using DTO;
+
+
+
+namespace DAL
+{
+
+    public class SqlConnectionData
+    {
+        public static SqlConnection Connect()
+        {
+            string strcon = @"Data Source=SPIDEY;Initial Catalog=Flight_ticket_database;Integrated Security=True";
+            SqlConnection conn = new SqlConnection(strcon); // khởi tạo connect
+            return conn;
+        }
+    }
+    public class DatabaseAccess
+    {
+        // Method to open a connection
+        private static SqlConnection OpenConnection()
+        {
+            SqlConnection conn = SqlConnectionData.Connect();
+            conn.Open();
+            return conn;
+        }
+
+        public static string CheckLogicDTO(NguoiDung nguoidung)
+        {
+            string user = null;
+
+            // Establishing connection to the database
+            using (SqlConnection conn = OpenConnection())
+            {
+                // Creating SQL command with parameters
+                string query = "SELECT Email FROM NGUOIDUNG WHERE Email = @user AND passwordND = @pass";
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@user", nguoidung.Email);
+                    command.Parameters.AddWithValue("@pass", nguoidung.PasswordND);
+
+                    // Executing the SQL query
+                    // Executing the SQL query and retrieving a single value
+                    object result = command.ExecuteScalar();
+
+                    // Checking if the result is not null and converting it to string
+                    if (result != null)
+                    {
+                        user = result.ToString();
+                    }
+                }
+            }
+
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                return "Tai khoan hoac mat khau khong chinh xac!";
+            }
+        }
+    }
+}
