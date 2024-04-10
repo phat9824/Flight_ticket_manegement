@@ -23,8 +23,7 @@ namespace GUI
     /// </summary>
     public partial class Login : Window
     {
-        NguoiDung nguoidung = new NguoiDung();
-        NguoiDungBLL ndBLL = new NguoiDungBLL();
+       
 
         public Login()
         {
@@ -76,7 +75,8 @@ namespace GUI
         {
             Application.Current.Shutdown();
         }
-
+        NguoiDung nguoidung = new NguoiDung();
+        NguoiDungBLL ndBLL = new NguoiDungBLL();
         private void login_btn_clk(object sender, RoutedEventArgs e)
         {
             nguoidung.Email= txtEmail.Text;

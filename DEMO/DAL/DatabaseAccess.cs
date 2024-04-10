@@ -24,36 +24,48 @@ namespace DAL
     }
     public class DatabaseAccess
     {
+        // Method to open a connection
+        private static SqlConnection OpenConnection()
+        {
+            SqlConnection conn = SqlConnectionData.Connect();
+            conn.Open();
+            return conn;
+        }
+
         public static string CheckLogicDTO(NguoiDung nguoidung)
         {
             string user = null;
-            //hàm connect tới csdl
-            SqlConnection conn =  SqlConnectionData.Connect();
-            conn.Open();
-            SqlCommand command = new SqlCommand("proc_logic", conn);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue ("@user", nguoidung.Email);
-            command.Parameters.AddWithValue ("@pass", nguoidung.PasswordND);
-            command.Connection = conn;
 
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.HasRows) 
+            // Establishing connection to the database
+            using (SqlConnection conn = OpenConnection())
             {
-                while(reader.Read()) 
+                // Creating SQL command with parameters
+                string query = "SELECT Email FROM NGUOIDUNG WHERE Email = @user AND passwordND = @pass";
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    user = reader.GetString (0);
-                    return user;
+                    command.Parameters.AddWithValue("@user", nguoidung.Email);
+                    command.Parameters.AddWithValue("@pass", nguoidung.PasswordND);
+
+                    // Executing the SQL query
+                    // Executing the SQL query and retrieving a single value
+                    object result = command.ExecuteScalar();
+
+                    // Checking if the result is not null and converting it to string
+                    if (result != null)
+                    {
+                        user = result.ToString();
+                    }
                 }
-                reader.Close();
-                conn.Close();
+            }
+
+            if (user != null)
+            {
+                return user;
             }
             else
             {
                 return "Tai khoan hoac mat khau khong chinh xac!";
             }
-
-            return user ;
         }
     }
 }
