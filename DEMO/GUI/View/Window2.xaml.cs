@@ -26,24 +26,24 @@ namespace GUI.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            textInput.Visibility = Visibility.Visible;
-            textInput.Focus();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    textInput.Visibility = Visibility.Visible;
+        //    textInput.Focus();
+        //}
 
-        private void textInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string input = textInput.Text.ToLower();
-            suggestionListBox.Items.Clear();
-            foreach (string suggestion in suggestions)
-            {
-                if (suggestion.ToLower().Contains(input))
-                {
-                    suggestionListBox.Items.Add(suggestion);
-                }
-            }
-            suggestionListBox.Visibility = Visibility.Visible;
-        }
+        //private void textInput_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    string input = textInput.Text.ToLower();
+        //    suggestionListBox.Items.Clear();
+        //    foreach (string suggestion in suggestions)
+        //    {
+        //        if (suggestion.ToLower().Contains(input))
+        //        {
+        //            suggestionListBox.Items.Add(suggestion);
+        //        }
+        //    }
+        //    suggestionListBox.Visibility = Visibility.Visible;
+        //}
     }
 }
