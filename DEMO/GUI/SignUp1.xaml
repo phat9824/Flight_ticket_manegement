@@ -185,6 +185,6 @@
         <Image Source="/Images/return.jpg" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" Margin="0,10,414,0" Height="27" Width="31"/>
         <Button Content="Sign Up"
   Style="{StaticResource mainbutton}"
-  IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0" Margin="125,544,129,20" />
+  IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0" Margin="125,544,129,0" Height="52" VerticalAlignment="Top" Click="Button_Click" />
     </Grid>
 </Window>
