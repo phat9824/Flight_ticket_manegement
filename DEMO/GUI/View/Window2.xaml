@@ -173,12 +173,21 @@
             <Setter Property="Width" Value="8"/>
         </Style>
         <Style x:Key="DataGridRowStyle1" TargetType="{x:Type DataGridRow}">
-            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="0 4 0 0"/>
             <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            <Setter Property="ValidationErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBlock Foreground="Red" Margin="2 0 0 0" Text="!" VerticalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridRow}">
-                        <Border x:Name="DGR_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                        <Border x:Name="DGR_Border" Padding="0 8" Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="0" SnapsToDevicePixels="True">
                             <SelectiveScrollingGrid>
                                 <SelectiveScrollingGrid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -196,16 +205,16 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            <!--<Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
             <Setter Property="ValidationErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
                         <TextBlock Foreground="#d50000" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
             <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
+                <!--<Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -213,7 +222,24 @@
                 </Trigger>
                 <Trigger Property="IsNewItem" Value="True">
                     <Setter Property="Margin" Value="{Binding NewItemMargin, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                </Trigger>-->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF479DD6"/>
+                    <Setter Property="Foreground" Value="#ffffff"/>
                 </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FF479DD6"/>
+                    <Setter Property="Foreground" Value="#ffffff"/>
+                </Trigger>
+
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsSelected" Value="True"/>
+                        <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#dfdfdf"/>
+                </MultiTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
@@ -284,6 +310,101 @@
             <Setter Property="TextBlock.FontWeight" Value="Medium"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#222528"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="Margin" Value="0 10 0 0"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="CanUserAddRows" Value="True"/>
+            <Setter Property="CanUserDeleteRows" Value="True"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="ColumnWidth" Value="*"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
+                                <ScrollViewer.Template>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ScrollViewer.Template>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Margin" Value="15 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" BorderThickness="0" SnapsToDevicePixels="True"/>
+                            <ContentPresenter Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--<Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>-->
+            <!--<Style.Triggers>
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <Setter Property="BorderBrush" Value="{Binding (wpf:DataGridAssist.SelectedCellBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                </Trigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Mode=Self}}" Value="True"/>
+                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
+                </MultiDataTrigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value=".56"/>
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+        <Style x:Key="DataGridColumHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#67717d"/>
+            <Setter Property="Margin" Value="15 0 15 10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid>
+                            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignGridColumnHeaderGripper}"/>
+                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignGridColumnHeaderGripper}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Border>
         <Grid>
@@ -350,8 +471,9 @@
                     <ComboBoxItem Content="Item 2" />
                     <ComboBoxItem Content="Item 3" />
                 </ComboBox>
+                
                 <!--DataGrid-->
-                <DataGrid  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,7,30" Grid.RowSpan="2">
+                <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource MaterialDesignDataGrid}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,7,30" Grid.RowSpan="2">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" Width="auto" MaxWidth="50">
                             <DataGridCheckBoxColumn.HeaderTemplate>
@@ -361,7 +483,7 @@
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="STT" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                        <DataGridTextColumn Header="STT" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
 
                         <DataGridTemplateColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -370,17 +492,17 @@
                                         <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
                                             <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                         </Border>
-                                        <TextBlock Text="..." VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding SanBayDi}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
-                        <DataGridTextColumn Header="Sân bay đến" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Khởi hành" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Thời gian" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Số ghế trống" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Số ghế đặt" IsReadOnly="True" Width="*"/>
+
+                        <DataGridTextColumn Header="Sân bay đến" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
+                        <DataGridTextColumn Header="Khởi hành" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
+                        <DataGridTextColumn Header="Thời gian" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
+                        <DataGridTextColumn Header="Số ghế trống" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
+                        <DataGridTextColumn Header="Số ghế đặt" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 
