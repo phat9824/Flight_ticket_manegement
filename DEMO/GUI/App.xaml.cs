@@ -6,6 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+using BLL;
+using DTO;
+
 namespace GUI
 {
     /// <summary>

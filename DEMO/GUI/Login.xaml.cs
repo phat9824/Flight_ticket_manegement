@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL;
+using DTO;
 
 namespace GUI
 {
@@ -71,8 +73,33 @@ namespace GUI
             Application.Current.Shutdown();
         }
 
+        ACCOUNT acc = new ACCOUNT();
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            acc.Email = txtEmail.Text;
+            acc.PasswordUser = txtPassword.Password;
+
+            string getuser = accBLL.CheckLogic(acc);
+
+            // Thể hiện trả lại kết quả nếu nghiệp vụ không đúng
+            switch (getuser)
+            {
+                case "required tk_email":
+                    MessageBox.Show("Tài khoản không được để trống");
+                    return;
+
+                case "required pass":
+                    MessageBox.Show("Mật khẩu không được để trống");
+                    return;
+
+                case "Tai khoan hoac mat khau khong chinh xac!":
+                    MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác!");
+                    return;
+            }
+
+            MessageBox.Show("sign in suceess");
             MainWindow f = new MainWindow();
             f.Show();
             Window.GetWindow(this).Close();

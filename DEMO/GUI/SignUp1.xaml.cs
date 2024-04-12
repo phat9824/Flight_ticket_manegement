@@ -11,12 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using BLL;
+using DTO;
 namespace GUI
 {
     /// <summary>
     /// Interaction logic for SignUp1.xaml
     /// </summary>
+    
     public partial class SignUp1 : Window
     {
         public SignUp1()
@@ -155,6 +157,32 @@ namespace GUI
             {
                 textPhone.Visibility = Visibility.Visible;
             }
+        }
+
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
+        ACCOUNT User = new ACCOUNT();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //User.UserName = "asdfasdf";
+            //User.Email = txtMailAdd.Text.Trim();
+            //User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
+            //User.PasswordUser = txtRePassword.Password.Trim();
+
+            //int kq = 0;
+            //accBLL.SignUp(User, ref kq);
+
+            //if (kq > 0)
+            //{
+            //    MessageBox.Show("Sign Up Success");
+            //    Login f = new Login();
+            //    f.Show();
+            //    Window.GetWindow(this).Close();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Error");
+            //}
         }
     }
 }
