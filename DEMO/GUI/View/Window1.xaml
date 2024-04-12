@@ -12,8 +12,9 @@
         <vm:Window1VM/>
     </UserControl.DataContext>
     
-    <Grid>
-       
-
+    <Grid Background="AliceBlue">
+        <Border CornerRadius="0 20 20 0">
+            
+        </Border>
     </Grid>
 </UserControl>

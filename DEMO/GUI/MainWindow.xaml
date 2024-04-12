@@ -13,7 +13,7 @@
     <Window.DataContext>
         <vm:NavigationVM/>
     </Window.DataContext>
-
+    
     <Grid>
         <Border Background="#f8f7fc"
                 CornerRadius="20">
@@ -81,7 +81,7 @@
                IsChecked="True" >
                         <Grid>
 
-
+                            
                             <TextBlock Text="Window1" Style="{StaticResource Text_Style}"/>
 
                         </Grid>
@@ -91,7 +91,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window2Command}">
                         <Grid>
-
+                           
                             <TextBlock Text="Window2" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -99,7 +99,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window3Command}">
                         <Grid>
-
+                            
                             <TextBlock Text="Window3" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -107,7 +107,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window4Command}">
                         <Grid>
-
+                           
                             <TextBlock Text="Window4" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
@@ -115,16 +115,16 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Window5Command}">
                         <Grid>
-
+                            
                             <TextBlock Text="Window5" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
                 </StackPanel>
 
-
+                
             </Grid>
 
-            <Grid Margin="1,0,0,0" Grid.Column="1">
+            <Grid Grid.Column="1">
 
                 <ContentControl x:Name="Pages"
                      Content="{Binding CurrentView}" />

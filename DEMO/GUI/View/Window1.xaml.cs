@@ -24,10 +24,5 @@ namespace GUI.View
         {
             InitializeComponent();
         }
-
-        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
     }
 }
