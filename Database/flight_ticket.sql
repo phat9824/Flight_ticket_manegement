@@ -109,3 +109,11 @@ CREATE TABLE THAMSO
 	TgChamDV	time,
 	TgHuyV		time,
 )
+DROP TABLE NGUOIDUNG
+
+
+select count(*) from NGUOIDUNG
+select * from NGUOIDUNG
+insert into NGUOIDUNG values('1', NULL, NULL, NULL, NULL, NULL, '1')
+
+SELECT *FROM QUYEN

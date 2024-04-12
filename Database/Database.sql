@@ -1,5 +1,5 @@
-CREATE DATABASE Flight_ticket_database
-USE Flight_ticket_database
+CREATE DATABASE airplan_database
+USE airplan_database
 
 CREATE TABLE PERMISSION
 (
@@ -17,9 +17,9 @@ CREATE TABLE USER_INFO
 	UserName VARCHAR(40),
 	Phone INT,
 	Email VARCHAR(40),
-	Birth SMALLDATETIME
+	Birth SMALLDATETIME,
 	PasswordUser VARCHAR(40),
-	PermissonID INT FOREIGN KEY REFERENCES PERMISSION(PerrmissionID)
+	PermissonID INT FOREIGN KEY REFERENCES PERMISSION(PermissionID)
 )
 
 CREATE TABLE AIRPORT
@@ -92,14 +92,14 @@ CREATE TABLE TICKETCLASS_FLIGHT
 	Quantity INT,
 	PRIMARY KEY (TicketClassID, FlightID)
 )
-CREATE TABLE THAMSO
+CREATE TABLE PARAMETER
 (
-	SoSanBay	int,
-	TGBay		time,
-	SoSB_TG		int,
-	TGDungMin	int,
-	TGDungMax	int,
-	SoHangVe	int,
-	TgChamDV	time,
-	TgHuyV		time,
-)
+    AirportCount            int,            -- Number of airports
+    DepartureTime           time,           -- Departure time
+    IntermediateAirportCount int,           -- Number of intermediate airports
+    MinStopTime             int,            -- Minimum stop time
+    MaxStopTime             int,            -- Maximum stop time
+    SeatCount               int,            -- Number of seats
+    SlowestBookingTime      time,           -- Slowest booking time
+    CancelTime              time            -- Cancellation time
+);
