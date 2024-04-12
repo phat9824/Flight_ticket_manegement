@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseAccess.cs" />
-    <Compile Include="NguoiDungAccess.cs" />
+    <Compile Include="AccountAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

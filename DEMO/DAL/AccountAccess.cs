@@ -9,11 +9,11 @@ using DTO;
 
 namespace DAL
 {
-    public class NguoiDungAccess : DatabaseAccess
+    public class AccountAccess : DatabaseAccess
     {
-        public string CheckLogic(NguoiDung nguoidung)
+        public string CheckLogic(ACCOUNT acc)
         {
-            string info = CheckLogicDTO(nguoidung);
+            string info = CheckLogicDTO(acc);
             return info;
         }
     }

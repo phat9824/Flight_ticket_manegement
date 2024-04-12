@@ -16,7 +16,7 @@ namespace DAL
     {
         public static SqlConnection Connect()
         {
-            string strcon = @"Data Source=HUNG;Initial Catalog=Flight_ticket_database;Integrated Security=True;Encrypt=True";
+            string strcon = @"Data Source=SPIDEY;Initial Catalog=airplan_database;Integrated Security=True";
             SqlConnection conn = new SqlConnection(strcon); // khởi tạo connect
             return conn;
         }
@@ -31,7 +31,7 @@ namespace DAL
             return conn;
         }
 
-        public static string CheckLogicDTO(NguoiDung nguoidung)
+        public static string CheckLogicDTO(ACCOUNT acc)
         {
             string user = null;
 
@@ -39,11 +39,11 @@ namespace DAL
             using (SqlConnection conn = OpenConnection())
             {
                 // Creating SQL command with parameters
-                string query = "SELECT Email FROM NGUOIDUNG WHERE Email = @user AND passwordND = @pass";
+                string query = "SELECT Email FROM ACCOUNT WHERE Email = @user AND PasswordUser = @pass";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    command.Parameters.AddWithValue("@user", nguoidung.Email);
-                    command.Parameters.AddWithValue("@pass", nguoidung.PasswordND);
+                    command.Parameters.AddWithValue("@user", acc.Email);
+                    command.Parameters.AddWithValue("@pass", acc.PasswordUser);
 
                     // Executing the SQL query
                     // Executing the SQL query and retrieving a single value

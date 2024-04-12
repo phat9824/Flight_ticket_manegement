@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Quyen
+    public class PERMISSION
     {
-        public int MaQuyen { get; set; }
-        public string TenQuyen { get; set; }
+        public int PermissionID { get; set; }
+        public string PermissionName { get; set; }
     }
 }

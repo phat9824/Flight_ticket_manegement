@@ -21,8 +21,8 @@ namespace GUI
     /// </summary>
     public partial class SignUp1 : Window
     {
-        NguoiDungBLL ndbll = new NguoiDungBLL();
-        NguoiDung User = new NguoiDung();
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
+        ACCOUNT User = new ACCOUNT();
         public SignUp1()
         {
             InitializeComponent();
@@ -146,13 +146,13 @@ namespace GUI
 
         private void SignU_Button_Click(object sender, RoutedEventArgs e)
         {
-            User.TenNguoiDung = "asdfasdf";
+            User.UserName = "asdfasdf";
             User.Email = txtMailAdd.Text.Trim();
-            User.NgaySinh = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
-            User.PasswordND = txtRePassword.Password.Trim();
+            User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
+            User.PasswordUser = txtRePassword.Password.Trim();
 
             int kq = 0;
-            ndbll.SignUp(User, ref kq);
+            accBLL.SignUp(User, ref kq);
 
             if (kq > 0)
             {

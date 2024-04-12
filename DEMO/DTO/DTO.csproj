@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="QUYEN.cs" />
-    <Compile Include="NGUOIDUNG.cs" />
+    <Compile Include="PERMISSION.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ACCOUNT.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

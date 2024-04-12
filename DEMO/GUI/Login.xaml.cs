@@ -75,14 +75,14 @@ namespace GUI
         {
             Application.Current.Shutdown();
         }
-        NguoiDung nguoidung = new NguoiDung();
-        NguoiDungBLL ndBLL = new NguoiDungBLL();
+        ACCOUNT acc = new ACCOUNT();
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
         private void login_btn_clk(object sender, RoutedEventArgs e)
         {
-            nguoidung.Email= txtEmail.Text;
-            nguoidung.PasswordND = txtPassword.Password ;
+            acc.Email= txtEmail.Text;
+            acc.PasswordUser = txtPassword.Password ;
 
-            string getuser = ndBLL.CheckLogic(nguoidung);
+            string getuser = accBLL.CheckLogic(acc);
 
             // Thể hiện trả lại kết quả nếu nghiệp vụ không đúng
             switch (getuser)

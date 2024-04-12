@@ -12,21 +12,21 @@ using System.Data;
 namespace BLL
 {
     
-    public class NguoiDungBLL
+    public class ACCOUNT_BLL
     {
-        NguoiDungAccess ndAccess = new NguoiDungAccess();
-        public string CheckLogic(NguoiDung nguoidung)
+        AccountAccess accAccess = new AccountAccess();
+        public string CheckLogic(ACCOUNT acc)
         {
-            if (nguoidung.Email == "") 
+            if (acc.Email == "") 
             {
                 return "required tk_email";
             }
-            if (nguoidung.Email == "")
+            if (acc.Email == "")
             {
                 return "required pass";
             }
 
-            string info = ndAccess.CheckLogic(nguoidung);
+            string info = accAccess.CheckLogic(acc);
             return info;
 
         }
@@ -35,19 +35,19 @@ namespace BLL
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("select count(*) from NGUOIDUNG", con);
-            int i = Convert.ToInt32 (cmd.ExecuteScalar());
+            SqlCommand cmd = new SqlCommand("select count(*) from ACCOUNT", con);
+            int i = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
             return i + 1;
         }
-        public void SignUp(NguoiDung User, ref int kq)
+        public void SignUp(ACCOUNT User, ref int kq)
         {
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into NGUOIDUNG values(@ID, @name, @SDT, @Email, @Birtday, @pass, '1')";
+            cmd.CommandText = "insert into ACCOUNT values(@ID, @name, @SDT, @Email, @Birtday, @pass, '1')";
 
             SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20);
             SqlParameter parName = new SqlParameter("@name", SqlDbType.VarChar, 40);
@@ -57,11 +57,11 @@ namespace BLL
             SqlParameter parPass = new SqlParameter("@pass", SqlDbType.VarChar, 40);
 
             parID.Value = AutoID();
-            parName.Value = User.TenNguoiDung;
-            parSdt.Value = User.SoDienThoai;
+            parName.Value = User.UserName;
+            parSdt.Value = User.Phone;
             parMail.Value = User.Email;
-            parBirDay.Value = User.NgaySinh;
-            parPass.Value = User.PasswordND;
+            parBirDay.Value = User.Birth;
+            parPass.Value = User.PasswordUser;
 
             cmd.Parameters.Add(parID);
             cmd.Parameters.Add(parName);

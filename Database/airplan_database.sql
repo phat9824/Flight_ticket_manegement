@@ -1,17 +1,21 @@
 CREATE DATABASE airplan_database
 USE airplan_database
 
+
+INSERT INTO PERMISSION VALUES ('1', 'Admin')
+INSERT INTO PERMISSION VALUES ('2', 'Staff')
 CREATE TABLE PERMISSION
 (
 	PermissionID INT PRIMARY KEY ,
 	PermissionName VARCHAR(40)
 )
 
-INSERT INTO PERMISSION VALUES ('1', 'Admin')
-INSERT INTO PERMISSION VALUES ('2', 'Staff')
 
+insert into ACCOUNT values ('0','admin','1','abc@gmail.com','2004/09/08','1','1')
+insert into ACCOUNT values ('1','s1','1','s1@gmail.com','2004/02/01','2','2')
+insert into ACCOUNT values ('2','s2','1','s2@gmail.com','2004/02/04','1','2')
 
-CREATE TABLE USER_INFO
+CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
 	UserName VARCHAR(40),
