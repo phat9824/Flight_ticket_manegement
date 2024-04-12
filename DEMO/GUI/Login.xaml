@@ -165,9 +165,9 @@
                         <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
                     </Grid>
                 </Border>
-                <Button x:Name="Btn_click" Content="Sign In"
+                <Button Content="Sign In"
                         Style="{StaticResource mainbutton}"
-                        IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54" Click="login_btn_clk"/>
+                        IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54" Click="Button_Click"/>
                 <Label Margin="530,356,134,16" FontFamily="Book Antiqua">
                     <Label Content="Don't have an account?" Foreground="#FFCBCACA"/>
                 </Label>

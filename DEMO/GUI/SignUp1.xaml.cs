@@ -1,5 +1,4 @@
-﻿using BLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DTO;
 
 namespace GUI
 {
@@ -21,8 +19,6 @@ namespace GUI
     /// </summary>
     public partial class SignUp1 : Window
     {
-        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
-        ACCOUNT User = new ACCOUNT();
         public SignUp1()
         {
             InitializeComponent();
@@ -32,7 +28,7 @@ namespace GUI
             {
                 days.Add(i);
             }
-            D_comboBox.ItemsSource = days;
+            comboBox.ItemsSource = days;
             //Month
             List<int> months = new List<int>();
             for (int i = 1; i <= 12; i++)
@@ -40,17 +36,17 @@ namespace GUI
                 months.Add(i);
             }
 
-            M_comboBox.ItemsSource = months;
+            comboBox1.ItemsSource = months;
             //Year
             int currentYear = DateTime.Now.Year;
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear + 50; i++) 
+            for (int i = currentYear - 120; i <= currentYear; i++) 
             {
                 years.Add(i);
             }
-            Y_comboBox.ItemsSource = years;
+            comboBox2.ItemsSource = years;
         }
         private void textFName_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -144,32 +140,21 @@ namespace GUI
             Window.GetWindow(this).Close();
         }
 
-        private void SignU_Button_Click(object sender, RoutedEventArgs e)
+        private void textPhone_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            User.UserName = "asdfasdf";
-            User.Email = txtMailAdd.Text.Trim();
-            User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
-            User.PasswordUser = txtRePassword.Password.Trim();
+            txtPhone.Focus();
+        }
 
-            int kq = 0;
-            accBLL.SignUp(User, ref kq);
-
-            if (kq > 0)
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPhone.Text) && txtPhone.Text.Length > 0)
             {
-                MessageBox.Show("Sign Up Success");
-                Login f = new Login();
-                f.Show();
-                Window.GetWindow(this).Close();
+                textPhone.Visibility = Visibility.Collapsed;
             }
             else
             {
-                MessageBox.Show("Error");
+                textPhone.Visibility = Visibility.Visible;
             }
-        }
-
-        private void Admin_bt_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
