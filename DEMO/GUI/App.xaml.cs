@@ -20,7 +20,8 @@ namespace GUI
         {
             base.OnStartup(e);
             // Đổi start up ở đây
-            var startUpWindow = new Login();
+            //var startUpWindow = new Login();
+            var startUpWindow = new MainWindow();
             startUpWindow.Show();
         }
     }
