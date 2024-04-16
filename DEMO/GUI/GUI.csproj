@@ -306,6 +306,10 @@
       <Project>{f1ecf821-1046-4c0a-96ec-205c01caf88c}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{b9822a15-43fc-467e-8bed-7d7ff370035a}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\key2.png">
