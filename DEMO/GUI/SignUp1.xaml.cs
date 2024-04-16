@@ -11,12 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using BLL;
+using DTO;
 namespace GUI
 {
     /// <summary>
     /// Interaction logic for SignUp1.xaml
     /// </summary>
+    
     public partial class SignUp1 : Window
     {
         public SignUp1()
@@ -42,7 +44,7 @@ namespace GUI
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear + 50; i++) 
+            for (int i = currentYear - 120; i <= currentYear; i++) 
             {
                 years.Add(i);
             }
@@ -138,6 +140,49 @@ namespace GUI
             Login f = new Login();
             f.Show();
             Window.GetWindow(this).Close();
+        }
+
+        private void textPhone_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtPhone.Focus();
+        }
+
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPhone.Text) && txtPhone.Text.Length > 0)
+            {
+                textPhone.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textPhone.Visibility = Visibility.Visible;
+            }
+        }
+
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
+        ACCOUNT User = new ACCOUNT();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //User.UserName = "asdfasdf";
+            //User.Email = txtMailAdd.Text.Trim();
+            //User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
+            //User.PasswordUser = txtRePassword.Password.Trim();
+
+            //int kq = 0;
+            //accBLL.SignUp(User, ref kq);
+
+            //if (kq > 0)
+            //{
+            //    MessageBox.Show("Sign Up Success");
+            //    Login f = new Login();
+            //    f.Show();
+            //    Window.GetWindow(this).Close();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Error");
+            //}
         }
     }
 }
