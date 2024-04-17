@@ -9,6 +9,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              d:DesignHeight="720" d:DesignWidth="805"
              Style="{StaticResource Page_Style}"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
@@ -62,30 +63,27 @@
                 </Grid.ColumnDefinitions>
                 <!--R1_C0___________________________________-->
                 <StackPanel Grid.Column="0">
-                    <ComboBox x:Name="SourceAirport"
-                              materialDesign:ComboBoxAssist.MaxLength="2"
-                              materialDesign:HintAssist.Hint="Flying From"
-                              materialDesign:HintAssist.HintOpacity=".26"
-                              IsEditable="True"
-                              Margin="0 10 0 0"
-                              Height="40" MaxWidth="200"
-                              VerticalAlignment="Top" >
-                    </ComboBox>
                     <ComboBox x:Name="DestinationAirport"
-                              materialDesign:ComboBoxAssist.MaxLength="2"
+                              materialDesign:ComboBoxAssist.MaxLength="10"
                               materialDesign:HintAssist.Hint="Flying To"
                               materialDesign:HintAssist.HintOpacity=".26"
                               IsEditable="True"
-                              Margin="0 0 0 10" 
+                              Margin="0 10 0 0" 
                               Height="40" MaxWidth="200"
                               VerticalAlignment="Top">
                     </ComboBox>
+                    <ComboBox x:Name="SourceAirport"
+                              wpf:ComboBoxAssist.MaxLength="10"
+                              wpf:HintAssist.Hint="Flying From"
+                              wpf:HintAssist.HintOpacity=".26"
+                              IsEditable="True"
+                              Height="40" MaxWidth="200"
+                              />
                 </StackPanel>
                 <!--R1_C1___________________________________-->
                 <StackPanel Grid.Column="1">
                     <Grid>
-                        <TextBox Width="200" Height="40"
-                                 Text="{Binding FlightCode}"
+                        <TextBox x:Name="FlightID" Width="200" Height="40"
                                  materialDesign:HintAssist.Hint="Mã chuyến bay"
                                  materialDesign:HintAssist.HelperText=""
                                  Margin="0 10 0 0"
@@ -95,36 +93,38 @@
                                  VerticalAlignment="Top"/>
                     </Grid>
                     <Grid>
-                        <TextBox Width="200" Height="40"
-                                 Text="{Binding TicketPrice}"
+                        <TextBox x:Name="TicketPrice" Width="200" Height="40"
                                  materialDesign:HintAssist.Hint="Giá vé"
                                  materialDesign:HintAssist.HelperText=""
                                  Margin="0 0 0 10"
                                  Padding="0 10 0 10"
                                  VerticalContentAlignment="Center"
                                  HorizontalContentAlignment="Center"
-                                 VerticalAlignment="Top"/>
+                                 VerticalAlignment="Top">
+                        </TextBox>
                     </Grid>
                 </StackPanel>
                 <!--R1_C2___________________________________-->
                 <StackPanel Grid.Column="2">
-                    <controls:DatePicker Width="200" Height="35"
-                                materialDesign:HintAssist.HelperText=""
-                                materialDesign:HintAssist.Hint="Pick Date"
-                                Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-                                Margin="0 10 0 0" Padding="0 5 0 3"
-                                VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                VerticalAlignment="Top">
+                    <controls:DatePicker x:Name="FlightDay"
+                                         Width="200" Height="35"
+                                         materialDesign:HintAssist.HelperText=""
+                                         materialDesign:HintAssist.Hint="Pick Date"
+                                         Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                         Margin="0 10 0 0" Padding="0 5 0 3"
+                                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                         VerticalAlignment="Top">
                     </controls:DatePicker>
-                    <materialDesign:TimePicker Width="200" Height="35"
-                               materialDesign:HintAssist.HelperText=""
-                               materialDesign:HintAssist.Hint="Pick Time"
-                               Style="{StaticResource MaterialDesignOutlinedTimePicker}"
-                               Margin="0 10 0 0" Padding="0 3 0 5"
-                               VerticalContentAlignment="Center"
-                               HorizontalContentAlignment="Center"
-                               VerticalAlignment="Top"
-                               Is24Hours="True">
+                    <materialDesign:TimePicker x:Name="FlightTime"
+                                           Width="200" Height="35"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="0 10 0 0" Padding="0 3 0 5"
+                                           VerticalContentAlignment="Center"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           Is24Hours="True">
                     </materialDesign:TimePicker>
                 </StackPanel>
             </Grid>
@@ -235,7 +235,7 @@
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetIA_Click"/>
             </Grid>
-            
+
             <!--R6___________________________________-->
             <Grid Grid.Row="6">
                 <DataGrid 
@@ -255,7 +255,7 @@
                                             Width="100"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
-                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>       
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
                         <DataGridTextColumn Header="Layover Time" Binding="{Binding LayoverTime}"
                                             Width="140"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
@@ -265,7 +265,7 @@
                                             Width="180"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
-                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>   
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
 
                         <DataGridTemplateColumn Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.Header>
@@ -298,7 +298,8 @@
                         Content="Confirm"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Click="ConfirmSchedule_Click">
+                        Click="ConfirmSchedule_Click"
+                        Command="{Binding ConfirmScheduleCommand}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
