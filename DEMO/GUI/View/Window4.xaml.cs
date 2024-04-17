@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,24 +16,42 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DTO;
+using GUI.ViewModel;
 
 namespace GUI.View
 {
     /// <summary>
     /// Interaction logic for Window4.xaml
     /// </summary>
+    /// 
+
+    /*
+     Đang:
+        Convert sang dữ liệu sang DTO (gần xong)
+        Thêm AirportName vào SourceAirport và DestinationAirport
+     
+     Cần:
+        Giới hạn miền giá trị thuộc tính theo parameter
+        Màn hình báo lỗi
+        Kiểm tra tính hợp lệ dữ liệu không liên quan database
+     */
     public partial class Window4 : UserControl
     {
         private ObservableCollection<TicketClass> ticketList;
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
         private ICollectionView collectionViewTicketClass;
         private ICollectionView collectionViewIA;
-
-        //private bool isEditing = false;
-
+        private ParameterDTO parameterDTO;
         public Window4()
         {
             InitializeComponent();
+
+            //---------------------------------------------------------------------------------------------------------------------------------------------
+            //parameterDTO = getParameterBAL();
+            parameterDTO = new ParameterDTO();
+            parameterDTO.IntermediateAirportCount = 2;
+            //---------------------------------------------------------------------------------------------------------------------------------------------
 
             ticketList = new ObservableCollection<TicketClass>
             {
@@ -60,24 +79,126 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
+            ScheduleData data = GetScheduleData();
+            FlightDTO flightDTO = InitializeFlightDTO(data);
+            AirportDTO airportDTO = InitializeAirportDTO(data);
+            List<TicketClassDTO> listTicketClassDTO = InitializeListTicketClassDTO(data);
+            List<TicketClassFlightDTO> listTicketClassFlightDTO = InitializeListTicketClassFlightDTO(data);
+            List<IntermediateAirportDTO> listIntermediateAirportDTO = InitializeListIntermediateAirportDTO(data);
 
             // Xử lí ......
 
+            // string processStateInfor = processBAL(flightDTO,airportDTO,listTicketClassDTO,listTicketClassFlightDTO,listIntermediateAirportDTO);
 
-            // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp...
+            // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
             bool f = true;
             if (f) {
                 SourceAirport.SelectedIndex = -1;
+                SourceAirport.Text = string.Empty;
                 DestinationAirport.SelectedIndex = -1;
-                //...
+                DestinationAirport.Text = string.Empty;
+                FlightID.Text = string.Empty;
+                TicketPrice.Text = string.Empty;
+                FlightDay.SelectedDate = null;
+                FlightTime.SelectedTime = null;
+                ticketList.Clear();
+                IAList.Clear();
+                collectionViewTicketClass.Filter = null;
+                collectionViewIA.Filter = null;
             }
             else
             {
                 // Xuat man hinh bao loi
             }
-            // Tu bi không tình yêu
         }
 
+
+        private ScheduleData GetScheduleData()
+        {
+            ScheduleData data = new ScheduleData();
+            data.sourceAirportID = SourceAirport.Text.Trim();
+            data.destinationAirportID = DestinationAirport.Text.Trim();
+            data.flightID = FlightID.Text.Trim();
+            data.price = decimal.TryParse(TicketPrice.Text.Trim(), out decimal price) ? price : -1;
+            data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
+            data.flightTime = FlightTime.SelectedTime.HasValue ? FlightTime.SelectedTime.Value.TimeOfDay : TimeSpan.Zero;
+            data.IAList = IAList;   
+            data.ticketList = ticketList;
+            return data;
+        }
+
+        private FlightDTO InitializeFlightDTO(ScheduleData data)
+        {
+            FlightDTO flightDTO = new FlightDTO();
+            flightDTO.DestinationAirportID = data.destinationAirportID;
+            flightDTO.SourceAirportID = data.sourceAirportID;
+            flightDTO.FlightID = data.flightID;
+            flightDTO.Price = data.price;
+            flightDTO.FlightDay = data.flightDay;
+            flightDTO.FlightTime = data.flightTime;
+            return flightDTO;
+        }
+
+        private AirportDTO InitializeAirportDTO(ScheduleData data)
+        {
+            AirportDTO airportDTO = new AirportDTO();
+            return airportDTO;
+        }
+
+        private AirportFlightDTO InitializeAirportFlightDTO(ScheduleData data)
+        {
+            AirportFlightDTO airportFlightDTO = new AirportFlightDTO();
+            return airportFlightDTO;
+        }
+
+        private List<TicketClassDTO> InitializeListTicketClassDTO(ScheduleData data)
+        {
+            List<TicketClassDTO> listTicketClassDTO = new List<TicketClassDTO>();
+            foreach (var ticketclass in data.ticketList)
+            {
+                listTicketClassDTO.Add(new TicketClassDTO
+                {
+                    TicketClassID = ticketclass.ID,
+                    TicketClassName = ticketclass.Name,
+                });
+            }
+            return listTicketClassDTO;
+        }
+
+        private List<TicketClassFlightDTO> InitializeListTicketClassFlightDTO(ScheduleData data)
+        {
+            List<TicketClassFlightDTO> listTicketClassFlightDTO = new List<TicketClassFlightDTO>();
+            foreach (var ticketclass in data.ticketList)
+            {
+                listTicketClassFlightDTO.Add(new TicketClassFlightDTO
+                {
+                    TicketClassID = ticketclass.ID,
+                    FlightID = data.flightID,
+                    Quantity = ticketclass.Quantity,
+                });
+            }
+            return listTicketClassFlightDTO;
+        }
+
+        private List<IntermediateAirportDTO> InitializeListIntermediateAirportDTO(ScheduleData data)
+        {
+            List<IntermediateAirportDTO> listIntermediateAirportDTO = new List<IntermediateAirportDTO>();
+            foreach (var airport in data.IAList)
+            {
+                listIntermediateAirportDTO.Add(new IntermediateAirportDTO
+                {
+                    FlightID = data.flightID,
+                    AirportID = airport.ID,
+                    LayoverTime = airport.LayoverTime,
+                    Note = airport.Note
+                });
+            }
+            return listIntermediateAirportDTO;
+        }
+
+        /*---------------------------------------------BEGIN R1------------------------------------------------*/
+
+        /*---------------------------------------------END R1--------------------------------------------------*/
 
         /*---------------------------------------------BEGIN Data Grid 1 aka TicketClass------------------------------------------------*/
 
@@ -221,7 +342,7 @@ namespace GUI.View
                 {
                     EndEditIA();
                 }
-                ((ObservableCollection<IntermediateAirport>)collectionViewTicketClass.SourceCollection).Remove(selectedIA);
+                ((ObservableCollection<IntermediateAirport>)collectionViewIA.SourceCollection).Remove(selectedIA);
                 dataGrid2.ItemsSource = collectionViewIA;
             }
         }
@@ -282,58 +403,15 @@ namespace GUI.View
 
     }
 
-
-
-    public class TicketClass : INotifyPropertyChanged
+    public class ScheduleData
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private string _id;
-        private string _name;
-        private int _quantity;
-        private string _buttonContent = "Edit";
-
-        public string ID { get => _id; set { _id = value; OnPropertyChanged(); } }
-        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
-        public int Quantity { get => _quantity; set { _quantity = value; OnPropertyChanged(); } }
-        public string ButtonContent
-        {
-            get => _buttonContent;
-            set { _buttonContent = value; OnPropertyChanged(); }
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public class IntermediateAirport : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private string _id;
-        private string _name;
-        private TimeSpan _layoverTime;
-        private string _note;
-        private string _buttonContent = "Edit";
-
-        public string ID { get => _id; set { if (_id != value) { _id = value; OnPropertyChanged(); } } }
-
-        public string Name { get => _name; set { if (_name != value) { _name = value; OnPropertyChanged(); } } }
-
-        public TimeSpan LayoverTime { get => _layoverTime; set { if ( _layoverTime != value) { _layoverTime = value; OnPropertyChanged(); } } }
-
-        public string Note { get => _note; set { if (_note != value) { _note = value; OnPropertyChanged(); } } }
-
-        public string ButtonContent
-        {
-            get => _buttonContent;
-            set { _buttonContent = value; OnPropertyChanged(); }
-        }
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public string flightID;
+        public string sourceAirportID;
+        public string destinationAirportID;
+        public decimal price;
+        public DateTime flightDay;
+        public TimeSpan flightTime;
+        public ObservableCollection<TicketClass> ticketList;
+        public ObservableCollection<IntermediateAirport> IAList;
     }
 }
