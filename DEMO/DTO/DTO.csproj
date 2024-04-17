@@ -42,8 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACCOUNT.cs" />
+    <Compile Include="AirportDTO.cs" />
+    <Compile Include="AirportFlightDTO.cs" />
+    <Compile Include="BookingTicketDTO.cs" />
+    <Compile Include="CustomerDTO.cs" />
+    <Compile Include="FlightDTO.cs" />
+    <Compile Include="ParameterDTO.cs" />
     <Compile Include="PERMISSION.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SellingTicketDTO.cs" />
+    <Compile Include="TicketClassDTO.cs" />
+    <Compile Include="TicketClassFlightDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
