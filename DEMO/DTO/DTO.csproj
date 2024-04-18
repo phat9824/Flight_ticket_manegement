@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="ACCOUNT.cs" />
     <Compile Include="AirportDTO.cs" />
-    <Compile Include="AirportFlightDTO.cs" />
     <Compile Include="BookingTicketDTO.cs" />
     <Compile Include="CustomerDTO.cs" />
     <Compile Include="FlightDTO.cs" />
