@@ -51,7 +51,7 @@
         <Grid Background="#FFFCFBFF" Margin="0 0 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="4"/>
@@ -61,7 +61,7 @@
             </Grid.RowDefinitions>
 
             <!--R0___________________________________-->
-            <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="0 10 0 0" Height="43" Width="341"/>
+            <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="10 7 0 0" Height="43" Width="341"/>
 
             <!--R1___________________________________-->
             <Grid Grid.Row="1">
@@ -76,7 +76,7 @@
                                 Margin="20 0 0 0">
                         <ComboBox x:Name="DestinationAirport"
                                   materialDesign:ComboBoxAssist.MaxLength="30"
-                                  materialDesign:HintAssist.Hint="Flying To"
+                                  materialDesign:HintAssist.Hint="Destination Airport"
                                   materialDesign:HintAssist.HintOpacity=".26"
                                   IsEditable="True"
                                   IsTextSearchEnabled="True"
@@ -109,7 +109,7 @@
                                 Margin="20 0 0 0">
                         <ComboBox x:Name="SourceAirport"
                                   wpf:ComboBoxAssist.MaxLength="30"
-                                  wpf:HintAssist.Hint="Flying From"
+                                  wpf:HintAssist.Hint="Departure Airport"
                                   wpf:HintAssist.HintOpacity=".26"
                                   IsEditable="True"
                                   IsTextSearchEnabled="True"
@@ -140,7 +140,7 @@
                 <StackPanel Grid.Column="1">
                     <Grid>
                         <TextBox x:Name="FlightID" Width="200" Height="40"
-                                 materialDesign:HintAssist.Hint="Mã chuyến bay"
+                                 materialDesign:HintAssist.Hint="Flight ID"
                                  materialDesign:HintAssist.HelperText=""
                                  Margin="0 10 0 0"
                                  Padding="0 10 0 10"
@@ -150,7 +150,7 @@
                     </Grid>
                     <Grid>
                         <TextBox x:Name="TicketPrice" Width="200" Height="40"
-                                 materialDesign:HintAssist.Hint="Giá vé"
+                                 materialDesign:HintAssist.Hint="Ticket Price"
                                  materialDesign:HintAssist.HelperText=""
                                  Margin="0 0 0 10"
                                  Padding="0 10 0 10"
@@ -165,7 +165,7 @@
                     <controls:DatePicker x:Name="FlightDay"
                                          Width="200" Height="35"
                                          materialDesign:HintAssist.HelperText=""
-                                         materialDesign:HintAssist.Hint="Pick Date"
+                                         materialDesign:HintAssist.Hint="MM/DD/YYYY"
                                          Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                          Margin="0 10 0 0" Padding="0 5 0 3"
                                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
@@ -174,7 +174,7 @@
                     <materialDesign:TimePicker x:Name="FlightTime"
                                            Width="200" Height="35"
                                            materialDesign:HintAssist.HelperText=""
-                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           materialDesign:HintAssist.Hint="HH:mm"
                                            Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                            Margin="0 10 0 0" Padding="0 3 0 5"
                                            VerticalContentAlignment="Center"
@@ -220,8 +220,7 @@
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
                     <DataGrid.Columns>
-
-                        <DataGridTemplateColumn Header="Ticket Class ID" Width="190">
+                        <DataGridTemplateColumn Header="Ticket Class ID" Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxID"
@@ -235,7 +234,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Ticket Class Name" Width="190">
+                        <DataGridTemplateColumn Header="Ticket Class Name" Width="270" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxName"
@@ -263,24 +262,24 @@
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
                         -->
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"
-                                            Width="190"
+                                            Width="180"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
 
-                        <DataGridTemplateColumn Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Width="150" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.Header>
                                 <TextBlock Text="Actions"
                                            HorizontalAlignment="Center"/>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Content="Delete"
-                                                HorizontalAlignment="Center" Margin="10,0,0,0"
-                                                Width = "80"
-                                                Click="DeleteButton_Click_1" />
-                                    </StackPanel>
+                                    <Button Content="Delete"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                            Margin="0,0,0,0"
+                                            Width = "100"
+                                            Click="DeleteButton_Click_1"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -323,33 +322,52 @@
                 <DataGrid 
                           x:Name="dataGrid2"
                           AutoGenerateColumns="False" CanUserAddRows="False"
-                          IsReadOnly="True"
+                          IsReadOnly="False"
                           ItemsSource="{Binding}"
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn Header="Intermidate Airport" Binding="{Binding Name}"
-                                            Width="150"
-                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
-                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
-                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"
-                                            Width="100"
-                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
-                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+                        <DataGridTemplateColumn Header="ID" Width="120" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="ComboBoxIAID"
+                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.airports}"
+                                              SelectedValue="{Binding ID}"
+                                              DisplayMemberPath="AirportID"
+                                              SelectedValuePath="AirportID"
+                                              IsReadOnly="False"
+                                              SelectionChanged="ComboBox_AirportID_SelectionChanged"
+                                              Tag="ID"/> 
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Intermidate Airport" Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="ComboBoxIAName"
+                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.airports}"
+                                              SelectedValue="{Binding Name}"
+                                              DisplayMemberPath="AirportName"
+                                              SelectedValuePath="AirportName"
+                                              IsReadOnly="False"
+                                              SelectionChanged="ComboBox_AirportName_SelectionChanged"
+                                              Tag="Name"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                         <DataGridTextColumn Header="Layover Time" Binding="{Binding LayoverTime}"
-                                            Width="140"
+                                            Width="130"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
                         <DataGridTextColumn Header="Note" Binding="{Binding Note}"
-                                            Width="180"
+                                            Width="200"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
 
-                        <DataGridTemplateColumn Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Width="150" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.Header>
                                 <TextBlock Text="Actions"
                                            HorizontalAlignment="Center"/>
@@ -357,14 +375,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Content="{Binding ButtonContent}"
-                                                CommandParameter="{Binding}"
-                                                HorizontalAlignment="Center"
-                                                Width = "80"
-                                                Click="EditButton_Click_2"/>
                                         <Button Content="Delete"
                                                 HorizontalAlignment="Center" Margin="10,0,0,0"
-                                                Width = "80"
+                                                Width = "100"
                                                 Click="DeleteButton_Click_2" />
                                     </StackPanel>
                                 </DataTemplate>
