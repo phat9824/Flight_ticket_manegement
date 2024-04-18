@@ -11,6 +11,7 @@ namespace DTO
         private int airportCount;
         private TimeSpan departureTime;
         private int intermediateAirportCount;
+        private int ticketClassCount;
         private int minStopTime;
         private int maxStopTime;
         private int seatCount;
@@ -33,6 +34,12 @@ namespace DTO
         {
             get => intermediateAirportCount;
             set => intermediateAirportCount = value;
+        }
+
+        public int TicketClassCount
+        {
+            get => ticketClassCount;
+            set => ticketClassCount = value;
         }
 
         public int MinStopTime
