@@ -40,7 +40,7 @@ namespace GUI.View
         Tiếp tục giới hạn miền giá trị thuộc tính theo parameter
         Màn hình báo lỗi
      */
-    public partial class Window4 : UserControl
+    public partial class FlightScheduleWindow : UserControl
     {
         private ObservableCollection<TicketClass> ticketList;
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
@@ -49,7 +49,7 @@ namespace GUI.View
         private ParameterDTO parameterDTO;
         public List<TicketClassDTO> ticketClasses { get; set; }
         public List<AirportDTO> airports {  get; set; }
-        public Window4()
+        public FlightScheduleWindow()
         {
             InitializeComponent();
             

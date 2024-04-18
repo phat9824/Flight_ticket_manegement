@@ -105,10 +105,10 @@
                     </Menu:Btn>
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding Window4Command}">
+                              Command="{Binding FlightScheduleWindowCommand}">
                         <Grid>
 
-                            <TextBlock Text="Window4" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Add Schedule" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
 

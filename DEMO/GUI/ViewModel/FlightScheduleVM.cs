@@ -16,7 +16,7 @@ using System.Windows.Markup;
 
 namespace GUI.ViewModel
 {
-    class Window4VM : Ultilities.ViewModelBase
+    class FlightScheduleWindowVM : Ultilities.ViewModelBase
     {
         private readonly PageModel _pageModel;
 
@@ -26,7 +26,7 @@ namespace GUI.ViewModel
             set { _pageModel.Window4 = value; OnPropertyChanged(); }
         }
 
-        public Window4VM()
+        public FlightScheduleWindowVM()
         {
             _pageModel = new PageModel();
         }
