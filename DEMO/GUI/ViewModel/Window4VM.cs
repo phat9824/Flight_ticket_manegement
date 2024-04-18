@@ -9,6 +9,10 @@ using DTO;
 using System.Windows.Input;
 using GUI.Model;
 using GUI.Ultilities;
+using GUI.View;
+using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Windows.Markup;
 
 namespace GUI.ViewModel
 {
@@ -50,6 +54,11 @@ namespace GUI.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public override string ToString()
+        {
+            return $"ID: {ID}, Name: {Name}, Quantity: {Quantity}, ButtonContent: {ButtonContent}";
+        }
     }
 
     public class IntermediateAirport : INotifyPropertyChanged
@@ -78,6 +87,122 @@ namespace GUI.ViewModel
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {ID}, Name: {Name}, Layover Time: {LayoverTime}, Note: {Note}, ButtonContent: {ButtonContent}";
+        }
+    }
+    public class ScheduleData
+    {
+        public string flightID;
+        public string sourceAirportID;
+        public string destinationAirportID;
+        public decimal price;
+        public DateTime flightDay;
+        public TimeSpan flightTime;
+        public ObservableCollection<TicketClass> ticketList;
+        public ObservableCollection<IntermediateAirport> IAList;
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Flight ID: {flightID} ({GetDataType(nameof(flightID))})");
+            sb.AppendLine($"Source Airport ID: {sourceAirportID} ({GetDataType(nameof(sourceAirportID))})");
+            sb.AppendLine($"Destination Airport ID: {destinationAirportID} ({GetDataType(nameof(destinationAirportID))})");
+            sb.AppendLine($"Price: {price} ({GetDataType(nameof(price))})");
+            sb.AppendLine($"Flight Day: {flightDay} ({GetDataType(nameof(flightDay))})");
+            sb.AppendLine($"Flight Time: {flightTime} ({GetDataType(nameof(flightTime))})");
+            sb.AppendLine("Ticket List:");
+            foreach (var ticket in ticketList)
+            {
+                sb.AppendLine($"  {ticket.ToString()}");
+            }
+            sb.AppendLine("Intermediate Airports:");
+            foreach (var ia in IAList)
+            {
+                sb.AppendLine($"  {ia.ToString()}");
+            }
+            return sb.ToString();
+        }
+
+        private string GetDataType(string propertyName)
+        {
+            var fieldInfo = this.GetType().GetField(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            if (fieldInfo != null)
+            {
+                return fieldInfo.FieldType.Name;
+            }
+            var propertyInfo = this.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            if (propertyInfo != null)
+            {
+                return propertyInfo.PropertyType.Name;
+            }
+            return "Unknown";
+        }
+
+        public FlightDTO InitializeFlightDTO()
+        {
+            return new FlightDTO
+            {
+                DestinationAirportID = this.destinationAirportID,
+                SourceAirportID = this.sourceAirportID,
+                FlightID = this.flightID,
+                Price = this.price,
+                FlightDay = this.flightDay,
+                FlightTime = this.flightTime
+            };
+        }
+
+        public AirportDTO InitializeAirportDTO()
+        {
+            return new AirportDTO();
+        }
+
+        public List<TicketClassDTO> InitializeListTicketClassDTO()
+        {
+            List<TicketClassDTO> list = new List<TicketClassDTO>();
+            foreach (var ticketclass in this.ticketList)
+            {
+                list.Add(new TicketClassDTO
+                {
+                    TicketClassID = ticketclass.ID,
+                    TicketClassName = ticketclass.Name,
+                });
+            }
+            return list;
+        }
+
+        public List<TicketClassFlightDTO> InitializeListTicketClassFlightDTO()
+        {
+            List<TicketClassFlightDTO> list = new List<TicketClassFlightDTO>();
+            foreach (var ticketclass in this.ticketList)
+            {
+                list.Add(new TicketClassFlightDTO
+                {
+                    TicketClassID = ticketclass.ID,
+                    FlightID = this.flightID,
+                    Quantity = ticketclass.Quantity,
+                });
+            }
+            return list;
+        }
+
+        public List<IntermediateAirportDTO> InitializeListIntermediateAirportDTO()
+        {
+            List<IntermediateAirportDTO> list = new List<IntermediateAirportDTO>();
+            foreach (var airport in this.IAList)
+            {
+                list.Add(new IntermediateAirportDTO
+                {
+                    FlightID = this.flightID,
+                    AirportID = airport.ID,
+                    LayoverTime = airport.LayoverTime,
+                    Note = airport.Note
+                });
+            }
+            return list;
         }
     }
 }
