@@ -21,6 +21,7 @@ using DTO;
 using GUI.ViewModel;
 using System.Collections;
 using System.Web.UI.WebControls;
+using ControlzEx.Standard;
 
 namespace GUI.View
 {
@@ -30,14 +31,14 @@ namespace GUI.View
     /// 
 
     /*
-     Đang:
-        Convert sang dữ liệu sang DTO (gần xong)
-        Thêm AirportName vào SourceAirport và DestinationAirport
-     
+     Xong:
+        Convert dữ liệu sang DTO
+        Sync ID-Name
+        Giới hạn số ticket class và IA theo parameter
+
      Cần:
-        Giới hạn miền giá trị thuộc tính theo parameter
+        Tiếp tục giới hạn miền giá trị thuộc tính theo parameter
         Màn hình báo lỗi
-        Kiểm tra tính hợp lệ dữ liệu không liên quan database
      */
     public partial class Window4 : UserControl
     {
@@ -47,7 +48,7 @@ namespace GUI.View
         private ICollectionView collectionViewIA;
         private ParameterDTO parameterDTO;
         public List<TicketClassDTO> ticketClasses { get; set; }
-
+        public List<AirportDTO> airports {  get; set; }
         public Window4()
         {
             InitializeComponent();
@@ -60,10 +61,10 @@ namespace GUI.View
             parameterDTO.TicketClassCount = 2;
 
             //---------------------------------------------------------------------------------------------------------------------------------------------
-            //List<AirportDTO> airports = BAL.GetAirports();
-            //List<TicketClassDTO> ticketclasses =BAL.GetTicketClass();
+            // airports = BAL.GetAirports();
+            // ticketclasses =BAL.GetTicketClass();
 
-            List<AirportDTO> airports = new List<AirportDTO>
+            airports = new List<AirportDTO>
             {
                 new AirportDTO() {AirportID = "000", AirportName = "Test"},
                 new AirportDTO() {AirportID = "001", AirportName = "Tân Sơn Nhất"},
@@ -76,8 +77,8 @@ namespace GUI.View
 
             ticketClasses = new List<TicketClassDTO>
             {
-            new TicketClassDTO { TicketClassID = "1", TicketClassName = "Economy" },
-            new TicketClassDTO { TicketClassID = "2", TicketClassName = "Business" },
+                new TicketClassDTO { TicketClassID = "1", TicketClassName = "Economy" },
+                new TicketClassDTO { TicketClassID = "2", TicketClassName = "Business" },
             };
             //InitializeComboBoxItems();
 
@@ -91,8 +92,8 @@ namespace GUI.View
 
             IAList = new ObservableCollection<IntermediateAirport>
             {
-                new IntermediateAirport { ID = "1", Name = "Standard", LayoverTime = TimeSpan.FromMinutes(15), Note = "ahdjbsad" },
-                new IntermediateAirport { ID = "2", Name = "Premium1", LayoverTime = TimeSpan.FromMinutes(20), Note = "ahdjbsad"  },
+                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
+                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
             };
             collectionViewIA = CollectionViewSource.GetDefaultView(IAList);
             dataGrid2.ItemsSource = collectionViewIA;
@@ -114,12 +115,16 @@ namespace GUI.View
 
 
             // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
-            bool processStateInfor = true;
-            if (processStateInfor) {
+            string processStateInfor = string.Empty;
+            if (String.IsNullOrWhiteSpace(processStateInfor)) {
                 SourceAirport.SelectedIndex = -1;
                 SourceAirport.Text = string.Empty;
                 DestinationAirport.SelectedIndex = -1;
                 DestinationAirport.Text = string.Empty;
+                SourceAirportID.SelectedIndex = -1;
+                SourceAirportID.Text = string.Empty;
+                DestinationAirportID.SelectedIndex = -1;
+                DestinationAirportID.Text = string.Empty;
                 FlightID.Text = string.Empty;
                 TicketPrice.Text = string.Empty;
                 FlightDay.SelectedDate = null;
@@ -131,7 +136,9 @@ namespace GUI.View
             }
             else
             {
-                MessageBox.Show("An error occurred. Please check the data and try again.", "Error");
+                string errorMessage = "An error occurred. Please check the data and try again.";
+                string state = "Error";
+                MessageBox.Show(errorMessage, state);
             }
         }
 
@@ -297,42 +304,22 @@ namespace GUI.View
         /*---------------------------------------------END Data Grid 1 aka TicketClass------------------------------------------------*/
 
         /*---------------------------------------------BEGIN Data Grid 2 aka IA-------------------------------------------------------*/
-        private void EndEditIA()
-        {
-            dataGrid2.CancelEdit(DataGridEditingUnit.Row);
-            dataGrid2.IsReadOnly = true;
-            foreach (var item in dataGrid2.Items)
-            {
-                DataGridRow otherDataGridRow = (DataGridRow)dataGrid2.ItemContainerGenerator.ContainerFromItem(item);
-                if (otherDataGridRow != null)
-                {
-                    otherDataGridRow.IsEnabled = true;
-                }
-                if (item is IntermediateAirport IA)
-                {
-                    IA.ButtonContent = "Edit";
-                }
-            }
-        }
 
         private void AddIA_Click(object sender, RoutedEventArgs e)
         {
-            EndEditIA();
-
             if (dataGrid2.Items.Count >= parameterDTO.TicketClassCount)
             {
                 MessageBox.Show($"Cannot add intermidate airport. The maximum intermidate airport is {parameterDTO.IntermediateAirportCount}");
                 return;
             }
 
-            var newIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromSeconds(0), Note = "...XYZ" };
+            var newIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromSeconds(0), Note = "..." };
             IAList.Add(newIA);
             collectionViewTicketClass.MoveCurrentTo(newIA);
         }
 
         private void ResetIA_Click(object sender, RoutedEventArgs e)
         {
-            EndEditIA();
             IAList.Clear();
         }
 
@@ -341,68 +328,41 @@ namespace GUI.View
             IntermediateAirport selectedIA = (IntermediateAirport)dataGrid2.SelectedItem;
             if (selectedIA != null)
             {
-                if (dataGrid2.IsReadOnly == false)
-                {
-                    EndEditIA();
-                }
                 ((ObservableCollection<IntermediateAirport>)collectionViewIA.SourceCollection).Remove(selectedIA);
                 dataGrid2.ItemsSource = collectionViewIA;
             }
         }
 
-        private void EditButton_Click_2(object sender, RoutedEventArgs e)
+        private void ComboBox_AirportID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            System.Windows.Controls.Button editButton = sender as System.Windows.Controls.Button;
-            IntermediateAirport IA = editButton.CommandParameter as IntermediateAirport;
-            if (IA.ButtonContent == "Edit")
+            ComboBox comboBoxIAID = sender as ComboBox;
+            if (comboBoxIAID.SelectedItem is AirportDTO selectedIA)
             {
-                IA.ButtonContent = "End";
-                DependencyObject dependencyObject = editButton;
-                while ((dependencyObject = VisualTreeHelper.GetParent(dependencyObject)) != null && !(dependencyObject is DataGridRow)) { }
+                var dataGridRow = DataGridRow.GetRowContainingElement(comboBoxIAID);
+                var comboBoxIAName = FindChild<ComboBox>(dataGridRow, "ComboBoxIAName");
 
-                DataGridRow row = dependencyObject as DataGridRow;
-
-                if (row != null)
+                if (comboBoxIAName != null)
                 {
-                    dataGrid2.IsReadOnly = false;
-                    dataGrid2.SelectedItem = row.Item;
-                    dataGrid2.CurrentItem = row.Item;
-                    dataGrid2.BeginEdit();
-
-                    // Vô hiệu hóa tất cả các dòng khác ngoại trừ dòng đang được edit
-                    foreach (var otherRow in dataGrid2.Items)
-                    {
-                        if (otherRow != row.Item)
-                        {
-                            DataGridRow otherDataGridRow = (DataGridRow)dataGrid2.ItemContainerGenerator.ContainerFromItem(otherRow);
-                            if (otherDataGridRow != null)
-                            {
-                                otherDataGridRow.IsEnabled = false;
-                            }
-                        }
-                    }
-
-                    // Đợi sự kiện nhấn Enter
-                    dataGrid2.PreviewKeyDown += DataGrid2_PreviewKeyDown;
+                    comboBoxIAName.SelectedValue = selectedIA.AirportName;
                 }
             }
-            else
-            {
-                EndEditIA();
-            }
         }
 
-        private void DataGrid2_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void ComboBox_AirportName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Key == Key.Enter && dataGrid2.CommitEdit(DataGridEditingUnit.Row, true))
+            ComboBox comboBoxIAName = sender as ComboBox;
+            if (comboBoxIAName.SelectedItem is AirportDTO selectedIA)
             {
-                EndEditIA();
-                // Gỡ việc đợi nhấn phím Enter
-                dataGrid2.PreviewKeyDown -= DataGrid2_PreviewKeyDown;
+                var dataGridRow = DataGridRow.GetRowContainingElement(comboBoxIAName);
+                var comboBoxIAID = FindChild<ComboBox>(dataGridRow, "ComboBoxIAID");
+
+                if (comboBoxIAID != null)
+                {
+                    comboBoxIAName.SelectedValue = selectedIA.AirportName;
+                }
             }
         }
-
         /*---------------------------------------------END Data Grid 2 aka IA---------------------------------------------------------*/
-        
+
     }
 }
