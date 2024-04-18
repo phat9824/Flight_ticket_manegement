@@ -106,7 +106,7 @@ CREATE TABLE PARAMETER
     IntermediateAirportCount int,           -- Number of intermediate airports
     MinStopTime             int,            -- Minimum stop time
     MaxStopTime             int,            -- Maximum stop time
-    SeatCount               int,            -- Number of seats
+    TicketClassCount        int,            -- Number of ticket class
     SlowestBookingTime      time,           -- Slowest booking time
     CancelTime              time            -- Cancellation time
 );
