@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GUI.View.Window4"
+﻿<UserControl x:Class="GUI.View.FlightScheduleWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,7 +14,7 @@
              Style="{StaticResource Page_Style}"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
     <UserControl.DataContext>
-        <vm:Window4VM/>
+        <vm:FlightScheduleWindowVM/>
     </UserControl.DataContext>
 
     <UserControl.Resources>
