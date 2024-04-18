@@ -53,7 +53,7 @@ namespace GUI.View
             InitializeComponent();
             
             //---------------------------------------------------------------------------------------------------------------------------------------------
-            //parameterDTO = getParameterBAL();
+            //parameterDTO = BAL.GetParameter();
 
             parameterDTO = new ParameterDTO();
             parameterDTO.IntermediateAirportCount = 2;
@@ -61,7 +61,7 @@ namespace GUI.View
 
             //---------------------------------------------------------------------------------------------------------------------------------------------
             //List<AirportDTO> airports = BAL.GetAirports();
-            //List<TicketClassDTO> ticketclasses =BAl.GetTicketClass();
+            //List<TicketClassDTO> ticketclasses =BAL.GetTicketClass();
 
             List<AirportDTO> airports = new List<AirportDTO>
             {
@@ -107,15 +107,15 @@ namespace GUI.View
             List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();
 
             // Xử lí ......
-            // var processStateInfor = BAL.ProcessObject.processMethod(flightDTO,airportDTO,listTicketClassDTO,listTicketClassFlightDTO,listIntermediateAirportDTO);
-            
-            // Debug datatype bằng cách in ra màn hình vì không biết dùng công cụ debug =)), sẽ được xóa sau
+            // var processStateInfor = BAL.ProcessObject.processMethod(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
+
+            // Debug datatype bằng cách huyền thoại, sẽ được xóa sau
             MessageBox.Show(data.ToString(), "CheckData");
 
 
             // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
-            bool f = true;
-            if (f) {
+            bool processStateInfor = true;
+            if (processStateInfor) {
                 SourceAirport.SelectedIndex = -1;
                 SourceAirport.Text = string.Empty;
                 DestinationAirport.SelectedIndex = -1;

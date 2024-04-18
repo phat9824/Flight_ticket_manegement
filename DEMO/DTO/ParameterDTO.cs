@@ -54,12 +54,6 @@ namespace DTO
             set => maxStopTime = value;
         }
 
-        public int SeatCount
-        {
-            get => seatCount;
-            set => seatCount = value;
-        }
-
         public TimeSpan SlowestBookingTime
         {
             get => slowestBookingTime;
