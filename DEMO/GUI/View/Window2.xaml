@@ -499,13 +499,13 @@
 
                 <!--Search Textbox-->
                 <Grid Width="300" HorizontalAlignment="Left">
-                  
+
 
                 </Grid>
 
 
                 <!--Page Title-->
-                <TextBlock Text="Flight list" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="Danh sách các chuyến bay" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
                 <!--Add Button-->
 
@@ -549,7 +549,7 @@
                     <ComboBoxItem Content="Item 2" />
                     <ComboBoxItem Content="Item 3" />
                 </ComboBox>
-                
+
                 <!--DataGrid-->
                 <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
                     <DataGrid.Columns>
@@ -619,7 +619,7 @@
 
                     </DataGrid.Columns>
                 </DataGrid>
-                
+
                 <!--Pagination Section-->
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
                         CornerRadius="5" Background="White">
@@ -637,7 +637,7 @@
                         <TextBlock Text="..." Foreground="#6c7682" VerticalAlignment="Center" FontSize="15" Margin="10 0"/>
 
                         <Button Style="{StaticResource pagingButton}" Content="7"/>
-                        <Button Style="{StaticResource pagingButton}" Content="8" Background="#FF72ABFA" Foreground="#ffffff"/>
+                        <Button Style="{StaticResource pagingButton}" Content="8"/>
                         <Button Style="{StaticResource pagingButton}" Content="9"/>
 
                         <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
@@ -647,6 +647,7 @@
 
                     </StackPanel>
                 </Border>
+                <Button Content="Search" HorizontalAlignment="Left" Margin="644,25,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource addButton}" Width="114"/>
             </Grid>
         </Grid>
     </Border>
