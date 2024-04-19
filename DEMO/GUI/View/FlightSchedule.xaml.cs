@@ -43,10 +43,13 @@ namespace GUI.View
     public partial class FlightScheduleWindow : UserControl
     {
         private ObservableCollection<TicketClass> ticketList;
+        private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
-        private ICollectionView collectionViewTicketClass;
+        private IntermediateAirport defaultIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
+    private ICollectionView collectionViewTicketClass;
         private ICollectionView collectionViewIA;
-        private ParameterDTO parameterDTO;
+
+        public ParameterDTO parameterDTO;
         public List<TicketClassDTO> ticketClasses { get; set; }
         public List<AirportDTO> airports {  get; set; }
         public FlightScheduleWindow()
@@ -70,34 +73,33 @@ namespace GUI.View
                 new AirportDTO() {AirportID = "001", AirportName = "Tân Sơn Nhất"},
                 new AirportDTO() {AirportID = "002", AirportName = "Nội Bài"},
             };
-            DestinationAirport.ItemsSource = airports;
-            DestinationAirportID.ItemsSource = airports;
-            SourceAirport.ItemsSource = airports;
-            SourceAirportID.ItemsSource = airports;
 
             ticketClasses = new List<TicketClassDTO>
             {
                 new TicketClassDTO { TicketClassID = "1", TicketClassName = "Economy" },
                 new TicketClassDTO { TicketClassID = "2", TicketClassName = "Business" },
             };
-            //InitializeComboBoxItems();
 
             //----------------------------------------------------------------------------------------------------------------------------------
             ticketList = new ObservableCollection<TicketClass>
             {
-                new TicketClass { ID = "Default", Name = "Default", Quantity = -1 },
+                defaultTicketClass,
             };
             collectionViewTicketClass = CollectionViewSource.GetDefaultView(ticketList);
             dataGrid1.ItemsSource = collectionViewTicketClass;
 
             IAList = new ObservableCollection<IntermediateAirport>
             {
-                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
-                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
+                defaultIA,
+                defaultIA,
             };
             collectionViewIA = CollectionViewSource.GetDefaultView(IAList);
             dataGrid2.ItemsSource = collectionViewIA;
 
+            DestinationAirport.ItemsSource = airports;
+            DestinationAirportID.ItemsSource = airports;
+            SourceAirport.ItemsSource = airports;
+            SourceAirportID.ItemsSource = airports;
             DataContext = this;
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
@@ -117,22 +119,10 @@ namespace GUI.View
             // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
             string processStateInfor = string.Empty;
             if (String.IsNullOrWhiteSpace(processStateInfor)) {
-                SourceAirport.SelectedIndex = -1;
-                SourceAirport.Text = string.Empty;
-                DestinationAirport.SelectedIndex = -1;
-                DestinationAirport.Text = string.Empty;
-                SourceAirportID.SelectedIndex = -1;
-                SourceAirportID.Text = string.Empty;
-                DestinationAirportID.SelectedIndex = -1;
-                DestinationAirportID.Text = string.Empty;
-                FlightID.Text = string.Empty;
-                TicketPrice.Text = string.Empty;
-                FlightDay.SelectedDate = null;
-                FlightTime.SelectedTime = null;
-                ticketList.Clear();
-                IAList.Clear();
-                collectionViewTicketClass.Filter = null;
-                collectionViewIA.Filter = null;
+                ResetDataWindow();
+                var newTicket = defaultTicketClass;
+                ticketList.Add(newTicket);
+                collectionViewTicketClass.MoveCurrentTo(newTicket);
             }
             else
             {
@@ -140,6 +130,26 @@ namespace GUI.View
                 string state = "Error";
                 MessageBox.Show(errorMessage, state);
             }
+        }
+
+        private void ResetDataWindow()
+        {
+            SourceAirport.SelectedIndex = -1;
+            SourceAirport.Text = string.Empty;
+            DestinationAirport.SelectedIndex = -1;
+            DestinationAirport.Text = string.Empty;
+            SourceAirportID.SelectedIndex = -1;
+            SourceAirportID.Text = string.Empty;
+            DestinationAirportID.SelectedIndex = -1;
+            DestinationAirportID.Text = string.Empty;
+            FlightID.Text = string.Empty;
+            TicketPrice.Text = string.Empty;
+            FlightDay.SelectedDate = null;
+            FlightTime.SelectedTime = null;
+            ticketList.Clear();
+            IAList.Clear();
+            collectionViewTicketClass.Filter = null;
+            collectionViewIA.Filter = null;
         }
 
         private ScheduleData GetScheduleData()
@@ -162,7 +172,7 @@ namespace GUI.View
         {
             if (DestinationAirport.SelectedItem is AirportDTO selectedAirport)
             {
-                DestinationAirportID.SelectedValue = selectedAirport.AirportID;
+                DestinationAirportID.SelectedValue = selectedAirport.AirportName;
             }
         }
 
@@ -178,7 +188,7 @@ namespace GUI.View
         {
             if (SourceAirport.SelectedItem is AirportDTO selectedAirport)
             {
-                SourceAirportID.SelectedValue = selectedAirport.AirportID;
+                SourceAirportID.SelectedValue = selectedAirport.AirportName;
             }
         }
 
@@ -211,7 +221,7 @@ namespace GUI.View
                 return;
             }
 
-            var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
+            var newTicket = defaultTicketClass;
             ticketList.Add(newTicket);
             collectionViewTicketClass.MoveCurrentTo(newTicket);
             
@@ -219,7 +229,7 @@ namespace GUI.View
         private void ResetTicket_Click(object sender, RoutedEventArgs e)
         {
             ticketList.Clear();
-            var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
+            var newTicket = defaultTicketClass;
             ticketList.Add(newTicket);
             collectionViewTicketClass.MoveCurrentTo(newTicket);
         }
@@ -313,7 +323,7 @@ namespace GUI.View
                 return;
             }
 
-            var newIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromSeconds(0), Note = "..." };
+            var newIA = defaultIA;
             IAList.Add(newIA);
             collectionViewTicketClass.MoveCurrentTo(newIA);
         }
@@ -358,7 +368,7 @@ namespace GUI.View
 
                 if (comboBoxIAID != null)
                 {
-                    comboBoxIAName.SelectedValue = selectedIA.AirportName;
+                    comboBoxIAID.SelectedValue = selectedIA.AirportID;
                 }
             }
         }
