@@ -57,7 +57,7 @@ namespace GUI.ViewModel
 
         public override string ToString()
         {
-            return $"ID: {ID}, Name: {Name}, Quantity: {Quantity}, ButtonContent: {ButtonContent}";
+            return $"ID: {ID}, Name: {Name}, Quantity: {Quantity}";
         }
     }
 
@@ -91,7 +91,7 @@ namespace GUI.ViewModel
 
         public override string ToString()
         {
-            return $"ID: {ID}, Name: {Name}, Layover Time: {LayoverTime}, Note: {Note}, ButtonContent: {ButtonContent}";
+            return $"ID: {ID}, Name: {Name}, Layover Time: {LayoverTime}, Note: {Note}";
         }
     }
     public class ScheduleData

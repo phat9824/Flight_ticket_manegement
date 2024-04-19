@@ -172,7 +172,7 @@ namespace GUI.View
         {
             if (DestinationAirport.SelectedItem is AirportDTO selectedAirport)
             {
-                DestinationAirportID.SelectedValue = selectedAirport.AirportName;
+                DestinationAirportID.SelectedValue = selectedAirport.AirportID;
             }
         }
 
@@ -188,7 +188,7 @@ namespace GUI.View
         {
             if (SourceAirport.SelectedItem is AirportDTO selectedAirport)
             {
-                SourceAirportID.SelectedValue = selectedAirport.AirportName;
+                SourceAirportID.SelectedValue = selectedAirport.AirportID;
             }
         }
 

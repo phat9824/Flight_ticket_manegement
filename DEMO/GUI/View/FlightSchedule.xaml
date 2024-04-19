@@ -229,6 +229,7 @@
                                               DisplayMemberPath="TicketClassID"
                                               SelectedValuePath="TicketClassID"
                                               IsReadOnly="False"
+                                              IsEditable="False"
                                               SelectionChanged="ComboBox_TicketClassID_SelectionChanged"
                                               Tag="TicketClassID"/>
                                 </DataTemplate>
@@ -243,6 +244,7 @@
                                               DisplayMemberPath="TicketClassName"
                                               SelectedValuePath="TicketClassName"
                                               IsReadOnly="False"
+                                              IsEditable="False"
                                               SelectionChanged="ComboBox_TicketClassName_SelectionChanged"
                                               Tag="TicketClassName"/>
                                 </DataTemplate>
@@ -336,6 +338,7 @@
                                               DisplayMemberPath="AirportID"
                                               SelectedValuePath="AirportID"
                                               IsReadOnly="False"
+                                              IsEditable="False"
                                               SelectionChanged="ComboBox_AirportID_SelectionChanged"
                                               Tag="ID"/> 
                                 </DataTemplate>
@@ -350,6 +353,7 @@
                                               DisplayMemberPath="AirportName"
                                               SelectedValuePath="AirportName"
                                               IsReadOnly="False"
+                                              IsEditable="False"
                                               SelectionChanged="ComboBox_AirportName_SelectionChanged"
                                               Tag="Name"/>
                                 </DataTemplate>
