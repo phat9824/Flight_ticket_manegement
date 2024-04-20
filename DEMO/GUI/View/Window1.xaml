@@ -11,11 +11,45 @@
     <UserControl.DataContext>
         <vm:Window1VM/>
     </UserControl.DataContext>
-    
+
+    <UserControl.Resources>
+        <Style x:Key="textHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#acb0af"/>
+        </Style>
+
+        <Style x:Key="textBox" TargetType="Control">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#878787"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Border Background="#FFDAEFFD" CornerRadius="0 20 20 0">
-            
+        <Border Background="#ffffff" CornerRadius="0 20 20 0">
+            <Border  BorderThickness="1" Height="413" VerticalAlignment="Top" Margin="10,107,10,0" Background="#FFDEECFC" CornerRadius="20"/>
         </Border>
 
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="34,161,513,522" >
+            <Grid Margin="7 9">
+
+                <TextBlock x:Name="textMaChuyenBay"  MouseDown="textMaChuyenBay_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtMaChuyenBay" TextChanged="txtMaChuyenBay_TextChanged" Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="496,163,51,522" >
+            <Grid Margin="7 9">
+
+                <TextBlock x:Name="textGiave"  MouseDown="textGiave_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtGiaVe" TextChanged="txtGiaVe_TextChanged" Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Label Content="Mã chuyến bay" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="39,136,0,0" FontFamily="Cooper Black"/>
+        <Label Content="Giá vé" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="501,141,0,0" FontFamily="Cooper Black"/>
     </Grid>
 </UserControl>
