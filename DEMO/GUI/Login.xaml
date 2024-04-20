@@ -172,7 +172,7 @@
                     <Label Content="Don't have an account?" Foreground="#FFCBCACA"/>
                 </Label>
 
-                <Button Content="Sign Up" HorizontalAlignment="Left" Margin="662,361,0,0" VerticalAlignment="Top" Height="24" Width="58" FontFamily="Arial Rounded MT Bold" Foreground="#FFA3D2F3" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_1"/>
+                <Button Content="Sign Up" HorizontalAlignment="Left" Margin="652,357,0,0" VerticalAlignment="Top" Height="27" Width="87" FontFamily="Arial Rounded MT Bold" Foreground="#FFA3D2F3" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_1"/>
               
                 <TextBlock Margin="583,277,135,111">
        <Hyperlink NavigateUri="http://example.com">Forget Password</Hyperlink>

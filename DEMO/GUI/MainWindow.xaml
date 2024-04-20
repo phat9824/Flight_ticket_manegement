@@ -124,7 +124,7 @@
                 <Menu:Btn Style="{StaticResource BtnStyle}" Margin="0,102,0,0" VerticalAlignment="Top" Checked="Btn_Checked" Grid.Row="1">
                     <Grid>
                         <Image Source="Images/logout.png" Style="{StaticResource Image_Style}"/>
-                        <TextBlock Text="Log Out" Style="{StaticResource Text_Style}"/>
+                        <TextBlock Text="Đăng xuất" Style="{StaticResource Text_Style}"/>
                     </Grid>
                 </Menu:Btn>
 
