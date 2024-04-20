@@ -23,5 +23,10 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void textMaChuyenBay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
