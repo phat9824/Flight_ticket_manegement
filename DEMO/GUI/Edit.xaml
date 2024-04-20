@@ -7,7 +7,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
         mc:Ignorable="d"
-        Title="Edit" Height="450" Width="450"
+        Title="Edit" Height="527" Width="450"
         Background="Transparent"
         AllowsTransparency="True" WindowStartupLocation="CenterScreen"
         WindowStyle="None">
@@ -291,20 +291,47 @@
         <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <Style x:Key="editButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF1DA2ED"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF1DA2ED"/>
+                    <Setter Property="Foreground" Value="#ffffff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
         <Border CornerRadius="20 20 20 20" Background="#FFDEEDF7">
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Thông tin chi tiết" Style="{StaticResource titleText1}" VerticalAlignment="Top" Width="209" Height="31" Margin="0,18,0,0" FontSize="22"/>
         </Border>
 
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="12,88,253,329" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="12,88,253,406" >
             <Grid Margin="7 9">
 
                 <TextBlock x:Name="textMaChuyenBay"  MouseDown="textMaChuyenBay_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
                 <TextBox  x:Name="txtMaChuyenBay" TextChanged="txtMaChuyenBay_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="253,89,12,328" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="253,89,12,405" >
             <Grid Margin="7 9">
 
                 <TextBlock x:Name="textGiaVe"  MouseDown="textGiaVe_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
@@ -329,10 +356,55 @@
             <ComboBoxItem Content="Pear" />
             <ComboBoxItem Content="Orange" />
         </ComboBox>
+        <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Margin="12,198,12,219" Background="#FFFDFDFD">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="STT" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
+                <DataGridTextColumn Header="Sân bay trung gian" IsReadOnly="False" Width="auto"/>
+                <DataGridTextColumn Header="Thời gian dừng" IsReadOnly="False" Width="*" Binding="{Binding ThoiGian}"/>
+                <DataGridTextColumn Header="Ghi chú" IsReadOnly="False" Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DatePicker
+             materialDesign:HintAssist.HelperText=""
+             materialDesign:HintAssist.Hint="Pick Date"
+             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="12,339,258,0" VerticalAlignment="Top" Height="48" />
+        <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
+                                   materialDesign:HintAssist.Hint="Pick Time"
+                                   Is24Hours="True"
+                                   Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="258,339,12,0" VerticalAlignment="Top" Height="48" />
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="12,428,343,66" >
+            <Grid Margin="7 9">
+
+                <TextBlock x:Name="textGheHang1"  MouseDown="textGheHang1_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtGheHang1" TextChanged="txtGheHang1_TextChanged" Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="177,428,178,66" >
+            <Grid Margin="7 9">
+
+                <TextBlock x:Name="textGheHang2"  MouseDown="textGheHang2_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtGheHang2" TextChanged="txtGheHang2_TextChanged" Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="343,428,12,66" >
+            <Grid Margin="7 9">
+
+                <TextBlock x:Name="textGheTrong"  MouseDown="textGheTrong_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBox  x:Name="txtGheTrong" TextChanged="txtGheTrong_TextChanged" Style="{StaticResource textBox}"/>
+            </Grid>
+        </Border>
+        <Button Content="Cập nhật" Style="{StaticResource editButton}" Margin="0,475,138,17" Width="110"/>
+        <Button Content="Đóng" Style="{StaticResource editButton}" Margin="0,475,12,18" Width="110"/>
         <Label Content="Mã chuyến bay" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,66,0,0" FontFamily="Cooper Black"/>
         <Label Content="Giá vé" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" FontFamily="Cooper Black" Margin="251,66,0,0"/>
         <Label Content="Sân bay đi" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,129,0,0" FontFamily="Cooper Black"/>
         <Label Content="Sân bay đến" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="251,129,0,0" FontFamily="Cooper Black"/>
-        
+        <Label Content="Khởi hành" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="12,316,0,0" FontFamily="Cooper Black"/>
+        <Label Content="Số ghế hạng 1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="96" Foreground="Black" Margin="12,404,0,0" FontFamily="Cooper Black"/>
+        <Label Content="Số ghế hạng 2" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="96" Foreground="Black" Margin="0,404,0,0" FontFamily="Cooper Black"/>
+        <Label Content="Số ghế trống" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="96" Foreground="Black" Margin="342,404,0,0" FontFamily="Cooper Black"/>
     </Grid>
 </Window>
