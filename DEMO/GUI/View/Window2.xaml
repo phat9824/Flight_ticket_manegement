@@ -522,6 +522,40 @@
             <Setter Property="Height" Value="12" />
         </Style>
 
+        <Style x:Key="searchTextbox" TargetType="TextBox">
+            <Setter Property="Background" Value="#ffffff" />
+            <Setter Property="Foreground" Value="#B0B9C6" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="15 10" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 10" />
+            <!--<Setter Property="Effect" >
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.1" ShadowDepth="1"/>
+                </Setter.Value>
+            </Setter>-->
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="#E0E6ED" >
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#d9d9d9"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#d9d9d9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
     <Border>
         <Grid>
@@ -537,8 +571,15 @@
                 </Grid.RowDefinitions>
 
                 <!--Search Textbox-->
-                <Grid Width="300" HorizontalAlignment="Left">
+                <Grid Width="225" HorizontalAlignment="Left" Margin="429,14,0,6" Grid.Row="1">
 
+                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+                           Panel.ZIndex="1" Text="Search here ..."
+                           Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="37"/>
+
+                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
 
                 </Grid>
 
@@ -557,7 +598,7 @@
                 <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying From"
                           materialDesign:HintAssist.HintOpacity=".26"
-                          IsEditable="True" Margin="15,8,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
+                          IsEditable="True" Margin="15,20,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
                     <ComboBoxItem Content="Apple" />
                     <ComboBoxItem Content="Banana" />
                     <ComboBoxItem Content="Pear" />
@@ -566,7 +607,7 @@
                 <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying To"
                           materialDesign:HintAssist.HintOpacity=".26"
-                          IsEditable="True" Margin="146,8,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
+                          IsEditable="True" Margin="146,20,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
                     <ComboBoxItem Content="Apple" />
                     <ComboBoxItem Content="Banana" />
                     <ComboBoxItem Content="Pear" />
@@ -576,14 +617,14 @@
                 <DatePicker Width="140"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Pick Date"
-                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="276,8,346,0" Grid.Row="5" VerticalAlignment="Top" />
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="276,20,346,0" Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False" />
                 <DatePicker Width="140"
              materialDesign:HintAssist.HelperText=""
              materialDesign:HintAssist.Hint="Pick Date"
-             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,8,182,0" Grid.Row="5" VerticalAlignment="Top" />
+             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
                 <ComboBox materialDesign:HintAssist.HelperText=""
                           materialDesign:HintAssist.Hint="Sort By"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,8,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49">
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49">
                     <ComboBoxItem Content="Item 1" />
                     <ComboBoxItem Content="Item 2" />
                     <ComboBoxItem Content="Item 3" />
@@ -624,7 +665,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}">
+                                        <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
                                         <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
@@ -684,7 +725,7 @@
                         <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
 
                         <Button Style="{StaticResource pagingButton}" Content="1"/>
-                        <Button Style="{StaticResource pagingButton}" Content="2" Background="#FF72ABFA" Foreground="#ffffff"/>
+                        <Button Style="{StaticResource pagingButton}" Content="2" Background="#FF1DA2ED" Foreground="#ffffff"/>
                         <Button Style="{StaticResource pagingButton}" Content="3"/>
 
                         <TextBlock Text="..." Foreground="#6c7682" VerticalAlignment="Center" FontSize="15" Margin="10 0"/>
@@ -700,7 +741,7 @@
 
                     </StackPanel>
                 </Border>
-                <Button Content="Search" HorizontalAlignment="Left" Margin="644,25,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource addButton}" Width="114"/>
+                <Button Content="Search" HorizontalAlignment="Left" Margin="669,25,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource addButton}" Width="101"/>
             </Grid>
         </Grid>
     </Border>

@@ -28,5 +28,65 @@ namespace GUI
         {
 
         }
+
+        private void txtMaChuyenBay_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void textGiaVe_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void txtGiaVe_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void textGheHang1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void txtGheHang1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void textGheHang2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void txtGheHang2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void textGheTrong_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void txtGheTrong_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Close();
+        }
+
+        //private void textSanBayDi_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+
+        //}
+
+        //private void txtSanBayDi_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+
+        //}
     }
 }

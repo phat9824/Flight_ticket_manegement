@@ -71,5 +71,11 @@ namespace GUI.View
 
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Edit f = new Edit();
+            f.Show();
+        }
     }
 }

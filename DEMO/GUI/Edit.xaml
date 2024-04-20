@@ -397,7 +397,7 @@
             </Grid>
         </Border>
         <Button Content="Cập nhật" Style="{StaticResource editButton}" Margin="0,475,138,17" Width="110"/>
-        <Button Content="Đóng" Style="{StaticResource editButton}" Margin="0,475,12,18" Width="110"/>
+        <Button Content="Đóng" Style="{StaticResource editButton}" Margin="0,475,12,18" Width="110" Click="Button_Click"/>
         <Label Content="Mã chuyến bay" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,66,0,0" FontFamily="Cooper Black"/>
         <Label Content="Giá vé" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" FontFamily="Cooper Black" Margin="251,66,0,0"/>
         <Label Content="Sân bay đi" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,129,0,0" FontFamily="Cooper Black"/>
