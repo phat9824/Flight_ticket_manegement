@@ -1,0 +1,430 @@
+﻿<UserControl x:Class="GUI.View.FlightScheduleWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUI.View"
+             xmlns:vm="clr-namespace:GUI.ViewModel"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             d:DesignHeight="720" d:DesignWidth="805"
+             Style="{StaticResource Page_Style}"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
+    <UserControl.DataContext>
+        <vm:FlightScheduleWindowVM/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <!--==========================================================-->
+        <Style x:Key="CenterAlignedTextBlock" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <!--==========================================================-->
+        <Style x:Key="CenterAlignedTextBox" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <!--==========================================================-->
+        <Style x:Key="CenterAlignedColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <!--==========================================================-->
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid Background="#FFFCFBFF" Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <!--R0___________________________________-->
+            <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="10 7 0 0" Height="43" Width="341"/>
+
+            <!--R1___________________________________-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <!--R1_C0___________________________________-->
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="20 0 0 0">
+                        <ComboBox x:Name="DestinationAirport"
+                                  materialDesign:ComboBoxAssist.MaxLength="30"
+                                  materialDesign:HintAssist.Hint="Destination Airport"
+                                  materialDesign:HintAssist.HintOpacity=".26"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  TextSearch.TextPath="AirportName"
+                                  Margin="0 10 0 0" 
+                                  Height="40" Width="200"
+                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                                  DisplayMemberPath="AirportName"
+                                  SelectedValuePath="AirportID"
+                                  SelectionChanged="DestinationAirport_SelectionChanged"
+                                  LostFocus="ComboBox_LostFocus">
+                        </ComboBox>
+                        <ComboBox x:Name="DestinationAirportID"
+                                  materialDesign:ComboBoxAssist.MaxLength="10"
+                                  materialDesign:HintAssist.Hint="ID"
+                                  materialDesign:HintAssist.HintOpacity=".26"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  TextSearch.TextPath="AirportID"
+                                  Margin="0 10 0 0"
+                                  Height="40" Width="75"
+                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                                  DisplayMemberPath="AirportID"
+                                  SelectedValuePath="AirportID"
+                                  SelectionChanged="DestinationAirportID_SelectionChanged"
+                                  LostFocus="ComboBox_LostFocus">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="20 0 0 0">
+                        <ComboBox x:Name="SourceAirport"
+                                  wpf:ComboBoxAssist.MaxLength="30"
+                                  wpf:HintAssist.Hint="Departure Airport"
+                                  wpf:HintAssist.HintOpacity=".26"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  TextSearch.TextPath="AirportName"
+                                  Height="40" Width="200"
+                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                                  DisplayMemberPath="AirportName"
+                                  SelectedValuePath="AirportID"
+                                  SelectionChanged="SourceAirport_SelectionChanged"
+                                  LostFocus="ComboBox_LostFocus"/>
+                        <ComboBox x:Name="SourceAirportID"
+                                  materialDesign:ComboBoxAssist.MaxLength="10"
+                                  materialDesign:HintAssist.Hint="ID"
+                                  materialDesign:HintAssist.HintOpacity=".26"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  TextSearch.TextPath="AirportID"
+                                  Width="75" Height="40"
+                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                                  DisplayMemberPath="AirportID"
+                                  SelectedValuePath="AirportID"
+                                  SelectionChanged="SourceAirportID_SelectionChanged"
+                                  LostFocus="ComboBox_LostFocus">
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <!--R1_C1___________________________________-->
+                <StackPanel Grid.Column="1">
+                    <Grid>
+                        <TextBox x:Name="FlightID" Width="200" Height="40"
+                                 materialDesign:HintAssist.Hint="Flight ID"
+                                 materialDesign:HintAssist.HelperText=""
+                                 Margin="0 10 0 0"
+                                 Padding="0 10 0 10"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid>
+                        <TextBox x:Name="TicketPrice" Width="200" Height="40"
+                                 materialDesign:HintAssist.Hint="Ticket Price"
+                                 materialDesign:HintAssist.HelperText=""
+                                 Margin="0 0 0 10"
+                                 Padding="0 10 0 10"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalAlignment="Top">
+                        </TextBox>
+                    </Grid>
+                </StackPanel>
+                <!--R1_C2___________________________________-->
+                <StackPanel Grid.Column="2">
+                    <controls:DatePicker x:Name="FlightDay"
+                                         Width="200" Height="35"
+                                         materialDesign:HintAssist.HelperText=""
+                                         materialDesign:HintAssist.Hint="MM/DD/YYYY"
+                                         Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                         Margin="0 10 0 0" Padding="0 5 0 3"
+                                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                         VerticalAlignment="Top">
+                    </controls:DatePicker>
+                    <materialDesign:TimePicker x:Name="FlightTime"
+                                           Width="200" Height="35"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="HH:mm"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="0 10 0 0" Padding="0 3 0 5"
+                                           VerticalContentAlignment="Center"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           Is24Hours="True">
+                    </materialDesign:TimePicker>
+                </StackPanel>
+            </Grid>
+
+            <!--R2___________________________________-->
+            <Grid Grid.Row="2" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" 
+                        Content="Add" 
+                        VerticalAlignment="Center" 
+                        Width="160" Height="30" Margin="5 0 0 0" 
+                        Click="AddTicket_Click"/>
+                <TextBlock Grid.Column="1"
+                           Text="Ticket Class" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           Width="160" Height="30" Margin="0 0 0 0"
+                           LineHeight="20" FontSize="20"
+                           FontWeight="SemiBold"/>
+                <Button Grid.Column="2" 
+                        Content="Reset" 
+                        VerticalAlignment="Center" 
+                        Width="160" Height="30" Margin="0 0 5 0" 
+                        Click="ResetTicket_Click"/>
+            </Grid>
+
+            <!--R3___________________________________-->
+            <Grid Grid.Row="3">
+                <DataGrid 
+                          x:Name="dataGrid1"
+                          AutoGenerateColumns="False" CanUserAddRows="False"
+                          IsReadOnly="False"
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                          DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Ticket Class ID" Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="ComboBoxID"
+                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.ticketClasses}"
+                                              SelectedValue="{Binding ID}"
+                                              DisplayMemberPath="TicketClassID"
+                                              SelectedValuePath="TicketClassID"
+                                              IsReadOnly="False"
+                                              IsEditable="False"
+                                              SelectionChanged="ComboBox_TicketClassID_SelectionChanged"
+                                              Tag="TicketClassID"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Ticket Class Name" Width="270" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="ComboBoxName"
+                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.ticketClasses}"
+                                              SelectedValue="{Binding Name}"
+                                              DisplayMemberPath="TicketClassName"
+                                              SelectedValuePath="TicketClassName"
+                                              IsReadOnly="False"
+                                              IsEditable="False"
+                                              SelectionChanged="ComboBox_TicketClassName_SelectionChanged"
+                                              Tag="TicketClassName"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <!--
+                        <DataGridTextColumn Header="Ticket Class IDx" Binding="{Binding ID}"
+                                            Width="0"
+                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+                        <DataGridTextColumn Header="Ticket Class Namex" Binding="{Binding Name}"
+                                            Width="0"
+                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+                        -->
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"
+                                            Width="180"
+                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+
+                        <DataGridTemplateColumn Width="150" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock Text="Actions"
+                                           HorizontalAlignment="Center"/>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                            Margin="0,0,0,0"
+                                            Width = "100"
+                                            Click="DeleteButton_Click_1"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!--R4___________________________________-->
+            <Border  Grid.Row="4" BorderBrush="Black" BorderThickness="2" Width="777" Height="1"
+                     HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+            <!--R5___________________________________-->
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" 
+                        Content="Add" 
+                        VerticalAlignment="Center" 
+                        Width="160" Height="30" Margin="5 0 0 0" 
+                        Click="AddIA_Click"/>
+                <TextBlock Grid.Column="1"
+                           Text="Intermidate Airport" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           Width="200" Height="30" Margin="0 0 0 0"
+                           LineHeight="20" FontSize="20"
+                           FontWeight="SemiBold"/>
+                <Button Grid.Column="2" 
+                        Content="Reset" 
+                        VerticalAlignment="Center" 
+                        Width="160" Height="30" Margin="0 0 5 0" 
+                        Click="ResetIA_Click"/>
+            </Grid>
+
+            <!--R6___________________________________-->
+            <Grid Grid.Row="6">
+                <DataGrid 
+                          x:Name="dataGrid2"
+                          AutoGenerateColumns="False" CanUserAddRows="False"
+                          IsReadOnly="False"
+                          ItemsSource="{Binding}"
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="ID" Width="120" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="ComboBoxIAID"
+                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.airports}"
+                                              SelectedValue="{Binding ID}"
+                                              DisplayMemberPath="AirportID"
+                                              SelectedValuePath="AirportID"
+                                              IsReadOnly="False"
+                                              IsEditable="False"
+                                              SelectionChanged="ComboBox_AirportID_SelectionChanged"
+                                              Tag="ID"/> 
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Intermidate Airport" Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="ComboBoxIAName"
+                                              ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.airports}"
+                                              SelectedValue="{Binding Name}"
+                                              DisplayMemberPath="AirportName"
+                                              SelectedValuePath="AirportName"
+                                              IsReadOnly="False"
+                                              IsEditable="False"
+                                              SelectionChanged="ComboBox_AirportName_SelectionChanged"
+                                              Tag="Name"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTextColumn Header="Layover Time" Binding="{Binding LayoverTime}"
+                                            Width="130"
+                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+                        <DataGridTextColumn Header="Note" Binding="{Binding Note}"
+                                            Width="200"
+                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+
+                        <DataGridTemplateColumn Width="150" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock Text="Actions"
+                                           HorizontalAlignment="Center"/>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Delete"
+                                                HorizontalAlignment="Center" Margin="10,0,0,0"
+                                                Width = "100"
+                                                Click="DeleteButton_Click_2" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!--R7___________________________________-->
+            <Grid Grid.Row="7" VerticalAlignment="Bottom">
+                <Button Height="50" Width="200"
+                        Content="Confirm"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Click="ConfirmSchedule_Click"
+                        Command="{Binding ConfirmScheduleCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="1"
+                                    Background="#94dde6"
+                                    CornerRadius="25">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="BorderBrush" Value="White"/>
+                                                <Setter TargetName="border" Property="Background" Value="#239cc7"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,5 +1,4 @@
-﻿using BLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL;
 using DTO;
-
 namespace GUI
 {
     /// <summary>
     /// Interaction logic for SignUp1.xaml
     /// </summary>
+    
     public partial class SignUp1 : Window
     {
-        NguoiDungBLL ndbll = new NguoiDungBLL();
-        NguoiDung User = new NguoiDung();
         public SignUp1()
         {
             InitializeComponent();
@@ -46,7 +44,7 @@ namespace GUI
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear + 50; i++) 
+            for (int i = currentYear - 120; i <= currentYear; i++) 
             {
                 years.Add(i);
             }
@@ -144,15 +142,35 @@ namespace GUI
             Window.GetWindow(this).Close();
         }
 
-        private void SignU_Button_Click(object sender, RoutedEventArgs e)
+        private void textPhone_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            User.TenNguoiDung = "asdfasdf";
+            txtPhone.Focus();
+        }
+
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPhone.Text) && txtPhone.Text.Length > 0)
+            {
+                textPhone.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textPhone.Visibility = Visibility.Visible;
+            }
+        }
+
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
+        ACCOUNT User = new ACCOUNT();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            User.UserName = "asdfasdf";
             User.Email = txtMailAdd.Text.Trim();
-            User.NgaySinh = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
-            User.PasswordND = txtRePassword.Password.Trim();
+            User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
+            User.PasswordUser = txtRePassword.Password.Trim();
 
             int kq = 0;
-            ndbll.SignUp(User, ref kq);
+            accBLL.SignUp(User, ref kq);
 
             if (kq > 0)
             {
@@ -165,11 +183,6 @@ namespace GUI
             {
                 MessageBox.Show("Error");
             }
-        }
-
-        private void Admin_bt_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 using BLL;
 using DTO;
 
@@ -23,7 +21,6 @@ namespace GUI
     /// </summary>
     public partial class Login : Window
     {
-       
 
         public Login()
         {
@@ -75,14 +72,16 @@ namespace GUI
         {
             Application.Current.Shutdown();
         }
-        NguoiDung nguoidung = new NguoiDung();
-        NguoiDungBLL ndBLL = new NguoiDungBLL();
-        private void login_btn_clk(object sender, RoutedEventArgs e)
-        {
-            nguoidung.Email= txtEmail.Text;
-            nguoidung.PasswordND = txtPassword.Password ;
 
-            string getuser = ndBLL.CheckLogic(nguoidung);
+        ACCOUNT acc = new ACCOUNT();
+        ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            acc.Email = txtEmail.Text;
+            acc.PasswordUser = txtPassword.Password;
+
+            string getuser = accBLL.CheckLogic(acc);
 
             // Thể hiện trả lại kết quả nếu nghiệp vụ không đúng
             switch (getuser)
@@ -99,6 +98,7 @@ namespace GUI
                     MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác!");
                     return;
             }
+
             MessageBox.Show("sign in suceess");
             MainWindow f = new MainWindow();
             f.Show();
@@ -111,6 +111,5 @@ namespace GUI
             f.Show();
             Window.GetWindow(this).Close();
         }
-
     }
 }

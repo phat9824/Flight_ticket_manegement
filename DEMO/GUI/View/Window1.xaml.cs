@@ -24,5 +24,30 @@ namespace GUI.View
         {
             InitializeComponent();
         }
+
+        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void textMaChuyenBay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void txtMaChuyenBay_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void textGiave_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void txtGiaVe_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

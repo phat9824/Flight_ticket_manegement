@@ -35,5 +35,10 @@ namespace GUI
             f.Show();
             Window.GetWindow(this).Close();
         }
+
+        private void Btn_Checked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
