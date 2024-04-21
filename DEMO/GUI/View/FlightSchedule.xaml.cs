@@ -142,7 +142,7 @@ namespace GUI.View
             SourceAirportID.Text = string.Empty;
             DestinationAirportID.SelectedIndex = -1;
             DestinationAirportID.Text = string.Empty;
-            FlightID.Text = string.Empty;
+            //FlightID.Text = string.Empty;
             TicketPrice.Text = string.Empty;
             FlightDay.SelectedDate = null;
             FlightTime.SelectedTime = null;
@@ -157,7 +157,7 @@ namespace GUI.View
             ScheduleData data = new ScheduleData();
             data.sourceAirportID = SourceAirportID.Text.Trim();
             data.destinationAirportID = DestinationAirportID.Text.Trim();
-            data.flightID = FlightID.Text.Trim();
+            data.flightID = null;
             data.price = decimal.TryParse(TicketPrice.Text.Trim(), out decimal price) ? price : -1;
             data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
             data.flightTime = FlightTime.SelectedTime.HasValue ? FlightTime.SelectedTime.Value.TimeOfDay : TimeSpan.Zero;
@@ -208,6 +208,7 @@ namespace GUI.View
                 comboBox.Text = "";
             }
         }
+
 
         /*---------------------------------------------END R1--------------------------------------------------*/
 
