@@ -51,7 +51,9 @@
         <Grid Background="#FFFCFBFF" Margin="0 0 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="4"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="4"/>
@@ -60,99 +62,127 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <!--R0___________________________________-->
             <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="10 7 0 0" Height="43" Width="341"/>
 
-            <!--R1___________________________________-->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="340"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="340"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <ComboBox x:Name="SourceAirport"
+                              wpf:ComboBoxAssist.MaxLength="30"
+                              wpf:HintAssist.Hint="Departure Airport"
+                              wpf:HintAssist.HintOpacity=".26"
+                              IsEditable="True"
+                              IsTextSearchEnabled="True"
+                              TextSearch.TextPath="AirportName"
+                              Height="40" Width="200"
+                              Margin="50 0 0 0"
+                              VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                              DisplayMemberPath="AirportName"
+                              SelectedValuePath="AirportID"
+                              SelectionChanged="SourceAirport_SelectionChanged"
+                              LostFocus="ComboBox_LostFocus"/>      
+                    <ComboBox x:Name="SourceAirportID"
+                              materialDesign:ComboBoxAssist.MaxLength="10"
+                              materialDesign:HintAssist.Hint="ID"
+                              materialDesign:HintAssist.HintOpacity=".26"
+                              IsEditable="True"
+                              IsTextSearchEnabled="True"
+                              TextSearch.TextPath="AirportID"
+                              Width="75" Height="40"
+                              VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                              DisplayMemberPath="AirportID"
+                              SelectedValuePath="AirportID"
+                              SelectionChanged="SourceAirportID_SelectionChanged"
+                              LostFocus="ComboBox_LostFocus">
+                    </ComboBox>
+                </StackPanel>
+
+                <Grid Grid.Column="1">
+                    <TextBlock Text="&#x27f6;"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="40"
+                               Margin="0 0 0 10"/>
+                </Grid>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <ComboBox x:Name="DestinationAirport"
+                              materialDesign:ComboBoxAssist.MaxLength="30"
+                              materialDesign:HintAssist.Hint="Destination Airport"
+                              materialDesign:HintAssist.HintOpacity=".26"
+                              IsEditable="True"
+                              IsTextSearchEnabled="True"
+                              TextSearch.TextPath="AirportName"
+                              Margin="0 0 0 0" 
+                              Height="40" Width="200"
+                              VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                              DisplayMemberPath="AirportName"
+                              SelectedValuePath="AirportID"
+                              SelectionChanged="DestinationAirport_SelectionChanged"
+                              LostFocus="ComboBox_LostFocus">
+                    </ComboBox>
+                    <ComboBox x:Name="DestinationAirportID"
+                              materialDesign:ComboBoxAssist.MaxLength="10"
+                              materialDesign:HintAssist.Hint="ID"
+                              materialDesign:HintAssist.HintOpacity=".26"
+                              IsEditable="True"
+                              IsTextSearchEnabled="True"
+                              TextSearch.TextPath="AirportID"
+                              Margin="0 0 0 0"
+                              Height="40" Width="75"
+                              VerticalAlignment="Top" HorizontalContentAlignment="Center"
+                              DisplayMemberPath="AirportID"
+                              SelectedValuePath="AirportID"
+                              SelectionChanged="DestinationAirportID_SelectionChanged"
+                              LostFocus="ComboBox_LostFocus">
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="270"/>
                     <ColumnDefinition Width="250"/>
-                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                <!--R1_C0___________________________________-->
+
                 <StackPanel Grid.Column="0">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="20 0 0 0">
-                        <ComboBox x:Name="DestinationAirport"
-                                  materialDesign:ComboBoxAssist.MaxLength="30"
-                                  materialDesign:HintAssist.Hint="Destination Airport"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True"
-                                  IsTextSearchEnabled="True"
-                                  TextSearch.TextPath="AirportName"
-                                  Margin="0 10 0 0" 
-                                  Height="40" Width="200"
-                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
-                                  DisplayMemberPath="AirportName"
-                                  SelectedValuePath="AirportID"
-                                  SelectionChanged="DestinationAirport_SelectionChanged"
-                                  LostFocus="ComboBox_LostFocus">
-                        </ComboBox>
-                        <ComboBox x:Name="DestinationAirportID"
-                                  materialDesign:ComboBoxAssist.MaxLength="10"
-                                  materialDesign:HintAssist.Hint="ID"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True"
-                                  IsTextSearchEnabled="True"
-                                  TextSearch.TextPath="AirportID"
-                                  Margin="0 10 0 0"
-                                  Height="40" Width="75"
-                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
-                                  DisplayMemberPath="AirportID"
-                                  SelectedValuePath="AirportID"
-                                  SelectionChanged="DestinationAirportID_SelectionChanged"
-                                  LostFocus="ComboBox_LostFocus">
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal"
-                                Margin="20 0 0 0">
-                        <ComboBox x:Name="SourceAirport"
-                                  wpf:ComboBoxAssist.MaxLength="30"
-                                  wpf:HintAssist.Hint="Departure Airport"
-                                  wpf:HintAssist.HintOpacity=".26"
-                                  IsEditable="True"
-                                  IsTextSearchEnabled="True"
-                                  TextSearch.TextPath="AirportName"
-                                  Height="40" Width="200"
-                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
-                                  DisplayMemberPath="AirportName"
-                                  SelectedValuePath="AirportID"
-                                  SelectionChanged="SourceAirport_SelectionChanged"
-                                  LostFocus="ComboBox_LostFocus"/>
-                        <ComboBox x:Name="SourceAirportID"
-                                  materialDesign:ComboBoxAssist.MaxLength="10"
-                                  materialDesign:HintAssist.Hint="ID"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True"
-                                  IsTextSearchEnabled="True"
-                                  TextSearch.TextPath="AirportID"
-                                  Width="75" Height="40"
-                                  VerticalAlignment="Top" HorizontalContentAlignment="Center"
-                                  DisplayMemberPath="AirportID"
-                                  SelectedValuePath="AirportID"
-                                  SelectionChanged="SourceAirportID_SelectionChanged"
-                                  LostFocus="ComboBox_LostFocus">
-                        </ComboBox>
-                    </StackPanel>
+                    <controls:DatePicker x:Name="FlightDay"
+                         Width="220" Height="35"
+                         materialDesign:HintAssist.HelperText=""
+                         materialDesign:HintAssist.Hint="MM/DD/YYYY"
+                         Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                         Margin="40 10 0 0" Padding="0 5 0 3"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         VerticalAlignment="Top">
+                    </controls:DatePicker>
                 </StackPanel>
-                <!--R1_C1___________________________________-->
+
                 <StackPanel Grid.Column="1">
-                    <Grid>
-                        <TextBox x:Name="FlightID" Width="200" Height="40"
-                                 materialDesign:HintAssist.Hint="Flight ID"
-                                 materialDesign:HintAssist.HelperText=""
-                                 Margin="0 10 0 0"
-                                 Padding="0 10 0 10"
-                                 VerticalContentAlignment="Center"
-                                 HorizontalContentAlignment="Center"
-                                 VerticalAlignment="Top"/>
-                    </Grid>
+                    <materialDesign:TimePicker x:Name="FlightTime"
+                                               Width="220" Height="35"
+                                               materialDesign:HintAssist.HelperText=""
+                                               materialDesign:HintAssist.Hint="HH:mm"
+                                               Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                               Margin="0 10 0 0" Padding="0 3 0 5"
+                                               VerticalContentAlignment="Center"
+                                               HorizontalContentAlignment="Center"
+                                               VerticalAlignment="Top"
+                                               Is24Hours="True">
+                    </materialDesign:TimePicker>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
                     <Grid>
                         <TextBox x:Name="TicketPrice" Width="200" Height="40"
                                  materialDesign:HintAssist.Hint="Ticket Price"
                                  materialDesign:HintAssist.HelperText=""
-                                 Margin="0 0 0 10"
+                                 Margin="5 5 0 10"
                                  Padding="0 10 0 10"
                                  VerticalContentAlignment="Center"
                                  HorizontalContentAlignment="Center"
@@ -160,33 +190,14 @@
                         </TextBox>
                     </Grid>
                 </StackPanel>
-                <!--R1_C2___________________________________-->
-                <StackPanel Grid.Column="2">
-                    <controls:DatePicker x:Name="FlightDay"
-                                         Width="200" Height="35"
-                                         materialDesign:HintAssist.HelperText=""
-                                         materialDesign:HintAssist.Hint="MM/DD/YYYY"
-                                         Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-                                         Margin="0 10 0 0" Padding="0 5 0 3"
-                                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                         VerticalAlignment="Top">
-                    </controls:DatePicker>
-                    <materialDesign:TimePicker x:Name="FlightTime"
-                                           Width="200" Height="35"
-                                           materialDesign:HintAssist.HelperText=""
-                                           materialDesign:HintAssist.Hint="HH:mm"
-                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
-                                           Margin="0 10 0 0" Padding="0 3 0 5"
-                                           VerticalContentAlignment="Center"
-                                           HorizontalContentAlignment="Center"
-                                           VerticalAlignment="Top"
-                                           Is24Hours="True">
-                    </materialDesign:TimePicker>
-                </StackPanel>
             </Grid>
 
-            <!--R2___________________________________-->
-            <Grid Grid.Row="2" VerticalAlignment="Center">
+
+            <Border  Grid.Row="3" BorderBrush="Black" BorderThickness="2" Width="777" Height="1"
+                     HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0.0"/>
+            
+            
+            <Grid Grid.Row="4" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="400"/>
@@ -211,8 +222,8 @@
                         Click="ResetTicket_Click"/>
             </Grid>
 
-            <!--R3___________________________________-->
-            <Grid Grid.Row="3">
+           
+            <Grid Grid.Row="5">
                 <DataGrid 
                           x:Name="dataGrid1"
                           AutoGenerateColumns="False" CanUserAddRows="False"
@@ -290,11 +301,11 @@
             </Grid>
 
             <!--R4___________________________________-->
-            <Border  Grid.Row="4" BorderBrush="Black" BorderThickness="2" Width="777" Height="1"
+            <Border  Grid.Row="6" BorderBrush="Black" BorderThickness="2" Width="777" Height="1"
                      HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
             <!--R5___________________________________-->
-            <Grid Grid.Row="5">
+            <Grid Grid.Row="7">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="400"/>
@@ -320,7 +331,7 @@
             </Grid>
 
             <!--R6___________________________________-->
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="8">
                 <DataGrid 
                           x:Name="dataGrid2"
                           AutoGenerateColumns="False" CanUserAddRows="False"
@@ -392,7 +403,7 @@
             </Grid>
 
             <!--R7___________________________________-->
-            <Grid Grid.Row="7" VerticalAlignment="Bottom">
+            <Grid Grid.Row="9" VerticalAlignment="Bottom">
                 <Button Height="50" Width="200"
                         Content="Confirm"
                         HorizontalAlignment="Center"
