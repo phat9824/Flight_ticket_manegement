@@ -10,7 +10,7 @@ namespace DTO
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
-        public int Phone { get; set; } // Dùng int? để cho phép giá trị null
+        public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime Birth { get; set; } // Dùng DateTime? để cho phép giá trị null
         public string PasswordUser { get; set; }

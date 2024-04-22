@@ -49,7 +49,7 @@ namespace BLL
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into ACCOUNT values(@ID, @name, @SDT, @Email, @Birtday, @pass, '1')";
+            cmd.CommandText = "insert into ACCOUNT values(@ID, @name, @SDT, @Email, @Birtday, @pass, @permission)";
 
             SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20);
             SqlParameter parName = new SqlParameter("@name", SqlDbType.VarChar, 40);
@@ -57,6 +57,8 @@ namespace BLL
             SqlParameter parMail = new SqlParameter("@Email", SqlDbType.VarChar, 40);
             SqlParameter parBirDay = new SqlParameter("@Birtday", SqlDbType.SmallDateTime);
             SqlParameter parPass = new SqlParameter("@pass", SqlDbType.VarChar, 40);
+            SqlParameter parPer = new SqlParameter("@permission", SqlDbType.Int);
+
 
             parID.Value = AutoID();
             parName.Value = User.UserName;
@@ -64,6 +66,7 @@ namespace BLL
             parMail.Value = User.Email;
             parBirDay.Value = User.Birth;
             parPass.Value = User.PasswordUser;
+            parPer.Value = User.PermissonID;
 
             cmd.Parameters.Add(parID);
             cmd.Parameters.Add(parName);
@@ -71,9 +74,11 @@ namespace BLL
             cmd.Parameters.Add(parMail);
             cmd.Parameters.Add(parBirDay);
             cmd.Parameters.Add(parPass);
+            cmd.Parameters.Add(parPer);
 
             cmd.Connection = con;
             kq = cmd.ExecuteNonQuery();
+            con.Close();
         }
 
     }

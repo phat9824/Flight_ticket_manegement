@@ -20,7 +20,7 @@ CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
 	UserName VARCHAR(40),
-	Phone INT,
+	Phone varchar(20),
 	Email VARCHAR(40),
 	Birth SMALLDATETIME,
 	PasswordUser VARCHAR(40),
@@ -113,6 +113,8 @@ CREATE TABLE PARAMETER
 SELECT *FROM AIRPORT
 SELECT *FROM FLIGHT
 SELECT *FROM ACCOUNT
+
+delete from FLIGHT
 delete from ACCOUNT
 
 insert into AIRPORT values ('000',N'Nội Bài')

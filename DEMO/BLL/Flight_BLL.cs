@@ -17,7 +17,7 @@ namespace BLL
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("select count(*) from ACCOUNT", con);
+            SqlCommand cmd = new SqlCommand("select count(*) from FLIGHT", con);
             int i = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
             i++;

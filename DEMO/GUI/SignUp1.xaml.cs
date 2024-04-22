@@ -164,10 +164,19 @@ namespace GUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            User.UserName = "asdfasdf";
+            User.UserName = textFName.Text.Trim() + " " + textLName.Text.Trim();
             User.Email = txtMailAdd.Text.Trim();
             User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
             User.PasswordUser = txtRePassword.Password.Trim();
+            User.Phone = txtPhone.Text.Trim();
+            if(Admin_bt.AllowDrop)
+            {
+                User.PermissonID = 1;
+            }
+            else 
+            {
+                User.PermissonID = 2;
+            }
 
             int kq = 0;
             accBLL.SignUp(User, ref kq);
