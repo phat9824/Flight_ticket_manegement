@@ -585,7 +585,7 @@
 
 
                 <!--Page Title-->
-                <TextBlock Text="Danh sách các chuyến bay" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                <TextBlock Text="List of flights" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
                 <!--Add Button-->
 
@@ -641,9 +641,9 @@
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="STT" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
+                        <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
 
-                        <DataGridTemplateColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn Header="Departure airport" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -656,11 +656,11 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Sân bay đến" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
-                        <DataGridTextColumn Header="Khởi hành" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
-                        <DataGridTextColumn Header="Thời gian" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
-                        <DataGridTextColumn Header="Số ghế trống" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
-                        <DataGridTextColumn Header="Số ghế đặt" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
+                        <DataGridTextColumn Header="Destination airport" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
+                        <DataGridTextColumn Header="Departure time" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
+                        <DataGridTextColumn Header="Duration" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
+                        <DataGridTextColumn Header="Empty seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
+                        <DataGridTextColumn Header="Booked seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
                         <DataGridTemplateColumn IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
