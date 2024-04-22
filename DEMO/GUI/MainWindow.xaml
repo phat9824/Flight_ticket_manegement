@@ -92,7 +92,7 @@
                               Command="{Binding Window2Command}">
                         <Grid>
 
-                            <TextBlock Text="Tra cứu chuyến bay" Style="{StaticResource Text_Style}" Margin="27,0,0,0" Width="206"/>
+                            <TextBlock Text="Flight list" Style="{StaticResource Text_Style}" />
                         </Grid>
                     </Menu:Btn>
 
