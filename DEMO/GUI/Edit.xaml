@@ -321,7 +321,7 @@
     </Window.Resources>
     <Grid>
         <Border CornerRadius="20 20 20 20" Background="#FFDEEDF7" Margin="0,0,0,27">
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Thông tin chi tiết" Style="{StaticResource titleText1}" VerticalAlignment="Top" Width="209" Height="31" Margin="0,18,0,0" FontSize="22"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Detailed information" Style="{StaticResource titleText1}" VerticalAlignment="Top" Width="243" Height="31" Margin="0,18,0,0" FontSize="22"/>
         </Border>
 
         <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="12,88,253,387" >
@@ -359,10 +359,10 @@
         <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Margin="12,198,12,200" Background="#FFFDFDFD">
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header="STT" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
-                <DataGridTextColumn Header="Sân bay trung gian" IsReadOnly="False" Width="auto"/>
-                <DataGridTextColumn Header="Thời gian dừng" IsReadOnly="False" Width="*" Binding="{Binding ThoiGian}"/>
-                <DataGridTextColumn Header="Ghi chú" IsReadOnly="False" Width="*"/>
+                <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
+                <DataGridTextColumn Header="Intermediate airport" IsReadOnly="False" Width="auto"/>
+                <DataGridTextColumn Header="Layout time" IsReadOnly="False" Width="*" Binding="{Binding ThoiGian}"/>
+                <DataGridTextColumn Header="Note" IsReadOnly="False" Width="*"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -396,12 +396,12 @@
                 <TextBox  x:Name="txtGheTrong" TextChanged="txtGheTrong_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>-->
-        <Button Content="Cập nhật" Style="{StaticResource editButton}" Margin="0,413,143,53" Width="110"/>
-        <Button Content="Đóng" Style="{StaticResource editButton}" Margin="0,413,12,58" Width="110" Click="Button_Click"/>
-        <Label Content="Mã chuyến bay" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,66,0,0" FontFamily="Cooper Black"/>
-        <Label Content="Giá vé" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" FontFamily="Cooper Black" Margin="251,66,0,0"/>
-        <Label Content="Sân bay đi" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,129,0,0" FontFamily="Cooper Black"/>
-        <Label Content="Sân bay đến" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="251,129,0,0" FontFamily="Cooper Black"/>
+        <Button Content="Update" Style="{StaticResource editButton}" Margin="0,413,143,53" Width="110"/>
+        <Button Content="Close" Style="{StaticResource editButton}" Margin="0,413,12,58" Width="110" Click="Button_Click"/>
+        <Label Content="ID Filght" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="14,66,0,0" FontFamily="Cooper Black"/>
+        <Label Content="Ticket prices" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" FontFamily="Cooper Black" Margin="251,66,0,0"/>
+        <Label Content="Departure airport" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="124" Foreground="Black" Margin="14,129,0,0" FontFamily="Cooper Black"/>
+        <Label Content="Destination airport" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="128" Foreground="Black" Margin="251,129,0,0" FontFamily="Cooper Black"/>
         <Label Content="Khởi hành" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="12,316,0,0" FontFamily="Cooper Black"/>
         <!--<Label Content="Số ghế hạng 1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="96" Foreground="Black" Margin="12,404,0,0" FontFamily="Cooper Black"/>
         <Label Content="Số ghế hạng 2" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="96" Foreground="Black" Margin="0,404,0,0" FontFamily="Cooper Black"/>
