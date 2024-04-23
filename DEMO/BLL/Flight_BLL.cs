@@ -14,95 +14,24 @@ namespace BLL
     {
         public string AutoID()
         {
-            SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand("select count(*) from FLIGHT", con);
-            int i = Convert.ToInt32(cmd.ExecuteScalar());
-            con.Close();
-            i++;
-            return i.ToString("000");
+            FlightAccess flightAccess = new FlightAccess();
+            return flightAccess.AutoID();
         }
         public void Add_Flights(FlightDTO flight)
         {
-            SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into FLIGHT values(@ID, @SouID, @DesID, @FlDay, @FlTime, @price)";
-
-            SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20);
-            SqlParameter parSouID = new SqlParameter("@SouID", SqlDbType.VarChar, 20);
-            SqlParameter parDesID = new SqlParameter("@DesID", SqlDbType.VarChar, 20);
-            SqlParameter parFlDay = new SqlParameter("@FlDay", SqlDbType.SmallDateTime);
-            SqlParameter parFlTime = new SqlParameter("@FlTime", SqlDbType.Time);
-            SqlParameter parPrice = new SqlParameter("@price", SqlDbType.Money);
-
-            parID.Value = AutoID();
-            parSouID.Value = flight.SourceAirportID;
-            parDesID.Value = flight.DestinationAirportID;
-            parFlDay.Value = flight.FlightDay;
-            parFlTime.Value = flight.FlightTime;
-            parPrice.Value = flight.Price;
-
-            cmd.Parameters.Add(parID);
-            cmd.Parameters.Add(parSouID);
-            cmd.Parameters.Add(parDesID);
-            cmd.Parameters.Add(parFlDay);
-            cmd.Parameters.Add(parFlTime);
-            cmd.Parameters.Add(parPrice);
-
-            cmd.Connection = con;
-            cmd.ExecuteNonQuery();
-            con.Close();
+            FlightAccess flightAccess = new FlightAccess();
+            flightAccess.Add_Flights(flight);
         }
         
         public List<AirportDTO> L_airport()
         {
-            List<AirportDTO> airports = new List<AirportDTO>();
-            SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from AIRPORT";
-
-            cmd.Connection = con;
-
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
-            {
-                airports.Add(new AirportDTO() { AirportID = rdr.GetString(0), AirportName = rdr.GetString(1) });
-            }
-            rdr.Close();
-            con.Close();
-
-            return airports;
+            FlightAccess flightAccess = new FlightAccess();
+            return flightAccess.L_airport();
         }
         public List<TicketClassDTO> L_TicketClass()
         {
-            List<TicketClassDTO> ticketclass = new List<TicketClassDTO>();
-            SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select *from TICKET_CLASS";
-
-            cmd.Connection = con;
-
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
-            {
-                ticketclass.Add(new TicketClassDTO() { TicketClassID = rdr.GetString(0), TicketClassName = rdr.GetString(1) });
-            }
-            rdr.Close();
-            con.Close();
-
-            return ticketclass;
+            FlightAccess flightAccess = new FlightAccess();
+            return flightAccess.L_TicketClass();
         }
 
     }

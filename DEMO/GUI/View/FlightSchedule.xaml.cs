@@ -98,15 +98,30 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
-            if(FlightDay.SelectedDate == null)
+            if(FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
             {
-                MessageBox.Show("Vui lòng nhập ngày khời hành!");
+                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
                 return;
             }
-            if (!FlightTime.SelectedTime.HasValue)
+            else if(FlightDay.SelectedDate == null)
             {
-                MessageBox.Show("Vui lòng nhập thời gian khời hành!");
+                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
                 return;
+            }
+            else if (!FlightTime.SelectedTime.HasValue)
+            {
+                MessageBox.Show("Vui lòng nhập thời gian khời hành!", "Error");
+                return;
+            }
+            if (FlightDay.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
+                return;
+            }
+            else if(FlightDay.SelectedDate == DateTime.Today && FlightTime.SelectedTime < DateTime.Now)
+            {
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
+                return; 
             }
             ScheduleData data = GetScheduleData();
             FlightDTO flightDTO = data.InitializeFlightDTO();
@@ -379,6 +394,7 @@ namespace GUI.View
                 }
             }
         }
+
         /*---------------------------------------------END Data Grid 2 aka IA---------------------------------------------------------*/
 
     }

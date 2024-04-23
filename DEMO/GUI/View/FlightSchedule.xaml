@@ -168,8 +168,7 @@
                                          Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                          Margin="0 10 0 0" Padding="0 5 0 3"
                                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                         VerticalAlignment="Top">
-                    </controls:DatePicker>
+                                         VerticalAlignment="Top"/>
                     <materialDesign:TimePicker x:Name="FlightTime"
                                            Width="200" Height="35"
                                            materialDesign:HintAssist.HelperText=""
@@ -179,8 +178,7 @@
                                            VerticalContentAlignment="Center"
                                            HorizontalContentAlignment="Center"
                                            VerticalAlignment="Top"
-                                           Is24Hours="True">
-                    </materialDesign:TimePicker>
+                                           Is24Hours="True"/>
                 </StackPanel>
             </Grid>
 
