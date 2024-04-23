@@ -120,6 +120,9 @@ select AirportID, AirportName from AIRPORT
 delete from FLIGHT
 delete from ACCOUNT
 
+insert into TICKET_CLASS values('1','Economy')
+insert into TICKET_CLASS values('2','Business')
+
 insert into AIRPORT values ('000',N'Nội Bài')
 insert into AIRPORT values ('001',N'Tân Sơn Nhất')
 insert into AIRPORT values ('002',N'Đà Nẵng')

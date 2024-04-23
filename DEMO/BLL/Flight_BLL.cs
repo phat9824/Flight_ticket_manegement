@@ -80,6 +80,29 @@ namespace BLL
 
             return airports;
         }
+        public List<TicketClassDTO> L_TicketClass()
+        {
+            List<TicketClassDTO> ticketclass = new List<TicketClassDTO>();
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select *from TICKET_CLASS";
+
+            cmd.Connection = con;
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                ticketclass.Add(new TicketClassDTO() { TicketClassID = rdr.GetString(0), TicketClassName = rdr.GetString(1) });
+            }
+            rdr.Close();
+            con.Close();
+
+            return ticketclass;
+        }
 
     }
 }

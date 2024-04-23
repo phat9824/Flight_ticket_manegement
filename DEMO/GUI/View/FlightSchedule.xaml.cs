@@ -71,20 +71,8 @@ namespace GUI.View
             // airports = BAL.GetAirports();
             // ticketclasses =BAL.GetTicketClass();
 
-            /*airports = new List<AirportDTO>
-            {
-                new AirportDTO() {AirportID = "000", AirportName = "Test"},
-                new AirportDTO() {AirportID = "001", AirportName = "Tân Sơn Nhất"},
-                new AirportDTO() {AirportID = "002", AirportName = "Nội Bài"},
-            };*/
             airports = fl_bll.L_airport();
-            
-
-            ticketClasses = new List<TicketClassDTO>
-            {
-                new TicketClassDTO { TicketClassID = "1", TicketClassName = "Economy" },
-                new TicketClassDTO { TicketClassID = "2", TicketClassName = "Business" },
-            };
+            ticketClasses = fl_bll.L_TicketClass();
 
             //----------------------------------------------------------------------------------------------------------------------------------
             ticketList = new ObservableCollection<TicketClass>
