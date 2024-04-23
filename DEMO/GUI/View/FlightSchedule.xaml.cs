@@ -46,6 +46,8 @@ namespace GUI.View
     public partial class FlightScheduleWindow : UserControl
     {
         Flight_BLL fl_bll = new Flight_BLL();
+        Airport_BLL airport_bll = new Airport_BLL();
+        Ticket_Class_BLL ticket_class_bll = new Ticket_Class_BLL();
 
         private ObservableCollection<TicketClass> ticketList;
         private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
@@ -72,8 +74,8 @@ namespace GUI.View
             // airports = BAL.GetAirports();
             // ticketclasses =BAL.GetTicketClass();
 
-            airports = fl_bll.L_airport();
-            ticketClasses = fl_bll.L_TicketClass();
+            airports = airport_bll.L_airport();
+            ticketClasses = ticket_class_bll.L_TicketClass();
 
             //----------------------------------------------------------------------------------------------------------------------------------
             ticketList = new ObservableCollection<TicketClass>

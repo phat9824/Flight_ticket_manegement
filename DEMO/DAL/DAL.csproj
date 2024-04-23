@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountAccess.cs" />
+    <Compile Include="AirportAccess.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="FlightAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ticket_classAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">
