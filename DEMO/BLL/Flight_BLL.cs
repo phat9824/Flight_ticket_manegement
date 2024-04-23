@@ -14,25 +14,13 @@ namespace BLL
     {
         public string AutoID()
         {
-            FlightAccess flightAccess = new FlightAccess();
-            return flightAccess.AutoID();
+            FlightAccess flight = new FlightAccess();
+            return flight.AutoID();
         }
         public void Add_Flights(FlightDTO flight)
         {
             FlightAccess flightAccess = new FlightAccess();
             flightAccess.Add_Flights(flight);
         }
-
-        public List<AirportDTO> L_airport()
-        {
-            FlightAccess flightAccess = new FlightAccess();
-            return flightAccess.L_airport();
-        }
-        public List<TicketClassDTO> L_TicketClass()
-        {
-            FlightAccess flightAccess = new FlightAccess();
-            return flightAccess.L_TicketClass();
-        }
-
     }
 }
