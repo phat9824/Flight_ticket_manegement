@@ -9,13 +9,47 @@ namespace DTO
 {
     public class ACCOUNT
     {
-        public string UserID { get; set; }
-        public string UserName { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public DateTime Birth { get; set; } // Dùng DateTime? để cho phép giá trị null
-        public string PasswordUser { get; set; }
-        public int PermissonID { get; set; }
-
+        private string userID;
+        private string userName;
+        private string phone;
+        private string email;
+        private DateTime birthday;
+        private string passWordUser;
+        private int perrmissionID;
+        public string UserID
+        {
+            get => this.userID;
+            set => this.userID = value;
+        }
+        public string UserName
+        {
+            get => this.userName;
+            set => this.userName = value;
+        }
+        public string Phone
+        {
+            get => this.phone;
+            set => this.phone = value;
+        }
+        public string Email
+        {
+            get => this.email;
+            set => this.email = value;
+        }
+        public DateTime Birth
+        {
+            get => this.birthday;
+            set => this.birthday = value;
+        }
+        public string PasswordUser
+        {
+            get => this.passWordUser;
+            set => this.passWordUser = value;
+        }
+        public int PermissonID
+        {
+            get => this.perrmissionID;
+            set => this.perrmissionID = value;
+        }
     }
 }

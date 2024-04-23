@@ -164,7 +164,7 @@ namespace GUI.View
             ScheduleData data = new ScheduleData();
             data.sourceAirportID = SourceAirportID.Text.Trim();
             data.destinationAirportID = DestinationAirportID.Text.Trim();
-            data.flightID = FlightID.Text.Trim();
+            data.flightID = fl_bll.AutoID();
             data.price = decimal.TryParse(TicketPrice.Text.Trim(), out decimal price) ? price : -1;
             data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
             data.flightTime = FlightTime.SelectedTime.HasValue ? FlightTime.SelectedTime.Value.TimeOfDay : TimeSpan.Zero;

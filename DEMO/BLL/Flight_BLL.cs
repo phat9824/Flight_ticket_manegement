@@ -12,7 +12,7 @@ namespace BLL
 {
     public class Flight_BLL
     {
-        private string AutoID()
+        public string AutoID()
         {
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
@@ -57,6 +57,7 @@ namespace BLL
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        
         public List<AirportDTO> L_airport()
         {
             List<AirportDTO> airports = new List<AirportDTO>();
