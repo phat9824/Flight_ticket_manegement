@@ -18,7 +18,7 @@ namespace GUI
     /// <summary>
     /// Interaction logic for SignUp1.xaml
     /// </summary>
-    
+
     public partial class SignUp1 : Window
     {
         public SignUp1()
@@ -30,7 +30,7 @@ namespace GUI
             {
                 days.Add(i);
             }
-            comboBox.ItemsSource = days;
+            D_comboBox.ItemsSource = days;
             //Month
             List<int> months = new List<int>();
             for (int i = 1; i <= 12; i++)
@@ -38,17 +38,17 @@ namespace GUI
                 months.Add(i);
             }
 
-            comboBox1.ItemsSource = months;
+            M_comboBox.ItemsSource = months;
             //Year
             int currentYear = DateTime.Now.Year;
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear; i++) 
+            for (int i = currentYear - 120; i <= currentYear; i++)
             {
                 years.Add(i);
             }
-            comboBox2.ItemsSource = years;
+            Y_comboBox.ItemsSource = years;
         }
         private void textFName_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -161,28 +161,35 @@ namespace GUI
 
         ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
         ACCOUNT User = new ACCOUNT();
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //User.UserName = "asdfasdf";
-            //User.Email = txtMailAdd.Text.Trim();
-            //User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
-            //User.PasswordUser = txtRePassword.Password.Trim();
+            User.UserName = txtFName.Text.Trim() + " " + txtLName.Text.Trim();
+            User.Email = txtMailAdd.Text.Trim();
+            User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
+            User.PasswordUser = txtRePassword.Password.Trim();
+            User.Phone = txtPhone.Text.Trim();
+            if (Admin_bt.AllowDrop)
+            {
+                User.PermissonID = 1;
+            }
+            else
+            {
+                User.PermissonID = 2;
+            }
+            int kq = 0;
+            accBLL.SignUp(User, ref kq);
 
-            //int kq = 0;
-            //accBLL.SignUp(User, ref kq);
-
-            //if (kq > 0)
-            //{
-            //    MessageBox.Show("Sign Up Success");
-            //    Login f = new Login();
-            //    f.Show();
-            //    Window.GetWindow(this).Close();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Error");
-            //}
+            if (kq > 0)
+            {
+                MessageBox.Show("Sign Up Success");
+                Login f = new Login();
+                f.Show();
+                Window.GetWindow(this).Close();
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
         }
     }
 }

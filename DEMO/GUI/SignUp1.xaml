@@ -173,13 +173,13 @@
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
         <Label Content="Mail Address" HorizontalAlignment="Left" Margin="27,156,0,0" VerticalAlignment="Top" Width="80" Foreground="#FFFFFDFD"/>
         <Label Content="What best describes what do you do?" HorizontalAlignment="Left" Margin="27,291,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFFFDFD"/>
-        <RadioButton Content="Admin" HorizontalAlignment="Left" Margin="107,318,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <RadioButton Content="Staff" HorizontalAlignment="Left" Margin="280,318,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <RadioButton x:Name="Admin_bt" Content="Admin" HorizontalAlignment="Left" Margin="107,318,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <RadioButton x:Name="Staff_bt" Content="Staff" HorizontalAlignment="Left" Margin="280,318,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Date of birth" HorizontalAlignment="Left" Margin="27,339,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
         <Label Content="Phone" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD" Margin="27,220,0,0"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="30,365,0,0" VerticalAlignment="Top" Width="96"  />
-        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="175,365,0,0" VerticalAlignment="Top" Width="96"/>
-        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="323,365,0,0" VerticalAlignment="Top" Width="96"/>
+        <ComboBox x:Name="D_comboBox" HorizontalAlignment="Left" Margin="30,365,0,0" VerticalAlignment="Top" Width="96"  />
+        <ComboBox x:Name="M_comboBox" HorizontalAlignment="Left" Margin="175,365,0,0" VerticalAlignment="Top" Width="96"/>
+        <ComboBox x:Name="Y_comboBox" HorizontalAlignment="Left" Margin="323,365,0,0" VerticalAlignment="Top" Width="96"/>
         <Label Content="Enter Password" HorizontalAlignment="Left" Margin="27,395,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
         <Label Content="Repeat Password" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD" Margin="27,462,0,0"/>
         <Image Source="/Images/return.jpg" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" Margin="0,10,414,0" Height="27" Width="31"/>
