@@ -53,7 +53,7 @@ namespace BLL
 
             SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20);
             SqlParameter parName = new SqlParameter("@name", SqlDbType.VarChar, 40);
-            SqlParameter parSdt = new SqlParameter("@SDT", SqlDbType.Int);
+            SqlParameter parSdt = new SqlParameter("@SDT", SqlDbType.VarChar, 20);
             SqlParameter parMail = new SqlParameter("@Email", SqlDbType.VarChar, 40);
             SqlParameter parBirDay = new SqlParameter("@Birtday", SqlDbType.SmallDateTime);
             SqlParameter parPass = new SqlParameter("@pass", SqlDbType.VarChar, 40);

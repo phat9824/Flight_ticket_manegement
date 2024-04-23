@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,6 @@ namespace DTO
         public DateTime Birth { get; set; } // Dùng DateTime? để cho phép giá trị null
         public string PasswordUser { get; set; }
         public int PermissonID { get; set; }
+
     }
 }

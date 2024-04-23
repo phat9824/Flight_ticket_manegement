@@ -102,8 +102,7 @@
                                   DisplayMemberPath="AirportID"
                                   SelectedValuePath="AirportID"
                                   SelectionChanged="DestinationAirportID_SelectionChanged"
-                                  LostFocus="ComboBox_LostFocus">
-                        </ComboBox>
+                                  LostFocus="ComboBox_LostFocus"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
                                 Margin="20 0 0 0">

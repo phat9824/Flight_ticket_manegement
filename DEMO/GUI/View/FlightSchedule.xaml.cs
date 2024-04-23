@@ -23,6 +23,7 @@ using System.Collections;
 using System.Web.UI.WebControls;
 using ControlzEx.Standard;
 using BLL;
+using System.Data.SqlClient;
 
 namespace GUI.View
 {
@@ -49,7 +50,7 @@ namespace GUI.View
         private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
         private IntermediateAirport defaultIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
-    private ICollectionView collectionViewTicketClass;
+        private ICollectionView collectionViewTicketClass;
         private ICollectionView collectionViewIA;
 
         public ParameterDTO parameterDTO;
@@ -70,12 +71,14 @@ namespace GUI.View
             // airports = BAL.GetAirports();
             // ticketclasses =BAL.GetTicketClass();
 
-            airports = new List<AirportDTO>
+            /*airports = new List<AirportDTO>
             {
                 new AirportDTO() {AirportID = "000", AirportName = "Test"},
                 new AirportDTO() {AirportID = "001", AirportName = "Tân Sơn Nhất"},
                 new AirportDTO() {AirportID = "002", AirportName = "Nội Bài"},
-            };
+            };*/
+            airports = fl_bll.L_airport();
+            
 
             ticketClasses = new List<TicketClassDTO>
             {

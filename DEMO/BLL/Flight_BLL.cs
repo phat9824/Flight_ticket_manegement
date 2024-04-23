@@ -55,6 +55,31 @@ namespace BLL
 
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
+            con.Close();
         }
+        public List<AirportDTO> L_airport()
+        {
+            List<AirportDTO> airports = new List<AirportDTO>();
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from AIRPORT";
+
+            cmd.Connection = con;
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                airports.Add(new AirportDTO() { AirportID = rdr.GetString(0), AirportName = rdr.GetString(1) });
+            }
+            rdr.Close();
+            con.Close();
+
+            return airports;
+        }
+
     }
 }

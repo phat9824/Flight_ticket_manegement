@@ -161,10 +161,9 @@ namespace GUI
 
         ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
         ACCOUNT User = new ACCOUNT();
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            User.UserName = textFName.Text.Trim() + " " + textLName.Text.Trim();
+            User.UserName = txtFName.Text.Trim() + " " + txtLName.Text.Trim();
             User.Email = txtMailAdd.Text.Trim();
             User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
             User.PasswordUser = txtRePassword.Password.Trim();
@@ -177,7 +176,6 @@ namespace GUI
             {
                 User.PermissonID = 2;
             }
-
             int kq = 0;
             accBLL.SignUp(User, ref kq);
 
