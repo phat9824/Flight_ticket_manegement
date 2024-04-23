@@ -18,7 +18,7 @@ namespace GUI
     /// <summary>
     /// Interaction logic for SignUp1.xaml
     /// </summary>
-    
+
     public partial class SignUp1 : Window
     {
         public SignUp1()
@@ -44,7 +44,7 @@ namespace GUI
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear; i++) 
+            for (int i = currentYear - 120; i <= currentYear; i++)
             {
                 years.Add(i);
             }
@@ -168,11 +168,11 @@ namespace GUI
             User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
             User.PasswordUser = txtRePassword.Password.Trim();
             User.Phone = txtPhone.Text.Trim();
-            if(Admin_bt.AllowDrop)
+            if (Admin_bt.AllowDrop)
             {
                 User.PermissonID = 1;
             }
-            else 
+            else
             {
                 User.PermissonID = 2;
             }

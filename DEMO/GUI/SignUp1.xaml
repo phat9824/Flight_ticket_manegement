@@ -162,7 +162,7 @@
                 <PasswordBox x:Name="txtRePassword" PasswordChanged="txtRePassword_PasswordChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border x:Name="txt_Phone" BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,247,30,329" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,247,30,329" >
             <Grid Margin="7 9">
 
                 <TextBlock x:Name="textPhone"  MouseDown="textPhone_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>

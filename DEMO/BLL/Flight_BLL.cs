@@ -22,7 +22,7 @@ namespace BLL
             FlightAccess flightAccess = new FlightAccess();
             flightAccess.Add_Flights(flight);
         }
-        
+
         public List<AirportDTO> L_airport()
         {
             FlightAccess flightAccess = new FlightAccess();

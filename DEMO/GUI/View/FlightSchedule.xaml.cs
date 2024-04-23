@@ -24,6 +24,7 @@ using System.Web.UI.WebControls;
 using ControlzEx.Standard;
 using BLL;
 using System.Data.SqlClient;
+using static GUI.View.Window2;
 
 namespace GUI.View
 {
@@ -55,11 +56,11 @@ namespace GUI.View
 
         public ParameterDTO parameterDTO;
         public List<TicketClassDTO> ticketClasses { get; set; }
-        public List<AirportDTO> airports {  get; set; }
+        public List<AirportDTO> airports { get; set; }
         public FlightScheduleWindow()
         {
             InitializeComponent();
-            
+
             //---------------------------------------------------------------------------------------------------------------------------------------------
             //parameterDTO = BAL.GetParameter();
 
@@ -98,12 +99,12 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
-            if(FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
+            if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
             {
                 MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
                 return;
             }
-            else if(FlightDay.SelectedDate == null)
+            else if (FlightDay.SelectedDate == null)
             {
                 MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
                 return;
@@ -118,10 +119,10 @@ namespace GUI.View
                 MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
                 return;
             }
-            else if(FlightDay.SelectedDate == DateTime.Today && FlightTime.SelectedTime < DateTime.Now)
+            else if (FlightDay.SelectedDate == DateTime.Today && FlightTime.SelectedTime < DateTime.Now)
             {
                 MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
-                return; 
+                return;
             }
             ScheduleData data = GetScheduleData();
             FlightDTO flightDTO = data.InitializeFlightDTO();
@@ -140,7 +141,8 @@ namespace GUI.View
 
             // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
             string processStateInfor = string.Empty;
-            if (String.IsNullOrWhiteSpace(processStateInfor)) {
+            if (String.IsNullOrWhiteSpace(processStateInfor))
+            {
                 ResetDataWindow();
                 var newTicket = defaultTicketClass;
                 ticketList.Add(newTicket);
@@ -164,7 +166,6 @@ namespace GUI.View
             SourceAirportID.Text = string.Empty;
             DestinationAirportID.SelectedIndex = -1;
             DestinationAirportID.Text = string.Empty;
-            FlightID.Text = string.Empty;
             TicketPrice.Text = string.Empty;
             FlightDay.SelectedDate = null;
             FlightTime.SelectedTime = null;
@@ -246,7 +247,7 @@ namespace GUI.View
             var newTicket = defaultTicketClass;
             ticketList.Add(newTicket);
             collectionViewTicketClass.MoveCurrentTo(newTicket);
-            
+
         }
         private void ResetTicket_Click(object sender, RoutedEventArgs e)
         {
@@ -264,7 +265,7 @@ namespace GUI.View
             }
             TicketClass selectedTicket = (TicketClass)dataGrid1.SelectedItem;
             if (selectedTicket != null)
-            {   
+            {
                 ((ObservableCollection<TicketClass>)collectionViewTicketClass.SourceCollection).Remove(selectedTicket);
                 dataGrid1.ItemsSource = collectionViewTicketClass;
             }
