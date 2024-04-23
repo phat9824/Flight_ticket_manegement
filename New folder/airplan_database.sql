@@ -1,4 +1,4 @@
-CREATE DATABASE airplan_database
+﻿CREATE DATABASE airplan_database
 USE airplan_database
 
 
@@ -20,7 +20,7 @@ CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
 	UserName VARCHAR(40),
-	Phone VARCHAR(20),
+	Phone INT,
 	Email VARCHAR(40),
 	Birth SMALLDATETIME,
 	PasswordUser VARCHAR(40),
@@ -32,7 +32,21 @@ CREATE TABLE AIRPORT
 	AirportID VARCHAR(20) PRIMARY KEY,
 	AirportName VARCHAR(40)
 )
-select * from AIRPORT
+
+
+insert into AIRPORT values ('0', N'Nội Bài')
+insert into AIRPORT values ('1',N'Tân Sơn Nhất')
+insert into AIRPORT values ('2',N'Đà Nẵng')
+insert into AIRPORT values ('3',N'Phú Quốc')
+insert into AIRPORT values ('4',N'Cam Ranh')
+insert into AIRPORT values ('5',N'Điện Biên Phủ')
+insert into AIRPORT values ('6',N'sample1')
+insert into AIRPORT values ('7',N'sample2')
+insert into AIRPORT values ('8',N'sample3')
+insert into AIRPORT values ('9',N'sample4')
+
+
+
 CREATE TABLE TICKET_CLASS
 (
 	TicketClassID VARCHAR(20) PRIMARY KEY,
@@ -48,6 +62,23 @@ CREATE TABLE FLIGHT
 	FlightTime TIME,
 	Price MONEY
 )
+
+
+-- Tạo dữ liệu ngẫu nhiên cho bảng FLIGHT
+INSERT INTO FLIGHT (FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price)
+SELECT 
+    CONCAT('FLIGHT', ROW_NUMBER() OVER (ORDER BY (SELECT NULL))), -- Tạo FlightID ngẫu nhiên
+    SourceAirport.AirportID,
+    DestinationAirport.AirportID,
+    DATEADD(day, ABS(CHECKSUM(NEWID())) % 30, GETDATE()), -- Ngày bay ngẫu nhiên trong 30 ngày kể từ ngày hiện tại
+    CAST(CAST(RAND(CHECKSUM(NEWID())) * 24 AS INT) AS VARCHAR(2)) + ':' + CAST(CAST(RAND(CHECKSUM(NEWID())) * 60 AS INT) AS VARCHAR(2)) + ':' + CAST(CAST(RAND(CHECKSUM(NEWID())) * 60 AS INT) AS VARCHAR(2)), -- Thời gian bay ngẫu nhiên trong ngày
+    CAST(RAND(CHECKSUM(NEWID())) * 1000 AS MONEY) -- Giá vé ngẫu nhiên từ 0 đến 1000
+FROM 
+    AIRPORT AS SourceAirport, AIRPORT AS DestinationAirport
+WHERE 
+    SourceAirport.AirportID != DestinationAirport.AirportID; -- Đảm bảo sân bay nguồn và đích khác nhau
+-----------------------------------------------------------
+
 
 CREATE TABLE CUSTOMER
 (

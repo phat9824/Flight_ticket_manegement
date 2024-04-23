@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +15,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using DTO;
+using BLL;
+
 
 namespace GUI.View
 {
@@ -69,6 +74,45 @@ namespace GUI.View
             public string SoGheTrong { get; set; }
             public string SoGheDat { get; set; }
 
+
+        }
+
+        private void Flight_from_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<AirportDTO> airports = AirportBLL.GetAirports();
+
+            // Xóa các mục cũ trước khi thêm mới
+            Flight_from_comboBox.Items.Clear();
+
+            // Lấy 5 phần tử đầu tiên của danh sách airports
+            var top5Airports = airports.Take(5);
+
+            // Tạo chuỗi để hiển thị trong MessageBox
+            StringBuilder message = new StringBuilder();
+            message.AppendLine("Top 5 sân bay:");
+
+            // Duyệt qua danh sách và thêm vào chuỗi
+            int count = 1;
+            foreach (AirportDTO airport in top5Airports)
+            {
+                message.AppendLine($"{count}. {airport.AirportName}");
+                count++;
+            }
+
+            // Hiển thị MessageBox
+            MessageBox.Show(message.ToString(), "Top 5 sân bay", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Duyệt qua danh sách và thêm từng mục vào ComboBox
+            foreach (AirportDTO airport in airports)
+            {
+                Flight_from_comboBox.Items.Add(airport.AirportName);
+            }
+
+            MessageBox.Show("Chọn sân bay đi thành công!");
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

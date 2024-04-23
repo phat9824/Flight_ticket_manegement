@@ -554,23 +554,17 @@
 
 
 
-                <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                <ComboBox x:Name="Flight_from_comboBox" materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying From"
                           materialDesign:HintAssist.HintOpacity=".26"
-                          IsEditable="True" Margin="15,8,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
-                    <ComboBoxItem Content="Apple" />
-                    <ComboBoxItem Content="Banana" />
-                    <ComboBoxItem Content="Pear" />
-                    <ComboBoxItem Content="Orange" />
+                          IsEditable="True" Margin="15,8,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100" SelectionChanged="Flight_from_ComboBox_SelectionChanged">
+                    
                 </ComboBox>
-                <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                <ComboBox x:Name="Flight_to_ComboBox" materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying To"
                           materialDesign:HintAssist.HintOpacity=".26"
-                          IsEditable="True" Margin="146,8,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
-                    <ComboBoxItem Content="Apple" />
-                    <ComboBoxItem Content="Banana" />
-                    <ComboBoxItem Content="Pear" />
-                    <ComboBoxItem Content="Orange" />
+                          IsEditable="True" Margin="146,8,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100" SelectionChanged="ComboBox_SelectionChanged">
+                 
                 </ComboBox>
 
                 <DatePicker Width="140"
