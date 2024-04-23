@@ -22,6 +22,9 @@ using GUI.ViewModel;
 using System.Collections;
 using System.Web.UI.WebControls;
 using ControlzEx.Standard;
+using BLL;
+using System.Data.SqlClient;
+using static GUI.View.Window2;
 
 namespace GUI.View
 {
@@ -42,20 +45,22 @@ namespace GUI.View
      */
     public partial class FlightScheduleWindow : UserControl
     {
+        Flight_BLL fl_bll = new Flight_BLL();
+
         private ObservableCollection<TicketClass> ticketList;
         private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
         private IntermediateAirport defaultIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
-    private ICollectionView collectionViewTicketClass;
+        private ICollectionView collectionViewTicketClass;
         private ICollectionView collectionViewIA;
 
         public ParameterDTO parameterDTO;
         public List<TicketClassDTO> ticketClasses { get; set; }
-        public List<AirportDTO> airports {  get; set; }
+        public List<AirportDTO> airports { get; set; }
         public FlightScheduleWindow()
         {
             InitializeComponent();
-            
+
             //---------------------------------------------------------------------------------------------------------------------------------------------
             //parameterDTO = BAL.GetParameter();
 
@@ -67,18 +72,8 @@ namespace GUI.View
             // airports = BAL.GetAirports();
             // ticketclasses =BAL.GetTicketClass();
 
-            airports = new List<AirportDTO>
-            {
-                new AirportDTO() {AirportID = "000", AirportName = "Test"},
-                new AirportDTO() {AirportID = "001", AirportName = "Tân Sơn Nhất"},
-                new AirportDTO() {AirportID = "002", AirportName = "Nội Bài"},
-            };
-
-            ticketClasses = new List<TicketClassDTO>
-            {
-                new TicketClassDTO { TicketClassID = "1", TicketClassName = "Economy" },
-                new TicketClassDTO { TicketClassID = "2", TicketClassName = "Business" },
-            };
+            airports = fl_bll.L_airport();
+            ticketClasses = fl_bll.L_TicketClass();
 
             //----------------------------------------------------------------------------------------------------------------------------------
             ticketList = new ObservableCollection<TicketClass>
@@ -104,8 +99,36 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
+            if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
+            {
+                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
+                return;
+            }
+            else if (FlightDay.SelectedDate == null)
+            {
+                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
+                return;
+            }
+            else if (!FlightTime.SelectedTime.HasValue)
+            {
+                MessageBox.Show("Vui lòng nhập thời gian khời hành!", "Error");
+                return;
+            }
+            if (FlightDay.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
+                return;
+            }
+            else if (FlightDay.SelectedDate == DateTime.Today && FlightTime.SelectedTime < DateTime.Now)
+            {
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
+                return;
+            }
             ScheduleData data = GetScheduleData();
             FlightDTO flightDTO = data.InitializeFlightDTO();
+
+            fl_bll.Add_Flights(flightDTO);
+
             List<TicketClassFlightDTO> listTicketClassFlightDTO = data.InitializeListTicketClassFlightDTO();
             List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();
 
@@ -118,7 +141,8 @@ namespace GUI.View
 
             // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
             string processStateInfor = string.Empty;
-            if (String.IsNullOrWhiteSpace(processStateInfor)) {
+            if (String.IsNullOrWhiteSpace(processStateInfor))
+            {
                 ResetDataWindow();
                 var newTicket = defaultTicketClass;
                 ticketList.Add(newTicket);
@@ -142,7 +166,6 @@ namespace GUI.View
             SourceAirportID.Text = string.Empty;
             DestinationAirportID.SelectedIndex = -1;
             DestinationAirportID.Text = string.Empty;
-            //FlightID.Text = string.Empty;
             TicketPrice.Text = string.Empty;
             FlightDay.SelectedDate = null;
             FlightTime.SelectedTime = null;
@@ -157,7 +180,7 @@ namespace GUI.View
             ScheduleData data = new ScheduleData();
             data.sourceAirportID = SourceAirportID.Text.Trim();
             data.destinationAirportID = DestinationAirportID.Text.Trim();
-            data.flightID = null;
+            data.flightID = fl_bll.AutoID();
             data.price = decimal.TryParse(TicketPrice.Text.Trim(), out decimal price) ? price : -1;
             data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
             data.flightTime = FlightTime.SelectedTime.HasValue ? FlightTime.SelectedTime.Value.TimeOfDay : TimeSpan.Zero;
@@ -209,7 +232,6 @@ namespace GUI.View
             }
         }
 
-
         /*---------------------------------------------END R1--------------------------------------------------*/
 
         /*---------------------------------------------BEGIN Data Grid 1 aka TicketClass------------------------------------------------*/
@@ -225,7 +247,7 @@ namespace GUI.View
             var newTicket = defaultTicketClass;
             ticketList.Add(newTicket);
             collectionViewTicketClass.MoveCurrentTo(newTicket);
-            
+
         }
         private void ResetTicket_Click(object sender, RoutedEventArgs e)
         {
@@ -243,7 +265,7 @@ namespace GUI.View
             }
             TicketClass selectedTicket = (TicketClass)dataGrid1.SelectedItem;
             if (selectedTicket != null)
-            {   
+            {
                 ((ObservableCollection<TicketClass>)collectionViewTicketClass.SourceCollection).Remove(selectedTicket);
                 dataGrid1.ItemsSource = collectionViewTicketClass;
             }
@@ -373,6 +395,7 @@ namespace GUI.View
                 }
             }
         }
+
         /*---------------------------------------------END Data Grid 2 aka IA---------------------------------------------------------*/
 
     }
