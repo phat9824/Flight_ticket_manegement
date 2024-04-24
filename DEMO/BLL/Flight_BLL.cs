@@ -12,7 +12,7 @@ namespace BLL
 {
     public class Flight_BLL
     {
-        public string AutoID()
+        public string Get_ID()
         {
             FlightAccess flight = new FlightAccess();
             return flight.AutoID();

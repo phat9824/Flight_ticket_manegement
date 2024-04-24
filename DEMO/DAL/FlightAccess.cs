@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
+using System.Runtime.CompilerServices;
 
 namespace DAL
 {
@@ -41,7 +42,7 @@ namespace DAL
             parID.Value = AutoID();
             parSouID.Value = flight.SourceAirportID;
             parDesID.Value = flight.DestinationAirportID;
-            parFlDay.Value = flight.FlightDay;
+            parFlDay.Value = flight.FlightDay.Add(new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second));
             parFlTime.Value = flight.FlightTime;
             parPrice.Value = flight.Price;
 
