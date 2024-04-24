@@ -37,7 +37,7 @@ namespace DAL
             cmd.CommandText = "insert into ACCOUNT values(@ID, @name, @SDT, @Email, @Birtday, @pass, @permission)";
 
             SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20);
-            SqlParameter parName = new SqlParameter("@name", SqlDbType.VarChar, 40);
+            SqlParameter parName = new SqlParameter("@name", SqlDbType.NVarChar, 40);
             SqlParameter parSdt = new SqlParameter("@SDT", SqlDbType.Int);
             SqlParameter parMail = new SqlParameter("@Email", SqlDbType.VarChar, 40);
             SqlParameter parBirDay = new SqlParameter("@Birtday", SqlDbType.SmallDateTime);
