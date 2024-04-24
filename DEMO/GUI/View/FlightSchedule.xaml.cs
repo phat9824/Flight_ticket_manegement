@@ -171,6 +171,7 @@ namespace GUI.View
             TicketPrice.Text = string.Empty;
             FlightDay.SelectedDate = null;
             FlightTime.SelectedTime = null;
+            DepartureTime.SelectedTime= null;
             ticketList.Clear();
             IAList.Clear();
             collectionViewTicketClass.Filter = null;
@@ -184,13 +185,34 @@ namespace GUI.View
             data.destinationAirportID = DestinationAirportID.Text.Trim();
             data.flightID = fl_bll.AutoID();
             data.price = decimal.TryParse(TicketPrice.Text.Trim(), out decimal price) ? price : -1;
-            data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
+            //data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
+            data.flightDay = combinedDayTime();
             data.flightTime = FlightTime.SelectedTime.HasValue ? FlightTime.SelectedTime.Value.TimeOfDay : TimeSpan.Zero;
             data.IAList = IAList;
             data.ticketList = ticketList;
             return data;
         }
 
+        private DateTime combinedDayTime()
+        {
+            DateTime combined;
+            if (FlightDay.SelectedDate.HasValue)
+            {
+                if (DepartureTime.SelectedTime.HasValue)
+                {
+                    combined = FlightDay.SelectedDate.Value.Date + DepartureTime.SelectedTime.Value.TimeOfDay;
+                }
+                else
+                {
+                    combined = FlightDay.SelectedDate.Value.Date + TimeSpan.Zero;
+                }
+            }
+            else
+            {
+                combined = DateTime.MinValue;
+            }
+            return combined;
+        }
         /*---------------------------------------------BEGIN R1------------------------------------------------*/
 
         private void DestinationAirport_SelectionChanged(object sender, SelectionChangedEventArgs e)
