@@ -1,4 +1,4 @@
-CREATE DATABASE airplan_database
+﻿CREATE DATABASE airplan_database
 USE airplan_database
 
 
@@ -19,20 +19,18 @@ insert into ACCOUNT values ('2','s2','1','s2@gmail.com','2004/02/04','1','2')
 CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
-	UserName VARCHAR(40),
+	UserName NVARCHAR(40),
 	Phone INT,
 	Email VARCHAR(40),
 	Birth SMALLDATETIME,
 	PasswordUser VARCHAR(40),
 	PermissonID INT FOREIGN KEY REFERENCES PERMISSION(PermissionID)
 )
-
 CREATE TABLE AIRPORT
 (
 	AirportID VARCHAR(20) PRIMARY KEY,
-	AirportName VARCHAR(40)
+	AirportName NVARCHAR(40)
 )
-
 CREATE TABLE TICKET_CLASS
 (
 	TicketClassID VARCHAR(20) PRIMARY KEY,
@@ -110,3 +108,19 @@ CREATE TABLE PARAMETER
     SlowestBookingTime      time,           -- Slowest booking time
     CancelTime              time            -- Cancellation time
 );
+select *from AIRPORT
+select *from ACCOUNT
+
+delete from AIRPORT
+
+delete from FLIGHT
+insert into AIRPORT values ('000',N'Nội Bài')
+insert into AIRPORT values ('001',N'Tân Sơn Nhất')
+insert into AIRPORT values ('002',N'Đà Nẵng')
+insert into AIRPORT values ('003',N'Phú Quốc')
+insert into AIRPORT values ('004',N'Cam Ranh')
+insert into AIRPORT values ('005',N'Điện Biên Phủ')
+insert into AIRPORT values ('006',N'sample1')
+insert into AIRPORT values ('007',N'sample2')
+insert into AIRPORT values ('008',N'sample3')
+insert into AIRPORT values ('009',N'sample4')
