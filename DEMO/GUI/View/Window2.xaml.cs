@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +16,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GUI.ViewModel;
+using System.Windows.Media.Media3D;
 
 namespace GUI.View
 {
@@ -22,12 +26,15 @@ namespace GUI.View
     /// </summary>
     public partial class Window2 : UserControl
     {
+        ObservableCollection<Flight> flights = new ObservableCollection<Flight>();
         private List<string> suggestions = new List<string> { "Gợi ý 1", "Gợi ý 2", "Gợi ý 3" };
+        
+        public List<AirportDTO> airports { get; set; }
+        private Dictionary<string, string> airportDictionary = new Dictionary<string, string>();
         public Window2()
         {
             InitializeComponent();
             var converter = new BrushConverter();
-            ObservableCollection<Flight> flights = new ObservableCollection<Flight>();
 
             //Create DataGrid Items
 
@@ -37,6 +44,17 @@ namespace GUI.View
             flights.Add(new Flight { STT = "4", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
             flights.Add(new Flight { STT = "5", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
             FlightsDataGrid.ItemsSource = flights;
+
+
+            Airport_BLL airport_bll = new Airport_BLL();
+
+            // Dùng cho item source
+            airports = airport_bll.L_airport();
+            // Dùng cho xử lý nếu cần
+            airportDictionary = airports.ToDictionary(airport => airport.AirportID, airport => airport.AirportName);
+            
+            SourceAirport.ItemsSource = airports;
+            DestinationAirport.ItemsSource = airports;
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
@@ -59,19 +77,19 @@ namespace GUI.View
         //    suggestionListBox.Visibility = Visibility.Visible;
         //}
 
-        public class Flight
+
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
-            public string STT { get; set; }
-            public string SanBayDi { get; set; }
-            public string SanBayDen { get; set; }
-            public string KhoiHanh { get; set; }
-            public string ThoiGian { get; set; }
-            public string SoGheTrong { get; set; }
-            public string SoGheDat { get; set; }
-
-
+            string a = SourceAirport.SelectedValue as string;
+            string b = DestinationAirport.SelectedValue as string;
+            DateTime startDate = new DateTime(1753, 1, 1, 0, 0, 0);
+            DateTime endDate = new DateTime(9999, 12, 31, 23, 59, 59);
+            
+            Search search = new Search();
+            List<FlightInformationSearchDTO> flightInformationSearches = new List<FlightInformationSearchDTO>();
+            flightInformationSearches = search.GetInformationSearch(a, b, startDate, endDate);
+            FlightsDataGrid.ItemsSource = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Edit f = new Edit();

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
+using System.Collections;
 
 namespace DAL
 {
@@ -55,6 +56,52 @@ namespace DAL
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+        public List<FlightInformationSearchDTO> getFlight(string sourceAirportID, string destinationAirportID
+                                                                       , DateTime startDate, DateTime endDate)
+        {
+            List<FlightInformationSearchDTO> data = new List<FlightInformationSearchDTO>();
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+            string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
+                            FROM FLIGHT
+                            WHERE (@sourceAirportID IS NULL OR SourceAirportID = @sourceAirportID)
+                            AND (@destinationAirportID IS NULL OR DestinationAirportID = @destinationAirportID)
+                            AND FlightDay BETWEEN @startDate AND @endDate";
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                // Thiết lập các tham số
+                command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@startDate", startDate);
+                command.Parameters.AddWithValue("@endDate", endDate);
+
+                // Đọc kết quả truy vấn
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        FlightInformationSearchDTO flight = new FlightInformationSearchDTO
+                        {
+                            Flight = new FlightDTO { FlightID = reader["FlightID"].ToString(),
+                                DestinationAirportID = reader["SourceAirportID"].ToString(),
+                                SourceAirportID = reader["DestinationAirportID"].ToString(),
+                                FlightDay = Convert.ToDateTime(reader["FlightDay"]),
+                                FlightTime = (TimeSpan)reader["FlightTime"],
+                                Price = Convert.ToDecimal(reader["Price"])
+                            },
+                            bookedTickets = 0,
+                            totalTickets = 0,
+                            IntermediateAirports = null,
+                            TicketClasses = null
+                        };
+                        data.Add(flight);
+                    }
+                }
+            }
+            // Đóng kết nối
+            con.Close();
+            return data;
         }
     }
 }

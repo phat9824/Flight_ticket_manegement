@@ -46,6 +46,7 @@
     <Compile Include="BookingTicketDTO.cs" />
     <Compile Include="CustomerDTO.cs" />
     <Compile Include="FlightDTO.cs" />
+    <Compile Include="FlightInformationSearchDTO.cs" />
     <Compile Include="IntermidateAirportDTO.cs" />
     <Compile Include="ParameterDTO.cs" />
     <Compile Include="PERMISSION.cs" />
