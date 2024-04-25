@@ -34,5 +34,34 @@ namespace DAL
 
             return ticketclass;
         }
+
+        public int getTotalSeat_byFlightID(string flightID)
+        {
+            int number = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+            string query = @"SELECT ISNULL(SUM(Quantity), 0) AS TotalSeat
+                            FROM TICKETCLASS_FLIGHT
+                            WHERE (@flightID IS NULL OR FlightID = @flightID)";
+
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                // Thiết lập các tham số
+                command.Parameters.AddWithValue("@flightID", flightID ?? (object)DBNull.Value);
+
+                // Đọc kết quả truy vấn
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read()) 
+                    {
+                        number = (int)reader["TotalSeat"];
+                    }
+                }
+            }
+            // Đóng kết nối
+            con.Close();
+
+            return number;
+        }
     }
 }

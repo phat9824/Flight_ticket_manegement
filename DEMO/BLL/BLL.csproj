@@ -45,6 +45,7 @@
     <Compile Include="Airport_BLL.cs" />
     <Compile Include="Flight_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchProcessor.cs" />
     <Compile Include="Ticket_Class_BLL.cs" />
   </ItemGroup>
   <ItemGroup>

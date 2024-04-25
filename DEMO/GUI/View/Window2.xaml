@@ -595,33 +595,32 @@
 
 
 
-                <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                <ComboBox x:Name="SourceAirport"
+                          materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying From"
                           materialDesign:HintAssist.HintOpacity=".26"
-                          IsEditable="True" Margin="15,20,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
-                    <ComboBoxItem Content="Apple" />
-                    <ComboBoxItem Content="Banana" />
-                    <ComboBoxItem Content="Pear" />
-                    <ComboBoxItem Content="Orange" />
+                          IsEditable="True" Margin="15,20,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100"
+                          DisplayMemberPath="AirportName"
+                          SelectedValuePath="AirportID">
                 </ComboBox>
-                <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                <ComboBox x:Name="DestinationAirport" materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying To"
                           materialDesign:HintAssist.HintOpacity=".26"
-                          IsEditable="True" Margin="146,20,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100">
-                    <ComboBoxItem Content="Apple" />
-                    <ComboBoxItem Content="Banana" />
-                    <ComboBoxItem Content="Pear" />
-                    <ComboBoxItem Content="Orange" />
+                          IsEditable="True" Margin="146,20,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100"
+                          DisplayMemberPath="AirportName"
+                          SelectedValuePath="AirportID">
                 </ComboBox>
 
-                <DatePicker Width="140"
+                <DatePicker x:Name="StartDay"
+                            Width="140"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Pick Date"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="276,20,346,0" Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False" />
-                <DatePicker Width="140"
-             materialDesign:HintAssist.HelperText=""
-             materialDesign:HintAssist.Hint="Pick Date"
-             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
+                <DatePicker x:Name="EndDay"
+                            Width="140"
+                            materialDesign:HintAssist.HelperText=""
+                            materialDesign:HintAssist.Hint="Pick Date"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
                 <ComboBox materialDesign:HintAssist.HelperText=""
                           materialDesign:HintAssist.Hint="Sort By"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49">
@@ -741,7 +740,9 @@
 
                     </StackPanel>
                 </Border>
-                <Button Content="Search" HorizontalAlignment="Left" Margin="669,25,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource addButton}" Width="101"/>
+                <Button Content="Search"
+                        Click="Search_Click"
+                        HorizontalAlignment="Left" Margin="669,25,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource addButton}" Width="101"/>
             </Grid>
         </Grid>
     </Border>
