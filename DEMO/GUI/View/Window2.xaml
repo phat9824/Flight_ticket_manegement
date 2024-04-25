@@ -611,14 +611,16 @@
                           SelectedValuePath="AirportID">
                 </ComboBox>
 
-                <DatePicker Width="140"
+                <DatePicker x:Name="StartDay"
+                            Width="140"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Pick Date"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="276,20,346,0" Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False" />
-                <DatePicker Width="140"
-             materialDesign:HintAssist.HelperText=""
-             materialDesign:HintAssist.Hint="Pick Date"
-             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
+                <DatePicker x:Name="EndDay"
+                            Width="140"
+                            materialDesign:HintAssist.HelperText=""
+                            materialDesign:HintAssist.Hint="Pick Date"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
                 <ComboBox materialDesign:HintAssist.HelperText=""
                           materialDesign:HintAssist.Hint="Sort By"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49">

@@ -82,10 +82,12 @@ namespace GUI.View
         {
             string a = SourceAirport.SelectedValue as string;
             string b = DestinationAirport.SelectedValue as string;
-            DateTime startDate = new DateTime(1753, 1, 1, 0, 0, 0);
-            DateTime endDate = new DateTime(9999, 12, 31, 23, 59, 59);
-            
-            Search search = new Search();
+
+            // 2 Giá trị dưới là min và max cho phép của SQL
+            DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);
+            DateTime endDate = EndDay.SelectedDate.HasValue ? EndDay.SelectedDate.Value.Date : new DateTime(9999, 12, 31, 23, 59, 59);
+
+            SearchProcessor search = new SearchProcessor();
             List<FlightInformationSearchDTO> flightInformationSearches = new List<FlightInformationSearchDTO>();
             flightInformationSearches = search.GetInformationSearch(a, b, startDate, endDate);
             FlightsDataGrid.ItemsSource = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
