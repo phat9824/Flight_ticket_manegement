@@ -43,9 +43,9 @@ namespace GUI.ViewModel
                 STT = flightInfo.Flight.FlightID,
                 SanBayDi = airportDictionary[flightInfo.Flight.SourceAirportID],
                 SanBayDen = airportDictionary[flightInfo.Flight.DestinationAirportID],
-                KhoiHanh = flightInfo.Flight.FlightDay.ToString("dd/MM/yyyy"),
+                KhoiHanh = flightInfo.Flight.FlightDay.ToString("dd/MM/yyyy hh:mm"),
                 ThoiGian = flightInfo.Flight.FlightTime.ToString(@"hh\:mm"),
-                SoGheTrong = (flightInfo.totalTickets - flightInfo.bookedTickets).ToString(),
+                SoGheTrong = flightInfo.emptySeats.ToString(),
                 SoGheDat = flightInfo.bookedTickets.ToString()
             };
             return flight;

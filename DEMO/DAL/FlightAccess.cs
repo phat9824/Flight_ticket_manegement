@@ -57,10 +57,10 @@ namespace DAL
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        public List<FlightInformationSearchDTO> getFlight(string sourceAirportID, string destinationAirportID
+        public List<FlightDTO> getFlight(string sourceAirportID, string destinationAirportID
                                                                        , DateTime startDate, DateTime endDate)
         {
-            List<FlightInformationSearchDTO> data = new List<FlightInformationSearchDTO>();
+            List<FlightDTO> data = new List<FlightDTO>();
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
             string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
@@ -68,6 +68,7 @@ namespace DAL
                             WHERE (@sourceAirportID IS NULL OR SourceAirportID = @sourceAirportID)
                             AND (@destinationAirportID IS NULL OR DestinationAirportID = @destinationAirportID)
                             AND FlightDay BETWEEN @startDate AND @endDate";
+
             using (SqlCommand command = new SqlCommand(query, con))
             {
                 // Thiết lập các tham số
@@ -81,19 +82,15 @@ namespace DAL
                 {
                     while (reader.Read())
                     {
-                        FlightInformationSearchDTO flight = new FlightInformationSearchDTO
+                        FlightDTO flight = new FlightDTO()
                         {
-                            Flight = new FlightDTO { FlightID = reader["FlightID"].ToString(),
-                                DestinationAirportID = reader["DestinationAirportID"].ToString(),
-                                SourceAirportID = reader["SourceAirportID"].ToString(),
-                                FlightDay = Convert.ToDateTime(reader["FlightDay"]),
-                                FlightTime = (TimeSpan)reader["FlightTime"],
-                                Price = Convert.ToDecimal(reader["Price"])
-                            },
-                            bookedTickets = 0,
-                            totalTickets = 0,
-                            IntermediateAirports = null,
-                            TicketClasses = null
+                            FlightID = reader["FlightID"].ToString(),
+                            DestinationAirportID = reader["DestinationAirportID"].ToString(),
+                            SourceAirportID = reader["SourceAirportID"].ToString(),
+                            FlightDay = Convert.ToDateTime(reader["FlightDay"]),
+                            FlightTime = (TimeSpan)reader["FlightTime"],
+                            Price = Convert.ToDecimal(reader["Price"])
+                            
                         };
                         data.Add(flight);
                     }
