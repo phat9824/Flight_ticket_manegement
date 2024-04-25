@@ -84,8 +84,8 @@ namespace DAL
                         FlightInformationSearchDTO flight = new FlightInformationSearchDTO
                         {
                             Flight = new FlightDTO { FlightID = reader["FlightID"].ToString(),
-                                DestinationAirportID = reader["SourceAirportID"].ToString(),
-                                SourceAirportID = reader["DestinationAirportID"].ToString(),
+                                DestinationAirportID = reader["DestinationAirportID"].ToString(),
+                                SourceAirportID = reader["SourceAirportID"].ToString(),
                                 FlightDay = Convert.ToDateTime(reader["FlightDay"]),
                                 FlightTime = (TimeSpan)reader["FlightTime"],
                                 Price = Convert.ToDecimal(reader["Price"])
