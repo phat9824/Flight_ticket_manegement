@@ -44,6 +44,10 @@ namespace GUI.ViewModel
             Window3Command = new RelayCommand(Window3);
             FlightScheduleWindowCommand = new RelayCommand(FlightScheduleWindow);
             Window5Command = new RelayCommand(Window5);
+            Window6Command = new RelayCommand(Window6);
+            Window7Command = new RelayCommand(Window7);
+            Window8Command = new RelayCommand(Window8);
+            Window9Command = new RelayCommand(Window9);
 
             CurrentView = new Window1VM();
         }
