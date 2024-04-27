@@ -26,4 +26,20 @@
     <DataTemplate DataType="{x:Type vm:Window6VM}">
         <view:Window6/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window7VM}">
+        <view:Window7/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window8VM}">
+        <view:Window8/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window9VM}">
+        <view:Window9/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window10VM}">
+        <view:Window10/>
+    </DataTemplate>
 </ResourceDictionary>
