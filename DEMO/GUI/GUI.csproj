@@ -189,6 +189,9 @@
     <Compile Include="SignUp1.xaml.cs">
       <DependentUpon>SignUp1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StaffWindow.xaml.cs">
+      <DependentUpon>StaffWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ultilities\Btn.cs" />
     <Compile Include="Ultilities\RelayCommand.cs" />
     <Compile Include="Ultilities\ViewModelBase.cs" />
@@ -250,6 +253,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SignUp1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StaffWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
