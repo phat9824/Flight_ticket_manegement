@@ -22,4 +22,8 @@
     <DataTemplate DataType="{x:Type vm:Window5VM}">
         <view:Window5/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window6VM}">
+        <view:Window6/>
+    </DataTemplate>
 </ResourceDictionary>
