@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
-<<<<<<< HEAD
 using System.Runtime.CompilerServices;
-=======
 using System.Collections;
->>>>>>> 2ec5174f66589509a2857ba12d6e4e27a8020238
 
 namespace DAL
 {

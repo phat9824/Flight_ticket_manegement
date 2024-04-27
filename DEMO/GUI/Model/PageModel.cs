@@ -13,6 +13,12 @@ namespace GUI.Model
         public string Window3 { get; set; }
         public string Window4 { get; set; }
         public string Window5 { get; set; }
+        public string Window6 { get; set; }
+        public string Window7 { get; set; }
+        public string Window8 { get; set; }
+        public string Window9 { get; set; }
+
+
 
     }
 }

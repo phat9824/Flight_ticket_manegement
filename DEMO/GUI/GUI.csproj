@@ -198,6 +198,10 @@
     <Compile Include="ViewModel\Window3VM.cs" />
     <Compile Include="ViewModel\FlightScheduleVM.cs" />
     <Compile Include="ViewModel\Window5VM.cs" />
+    <Compile Include="ViewModel\Window6VM.cs" />
+    <Compile Include="ViewModel\Window7VM.cs" />
+    <Compile Include="ViewModel\Window8VM.cs" />
+    <Compile Include="ViewModel\Window9VM.cs" />
     <Compile Include="View\FlightSchedule.xaml.cs">
       <DependentUpon>FlightSchedule.xaml</DependentUpon>
     </Compile>
@@ -212,6 +216,18 @@
     </Compile>
     <Compile Include="View\Window5.xaml.cs">
       <DependentUpon>Window5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Window6.xaml.cs">
+      <DependentUpon>Window6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Window7.xaml.cs">
+      <DependentUpon>Window7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Window8.xaml.cs">
+      <DependentUpon>Window8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Window9.xaml.cs">
+      <DependentUpon>Window9.xaml</DependentUpon>
     </Compile>
     <Page Include="Edit.xaml">
       <SubType>Designer</SubType>
@@ -274,6 +290,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Window5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window9.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
