@@ -645,7 +645,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
+                                        <Button Style="{StaticResource gridEditButton}">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </Button>
                                         <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
@@ -655,42 +655,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
-                         <DataGridTextColumn.Binding>
-                             <Binding Path="SanBayDi"/>
-                         </DataGridTextColumn.Binding>
-                     </DataGridTextColumn>
-
-                     <DataGridTextColumn Header="Sân bay đến" IsReadOnly="True" Width="*">
-                         <DataGridTextColumn.Binding>
-                             <Binding Path="SanBayDen"/>
-                         </DataGridTextColumn.Binding>
-                     </DataGridTextColumn>
-
-                     <DataGridTextColumn Header="Khởi hành" IsReadOnly="True" Width="*">
-                         <DataGridTextColumn.Binding>
-                             <Binding Path="KhoiHanh"/>
-                         </DataGridTextColumn.Binding>
-                     </DataGridTextColumn>
-
-                     <DataGridTextColumn Header="Thời gian" IsReadOnly="True" Width="*">
-                         <DataGridTextColumn.Binding>
-                             <Binding Path="ThoiGian"/>
-                         </DataGridTextColumn.Binding>
-                     </DataGridTextColumn>
-
-                     <DataGridTextColumn Header="Số ghế trống" IsReadOnly="True" Width="*">
-                         <DataGridTextColumn.Binding>
-                             <Binding Path="SoGheTrong"/>
-                         </DataGridTextColumn.Binding>
-                     </DataGridTextColumn>
-
-                     <DataGridTextColumn Header="Số ghế đặt" IsReadOnly="True" Width="*">
-                         <DataGridTextColumn.Binding>
-                             <Binding Path="SoGheDat"/>
-                         </DataGridTextColumn.Binding>
-                     </DataGridTextColumn>-->
-
                     </DataGrid.Columns>
                 </DataGrid>
 
