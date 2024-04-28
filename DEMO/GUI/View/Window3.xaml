@@ -621,26 +621,26 @@
                             </DataGridCheckBoxColumn.HeaderTemplate>
                         </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
+                        <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Seq}"/>
 
-                        <DataGridTemplateColumn Header="Departure airport" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
                                             <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                         </Border>
-                                        <TextBlock Text="{Binding SanBayDi}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Destination airport" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
-                        <DataGridTextColumn Header="Departure time" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
-                        <DataGridTextColumn Header="Duration" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
-                        <DataGridTextColumn Header="Empty seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
-                        <DataGridTextColumn Header="Booked seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
+                        <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding ID}"/>
+                        <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
+                        <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                        <DataGridTextColumn Header="Phone" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Birth" IsReadOnly="True" Width="*" Binding="{Binding Birth}"/>
                         <DataGridTemplateColumn IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
