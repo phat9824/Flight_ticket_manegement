@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.View"
              xmlns:vm="clr-namespace:GUI.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              d:DesignHeight="720" d:DesignWidth="805"
              Style="{StaticResource Page_Style}">
     <UserControl.DataContext>
@@ -28,9 +29,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBoxBase">
                         <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"
-                                BorderThickness="1" BorderBrush="#e0e6ed">
+                              BorderThickness="1" BorderBrush="#e0e6ed">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
-                                          VerticalScrollBarVisibility="Hidden"/>
+                                        VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -206,23 +207,23 @@
                 </Setter.Value>
             </Setter>
             <!--<Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-            <Setter Property="ValidationErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <TextBlock Foreground="#d50000" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>-->
+          <Setter Property="ValidationErrorTemplate">
+              <Setter.Value>
+                  <ControlTemplate>
+                      <TextBlock Foreground="#d50000" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
+                  </ControlTemplate>
+              </Setter.Value>
+          </Setter>-->
             <Style.Triggers>
                 <!--<Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}"/>
-                </Trigger>
-                <Trigger Property="IsNewItem" Value="True">
-                    <Setter Property="Margin" Value="{Binding NewItemMargin, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
-                </Trigger>-->
+                  <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                  <Setter Property="Background" Value="{DynamicResource MaterialDesignDataGridRowHoverBackground}"/>
+              </Trigger>
+              <Trigger Property="IsNewItem" Value="True">
+                  <Setter Property="Margin" Value="{Binding NewItemMargin, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+              </Trigger>-->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF479DD6"/>
                     <Setter Property="Foreground" Value="#ffffff"/>
@@ -397,20 +398,20 @@
             </Setter>
             <!--<Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>-->
             <!--<Style.Triggers>
-                <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                    <Setter Property="BorderBrush" Value="{Binding (wpf:DataGridAssist.SelectedCellBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
-                </Trigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Mode=Self}}" Value="True"/>
-                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="False"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
-                </MultiDataTrigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Opacity" Value=".56"/>
-                </Trigger>
-            </Style.Triggers>-->
+              <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                  <Setter Property="BorderBrush" Value="{Binding (wpf:DataGridAssist.SelectedCellBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+              </Trigger>
+              <MultiDataTrigger>
+                  <MultiDataTrigger.Conditions>
+                      <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Mode=Self}}" Value="True"/>
+                      <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="False"/>
+                  </MultiDataTrigger.Conditions>
+                  <Setter Property="Background" Value="{DynamicResource MaterialDesignSelection}"/>
+              </MultiDataTrigger>
+              <Trigger Property="IsEnabled" Value="False">
+                  <Setter Property="Opacity" Value=".56"/>
+              </Trigger>
+          </Style.Triggers>-->
         </Style>
         <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
@@ -530,10 +531,10 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0 10" />
             <!--<Setter Property="Effect" >
-                <Setter.Value>
-                    <DropShadowEffect BlurRadius="2" Opacity="0.1" ShadowDepth="1"/>
-                </Setter.Value>
-            </Setter>-->
+              <Setter.Value>
+                  <DropShadowEffect BlurRadius="2" Opacity="0.1" ShadowDepth="1"/>
+              </Setter.Value>
+          </Setter>-->
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -557,131 +558,7 @@
 
     </UserControl.Resources>
 
-    <Border>
-        <Grid>
-            <Grid Background="#f8f7fc" Margin="17,20,10,3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <!--Search Textbox-->
-                <Grid Width="225" HorizontalAlignment="Left" Margin="429,14,0,6" Grid.Row="1">
-
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                        Panel.ZIndex="1" Text="Search here ..."
-                        Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
-
-                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="37"/>
-
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
-
-                </Grid>
-
-
-                <!--Page Title-->
-                <TextBlock Text="List of flights" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
-                        HorizontalAlignment="Left" Foreground="#121518"/>
-                <!--Add Button-->
-
-                <Button Style="{StaticResource addButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 1 8 0" Width="11" Height="11"/>
-                        <TextBlock Text="Add New Member"/>
-                    </StackPanel>
-                </Button>
-                
-                <!--Seprator-->
-                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 1 0 10"/>
-                <DockPanel LastChildFill="False" Grid.Row="5"/>
-
-
-
-            
-
-            
-              
-                <!--DataGrid-->
-                <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="50" ElementStyle="{StaticResource CheckBoxStyle1}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
-                                </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
-                        </DataGridCheckBoxColumn>
-
-                        <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
-
-                        <DataGridTemplateColumn Header="Departure airport" IsReadOnly="True" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
-                                            <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                        </Border>
-                                        <TextBlock Text="{Binding SanBayDi}" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTextColumn Header="Destination airport" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
-                        <DataGridTextColumn Header="Departure time" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
-                        <DataGridTextColumn Header="Duration" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
-                        <DataGridTextColumn Header="Empty seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
-                        <DataGridTextColumn Header="Booked seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
-                        <DataGridTemplateColumn IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
-                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <!--Pagination Section-->
-                <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
-                     CornerRadius="5" Background="White">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}"/>
-                        </Button>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
-
-                        <Button Style="{StaticResource pagingButton}" Content="1"/>
-                        <Button Style="{StaticResource pagingButton}" Content="2" Background="#FF1DA2ED" Foreground="#ffffff"/>
-                        <Button Style="{StaticResource pagingButton}" Content="3"/>
-
-                        <TextBlock Text="..." Foreground="#6c7682" VerticalAlignment="Center" FontSize="15" Margin="10 0"/>
-
-                        <Button Style="{StaticResource pagingButton}" Content="7"/>
-                        <Button Style="{StaticResource pagingButton}" Content="8"/>
-                        <Button Style="{StaticResource pagingButton}" Content="9"/>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
-                        <Button Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}"/>
-                        </Button>
-
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </Grid>
-    </Border>
+    <Grid>
+        
+    </Grid>
 </UserControl>
