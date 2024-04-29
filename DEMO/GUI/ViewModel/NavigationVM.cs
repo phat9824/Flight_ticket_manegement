@@ -22,12 +22,20 @@ namespace GUI.ViewModel
         public ICommand Window3Command { get; set; }
         public ICommand FlightScheduleWindowCommand { get; set; }
         public ICommand Window5Command { get; set; }
+        public ICommand Window6Command { get; set; }
+        public ICommand Window7Command { get; set; }
+        public ICommand Window8Command { get; set; }
+        public ICommand Window9Command { get; set; }
 
         private void Window1(object obj) => CurrentView = new Window1VM();
         private void Window2(object obj) => CurrentView = new Window2VM();
         private void Window3(object obj) => CurrentView = new Window3VM();
         private void FlightScheduleWindow(object obj) => CurrentView = new FlightScheduleWindowVM();
         private void Window5(object obj) => CurrentView = new Window5VM();
+        private void Window6(object obj) => CurrentView = new Window6VM();
+        private void Window7(object obj) => CurrentView = new Window7VM();
+        private void Window8(object obj) => CurrentView = new Window8VM();
+        private void Window9(object obj) => CurrentView = new Window9VM();
 
         public NavigationVM()
         {
@@ -36,6 +44,10 @@ namespace GUI.ViewModel
             Window3Command = new RelayCommand(Window3);
             FlightScheduleWindowCommand = new RelayCommand(FlightScheduleWindow);
             Window5Command = new RelayCommand(Window5);
+            Window6Command = new RelayCommand(Window6);
+            Window7Command = new RelayCommand(Window7);
+            Window8Command = new RelayCommand(Window8);
+            Window9Command = new RelayCommand(Window9);
 
             CurrentView = new Window1VM();
         }
