@@ -51,6 +51,7 @@
     <Compile Include="ParameterDTO.cs" />
     <Compile Include="PERMISSION.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportInforDTO.cs" />
     <Compile Include="SellingTicketDTO.cs" />
     <Compile Include="TicketClassDTO.cs" />
     <Compile Include="TicketClassFlightDTO.cs" />

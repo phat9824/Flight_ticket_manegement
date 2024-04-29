@@ -11,7 +11,65 @@
     <UserControl.DataContext>
         <vm:Window5VM/>
     </UserControl.DataContext>
-    <Grid Background="BurlyWood">
-            
+
+    <UserControl.Resources>
+    </UserControl.Resources>
+    
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Receive Flight Schedule"
+                   Grid.Row="0"
+                   FontSize="32" FontWeight="SemiBold"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="10 7 0 0" Height="43" Width="341"/>
+        
+        <TabControl Grid.Row="1">
+            <TabItem Header="Window 1">
+                <!-- Tab 1 -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                    local:DatePickerCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="MMM-yyyy"
+                                    Text="MMM-yyyy"
+                                    Width="200">
+                            
+                        </DatePicker>
+                        <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                    local:DatePickerCalendar.IsMonthYear="True"
+                                    local:DatePickerDateFormat.DateFormat="MMM-yyyy"
+                                    Text="MMM-yyyy"
+                                    Width ="200">
+                            
+                        </DatePicker>
+                    </StackPanel>
+
+                    <DataGrid x:Name="GridRP_Flight_Month" Grid.Row="1"
+                              AutoGenerateColumns="False"  CanUserAddRows="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Flight ID" Binding="{Binding flightID}" Width="*"/>
+                            <DataGridTextColumn Header="Tickets Sold" Binding="{Binding ticketsSold}" Width="*"/>
+                            <DataGridTextColumn Header="Revenue" Binding="{Binding revenue}" Width="*"/>
+                            <DataGridTextColumn Header="Ratio" Binding="{Binding ratio}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Window 2">
+                <!-- Nội dung của Window 2 -->
+                <Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
