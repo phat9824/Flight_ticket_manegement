@@ -97,5 +97,10 @@ namespace GUI.View
             Edit f = new Edit();
             f.Show();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
