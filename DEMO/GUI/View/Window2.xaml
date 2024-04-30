@@ -624,10 +624,11 @@
                 <ComboBox x:Name = "SortProperty"
                           materialDesign:HintAssist.HelperText=""
                           materialDesign:HintAssist.Hint="Sort By"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49" SelectionChanged="ComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Item 1" />
-                    <ComboBoxItem Content="Item 2" />
-                    <ComboBoxItem Content="Item 3" />
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5"
+                          VerticalAlignment="Top" Height="49"
+                          SelectionChanged="ComboBox_SelectionChanged"
+                          DisplayMemberPath="property"
+                          SelectedValuePath="map_peoperty">
                 </ComboBox>
 
                 <!--DataGrid-->

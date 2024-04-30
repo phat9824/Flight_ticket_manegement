@@ -14,12 +14,9 @@ namespace BLL
     public class SearchProcessor
     {
         public SearchProcessor() { }
-        public List<FlightInformationSearchDTO> GetInformationSearch(string sourceAirportID, string destinationAirportID
+        public static List<FlightInformationSearchDTO> GetInformationSearch(string sourceAirportID, string destinationAirportID
                                                                        , DateTime startDate, DateTime endDate)
         {
-            // Nhận đầu vào là các tham số cho truy vấn và thuộc tính được sort khi trả về:
-            // Các thuộc tính có thể có hoặc không
-            // Trả về danh sách dữ liệu theo yêu cầu
             FlightAccess flightAccess = new FlightAccess();
             SellingTicketAcess sellingTicketAcess = new SellingTicketAcess();
             Ticket_classAccess ticket_ClassAccess = new Ticket_classAccess();
@@ -38,6 +35,33 @@ namespace BLL
                 data.Add(flightInformationSearchDTO);
             }
             return data;
+        }
+
+
+        public static ObservableCollection<T> SortItems<T>(ObservableCollection<T> items, string propertyName, string sortOrder)
+        {
+            PropertyInfo propertyInfo = GetPropertyInfo(typeof(T), propertyName);
+            return SortCollection(items, propertyInfo, sortOrder);
+        }
+
+        public static PropertyInfo GetPropertyInfo(Type type, string propertyName)
+        {
+            PropertyInfo propertyInfo = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            return propertyInfo;
+        }
+
+        public static ObservableCollection<T> SortCollection<T>(ObservableCollection<T> items, PropertyInfo propertyInfo, string sortOrder)
+        {
+            IEnumerable<T> sortedItems;
+            if (sortOrder == "ASC")
+            {
+                sortedItems = items.OrderBy(item => propertyInfo.GetValue(item, null));
+            }
+            else
+            {
+                sortedItems = items.OrderByDescending(item => propertyInfo.GetValue(item, null));
+            }
+            return new ObservableCollection<T>(sortedItems);
         }
     }
 }

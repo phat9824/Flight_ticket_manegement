@@ -17,17 +17,17 @@ using DTO;
 
 namespace GUI.ViewModel
 {
-    class Window5VM : Ultilities.ViewModelBase
+    class ReportVM : Ultilities.ViewModelBase
     {
         private readonly PageModel _pageModel;
 
-        public string Window5
+        public string Report
         {
             get { return _pageModel.Window5; }
             set { _pageModel.Window5 = value; OnPropertyChanged(); }
         }
 
-        public Window5VM()
+        public ReportVM()
         {
             _pageModel = new PageModel();
         }
@@ -64,12 +64,26 @@ namespace GUI.ViewModel
 
     public class ReportByMonthData
     {
-        public static ObservableCollection<T> ConvertListToObservableCollection<T>(List<T> list)
+        public string month_year { get; set; }
+        public int flightQuantity { get; set; }
+        public decimal revenue { get; set; }
+        public decimal ratio { get; set; }
+        public static ReportByMonthData Convert(ReportByMonthDTO reportByMonthDTO)
         {
-            var observableCollection = new ObservableCollection<T>();
-            foreach (T item in list)
+            return new ReportByMonthData
             {
-                observableCollection.Add(item);
+                month_year = reportByMonthDTO.time.ToString("MM-yyyy"),
+                ratio = reportByMonthDTO.ratio,
+                revenue = reportByMonthDTO.revenue,
+                flightQuantity = reportByMonthDTO.numFLight
+            };
+        }
+        public static ObservableCollection<ReportByMonthData> ConvertListToObservableCollection(List<ReportByMonthDTO> list)
+        {
+            var observableCollection = new ObservableCollection<ReportByMonthData>();
+            foreach (ReportByMonthDTO item in list)
+            {
+                observableCollection.Add(ReportByMonthData.Convert(item));
             }
             return observableCollection;
         }
