@@ -61,30 +61,11 @@ namespace GUI.ViewModel
             }
             return flights;
         }
-        public static ObservableCollection<Flight> SortFlights(ObservableCollection<Flight> flights, string propertyName, string sortOrder)
-        {
-            PropertyInfo propertyInfo = GetPropertyInfo(typeof(Flight), propertyName);
-            return SortCollection(flights, propertyInfo, sortOrder);
-        }
+    }
 
-        public static PropertyInfo GetPropertyInfo(Type type, string propertyName)
-        {
-            PropertyInfo propertyInfo = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-            return propertyInfo;
-        }
-
-        public static ObservableCollection<Flight> SortCollection(ObservableCollection<Flight> flights, PropertyInfo propertyInfo, string sortOrder)
-        {
-            IEnumerable<Flight> sortedFlights;
-            if (sortOrder == "ASC")
-            {
-                sortedFlights = flights.OrderBy(f => propertyInfo.GetValue(f, null));
-            }
-            else
-            {
-                sortedFlights = flights.OrderByDescending(f => propertyInfo.GetValue(f, null));
-            }
-            return new ObservableCollection<Flight>(sortedFlights);
-        }
+    public class SortPropertyPair
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }

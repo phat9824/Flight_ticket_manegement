@@ -200,7 +200,7 @@
     <Compile Include="ViewModel\Window2VM.cs" />
     <Compile Include="ViewModel\Window3VM.cs" />
     <Compile Include="ViewModel\FlightScheduleVM.cs" />
-    <Compile Include="ViewModel\Window5VM.cs" />
+    <Compile Include="ViewModel\ReportVM.cs" />
     <Compile Include="ViewModel\Window6VM.cs" />
     <Compile Include="ViewModel\Window7VM.cs" />
     <Compile Include="ViewModel\Window8VM.cs" />
@@ -217,8 +217,8 @@
     <Compile Include="View\Window3.xaml.cs">
       <DependentUpon>Window3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Window5.xaml.cs">
-      <DependentUpon>Window5.xaml</DependentUpon>
+    <Compile Include="View\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Window6.xaml.cs">
       <DependentUpon>Window6.xaml</DependentUpon>
@@ -296,7 +296,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Window5.xaml">
+    <Page Include="View\Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
