@@ -104,6 +104,14 @@ namespace GUI.View
             List<FlightInformationSearchDTO> flightInformationSearches = new List<FlightInformationSearchDTO>();
             flightInformationSearches = SearchProcessor.GetInformationSearch(a, b, startDate, endDate);
             flights = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
+            
+            //Nếu có yêu cầu sort
+            if (SortProperty.SelectedIndex != -1)
+            {
+                string sortOrder = "ASC";
+                flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
+            }
+
             FlightsDataGrid.ItemsSource = flights;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -114,7 +122,8 @@ namespace GUI.View
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), "ASC");
+            string sortOrder = "ASC";
+            flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
             FlightsDataGrid.ItemsSource = flights;
         }
     }

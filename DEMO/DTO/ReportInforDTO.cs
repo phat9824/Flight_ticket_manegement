@@ -16,8 +16,8 @@ namespace DTO
 
     public class ReportByMonthDTO
     {
-        public DateTime time { get; set; } // Tháng
-        public int numFLight { get; set; } // Số chuyến bay khởi hành trong tháng
+        public DateTime time { get; set; } // Tháng + Năm
+        public int flightQuantity { get; set; } // Số chuyến bay khởi hành trong tháng
         public decimal revenue { get; set; }
         public decimal ratio { get; set; }
     }

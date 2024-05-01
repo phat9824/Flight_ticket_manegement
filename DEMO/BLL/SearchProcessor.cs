@@ -38,6 +38,13 @@ namespace BLL
         }
 
 
+        /* 
+           Hàm sort được Generalize với mức bất kì ObservableCollection<T>
+           Tuy nhiên có thể không hoạt động đúng cách nếu T chứa thuộc tính kiểu non-primitive
+                + items: ObservableCollection
+                + propertyName: tên thuộc tính trong T, nếu không có trong T sẽ gây ra exception, sẽ xử lí sau nếu phát sinh
+                + sortOrder: "ASC" hoặc "DESC", nếu không sẽ gây ra exception, sẽ xử lí sau nếu phát sinh
+        */
         public static ObservableCollection<T> SortItems<T>(ObservableCollection<T> items, string propertyName, string sortOrder)
         {
             PropertyInfo propertyInfo = GetPropertyInfo(typeof(T), propertyName);

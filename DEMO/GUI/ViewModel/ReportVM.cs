@@ -75,7 +75,7 @@ namespace GUI.ViewModel
                 month_year = reportByMonthDTO.time.ToString("MM-yyyy"),
                 ratio = reportByMonthDTO.ratio,
                 revenue = reportByMonthDTO.revenue,
-                flightQuantity = reportByMonthDTO.numFLight
+                flightQuantity = reportByMonthDTO.flightQuantity
             };
         }
         public static ObservableCollection<ReportByMonthData> ConvertListToObservableCollection(List<ReportByMonthDTO> list)

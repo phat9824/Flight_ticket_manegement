@@ -325,6 +325,7 @@
                         -->
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"
                                             Width="180"
+                                            CanUserSort="False"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
