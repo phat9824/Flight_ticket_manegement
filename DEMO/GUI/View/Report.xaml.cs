@@ -22,6 +22,7 @@ using DatePicker = System.Windows.Controls.DatePicker;
 using DTO;
 using GUI.ViewModel;
 using System.Collections.ObjectModel;
+using BLL;
 
 namespace GUI.View
 {
@@ -36,8 +37,8 @@ namespace GUI.View
         // byFlight: với mỗi chuyến bay, cần ID, số vé, doanh thu, tỉ lệ doanh thu của chuyến này trên tất cả chuyến được query ?
         // byMonth: với mỗi tháng, cần số lượng chuyến bay trong tháng, tỉ lệ doanh thu của tháng đó trên cả tất cả tháng được query ?
 
-        ObservableCollection<ReportByFlightData> reportsByFlightData = new ObservableCollection<ReportByFlightData>();
-        ObservableCollection<ReportByMonthData> reportsByMonthData = new ObservableCollection<ReportByMonthData>();
+        private ObservableCollection<ReportByFlightData> reportsByFlightData = new ObservableCollection<ReportByFlightData>();
+        private ObservableCollection<ReportByMonthData> reportsByMonthData = new ObservableCollection<ReportByMonthData>();
         public Window5()
         {
             InitializeComponent();
@@ -60,28 +61,72 @@ namespace GUI.View
 
             List<ReportByMonthDTO> listReportByMonthDTO = new List<ReportByMonthDTO>()
             {
-                new ReportByMonthDTO { time = DateTime.UtcNow, numFLight = 999, revenue = 99877000, ratio = 0.78m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-1), numFLight = 980, revenue = 89877000, ratio = 0.75m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-2), numFLight = 970, revenue = 79877000, ratio = 0.72m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-3), numFLight = 960, revenue = 69877000, ratio = 0.70m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-4), numFLight = 950, revenue = 59877000, ratio = 0.68m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-5), numFLight = 940, revenue = 49877000, ratio = 0.65m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-6), numFLight = 930, revenue = 39877000, ratio = 0.63m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-7), numFLight = 920, revenue = 29877000, ratio = 0.60m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-8), numFLight = 910, revenue = 19877000, ratio = 0.58m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-9), numFLight = 900, revenue = 9877000, ratio = 0.55m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-10), numFLight = 890, revenue = 877000, ratio = 0.50m }
+                new ReportByMonthDTO { time = DateTime.UtcNow, flightQuantity = 999, revenue = 99877000, ratio = 0.78m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-1), flightQuantity = 980, revenue = 89877000, ratio = 0.75m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-2), flightQuantity = 970, revenue = 79877000, ratio = 0.72m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-3), flightQuantity = 960, revenue = 69877000, ratio = 0.70m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-4), flightQuantity = 950, revenue = 59877000, ratio = 0.68m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-5), flightQuantity = 940, revenue = 49877000, ratio = 0.65m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-6), flightQuantity = 930, revenue = 39877000, ratio = 0.63m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-7), flightQuantity = 920, revenue = 29877000, ratio = 0.60m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-8), flightQuantity = 910, revenue = 19877000, ratio = 0.58m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-9), flightQuantity = 900, revenue = 9877000, ratio = 0.55m },
+                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-10), flightQuantity = 890, revenue = 877000, ratio = 0.50m }
             };
 
             reportsByFlightData = ReportByFlightData.ConvertListToObservableCollection(listReportByFlightDTO);
-            GridRP_Flight_Month.ItemsSource = reportsByFlightData;
+            GridRP_Month.ItemsSource = reportsByFlightData;
             reportsByMonthData = ReportByMonthData.ConvertListToObservableCollection(listReportByMonthDTO);
             GridRP_Year.ItemsSource = reportsByMonthData;
-            TotalFlight.Text = "0";
-            TotalMonth.Text = "0";
+            TotalRevenue_Month.Text = ((Int64)0982737132323).ToString();
+            TotalRevenue_Year.Text = ((Int64)123234323111).ToString();
             //----------END-Test UI-----------------------------------------------------------------------------//
 
         }
+
+        private void Search_TabMonth_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime start = startMonth.SelectedDate.HasValue ? startMonth.SelectedDate.Value : new DateTime(1753, 1, 1, 0, 0, 0); // Min Date của SQL
+            DateTime end = endMonth.SelectedDate.HasValue ? endMonth.SelectedDate.Value : new DateTime(9999, 12, 31, 23, 59, 59); // Max Date của SQL
+            int max = -1; // -1 tìm tất cả, có tham số này vì có thể có một số chỉnh sửa để tối ưu hóa trong tương lai
+
+            List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>();
+            int total = 0;
+
+            /*Cần code BE xử lý ở đây:
+                   Phương thức này cần trả về Tuple với list có kiểu List<ReportByFlightDTO>(), total có kiểu int 
+                        + List<ReportByFlightDTO>(): mô tả thuộc tính có trong ReportInfoDTO
+                        + total: Tổng doanh thu của tất cả chuyến bay trong list
+            var result = BLL.ProcessMethod(start, end, max);
+            listReportByFlightDTO = result.list;
+            total = result.total;
+            */
+            reportsByFlightData = ReportByFlightData.ConvertListToObservableCollection(listReportByFlightDTO);
+            GridRP_Month.ItemsSource = reportsByFlightData;
+            TotalRevenue_Month.Text = total.ToString();
+        }
+
+        private void Search_TabYear_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime start = DateTime.TryParse($"01/01/{startYear.Text}", out var sDate) ? sDate : new DateTime(1753, 1, 1, 0, 0, 0); // Min Date của SQL
+            DateTime end = DateTime.TryParse($"12/31/{endYear.Text}", out var eDate) ? eDate : new DateTime(9999, 12, 31, 23, 59, 59); // Max Date của SQL
+            int max = -1; // -1 tìm tất cả, có tham số này vì có thể có một số chỉnh sửa để tối ưu hóa trong tương lai
+
+            List<ReportByMonthDTO> listReportByMonthDTO = new List<ReportByMonthDTO>();
+            int total = 0;
+            /*Cần code BE xử lý ở đây:
+                   Phương thức này cần trả về Tuple với list có kiểu List<ReportByMonthDTO>(), total có kiểu int 
+                        + List<ReportByMonthDTO>(): mô tả thuộc tính có trong ReportInfoDTO
+                        + total: Tổng doanh thu của tất cả tháng trong list
+            var result = BLL.ProcessMethod(start, end, max);
+            listReportByMonthDTO = result.list;
+            total = result.total;
+            */
+            reportsByMonthData = ReportByMonthData.ConvertListToObservableCollection(listReportByMonthDTO);
+            GridRP_Year.ItemsSource = reportsByMonthData;
+            TotalRevenue_Year.Text = total.ToString();
+        }
+
     }
 
     //------------BEGIN-Date Picker Custom----------------------------------------------------------------//

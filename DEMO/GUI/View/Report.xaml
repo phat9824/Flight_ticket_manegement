@@ -69,6 +69,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
     </UserControl.Resources>
 
     <Grid Background="WhiteSmoke">
@@ -84,7 +85,8 @@
                    Margin="10 7 0 0" Height="43" Width="341"/>
 
         <TabControl Grid.Row="1">
-            <TabItem Header="Month">
+            <TabItem Header="Month"
+                     Background="LightGray">
                 <!-- Tab 1 -->
                 <Grid>
                     <Grid.RowDefinitions>
@@ -101,7 +103,8 @@
                                    FontSize="20"
                                    Margin="0 0 15 5">
                         </TextBlock>
-                        <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                        <DatePicker x:Name="startMonth"
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     local:DatePickerCalendar.IsMonthYear="True"
                                     local:DatePickerDateFormat.DateFormat="MMM-yyyy"
                                     Text="MMM-yyyy"
@@ -114,7 +117,8 @@
                                    FontSize="20"
                                    Margin="15 0 15 5">
                         </TextBlock>
-                        <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                        <DatePicker x:Name="endMonth"
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     local:DatePickerCalendar.IsMonthYear="True"
                                     local:DatePickerDateFormat.DateFormat="MMM-yyyy"
                                     Text="MMM-yyyy"
@@ -122,13 +126,13 @@
 
                         </DatePicker>
                         <Button Content="Search"
-        
+                                Click="Search_TabMonth_Click"
                                 Margin="20 0 0 0" Width="101"
                                 VerticalAlignment="Center" HorizontalAlignment="Center" 
                                 Style="{StaticResource addButton}" />
                     </StackPanel>
 
-                    <DataGrid x:Name="GridRP_Flight_Month" Grid.Row="1"
+                    <DataGrid x:Name="GridRP_Month" Grid.Row="1"
                               AutoGenerateColumns="False"  CanUserAddRows="False" IsReadOnly="True" Grid.ColumnSpan="2"
                               HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="805">
                         <DataGrid.Columns>
@@ -158,7 +162,7 @@
                                    FontSize="20"
                                    Margin="600 0 0 0">
                         </TextBlock>
-                        <TextBlock x:Name="TotalFlight"
+                        <TextBlock x:Name="TotalRevenue_Month"
                                    Text=""
                                    HorizontalAlignment="Right" VerticalAlignment="Center"
                                    FontSize="20"
@@ -185,7 +189,7 @@
                                    FontSize="20"
                        Margin="0 0 15 5">
                         </TextBlock>
-                        <TextBox x:Name="StartYear"
+                        <TextBox x:Name="startYear"
                                  Width="200" Height="40"
                                  materialDesign:HintAssist.Hint="YYYY"
                                  materialDesign:HintAssist.HelperText=""
@@ -199,7 +203,7 @@
                                    Margin="15 0 15 5">  
                         </TextBlock>
 
-                        <TextBox x:Name="EndYear"
+                        <TextBox x:Name="endYear"
                                  Width="200" Height="40"
                                  materialDesign:HintAssist.Hint="YYYY"
                                  materialDesign:HintAssist.HelperText=""
@@ -209,7 +213,7 @@
                         </TextBox>
 
                         <Button Content="Search"
-                                
+                                Click="Search_TabYear_Click"
                                 Margin="20 0 0 0" Width="101"
                                 VerticalAlignment="Center" HorizontalAlignment="Center" 
                                 Style="{StaticResource addButton}" />
@@ -223,7 +227,7 @@
                                 HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                 ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                 EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
-                            <DataGridTextColumn Header="Flight Quantity" Binding="{Binding ratio}" Width="*"
+                            <DataGridTextColumn Header="Flight Quantity" Binding="{Binding flightQuantity}" Width="*"
                                 HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                 ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                 EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
@@ -245,7 +249,7 @@
                                    FontSize="20"
                                    Margin="600 0 0 0">  
                         </TextBlock>
-                        <TextBlock x:Name="TotalMonth"
+                        <TextBlock x:Name="TotalRevenue_Year"
                                    Text=""
                                    HorizontalAlignment="Right" VerticalAlignment="Center"
                                    FontSize="20"
