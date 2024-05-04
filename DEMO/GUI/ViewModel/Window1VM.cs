@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using DTO;
 using GUI.Model;
 
@@ -28,36 +29,41 @@ namespace GUI.ViewModel
 
 namespace GUI.ViewModel.StaffWin1
 {
-    public class FlightData
+    public class CustomerData
     {
-        public string flightID { get; set; }
-        public string remainingTickets { get; set; }
-        public string ticketPrice { get; set; }
-        public string departureTime { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
-        public static Flight ConvertToFlight(FlightInformationSearchDTO flightInfo, Dictionary<string, string> airportDictionary)
-        {
-            Flight flight = new Flight
-            {
-                STT = flightInfo.Flight.FlightID,
-                SanBayDi = airportDictionary[flightInfo.Flight.SourceAirportID],
-                SanBayDen = airportDictionary[flightInfo.Flight.DestinationAirportID],
-                KhoiHanh = flightInfo.Flight.FlightDay.ToString("dd/MM/yyyy hh:mm"),
-                ThoiGian = flightInfo.Flight.FlightTime.ToString(@"hh\:mm"),
-                SoGheTrong = flightInfo.emptySeats.ToString(),
-                SoGheDat = flightInfo.bookedTickets.ToString()
-            };
-            return flight;
-        }
+        public DateTime birthDay { get; set; }
+    }
+}
 
-        public static ObservableCollection<Flight> ConvertListToObservableCollection(List<FlightInformationSearchDTO> flightInfos, Dictionary<string, string> airportDictionary)
-        {
-            ObservableCollection<Flight> flights = new ObservableCollection<Flight>();
-            foreach (var flightInfo in flightInfos)
-            {
-                flights.Add(ConvertToFlight(flightInfo, airportDictionary));
-            }
-            return flights;
-        }
+public class RelayCommand<T> : ICommand
+{
+    private Action<T> _execute;
+    private Func<T, bool> _canExecute;
+
+    public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
+    {
+        _execute = execute;
+        _canExecute = canExecute;
+    }
+
+    public bool CanExecute(object parameter)
+    {
+        return _canExecute == null || _canExecute((T)parameter);
+    }
+
+    public void Execute(object parameter)
+    {
+        _execute((T)parameter);
+    }
+
+    public event EventHandler CanExecuteChanged
+    {
+        add { CommandManager.RequerySuggested += value; }
+        remove { CommandManager.RequerySuggested -= value; }
     }
 }
