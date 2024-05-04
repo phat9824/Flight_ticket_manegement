@@ -74,9 +74,9 @@ namespace GUI.View
                 new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-10), flightQuantity = 890, revenue = 877000, ratio = 0.50m }
             };
 
-            reportsByFlightData = ReportByFlightData.ConvertListToObservableCollection(listReportByFlightDTO);
+            reportsByFlightData = ReportByFlightData.ConvertListDTOToObservableCollectionData(listReportByFlightDTO);
             GridRP_Month.ItemsSource = reportsByFlightData;
-            reportsByMonthData = ReportByMonthData.ConvertListToObservableCollection(listReportByMonthDTO);
+            reportsByMonthData = ReportByMonthData.ConvertListDTOToObservableCollectionData(listReportByMonthDTO);
             GridRP_Year.ItemsSource = reportsByMonthData;
             TotalRevenue_Month.Text = ((Int64)0982737132323).ToString();
             TotalRevenue_Year.Text = ((Int64)123234323111).ToString();
@@ -101,7 +101,7 @@ namespace GUI.View
             listReportByFlightDTO = result.list;
             total = result.total;
             */
-            reportsByFlightData = ReportByFlightData.ConvertListToObservableCollection(listReportByFlightDTO);
+            reportsByFlightData = ReportByFlightData.ConvertListDTOToObservableCollectionData(listReportByFlightDTO);
             GridRP_Month.ItemsSource = reportsByFlightData;
             TotalRevenue_Month.Text = total.ToString();
         }
@@ -122,7 +122,7 @@ namespace GUI.View
             listReportByMonthDTO = result.list;
             total = result.total;
             */
-            reportsByMonthData = ReportByMonthData.ConvertListToObservableCollection(listReportByMonthDTO);
+            reportsByMonthData = ReportByMonthData.ConvertListDTOToObservableCollectionData(listReportByMonthDTO);
             GridRP_Year.ItemsSource = reportsByMonthData;
             TotalRevenue_Year.Text = total.ToString();
         }

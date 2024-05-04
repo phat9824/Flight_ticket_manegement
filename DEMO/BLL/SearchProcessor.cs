@@ -14,7 +14,7 @@ namespace BLL
     public class SearchProcessor
     {
         public SearchProcessor() { }
-        public static List<FlightInformationSearchDTO> GetInformationSearch(string sourceAirportID, string destinationAirportID
+        public static List<FlightInforDTO> GetInformationSearch(string sourceAirportID, string destinationAirportID
                                                                        , DateTime startDate, DateTime endDate)
         {
             FlightAccess flightAccess = new FlightAccess();
@@ -22,13 +22,13 @@ namespace BLL
             Ticket_classAccess ticket_ClassAccess = new Ticket_classAccess();
 
             
-            List<FlightInformationSearchDTO> data = new List<FlightInformationSearchDTO>();
+            List<FlightInforDTO> data = new List<FlightInforDTO>();
             List<FlightDTO> flights = new List<FlightDTO>();
             flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate);
 
             foreach (FlightDTO flight in flights)
             {
-                FlightInformationSearchDTO flightInformationSearchDTO = new FlightInformationSearchDTO();
+                FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
                 flightInformationSearchDTO.Flight = flight;
                 flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
                 flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;

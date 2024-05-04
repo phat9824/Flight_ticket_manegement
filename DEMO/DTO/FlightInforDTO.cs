@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class FlightInformationSearchDTO
+    public class FlightInforDTO
     {   
         // Thông tin cần thiết cho chức năng tìm thông tin chuyến bay
         public FlightDTO Flight {  get; set; } // Thông tin cơ bản của chuyến bay
