@@ -15,6 +15,12 @@ using System.Windows.Shapes;
 
 namespace GUI.View
 {
+    public class Item
+    {
+        public string xyz { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
@@ -23,6 +29,36 @@ namespace GUI.View
         public Window1()
         {
             InitializeComponent();
+            this.Loaded += Popup_Loaded;
+            //Application.Current.Deactivated += Popup_Deactivated;
+            
+
+            // Test ListView
+            List<Item> items = new List<Item>
+            {
+            new Item { xyz = "1", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "2", Name = "Item 2", Description = "Description 2" },
+            new Item { xyz = "3", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "4", Name = "Item 2", Description = "Description 2" },
+            new Item { xyz = "5", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "1", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "2", Name = "Item 2", Description = "Description 2" },
+            new Item { xyz = "3", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "4", Name = "Item 2", Description = "Description 2" },
+            new Item { xyz = "5", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "1", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "2", Name = "Item 2", Description = "Description 2" },
+            new Item { xyz = "3", Name = "Item 1", Description = "Description 1" },
+            new Item { xyz = "4", Name = "Item 2", Description = "Description 2" },
+            new Item { xyz = "5", Name = "Item 1", Description = "Description 1" },
+            };
+
+            MyListView.ItemsSource = items;
+        }
+
+        private void SelectButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Button selectButton = sender as Button;
         }
 
         private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -48,6 +84,21 @@ namespace GUI.View
         private void txtGiaVe_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Popup_Loaded(object sender, RoutedEventArgs e)
+        {
+            SearchFlight_Popup.IsOpen = true;
+        }
+
+        private void Popup_Deactivated(object sender, EventArgs e)
+        {
+            SearchFlight_Popup.IsOpen = false;
+        }
+
+        private void ClosePopup_Click(object sender, RoutedEventArgs e)
+        {
+            SearchFlight_Popup.IsOpen = false;
         }
     }
 }
