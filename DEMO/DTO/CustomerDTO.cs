@@ -10,7 +10,7 @@ namespace DTO
     {
         private string id;
         private string customerName;
-        private int phone;
+        private string phone;
         private string email;
         private DateTime birth;
         private string flightID;
@@ -28,7 +28,7 @@ namespace DTO
             set => customerName = value;
         }
 
-        public int Phone
+        public string Phone
         {
             get => phone;
             set => phone = value;

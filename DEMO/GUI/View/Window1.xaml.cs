@@ -18,6 +18,8 @@ using System.Windows.Shapes;
 using GUI.ViewModel;
 using GUI.ViewModel.StaffWin1;
 using System.Windows.Controls.Primitives;
+using BLL;
+using DTO;
 
 namespace GUI.View
 {
@@ -26,8 +28,10 @@ namespace GUI.View
     /// </summary>
     public partial class Window1 : UserControl
     {
-        public ObservableCollection<CustomerData> listViewCustomerData { get; set; }
+        public ObservableCollection<CustomerDTO> listViewCustomerData { get; set; }
 
+
+        public List<AirportDTO> airports { get; set; }
         public ICommand DeleteCommand { get; private set; }
         public Window1()
         {
@@ -36,20 +40,25 @@ namespace GUI.View
             //Application.Current.Deactivated += Popup_Deactivated;
 
             // Test list view
-            listViewCustomerData = new ObservableCollection<CustomerData>
+            listViewCustomerData = new ObservableCollection<CustomerDTO>
             {
-            new CustomerData { ID = "ID1", Name = "Customer 1", Phone = "(555) 123-4501", Email = "customer1@example.com", birthDay = new DateTime(1991, 1, 1) },
-            new CustomerData { ID = "ID2", Name = "Customer 2", Phone = "(555) 123-4502", Email = "customer2@example.com", birthDay = new DateTime(1992, 1, 1) },
-            new CustomerData { ID = "ID3", Name = "Customer 3", Phone = "(555) 123-4503", Email = "customer3@example.com", birthDay = new DateTime(1993, 1, 1) },
-            new CustomerData { ID = "ID4", Name = "Customer 4", Phone = "(555) 123-4504", Email = "customer4@example.com", birthDay = new DateTime(1994, 1, 1) },
-            new CustomerData { ID = "ID5", Name = "Customer 5", Phone = "(555) 123-4505", Email = "customer5@example.com", birthDay = new DateTime(1995, 1, 1) },
-            new CustomerData { ID = "ID6", Name = "Customer 6", Phone = "(555) 123-4506", Email = "customer6@example.com", birthDay = new DateTime(1996, 1, 1) },
-            new CustomerData { ID = "ID7", Name = "Customer 7", Phone = "(555) 123-4507", Email = "customer7@example.com", birthDay = new DateTime(1997, 1, 1) },
-            new CustomerData { ID = "ID8", Name = "Customer 8", Phone = "(555) 123-4508", Email = "customer8@example.com", birthDay = new DateTime(1998, 1, 1) },
-            new CustomerData { ID = "ID9", Name = "Customer 9", Phone = "(555) 123-4509", Email = "customer9@example.com", birthDay = new DateTime(1999, 1, 1) },
-            new CustomerData { ID = "ID10", Name = "Customer 10", Phone = "(555) 123-4510", Email = "customer10@example.com", birthDay = new DateTime(2000, 1, 1) }
+            new CustomerDTO { ID = "ID1", CustomerName = "Customer 1", Phone = "5551234501", Email = "customer1@example.com", Birth = new DateTime(1991, 1, 1) },
+            new CustomerDTO { ID = "ID2", CustomerName = "Customer 2", Phone = "5551234502", Email = "customer2@example.com", Birth = new DateTime(1992, 1, 1) },
+            new CustomerDTO { ID = "ID3", CustomerName = "Customer 3", Phone = "5551234503", Email = "customer3@example.com", Birth = new DateTime(1993, 1, 1) },
+            new CustomerDTO { ID = "ID4", CustomerName = "Customer 4", Phone = "5551234504", Email = "customer4@example.com", Birth = new DateTime(1994, 1, 1) },
+            new CustomerDTO { ID = "ID5", CustomerName = "Customer 5", Phone = "5551234505", Email = "customer5@example.com", Birth = new DateTime(1995, 1, 1) },
+            new CustomerDTO { ID = "ID6", CustomerName = "Customer 6", Phone = "5551234506", Email = "customer6@example.com", Birth = new DateTime(1996, 1, 1) },
+            new CustomerDTO { ID = "ID7", CustomerName = "Customer 7", Phone = "5551234507", Email = "customer7@example.com", Birth = new DateTime(1997, 1, 1) },
+            new CustomerDTO { ID = "ID8", CustomerName = "Customer 8", Phone = "5551234508", Email = "customer8@example.com", Birth = new DateTime(1998, 1, 1) },
+            new CustomerDTO { ID = "ID9", CustomerName = "Customer 9", Phone = "5551234509", Email = "customer9@example.com", Birth = new DateTime(1999, 1, 1) },
+            new CustomerDTO { ID = "ID10", CustomerName = "Customer 10", Phone = "5551234510", Email = "customer10@example.com", Birth = new DateTime(2000, 1, 1) }
             };
             MyListView.ItemsSource = listViewCustomerData;
+
+            Airport_BLL airport_bll = new Airport_BLL();
+            airports = airport_bll.L_airport();
+            
+
 
             DeleteCommand = new RelayCommand<object>(DeleteItem);
             DataContext = this;
@@ -57,7 +66,7 @@ namespace GUI.View
         }
         private void DeleteItem(object parameter)
         {
-            var itemToRemove = parameter as CustomerData;
+            var itemToRemove = parameter as CustomerDTO;
             if (itemToRemove != null)
             {
                 listViewCustomerData.Remove(itemToRemove);
