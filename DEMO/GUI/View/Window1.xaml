@@ -312,7 +312,7 @@
                                                        FontWeight="Bold"
                                                        Opacity="1"/>
 
-                                            <TextBox x:Name="Name" Text="{Binding Name}"
+                                            <TextBox x:Name="Name" Text="{Binding CustomerName}"
                                                        Margin="10 0 0 0"
                                                        VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
                                                        Width="400"
@@ -352,7 +352,7 @@
                                                        FontSize="18"
                                                        Opacity="1"/>
 
-                                            <DatePicker x:Name="BirthDay" SelectedDate="{Binding birthDay}"
+                                            <DatePicker x:Name="BirthDay" SelectedDate="{Binding Birth}"
                                                         Width="140" Height="40"
                                                         Padding="0 0 0 0" Margin="30 0 0 6.9"
                                                         materialDesign:HintAssist.HelperText=""
