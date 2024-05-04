@@ -101,7 +101,7 @@ namespace GUI.View
             DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);
             DateTime endDate = EndDay.SelectedDate.HasValue ? EndDay.SelectedDate.Value.Date : new DateTime(9999, 12, 31, 23, 59, 59);
 
-            List<FlightInformationSearchDTO> flightInformationSearches = new List<FlightInformationSearchDTO>();
+            List<FlightInforDTO> flightInformationSearches = new List<FlightInforDTO>();
             flightInformationSearches = SearchProcessor.GetInformationSearch(a, b, startDate, endDate);
             flights = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
             

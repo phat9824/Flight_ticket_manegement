@@ -179,12 +179,12 @@
             <TextBlock Text="Sell Ticket" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 10 0 0"
                        HorizontalAlignment="Left" Foreground="#121518"/>
 
-            <TextBlock Text="12:30"
-           Margin="0,6,184,0"
-           VerticalAlignment="Top" HorizontalAlignment="Right" TextAlignment="Center"
-           Width="100"
-           FontSize="18"
-           Opacity="0.66" Grid.Row="1"/>
+            <TextBlock x:Name="Duration" Text="00:00"
+                       Margin="0,7,167,0"
+                       VerticalAlignment="Top" HorizontalAlignment="Right" TextAlignment="Center"
+                       Width="100"
+                       FontSize="18"
+                       Opacity="0.66" Grid.Row="1"/>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Content="Find Flight"
@@ -193,7 +193,6 @@
                         VerticalAlignment="Center" VerticalContentAlignment="Center" 
                         Margin="0 0 0 0" Padding="0 0 0 0" Grid.Row="1" 
                         FontSize="20"
-                        Style="{StaticResource addButton}"
                         Width="120" Height="50"
                         Click="FindFlight_Click"/>
 
@@ -209,9 +208,10 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            FontSize="20"
+                           Width="120"
                            Opacity="0.66"/>
 
-                <TextBlock Text="Không"
+                <TextBlock x:Name="DepartureAirport" Text=""
                            Margin="20 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right"
                            Width="180"
@@ -223,7 +223,7 @@
                            FontSize="40"
                            Margin="0 0 0 0"/>
 
-                <TextBlock Text="Không"
+                <TextBlock x:Name="DestinationAirport" Text=""
                            Margin="5 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
                            Width="180"
@@ -240,7 +240,7 @@
                            FontSize="20"
                            Opacity="0.66"/>
 
-                <TextBlock x:Name="DepartureTime" Text="Không"
+                <TextBlock x:Name="DepartureTime" Text=""
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
                            Width="130"
@@ -254,10 +254,10 @@
                            FontSize="20"
                            Opacity="0.66"/>
 
-                <TextBlock x:Name="TicketClass" Text="Không"
+                <TextBlock x:Name="TicketClass" Text=""
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
-                           Width="100"
+                           Width="220"
                            FontSize="20"
                            Opacity="0.66"/>
 
@@ -268,7 +268,7 @@
                            FontSize="20"
                            Opacity="0.66"/>
 
-                <TextBlock x:Name="TicketPrice" Text="Không"
+                <TextBlock x:Name="TicketPrice" Text="999999999"
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
                            Width="170"
@@ -427,11 +427,21 @@
                         <RowDefinition Height="55"/>
                     </Grid.RowDefinitions>
 
-                    <Button Content="Search" Grid.Row="1"
-                            HorizontalAlignment="Left" Margin="370 -20 0 0"  VerticalAlignment="Top"
-                            Style="{StaticResource addButton}"
+                    <Button Content="Search" Grid.Row="0"
+                            HorizontalAlignment="Left" Margin="370 15 0 0"  VerticalAlignment="Top"
                             FontSize="18"
-                            Width="120" Height="50"/>
+                            Width="120" Height="40"/>
+
+                    <TextBox  x:Name="NumTicket" Grid.Row="1"
+                              Width="120" Height="40"
+                              materialDesign:HintAssist.Hint="Ticket Quantity"
+                              materialDesign:HintAssist.HelperText=""
+                              materialDesign:HintAssist.HintOpacity=".26"
+                              IsEnabled="True"
+                              Margin="360 13 0 0" Padding="0 0 0 0"
+                              VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                              Foreground="Black">
+                    </TextBox>
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 0" VerticalAlignment="Center">
                         <ComboBox x:Name="SourceAirport_popup"
@@ -464,22 +474,27 @@
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     Margin="10 10 0 0" Padding="50 0 0 0"
                                     Width="160" Height="45"
+                                    materialDesign:HintAssist.HintOpacity=".26"
                                     Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False" />
-                        <TextBox x:Name="numTicket"
-                                 Width="160" Height="40"
-                                 materialDesign:HintAssist.Hint=""
-                                 materialDesign:HintAssist.HelperText=""
-                                 IsEnabled="True"
-                                 Margin="20 15 0 0" Padding="0 0 0 0"
-                                 VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                        </TextBox>
+                        <ComboBox x:Name="TicketClass_popup"
+                                  Width="160" Height="40"
+                                  materialDesign:HintAssist.Hint="Ticket Class"
+                                  materialDesign:HintAssist.HelperText=""
+                                  materialDesign:HintAssist.HintOpacity=".26"
+                                  IsEnabled="True"
+                                  Margin="20 15 0 0" Padding="0 0 0 0"
+                                  DisplayMemberPath="TicketClassName"
+                                  SelectedValuePath="TicketClassID"
+                                  VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                  Foreground="Black">
+                        </ComboBox>
                     </StackPanel>
 
-                    <DataGrid x:Name="dataGridFlights" Grid.Row="2"
+                    <DataGrid x:Name="dataGridFlights" Grid.Row="2" IsReadOnly="True"
                               AutoGenerateColumns="False" Margin="10"
                               Width="480">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Flight ID" Binding="{Binding flightID}" Width="80">
+                            <DataGridTextColumn Header="Flight ID" Binding="{Binding Flight.FlightID}" Width="80">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -492,9 +507,14 @@
                                         </Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Remain" Binding="{Binding remainingTickets}" Width="80">
+                            <DataGridTextColumn Header="Remain" Binding="{Binding emptySeats}" Width="70">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -507,9 +527,14 @@
                                         </Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Price " Binding="{Binding ticketPrice}" Width="120">
+                            <DataGridTextColumn Header="Price " Binding="{Binding Flight.Price}" Width="120">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -522,9 +547,14 @@
                                         </Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Departure Time" Binding="{Binding departureTime}" Width="120">
+                            <DataGridTextColumn Header="Departure" Binding="{Binding Flight.FlightDay, StringFormat={}{0:HH:mm}}" Width="80">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -537,9 +567,14 @@
                                         </Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTemplateColumn Width="78" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn Width="78" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}" IsReadOnly="False">
                                 <DataGridTemplateColumn.Header>
                                     <TextBlock Text=""
                                                HorizontalAlignment="Center"/>

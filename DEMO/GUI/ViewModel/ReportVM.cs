@@ -51,7 +51,7 @@ namespace GUI.ViewModel
                 ticketsSold = reportByFlightDTO.ticketsSold
             };
         }
-        public static ObservableCollection<ReportByFlightData> ConvertListToObservableCollection(List<ReportByFlightDTO> list)
+        public static ObservableCollection<ReportByFlightData> ConvertListDTOToObservableCollectionData(List<ReportByFlightDTO> list)
         {
             var observableCollection = new ObservableCollection<ReportByFlightData>();
             foreach (ReportByFlightDTO item in list)
@@ -78,7 +78,7 @@ namespace GUI.ViewModel
                 flightQuantity = reportByMonthDTO.flightQuantity
             };
         }
-        public static ObservableCollection<ReportByMonthData> ConvertListToObservableCollection(List<ReportByMonthDTO> list)
+        public static ObservableCollection<ReportByMonthData> ConvertListDTOToObservableCollectionData(List<ReportByMonthDTO> list)
         {
             var observableCollection = new ObservableCollection<ReportByMonthData>();
             foreach (ReportByMonthDTO item in list)

@@ -27,19 +27,6 @@ namespace GUI.ViewModel
     }
 }
 
-namespace GUI.ViewModel.StaffWin1
-{
-    public class CustomerData
-    {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-
-        public DateTime birthDay { get; set; }
-    }
-}
-
 public class RelayCommand<T> : ICommand
 {
     private Action<T> _execute;
