@@ -5,7 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:vm="clr-namespace:GUI.ViewModel"
+             d:DesignHeight="720" d:DesignWidth="805"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              Style="{StaticResource Page_Style}">
+    <UserControl.DataContext>
+        <vm:Window10VM/>
+    </UserControl.DataContext>
     <Grid>
             
     </Grid>

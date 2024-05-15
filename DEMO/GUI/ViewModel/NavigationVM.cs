@@ -26,6 +26,7 @@ namespace GUI.ViewModel
         public ICommand Window7Command { get; set; }
         public ICommand Window8Command { get; set; }
         public ICommand Window9Command { get; set; }
+        public ICommand Window10Command { get; set; }
 
         private void Window1(object obj) => CurrentView = new Window1VM();
         private void Window2(object obj) => CurrentView = new Window2VM();
@@ -36,6 +37,7 @@ namespace GUI.ViewModel
         private void Window7(object obj) => CurrentView = new Window7VM();
         private void Window8(object obj) => CurrentView = new Window8VM();
         private void Window9(object obj) => CurrentView = new Window9VM();
+        private void Window10(object obj) => CurrentView = new Window1VM();
 
         public NavigationVM()
         {
@@ -48,6 +50,7 @@ namespace GUI.ViewModel
             Window7Command = new RelayCommand(Window7);
             Window8Command = new RelayCommand(Window8);
             Window9Command = new RelayCommand(Window9);
+            Window10Command = new RelayCommand(Window1);
 
             CurrentView = new Window1VM();
         }
