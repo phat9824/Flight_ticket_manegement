@@ -12,9 +12,98 @@
     <UserControl.DataContext>
         <vm:Window10VM/>
     </UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <Style x:Key="textHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#acb0af"/>
+        </Style>
+
+        <Style x:Key="textBox" TargetType="Control">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#878787"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="mainbutton" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="Background" Value="#FFB9A1FA"/>
+            <Setter Property="Foreground" Value="#FDFEFE"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="#FFC1AEF6" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFB049EE"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#FF9B06F4"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    
     <Border Background="#f8f7fc" CornerRadius="0 20 20 0">
         <Grid>
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Height="70">
+                <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="10 20 0 0"
+              HorizontalAlignment="Left" Foreground="#121518"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Height="120">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="26,44,504,21" >
+                    <Grid Margin="7 9">
+
+                        <TextBlock x:Name="textPhone"  MouseDown="textPhone_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                        <TextBox  x:Name="txtPhone" TextChanged="txtPhone_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2" Height="120">
+
+            </Grid>
+
+            <Grid Grid.Row="3" Height="120">
+
+            </Grid>
+
+            <Grid Grid.Row="4" Height="120">
+
+            </Grid>
+
+            <Grid Grid.Row="5" Height="120">
+
+            </Grid>
+
         </Grid>
     </Border>
 </UserControl>
