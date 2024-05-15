@@ -61,7 +61,7 @@
         </Style>
 
     </UserControl.Resources>
-    
+
     <Border Background="#f8f7fc" CornerRadius="0 20 20 0">
         <Grid>
             <Grid.RowDefinitions>
@@ -79,28 +79,37 @@
             </Grid>
 
             <Grid Grid.Row="1" Height="120">
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="26,44,504,21" >
+                <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,12,0,74" FontSize="18"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,21" Width="280" >
                     <Grid Margin="7 9">
 
-                        <TextBlock x:Name="textPhone"  MouseDown="textPhone_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                        <TextBox  x:Name="txtPhone" TextChanged="txtPhone_TextChanged" Style="{StaticResource textBox}"/>
+                        <TextBlock x:Name="textN_Airport"  MouseDown="textN_Airport_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                        <TextBox  x:Name="txtN_Airport" TextChanged="txtN_Airport_TextChanged" Style="{StaticResource textBox}"/>
                     </Grid>
                 </Border>
+
+                <Label Content="Minimum flight time" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker"
+                           Is24Hours="True"
+                          SelectedTimeChanged="PresetTimePicker_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
             </Grid>
 
-            <Grid Grid.Row="2" Height="120">
+            <Grid Grid.Row="2" Height="110">
+
+                
 
             </Grid>
 
-            <Grid Grid.Row="3" Height="120">
+            <Grid Grid.Row="3" Height="110">
 
             </Grid>
 
-            <Grid Grid.Row="4" Height="120">
+            <Grid Grid.Row="4" Height="110">
 
             </Grid>
 
-            <Grid Grid.Row="5" Height="120">
+            <Grid Grid.Row="5" Height="110">
 
             </Grid>
 
