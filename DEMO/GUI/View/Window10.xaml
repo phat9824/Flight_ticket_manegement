@@ -12,7 +12,9 @@
     <UserControl.DataContext>
         <vm:Window10VM/>
     </UserControl.DataContext>
-    <Grid>
+    <Border Background="#f8f7fc" CornerRadius="0 20 20 0">
+        <Grid>
             
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>
