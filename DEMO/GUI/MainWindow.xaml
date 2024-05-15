@@ -119,6 +119,14 @@
                             <TextBlock Text="Report" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                             Command="{Binding Window10Command}">
+                        <Grid>
+
+                            <TextBlock Text="Window10" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </Menu:Btn>
                 </StackPanel>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}" Margin="0,102,0,0" VerticalAlignment="Top" Checked="Btn_Checked" Grid.Row="1">
