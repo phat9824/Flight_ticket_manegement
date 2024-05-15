@@ -24,5 +24,22 @@ namespace GUI.View
         {
             InitializeComponent();
         }
+
+        private void textN_Airport_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtN_Airport.Text) && txtN_Airport.Text.Length > 0)
+            {
+                textN_Airport.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textN_Airport.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtN_Airport_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtN_Airport.Focus();
+        }
     }
 }
