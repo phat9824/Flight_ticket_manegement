@@ -196,6 +196,7 @@
     <Compile Include="Ultilities\RelayCommand.cs" />
     <Compile Include="Ultilities\ViewModelBase.cs" />
     <Compile Include="ViewModel\NavigationVM.cs" />
+    <Compile Include="ViewModel\Window10VM.cs" />
     <Compile Include="ViewModel\Window1VM.cs" />
     <Compile Include="ViewModel\Window2VM.cs" />
     <Compile Include="ViewModel\Window3VM.cs" />
@@ -210,6 +211,9 @@
     </Compile>
     <Compile Include="View\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Window10.xaml.cs">
+      <DependentUpon>Window10.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Window2.xaml.cs">
       <DependentUpon>Window2.xaml</DependentUpon>
@@ -281,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window10.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
