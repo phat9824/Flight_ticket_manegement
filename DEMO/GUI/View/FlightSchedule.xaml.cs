@@ -50,7 +50,7 @@ namespace GUI.View
         Ticket_Class_BLL ticket_class_bll = new Ticket_Class_BLL();
 
         private ObservableCollection<TicketClass> ticketList;
-        private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
+        private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
         private IntermediateAirport defaultIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
         private ICollectionView collectionViewTicketClass;
@@ -75,8 +75,15 @@ namespace GUI.View
             // ticketclasses =BAL.GetTicketClass();
 
             airports = airport_bll.L_airport();
-            ticketClasses = ticket_class_bll.L_TicketClass();
-
+            //ticketClasses = ticket_class_bll.L_TicketClass();
+            ticketClasses = new List<TicketClassDTO>
+            {
+                new TicketClassDTO { TicketClassID = "TC1", TicketClassName = "Economy", BaseMultiplier = 1.0m },
+                new TicketClassDTO { TicketClassID = "TC2", TicketClassName = "Business", BaseMultiplier = 1.5m },
+                new TicketClassDTO { TicketClassID = "TC3", TicketClassName = "First Class", BaseMultiplier = 2.0m },
+                new TicketClassDTO { TicketClassID = "TC4", TicketClassName = "Premium Economy", BaseMultiplier = 1.2m },
+                new TicketClassDTO { TicketClassID = "TC5", TicketClassName = "Budget", BaseMultiplier = 0.8m }
+            };
             //----------------------------------------------------------------------------------------------------------------------------------
             ticketList = new ObservableCollection<TicketClass>
             {
@@ -295,6 +302,21 @@ namespace GUI.View
             }
         }
 
+        public void UpdateMultiplierById(string id)
+        {
+            var ticketClass = ticketList.FirstOrDefault(t => t.ID == id);
+            var ticketClassDTO = ticketClasses.FirstOrDefault(t => t.TicketClassID == id);
+
+            if (ticketClass != null && ticketClassDTO != null)
+            {
+                ticketClass.Multiplier = ticketClassDTO.BaseMultiplier;
+            }
+        }
+
+        private void ComboBox_BaseMultiplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
         private void ComboBox_TicketClassID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBoxID = sender as ComboBox;
@@ -306,6 +328,15 @@ namespace GUI.View
                 if (comboBoxName != null)
                 {
                     comboBoxName.SelectedValue = selectedTicketClass.TicketClassName;
+                }
+            }
+
+            if (sender is ComboBox comboBox && comboBox.SelectedItem is TicketClassDTO selectedDTO)
+            {
+                var ticketClass = comboBox.DataContext as TicketClass;
+                if (ticketClass != null)
+                {
+                    ticketClass.Multiplier = selectedDTO.BaseMultiplier;
                 }
             }
         }
@@ -321,6 +352,15 @@ namespace GUI.View
                 if (comboBoxID != null)
                 {
                     comboBoxID.SelectedValue = selectedTicketClass.TicketClassID;
+                }
+            }
+
+            if (sender is ComboBox comboBox && comboBox.SelectedItem is TicketClassDTO selectedDTO)
+            {
+                var ticketClass = comboBox.DataContext as TicketClass;
+                if (ticketClass != null)
+                {
+                    ticketClass.Multiplier = selectedDTO.BaseMultiplier;
                 }
             }
         }

@@ -38,6 +38,10 @@ namespace GUI.View
             }
         }
 
+        private void PresetTimePicker_SelectedTimeChanged(object sender, RoutedEventArgs e)
+        {
+        }
+
         private void txtN_Airport_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtN_Airport.Focus();
