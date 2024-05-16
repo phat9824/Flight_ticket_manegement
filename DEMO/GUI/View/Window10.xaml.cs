@@ -41,5 +41,10 @@ namespace GUI.View
         {
             txtN_Airport.Focus();
         }
+
+        private void PresetTimePicker_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+
+        }
     }
 }
