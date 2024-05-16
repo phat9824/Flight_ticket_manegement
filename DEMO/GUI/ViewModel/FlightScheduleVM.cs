@@ -39,11 +39,14 @@ namespace GUI.ViewModel
         private string _id;
         private string _name;
         private int _quantity;
+        private decimal _multiplier;
         private string _buttonContent = "Edit";
 
         public string ID { get => _id; set { _id = value; OnPropertyChanged(); } }
         public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
         public int Quantity { get => _quantity; set { _quantity = value; OnPropertyChanged(); } }
+
+        public decimal Multiplier { get => _multiplier; set { _multiplier = value; OnPropertyChanged(); } }
         public string ButtonContent
         {
             get => _buttonContent;
