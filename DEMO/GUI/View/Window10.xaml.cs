@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,10 @@ namespace GUI.View
 
         private void PresetTimePicker_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
+            var oldValue = e.OldValue.HasValue ? e.OldValue.Value.ToLongTimeString() : "NULL";
+            var newValue = e.NewValue.HasValue ? e.NewValue.Value.ToLongTimeString() : "NULL";
 
+            Debug.WriteLine($"PresentTimePicker's SelectedTime changed from {oldValue} to {newValue}");
         }
     }
 }
