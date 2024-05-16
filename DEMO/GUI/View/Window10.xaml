@@ -97,19 +97,53 @@
 
             <Grid Grid.Row="2" Height="110">
 
-                
+                <Label Content="Minimum downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
 
+                <materialDesign:TimePicker x:Name="PresetTimePicker1"
+                                           Is24Hours="True"
+                                           SelectedTimeChanged="PresetTimePicker1_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+
+                <Label Content="Maximun downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,503,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker2"
+                                           Is24Hours="True"
+                                        SelectedTimeChanged="PresetTimePicker2_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280" />
             </Grid>
 
             <Grid Grid.Row="3" Height="110">
+
+                <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,7,0,71" FontSize="18" Height="34"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,8" Width="280" Height="55" >
+                    <Grid Margin="7 9">
+
+                        <TextBlock x:Name="textN_Ticket_class"  MouseDown="textN_Ticket_class_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                        <TextBox  x:Name="txtN_Ticket_class" TextChanged="txtN_Ticket_class_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
 
             </Grid>
 
             <Grid Grid.Row="4" Height="110">
 
+                <Label Content="Latest time to book tickets" HorizontalAlignment="Left"  Width="231" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,0,64" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker3"
+                           Is24Hours="True"
+                        SelectedTimeChanged="PresetTimePicker3_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280" />
+
+                <Label Content="Minimum downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker4"
+                           Is24Hours="True"
+                           SelectedTimeChanged="PresetTimePicker4_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+
             </Grid>
 
             <Grid Grid.Row="5" Height="110">
+
+                <Button Content="Submit"
+                        Style="{StaticResource mainbutton}"
+                        IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0"  Height="57" VerticalAlignment="Top" Margin="292,53,313,0" />
 
             </Grid>
 
