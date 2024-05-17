@@ -11,6 +11,7 @@ namespace DAL
 {
     public class Ticket_classAccess : DatabaseAccess
     {
+        /*
         public List<TicketClassDTO> L_TicketClass()
         {
             List<TicketClassDTO> ticketclass = new List<TicketClassDTO>();
@@ -34,6 +35,39 @@ namespace DAL
 
             return ticketclass;
         }
+        */
+
+        public List<TicketClassDTO> L_TicketClass()
+        {
+            List<TicketClassDTO> ticketclass = new List<TicketClassDTO>();
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+            string query = @"SELECT TicketClassID, TicketClassName, BaseMultiplier
+                             FROM TICKET_CLASS";
+
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                // Thiết lập các tham số
+
+                // Đọc kết quả truy vấn
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ticketclass.Add(new TicketClassDTO() {
+                            TicketClassID = (string)reader["TicketClassID"],
+                            TicketClassName = (string)reader["TicketClassName"],
+                            BaseMultiplier = (decimal)(double)reader["BaseMultiplier"]
+                        });
+                    }
+                }
+            }
+            // Đóng kết nối
+            con.Close();
+
+            return ticketclass;
+        }
+
 
         public int getTotalSeat_byFlightID(string flightID)
         {
