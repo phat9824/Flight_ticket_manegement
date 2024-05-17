@@ -310,14 +310,29 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <!--
                         <DataGridTextColumn Header="Multiplier" Binding="{Binding Multiplier}"
                                             Width="115"
                                             CanUserSort="False"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+                        -->
 
-                        <!--
+                        <DataGridTemplateColumn Header="Multiplier" Width="115" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="TextBoxMultiplier"
+                                            Text="{Binding Multiplier, Mode=TwoWay}"
+                                            IsReadOnly="False"
+                                            Style="{StaticResource CenterAlignedTextBox}"
+                                            Background="Transparent"
+                                            BorderThickness="0"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                                <!--
                         <DataGridTextColumn Header="Ticket Class IDx" Binding="{Binding ID}"
                                             Width="0"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"

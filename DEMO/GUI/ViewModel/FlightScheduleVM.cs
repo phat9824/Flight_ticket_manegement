@@ -60,7 +60,7 @@ namespace GUI.ViewModel
 
         public override string ToString()
         {
-            return $"ID: {ID}, Name: {Name}, Quantity: {Quantity}";
+            return $"ID: {ID}, Name: {Name}, Quantity: {Quantity}, Multiplier: {Multiplier}";
         }
     }
 
@@ -187,6 +187,7 @@ namespace GUI.ViewModel
                     TicketClassID = ticketclass.ID,
                     FlightID = this.flightID,
                     Quantity = ticketclass.Quantity,
+                    Multiplier = ticketclass.Multiplier,
                 });
             }
             return list;
