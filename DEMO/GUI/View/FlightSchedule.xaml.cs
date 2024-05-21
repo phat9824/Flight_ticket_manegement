@@ -25,6 +25,7 @@ using ControlzEx.Standard;
 using BLL;
 using System.Data.SqlClient;
 using static GUI.View.Window2;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace GUI.View
 {
@@ -50,9 +51,9 @@ namespace GUI.View
         Ticket_Class_BLL ticket_class_bll = new Ticket_Class_BLL();
 
         private ObservableCollection<TicketClass> ticketList;
-        private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1 };
+        //private TicketClass defaultTicketClass = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
         private ObservableCollection<IntermediateAirport> IAList; // Intermidate Airport List
-        private IntermediateAirport defaultIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
+        //private IntermediateAirport defaultIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
         private ICollectionView collectionViewTicketClass;
         private ICollectionView collectionViewIA;
 
@@ -76,19 +77,26 @@ namespace GUI.View
 
             airports = airport_bll.L_airport();
             ticketClasses = ticket_class_bll.L_TicketClass();
-
+            /*ticketClasses = new List<TicketClassDTO>
+            {
+                new TicketClassDTO { TicketClassID = "TC1", TicketClassName = "Economy", BaseMultiplier = 1.0m },
+                new TicketClassDTO { TicketClassID = "TC2", TicketClassName = "Business", BaseMultiplier = 1.5m },
+                new TicketClassDTO { TicketClassID = "TC3", TicketClassName = "First Class", BaseMultiplier = 2.0m },
+                new TicketClassDTO { TicketClassID = "TC4", TicketClassName = "Premium Economy", BaseMultiplier = 1.2m },
+                new TicketClassDTO { TicketClassID = "TC5", TicketClassName = "Budget", BaseMultiplier = 0.8m }
+            };*/
             //----------------------------------------------------------------------------------------------------------------------------------
             ticketList = new ObservableCollection<TicketClass>
             {
-                defaultTicketClass,
+                new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 },
             };
             collectionViewTicketClass = CollectionViewSource.GetDefaultView(ticketList);
             dataGrid1.ItemsSource = collectionViewTicketClass;
 
             IAList = new ObservableCollection<IntermediateAirport>
             {
-                defaultIA,
-                defaultIA,
+                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
+                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
             };
             collectionViewIA = CollectionViewSource.GetDefaultView(IAList);
             dataGrid2.ItemsSource = collectionViewIA;
@@ -101,7 +109,7 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
-            if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
+            /*if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
             {
                 MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
                 return;
@@ -125,14 +133,14 @@ namespace GUI.View
             {
                 MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
                 return;
-            }
+            }*/
             ScheduleData data = GetScheduleData();
-            FlightDTO flightDTO = data.InitializeFlightDTO();
+            /*FlightDTO flightDTO = data.InitializeFlightDTO();
 
             fl_bll.Add_Flights(flightDTO);
 
             List<TicketClassFlightDTO> listTicketClassFlightDTO = data.InitializeListTicketClassFlightDTO();
-            List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();
+            List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();*/
 
             // Xử lí ......
             // var processStateInfor = BAL.ProcessObject.processMethod(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
@@ -146,7 +154,7 @@ namespace GUI.View
             if (String.IsNullOrWhiteSpace(processStateInfor))
             {
                 ResetDataWindow();
-                var newTicket = defaultTicketClass;
+                var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
                 ticketList.Add(newTicket);
                 collectionViewTicketClass.MoveCurrentTo(newTicket);
             }
@@ -268,7 +276,7 @@ namespace GUI.View
                 return;
             }
 
-            var newTicket = defaultTicketClass;
+            var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
             ticketList.Add(newTicket);
             collectionViewTicketClass.MoveCurrentTo(newTicket);
 
@@ -276,7 +284,7 @@ namespace GUI.View
         private void ResetTicket_Click(object sender, RoutedEventArgs e)
         {
             ticketList.Clear();
-            var newTicket = defaultTicketClass;
+            var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
             ticketList.Add(newTicket);
             collectionViewTicketClass.MoveCurrentTo(newTicket);
         }
@@ -295,17 +303,56 @@ namespace GUI.View
             }
         }
 
+        public void UpdateMultiplierById(string id)
+        {
+            var ticketClass = ticketList.FirstOrDefault(t => t.ID == id);
+            var ticketClassDTO = ticketClasses.FirstOrDefault(t => t.TicketClassID == id);
+
+            if (ticketClass != null && ticketClassDTO != null)
+            {
+                ticketClass.Multiplier = ticketClassDTO.BaseMultiplier;
+            }
+        }
+
+        private void ComboBox_BaseMultiplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
         private void ComboBox_TicketClassID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBoxID = sender as ComboBox;
             if (comboBoxID.SelectedItem is TicketClassDTO selectedTicketClass)
             {
+
+                BindingExpression binding = comboBoxID.GetBindingExpression(ComboBox.SelectedValueProperty);
+                if (binding != null)
+                {
+                    binding.UpdateSource();
+                }
+
                 var dataGridRow = DataGridRow.GetRowContainingElement(comboBoxID);
                 var comboBoxName = FindChild<ComboBox>(dataGridRow, "ComboBoxName");
+                var textBoxMultiplier = FindChild<TextBox>(dataGridRow, "TextBoxMultiplier");
+
 
                 if (comboBoxName != null)
                 {
                     comboBoxName.SelectedValue = selectedTicketClass.TicketClassName;
+                    BindingExpression bindingName = comboBoxName.GetBindingExpression(ComboBox.SelectedValueProperty);
+                    if (bindingName != null)
+                    {
+                        bindingName.UpdateSource();
+                    }
+                }
+
+                if (textBoxMultiplier != null)
+                {
+                    textBoxMultiplier.Text = selectedTicketClass.BaseMultiplier.ToString();
+                    BindingExpression bindingmul = textBoxMultiplier.GetBindingExpression(TextBox.TextProperty);
+                    if (bindingmul != null)
+                    {
+                        bindingmul.UpdateSource();
+                    }
                 }
             }
         }
@@ -315,12 +362,34 @@ namespace GUI.View
             ComboBox comboBoxName = sender as ComboBox;
             if (comboBoxName.SelectedItem is TicketClassDTO selectedTicketClass)
             {
+                BindingExpression binding = comboBoxName.GetBindingExpression(ComboBox.SelectedValueProperty);
+                if (binding != null)
+                {
+                    binding.UpdateSource();
+                }
+
                 var dataGridRow = DataGridRow.GetRowContainingElement(comboBoxName);
                 var comboBoxID = FindChild<ComboBox>(dataGridRow, "ComboBoxID");
+                var textBoxMultiplier = FindChild<TextBox>(dataGridRow, "TextBoxMultiplier");
 
                 if (comboBoxID != null)
                 {
                     comboBoxID.SelectedValue = selectedTicketClass.TicketClassID;
+                    BindingExpression bindingid = comboBoxID.GetBindingExpression(ComboBox.SelectedValueProperty);
+                    if (bindingid != null)
+                    {
+                        bindingid.UpdateSource();
+                    }
+                }
+
+                if (textBoxMultiplier != null)
+                {
+                    textBoxMultiplier.Text = selectedTicketClass.BaseMultiplier.ToString();
+                    BindingExpression bindingmul = textBoxMultiplier.GetBindingExpression(TextBox.TextProperty);
+                    if (bindingmul != null)
+                    {
+                        bindingmul.UpdateSource();
+                    }
                 }
             }
         }
@@ -370,7 +439,7 @@ namespace GUI.View
                 return;
             }
 
-            var newIA = defaultIA;
+            var newIA = new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." };
             IAList.Add(newIA);
             collectionViewTicketClass.MoveCurrentTo(newIA);
         }
@@ -395,12 +464,23 @@ namespace GUI.View
             ComboBox comboBoxIAID = sender as ComboBox;
             if (comboBoxIAID.SelectedItem is AirportDTO selectedIA)
             {
+                BindingExpression bindingID = comboBoxIAID.GetBindingExpression(ComboBox.SelectedValueProperty);
+                if (bindingID != null)
+                {
+                    bindingID.UpdateSource();
+                }
+
                 var dataGridRow = DataGridRow.GetRowContainingElement(comboBoxIAID);
                 var comboBoxIAName = FindChild<ComboBox>(dataGridRow, "ComboBoxIAName");
 
                 if (comboBoxIAName != null)
                 {
                     comboBoxIAName.SelectedValue = selectedIA.AirportName;
+                    BindingExpression bindingName = comboBoxIAName.GetBindingExpression(ComboBox.SelectedValueProperty);
+                    if (bindingName != null)
+                    {
+                        bindingName.UpdateSource();
+                    }
                 }
             }
         }
@@ -410,12 +490,24 @@ namespace GUI.View
             ComboBox comboBoxIAName = sender as ComboBox;
             if (comboBoxIAName.SelectedItem is AirportDTO selectedIA)
             {
+
+                BindingExpression bindingName = comboBoxIAName.GetBindingExpression(ComboBox.SelectedValueProperty);
+                if (bindingName != null)
+                {
+                    bindingName.UpdateSource();
+                }
+
                 var dataGridRow = DataGridRow.GetRowContainingElement(comboBoxIAName);
                 var comboBoxIAID = FindChild<ComboBox>(dataGridRow, "ComboBoxIAID");
 
                 if (comboBoxIAID != null)
                 {
                     comboBoxIAID.SelectedValue = selectedIA.AirportID;
+                    BindingExpression bindingID = comboBoxIAID.GetBindingExpression(ComboBox.SelectedValueProperty);
+                    if (bindingID != null)
+                    {
+                        bindingID.UpdateSource();
+                    }
                 }
             }
         }

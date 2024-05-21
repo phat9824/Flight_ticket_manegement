@@ -280,7 +280,7 @@
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Ticket Class ID" Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Header="Ticket Class ID" Width="125" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxID"
@@ -295,7 +295,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Ticket Class Name" Width="270" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Header="Ticket Class Name" Width="225" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxName"
@@ -310,8 +310,29 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
                         <!--
+                        <DataGridTextColumn Header="Multiplier" Binding="{Binding Multiplier}"
+                                            Width="115"
+                                            CanUserSort="False"
+                                            HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                                            ElementStyle="{StaticResource CenterAlignedTextBlock}"
+                                            EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
+                        -->
+
+                        <DataGridTemplateColumn Header="Multiplier" Width="115" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="TextBoxMultiplier"
+                                            Text="{Binding Multiplier, Mode=TwoWay}"
+                                            IsReadOnly="False"
+                                            Style="{StaticResource CenterAlignedTextBox}"
+                                            Background="Transparent"
+                                            BorderThickness="0"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                                <!--
                         <DataGridTextColumn Header="Ticket Class IDx" Binding="{Binding ID}"
                                             Width="0"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"

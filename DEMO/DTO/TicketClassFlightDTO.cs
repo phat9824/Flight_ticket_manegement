@@ -11,7 +11,7 @@ namespace DTO
         private string ticketClassID;
         private string flightID;
         private int quantity;
-
+        private decimal multiplier;
         public string TicketClassID
         {
             get => ticketClassID;
@@ -28,6 +28,12 @@ namespace DTO
         {
             get => quantity;
             set => quantity = value;
+        }
+
+        public decimal Multiplier
+        {
+            get => multiplier;
+            set => multiplier = value;
         }
     }
 }
