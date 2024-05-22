@@ -430,6 +430,7 @@
                     <Button Content="Search" Grid.Row="0"
                             HorizontalAlignment="Left" Margin="370 15 0 0"  VerticalAlignment="Top"
                             FontSize="18"
+                            Click="SearchFlight_Click"
                             Width="120" Height="40"/>
 
                     <TextBox  x:Name="NumTicket" Grid.Row="1"

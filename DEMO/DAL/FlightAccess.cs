@@ -170,5 +170,55 @@ namespace DAL
             con.Close();
             return data;
         }
+
+        public List<FlightDTO> getFlight(string sourceAirportID, string destinationAirportID, DateTime startDate, DateTime endDate, string ticketClass, int numTicket)
+        {
+            List<FlightDTO> data = new List<FlightDTO>();
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+
+            string query = @"
+                            SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
+                            FROM FLIGHT f
+                            INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
+                            WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
+                            AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
+                            AND CAST(f.FlightDay AS DATE) = @startDate
+                            AND (@ticketClass IS NULL OR tf.TicketClassID = @ticketClass)
+                            AND tf.Quantity >= @numTicket";
+
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                // Thiết lập các tham số
+                command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@startDate", startDate);
+                command.Parameters.AddWithValue("@endDate", endDate);
+                command.Parameters.AddWithValue("@ticketClass", ticketClass ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@numTicket", numTicket);
+
+                // Đọc kết quả truy vấn
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        FlightDTO flight = new FlightDTO()
+                        {
+                            FlightID = reader["FlightID"].ToString(),
+                            SourceAirportID = reader["SourceAirportID"].ToString(),
+                            DestinationAirportID = reader["DestinationAirportID"].ToString(),
+                            FlightDay = Convert.ToDateTime(reader["FlightDay"]),
+                            FlightTime = (TimeSpan)reader["FlightTime"],
+                            Price = Convert.ToDecimal(reader["Price"])
+                        };
+                        data.Add(flight);
+                    }
+                }
+            }
+
+            // Đóng kết nối
+            con.Close();
+            return data;
+        }
     }
 }
