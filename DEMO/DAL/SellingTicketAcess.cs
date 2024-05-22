@@ -18,7 +18,7 @@ namespace DAL
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
             string query = @"SELECT COUNT(FlightID) AS SoldTickets
-                            FROM SELLING_TICKET
+                            FROM BOOKING_TICKET
                             WHERE (@flightID IS NULL OR FlightID = @flightID)";
 
             using (SqlCommand command = new SqlCommand(query, con))
