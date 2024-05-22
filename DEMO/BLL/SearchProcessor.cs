@@ -14,7 +14,7 @@ namespace BLL
     public class SearchProcessor
     {
         public SearchProcessor() { }
-        public static List<FlightInforDTO> GetInformationSearch(string sourceAirportID, string destinationAirportID
+        public static List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID
                                                                        , DateTime startDate, DateTime endDate)
         {
             FlightAccess flightAccess = new FlightAccess();
@@ -25,6 +25,28 @@ namespace BLL
             List<FlightInforDTO> data = new List<FlightInforDTO>();
             List<FlightDTO> flights = new List<FlightDTO>();
             flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate);
+
+            foreach (FlightDTO flight in flights)
+            {
+                FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
+                flightInformationSearchDTO.Flight = flight;
+                flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
+                flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;
+                data.Add(flightInformationSearchDTO);
+            }
+            return data;
+        }
+
+        public static List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID, DateTime startDate, DateTime endDate, string TicketClass, int numTicket)
+        {
+            FlightAccess flightAccess = new FlightAccess();
+            SellingTicketAcess sellingTicketAcess = new SellingTicketAcess();
+            Ticket_classAccess ticket_ClassAccess = new Ticket_classAccess();
+
+
+            List<FlightInforDTO> data = new List<FlightInforDTO>();
+            List<FlightDTO> flights = new List<FlightDTO>();
+            flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate, TicketClass, numTicket);
 
             foreach (FlightDTO flight in flights)
             {

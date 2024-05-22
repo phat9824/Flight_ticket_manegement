@@ -122,6 +122,18 @@ namespace GUI.View
             }
         }
 
+        private void SearchFlight_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(SourceAirport_popup.SelectedValue.ToString() + DestinationAirport_popup.SelectedValue.ToString() + DepartureDay_popup.DisplayDate + TicketClass_popup.SelectedValue.ToString());
+            var flights = BLL.SearchProcessor.GetFlightInfoDTO(SourceAirport_popup.SelectedValue.ToString(),
+                                                               DestinationAirport_popup.SelectedValue.ToString(),
+                                                               DepartureDay_popup.DisplayDate,
+                                                               new DateTime(9999, 12, 31, 23, 59, 59),
+                                                               TicketClass_popup.SelectedValue.ToString(),
+                                                               int.TryParse(NumTicket.Text, out int numTicket) ? numTicket : 0);
+            dataGridFlights.ItemsSource = flights;
+        }
+
         private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
