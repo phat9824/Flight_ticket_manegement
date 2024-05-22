@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class ParameterAccess : DatabaseAccess
+    public class ParameterAccess : DatabaseAccess
     {
         public static ParameterDTO GetParameters()
         {

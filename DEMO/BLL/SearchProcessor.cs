@@ -70,5 +70,10 @@ namespace BLL
             }
             return new ObservableCollection<T>(sortedItems);
         }
+
+        public static ParameterDTO GetParameterDTO()
+        {
+            return ParameterAccess.GetParameters();
+        }
     }
 }

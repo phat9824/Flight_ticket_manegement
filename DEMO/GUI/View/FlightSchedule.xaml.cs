@@ -65,11 +65,11 @@ namespace GUI.View
             InitializeComponent();
 
             //---------------------------------------------------------------------------------------------------------------------------------------------
-            //parameterDTO = BAL.GetParameter();
+            parameterDTO = BLL.SearchProcessor.GetParameterDTO();
 
-            parameterDTO = new ParameterDTO();
+            /*parameterDTO = new ParameterDTO();
             parameterDTO.IntermediateAirportCount = 2;
-            parameterDTO.TicketClassCount = 2;
+            parameterDTO.TicketClassCount = 2;*/
 
             //---------------------------------------------------------------------------------------------------------------------------------------------
             // airports = BAL.GetAirports();
@@ -109,7 +109,7 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
-            /*if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
+            if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
             {
                 MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
                 return;
@@ -133,26 +133,22 @@ namespace GUI.View
             {
                 MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
                 return;
-            }*/
+            }
+
             ScheduleData data = GetScheduleData();
-            /*FlightDTO flightDTO = data.InitializeFlightDTO();
-
-            fl_bll.Add_Flights(flightDTO);
-
+            FlightDTO flightDTO = data.InitializeFlightDTO();
             List<TicketClassFlightDTO> listTicketClassFlightDTO = data.InitializeListTicketClassFlightDTO();
-            List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();*/
-
-            // Xử lí ......
-            // var processStateInfor = BAL.ProcessObject.processMethod(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
+            List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();
+            string processState = new BLL.InsertProcessor().AddFlightInfor(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
 
             // Debug datatype bằng cách huyền thoại, sẽ được xóa sau
-            MessageBox.Show(data.ToString(), "CheckData");
+            MessageBox.Show(data.ToString() + "\n Chỉ dùng cho debug, cửa sổ này nằm trong phương thức ConfirmSchedule_Click thuộc Code-Behind FlightSchedule.xaml", "Debug");
 
 
             // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
-            string processStateInfor = string.Empty;
-            if (String.IsNullOrWhiteSpace(processStateInfor))
+            if (String.IsNullOrWhiteSpace(processState))
             {
+                MessageBox.Show("Succesful" + "\n Chỉ dùng cho debug, cửa sổ này nằm trong phương thức ConfirmSchedule_Click thuộc Code-Behind FlightSchedule.xaml", "Debug");
                 ResetDataWindow();
                 var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
                 ticketList.Add(newTicket);
@@ -160,9 +156,8 @@ namespace GUI.View
             }
             else
             {
-                string errorMessage = "An error occurred. Please check the data and try again.";
                 string state = "Error";
-                MessageBox.Show(errorMessage, state);
+                MessageBox.Show(processState, state);
             }
         }
 

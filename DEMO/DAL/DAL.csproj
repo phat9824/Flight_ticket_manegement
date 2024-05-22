@@ -45,9 +45,11 @@
     <Compile Include="AirportAccess.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="FlightAccess.cs" />
+    <Compile Include="IntermidateAirportAccess.cs" />
     <Compile Include="ParameterAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SellingTicketAcess.cs" />
+    <Compile Include="TicketClassFlightAccess.cs" />
     <Compile Include="Ticket_classAccess.cs" />
   </ItemGroup>
   <ItemGroup>

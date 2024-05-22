@@ -15,15 +15,6 @@
     <!-- Set background to white -->
 
     <Grid>
-
-        <!-- Page Title -->
-        <TextBlock Text="Setting" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
-    HorizontalAlignment="Left" Foreground="#121518"/>
-
-        <!-- Personal Information Label -->
-        <TextBlock Text="Personal Information" FontSize="20" FontWeight="Bold" Margin="10,95,0,366"
-    HorizontalAlignment="Left" Foreground="#121518"/>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="262"/>
             <ColumnDefinition/>
@@ -34,6 +25,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <!-- Page Title -->
+        <TextBlock Text="Setting" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+    HorizontalAlignment="Left" Foreground="#121518"/>
+
+        <!-- Personal Information Label -->
+        <TextBlock Text="Personal Information" FontSize="20" FontWeight="Bold" Margin="10,95,0,366"
+    HorizontalAlignment="Left" Foreground="#121518"/>
+
+        
 
         <!-- Username information -->
         <Grid Grid.Column="0" Margin="20,152,0,-132">
