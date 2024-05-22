@@ -11,7 +11,8 @@ using System.Collections;
 namespace DAL
 {
     public class FlightAccess : DatabaseAccess
-    {
+    {   
+        string state = string.Empty; // Chuỗi rỗng xem như thành công
         public string AutoID()
         {
             SqlConnection con = SqlConnectionData.Connect();
@@ -113,7 +114,7 @@ namespace DAL
                         if (rowsAffected == 0)
                         {
                             transaction.Rollback();
-                            throw new Exception("Insert failed: No rows affected.");
+                            return "No rows were inserted.";
                         }
                     }
 
@@ -132,39 +133,46 @@ namespace DAL
         {
             List<FlightDTO> data = new List<FlightDTO>();
             SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-            string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
-                            FROM FLIGHT
-                            WHERE (@sourceAirportID IS NULL OR SourceAirportID = @sourceAirportID)
-                            AND (@destinationAirportID IS NULL OR DestinationAirportID = @destinationAirportID)
-                            AND FlightDay BETWEEN @startDate AND @endDate";
-
-            using (SqlCommand command = new SqlCommand(query, con))
+            this.state = string.Empty; 
+            try
             {
-                // Thiết lập các tham số
-                command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
-                command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
-                command.Parameters.AddWithValue("@startDate", startDate);
-                command.Parameters.AddWithValue("@endDate", endDate);
+                con.Open();
+                string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
+                                FROM FLIGHT
+                                WHERE (@sourceAirportID IS NULL OR SourceAirportID = @sourceAirportID)
+                                AND (@destinationAirportID IS NULL OR DestinationAirportID = @destinationAirportID)
+                                AND FlightDay BETWEEN @startDate AND @endDate";
 
-                // Đọc kết quả truy vấn
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlCommand command = new SqlCommand(query, con))
                 {
-                    while (reader.Read())
+                    // Thiết lập các tham số
+                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@startDate", startDate);
+                    command.Parameters.AddWithValue("@endDate", endDate);
+
+                    // Đọc kết quả truy vấn
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        FlightDTO flight = new FlightDTO()
+                        while (reader.Read())
                         {
-                            FlightID = reader["FlightID"].ToString(),
-                            DestinationAirportID = reader["DestinationAirportID"].ToString(),
-                            SourceAirportID = reader["SourceAirportID"].ToString(),
-                            FlightDay = Convert.ToDateTime(reader["FlightDay"]),
-                            FlightTime = (TimeSpan)reader["FlightTime"],
-                            Price = Convert.ToDecimal(reader["Price"])
-                            
-                        };
-                        data.Add(flight);
+                            FlightDTO flight = new FlightDTO()
+                            {
+                                FlightID = reader["FlightID"].ToString(),
+                                DestinationAirportID = reader["DestinationAirportID"].ToString(),
+                                SourceAirportID = reader["SourceAirportID"].ToString(),
+                                FlightDay = Convert.ToDateTime(reader["FlightDay"]),
+                                FlightTime = (TimeSpan)reader["FlightTime"],
+                                Price = Convert.ToDecimal(reader["Price"])
+
+                            };
+                            data.Add(flight);
+                        }
                     }
                 }
+            } catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
             }
             // Đóng kết nối
             con.Close();
@@ -175,50 +183,66 @@ namespace DAL
         {
             List<FlightDTO> data = new List<FlightDTO>();
             SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-
-            string query = @"
-                            SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
-                            FROM FLIGHT f
-                            INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
-                            WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
-                            AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
-                            AND CAST(f.FlightDay AS DATE) = @startDate
-                            AND (@ticketClass IS NULL OR tf.TicketClassID = @ticketClass)
-                            AND tf.Quantity >= @numTicket";
-
-            using (SqlCommand command = new SqlCommand(query, con))
+            string state = string.Empty;
+            try
             {
-                // Thiết lập các tham số
-                command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
-                command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
-                command.Parameters.AddWithValue("@startDate", startDate);
-                command.Parameters.AddWithValue("@endDate", endDate);
-                command.Parameters.AddWithValue("@ticketClass", ticketClass ?? (object)DBNull.Value);
-                command.Parameters.AddWithValue("@numTicket", numTicket);
+                con.Open();
 
-                // Đọc kết quả truy vấn
-                using (SqlDataReader reader = command.ExecuteReader())
+                string query = @"
+                                SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
+                                FROM FLIGHT f
+                                INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
+                                LEFT JOIN (
+                                    SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets
+                                    FROM BOOKING_TICKET
+                                    GROUP BY FlightID, TicketClassID
+                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID
+                                WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
+                                AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
+                                AND f.FlightDay BETWEEN @startDate AND @endDate
+                                AND (@ticketClass IS NULL OR tf.TicketClassID = @ticketClass)
+                                AND (tf.Quantity - ISNULL(bt.BookedTickets, 0)) >= @numTicket";
+
+                using (SqlCommand command = new SqlCommand(query, con))
                 {
-                    while (reader.Read())
+                    // Thiết lập các tham số
+                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@startDate", startDate);
+                    command.Parameters.AddWithValue("@endDate", endDate);
+                    command.Parameters.AddWithValue("@ticketClass", ticketClass ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@numTicket", numTicket);
+
+                    // Đọc kết quả truy vấn
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        FlightDTO flight = new FlightDTO()
+                        while (reader.Read())
                         {
-                            FlightID = reader["FlightID"].ToString(),
-                            SourceAirportID = reader["SourceAirportID"].ToString(),
-                            DestinationAirportID = reader["DestinationAirportID"].ToString(),
-                            FlightDay = Convert.ToDateTime(reader["FlightDay"]),
-                            FlightTime = (TimeSpan)reader["FlightTime"],
-                            Price = Convert.ToDecimal(reader["Price"])
-                        };
-                        data.Add(flight);
+                            FlightDTO flight = new FlightDTO()
+                            {
+                                FlightID = reader["FlightID"].ToString(),
+                                SourceAirportID = reader["SourceAirportID"].ToString(),
+                                DestinationAirportID = reader["DestinationAirportID"].ToString(),
+                                FlightDay = Convert.ToDateTime(reader["FlightDay"]),
+                                FlightTime = (TimeSpan)reader["FlightTime"],
+                                Price = Convert.ToDecimal(reader["Price"])
+                            };
+                            data.Add(flight);
+                        }
                     }
                 }
+            } catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
             }
-
             // Đóng kết nối
             con.Close();
             return data;
+        }
+
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }

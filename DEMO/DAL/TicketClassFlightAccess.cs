@@ -10,6 +10,7 @@ namespace DAL
 {
     public class TicketClassFlightAccess
     {
+        string state = string.Empty;
         public TicketClassFlightAccess() { }
         public string insertListTicketClass(List<TicketClassFlightDTO> listTicketClassFlight)
         {
@@ -76,6 +77,11 @@ namespace DAL
                     return $"Insert failed: {ex.Message}";
                 }
             }
+        }
+
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }

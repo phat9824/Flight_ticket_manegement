@@ -8,53 +8,80 @@ using DAL;
 using Microsoft.SqlServer.Server;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 
 namespace BLL
 {
     public class SearchProcessor
     {
+        string state = string.Empty;
         public SearchProcessor() { }
-        public static List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID
+        public List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID
                                                                        , DateTime startDate, DateTime endDate)
         {
             FlightAccess flightAccess = new FlightAccess();
             SellingTicketAcess sellingTicketAcess = new SellingTicketAcess();
             Ticket_classAccess ticket_ClassAccess = new Ticket_classAccess();
-
+            this.state = string.Empty;
             
             List<FlightInforDTO> data = new List<FlightInforDTO>();
             List<FlightDTO> flights = new List<FlightDTO>();
-            flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate);
-
-            foreach (FlightDTO flight in flights)
+            try
             {
-                FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
-                flightInformationSearchDTO.Flight = flight;
-                flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
-                flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;
-                data.Add(flightInformationSearchDTO);
+                flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate);
+                if (flightAccess.GetState() != string.Empty)
+                {
+                    return data;
+                }
+
+                foreach (FlightDTO flight in flights)
+                {
+                    FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
+                    flightInformationSearchDTO.Flight = flight;
+                    flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
+                    flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;
+                    data.Add(flightInformationSearchDTO);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+                return data;
             }
             return data;
         }
 
-        public static List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID, DateTime startDate, DateTime endDate, string TicketClass, int numTicket)
+        public List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID, DateTime startDate, DateTime endDate, string TicketClass, int numTicket)
         {
             FlightAccess flightAccess = new FlightAccess();
             SellingTicketAcess sellingTicketAcess = new SellingTicketAcess();
             Ticket_classAccess ticket_ClassAccess = new Ticket_classAccess();
-
+            this.state = string.Empty;
 
             List<FlightInforDTO> data = new List<FlightInforDTO>();
             List<FlightDTO> flights = new List<FlightDTO>();
-            flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate, TicketClass, numTicket);
 
-            foreach (FlightDTO flight in flights)
+            try
             {
-                FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
-                flightInformationSearchDTO.Flight = flight;
-                flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
-                flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;
-                data.Add(flightInformationSearchDTO);
+                flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate, TicketClass, numTicket);
+                if (flightAccess.GetState() != string.Empty)
+                {
+                    return data;
+                }
+
+                foreach (FlightDTO flight in flights)
+                {
+                    FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
+                    flightInformationSearchDTO.Flight = flight;
+                    flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
+                    flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;
+                    data.Add(flightInformationSearchDTO);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+                return data;
             }
             return data;
         }

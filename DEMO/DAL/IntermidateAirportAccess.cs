@@ -10,10 +10,10 @@ namespace DAL
 {
     public class IntermidateAirportAccess
     {
+        string state = string.Empty;
         public IntermidateAirportAccess() { }
         public string insertListItermedateAirport(List<IntermediateAirportDTO> listIntermediateAirportDTO)
         {
-
             SqlConnection con = SqlConnectionData.Connect();
             
             con.Open();
@@ -79,6 +79,10 @@ namespace DAL
                 }
                 
             }
+        }
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }

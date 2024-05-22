@@ -470,6 +470,7 @@
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <DatePicker x:Name="DepartureDay_popup"
+                                    SelectedDateChanged="DepartureDay_popup_SelectedDateChanged"
                                     materialDesign:HintAssist.HelperText=""
                                     materialDesign:HintAssist.Hint="Pick Date"
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
