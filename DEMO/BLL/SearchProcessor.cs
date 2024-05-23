@@ -51,7 +51,7 @@ namespace BLL
             return data;
         }
 
-        public List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID, DateTime startDate, DateTime endDate, string TicketClass, int numTicket)
+        public List<FlightInforDTO> GetFlightInfoDTO(string sourceAirportID, string destinationAirportID, DateTime startDate, DateTime endDate, string ticketClass, int numTicket)
         {
             FlightAccess flightAccess = new FlightAccess();
             SellingTicketAcess sellingTicketAcess = new SellingTicketAcess();
@@ -63,7 +63,7 @@ namespace BLL
 
             try
             {
-                flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate, TicketClass, numTicket);
+                flights = flightAccess.getFlight(sourceAirportID, destinationAirportID, startDate, endDate, ticketClass, numTicket);
                 if (flightAccess.GetState() != string.Empty)
                 {
                     return data;
@@ -73,8 +73,8 @@ namespace BLL
                 {
                     FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
                     flightInformationSearchDTO.Flight = flight;
-                    flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID(flight.FlightID);
-                    flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID(flight.FlightID) - flightInformationSearchDTO.bookedTickets;
+                    flightInformationSearchDTO.bookedTickets = sellingTicketAcess.getTicketSales_byFlightID_TicketClassID(flight.FlightID, ticketClass);
+                    flightInformationSearchDTO.emptySeats = ticket_ClassAccess.getTotalSeat_byFlightID_TicketClassID(flight.FlightID, ticketClass) - flightInformationSearchDTO.bookedTickets;
                     data.Add(flightInformationSearchDTO);
                 }
             }

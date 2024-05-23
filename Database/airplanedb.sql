@@ -73,6 +73,21 @@ CREATE TABLE BOOKING_TICKET
     FOREIGN KEY (TicketClassID) REFERENCES TICKET_CLASS(TicketClassID)
 )
 
+CREATE SEQUENCE Seq_TicketID
+    START WITH 1
+    INCREMENT BY 1;
+
+GO 
+CREATE TRIGGER Trigger_TicketID
+ON BOOKING_TICKET
+INSTEAD OF INSERT
+AS
+BEGIN
+    INSERT INTO BOOKING_TICKET (TicketID, FlightID, ID, TicketClassID, TicketStatus, BookingDate)
+    SELECT 'TK' + FORMAT(NEXT VALUE FOR Seq_TicketID, '000'), FlightID, ID, TicketClassID, TicketStatus, BookingDate
+    FROM inserted;
+END
+
 CREATE TABLE INTERMEDIATE_AIRPORT
 (
 	AirportID VARCHAR(20) FOREIGN KEY REFERENCES AIRPORT(AirportID),
@@ -102,6 +117,9 @@ CREATE TABLE PARAMETER
     SlowestBookingTime      time,           -- Slowest booking time
     CancelTime              time            -- Cancellation time
 );
+
+INSERT INTO PARAMETER (AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime)
+VALUES (10, '08:00:00', 2, 30, 120, 2, '07:00:00', '06:00:00')
 
 insert into AIRPORT values ('000',N'Nội Bài')
 insert into AIRPORT values ('001',N'Tân Sơn Nhất')
