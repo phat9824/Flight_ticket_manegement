@@ -33,7 +33,7 @@
         <TextBlock Text="Personal Information" FontSize="20" FontWeight="Bold" Margin="10,95,0,366"
     HorizontalAlignment="Left" Foreground="#121518"/>
 
-        
+
 
         <!-- Username information -->
         <Grid Grid.Column="0" Margin="20,152,0,-132">
