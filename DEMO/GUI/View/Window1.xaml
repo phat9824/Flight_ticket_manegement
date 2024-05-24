@@ -15,18 +15,6 @@
     <!-- Set background to white -->
 
     <Grid>
-<<<<<<< HEAD
-
-        <!-- Page Title -->
-        <TextBlock Text="Setting" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
-    HorizontalAlignment="Left" Foreground="#121518"/>
-
-        <!-- Personal Information Label -->
-        <TextBlock Text="Personal Information" FontSize="20" FontWeight="Bold" Margin="10,95,0,366"
-    HorizontalAlignment="Left" Foreground="#121518" Grid.ColumnSpan="2" Width="785"/>
-
-=======
->>>>>>> f401a6f29362a4012d1a335230a486fb6a56b53c
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="262"/>
             <ColumnDefinition/>
@@ -45,7 +33,7 @@
         <TextBlock Text="Personal Information" FontSize="20" FontWeight="Bold" Margin="10,95,0,366"
     HorizontalAlignment="Left" Foreground="#121518"/>
 
-        
+
 
         <!-- Username information -->
         <Grid Grid.Column="0" Margin="20,152,0,-132">
@@ -61,7 +49,7 @@
             </Border>
 
             <!-- Change avatar button -->
-            <Button Grid.Row="1" Content="Change Avatar" HorizontalAlignment="Left" Margin="75,10,0,10" Command="{Binding ChangeAvatarCommand}" Height="30"/>
+            <Button Grid.Row="1" Content="Change Avatar" HorizontalAlignment="Center" Margin="10" Command="{Binding ChangeAvatarCommand}" Height="30"/>
         </Grid>
 
         <!-- User information -->
@@ -72,40 +60,40 @@
                         <TextBlock Text="Fullname:"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="250" Margin="5" Text="{Binding Fullname}" TextChanged="TextBox_TextChanged"/>
+                        <TextBox Width="250" Margin="5" Text="{Binding Fullname}"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Gender:"/>
+                        <TextBlock Text="Gender"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="209" Margin="5" TextChanged="TextBox_TextChanged_3"/>
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Birth:"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="250" Margin="5" TextChanged="TextBox_TextChanged_4"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Phone:"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="209" Margin="5" TextChanged="TextBox_TextChanged_5"/>
+                        <TextBox Width="250" Margin="5"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Email:"/>
+                        <TextBlock Text="Birth"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="250" Margin="5"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Phone"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="250" Margin="5"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Email"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBox Width="488" Margin="5"/>
@@ -114,7 +102,7 @@
             </StackPanel>
 
             <!-- Update button -->
-            <Button Content="Update" HorizontalAlignment="Stretch" Margin="10" Command="{Binding UpdateUserCommand}" Height="30" Click="Button_Click"/>
+            <Button Content="Update" HorizontalAlignment="Stretch" Margin="10" Command="{Binding UpdateUserCommand}" Height="30"/>
         </StackPanel>
 
         <!-- Account Information Label -->
@@ -123,24 +111,20 @@
 
         <!-- Account information -->
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="10,63,10,284" Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="467*"/>
-                <ColumnDefinition Width="318*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Username and role -->
-            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10,10,10,10" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Username:"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="150" Margin="5" Text="{Binding Username}" TextChanged="TextBox_TextChanged_3"/>
+                            <TextBox Width="150" Margin="5" Text="{Binding Username}"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -149,16 +133,7 @@
                             <TextBlock Text="Role:"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="150" Margin="5" Text="{Binding Role}" TextChanged="TextBox_TextChanged_2"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Password:" Width="62"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <PasswordBox Width="150" Margin="5" PasswordChanged="PasswordBox_PasswordChanged_1" Password="test"/>
+                            <TextBox Width="150" Margin="5" Text="{Binding Role}"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -166,7 +141,7 @@
             </StackPanel>
 
             <!-- Change password button -->
-            <Button Content="Change Password" HorizontalAlignment="Left" Margin="87,30,0,31" Command="{Binding ChangePasswordCommand}" Height="30" Width="221" Grid.Row="0" Grid.Column="1"/>
+            <Button Content="Change Password" HorizontalAlignment="Left" Margin="470,30,0,31" Command="{Binding ChangePasswordCommand}" Height="30" Width="221" Grid.Row="0"/>
         </Grid>
     </Grid>
 </UserControl>
