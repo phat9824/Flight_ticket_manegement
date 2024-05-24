@@ -1,4 +1,5 @@
 ﻿using BLL;
+using ControlzEx.Standard;
 using DTO;
 using GUI.ViewModel;
 using System;
@@ -28,6 +29,12 @@ namespace GUI.View
     public partial class Window6 : UserControl
     {
         private ObservableCollection<CustomerDTO> ViewCustomerData { get; set; }
+        public ObservableCollection<FlightInforDTO> Flights { get; set; }
+
+        private int maxNumTicket = 0;
+        private int numTicket = 0;
+        private Int64 ticketPrice = 0;
+
         private ICollectionView customerView;
 
         public List<AirportDTO> airports { get; set; }
@@ -42,19 +49,9 @@ namespace GUI.View
             //Application.Current.Deactivated += Popup_Deactivated;
 
             // Test data
-            ViewCustomerData = new ObservableCollection<CustomerDTO>
-            {
-            new CustomerDTO { ID = "ID1", CustomerName = "Customer 1", Phone = "5551234501", Email = "customer1@example.com", Birth = new DateTime(1991, 1, 1) },
-            new CustomerDTO { ID = "ID2", CustomerName = "Customer 2", Phone = "5551234502", Email = "customer2@example.com", Birth = new DateTime(1992, 1, 1) },
-            new CustomerDTO { ID = "ID3", CustomerName = "Customer 3", Phone = "5551234503", Email = "customer3@example.com", Birth = new DateTime(1993, 1, 1) },
-            new CustomerDTO { ID = "ID4", CustomerName = "Customer 4", Phone = "5551234504", Email = "customer4@example.com", Birth = new DateTime(1994, 1, 1) },
-            new CustomerDTO { ID = "ID5", CustomerName = "Customer 5", Phone = "5551234505", Email = "customer5@example.com", Birth = new DateTime(1995, 1, 1) },
-            new CustomerDTO { ID = "ID6", CustomerName = "Customer 6", Phone = "5551234506", Email = "customer6@example.com", Birth = new DateTime(1996, 1, 1) },
-            new CustomerDTO { ID = "ID7", CustomerName = "Customer 7", Phone = "5551234507", Email = "customer7@example.com", Birth = new DateTime(1997, 1, 1) },
-            new CustomerDTO { ID = "ID8", CustomerName = "Customer 8", Phone = "5551234508", Email = "customer8@example.com", Birth = new DateTime(1998, 1, 1) },
-            new CustomerDTO { ID = "ID9", CustomerName = "Customer 9", Phone = "5551234509", Email = "customer9@example.com", Birth = new DateTime(1999, 1, 1) },
-            new CustomerDTO { ID = "ID10", CustomerName = "Customer 10", Phone = "5551234510", Email = "customer10@example.com", Birth = new DateTime(2000, 1, 1) }
-            };
+            ViewCustomerData = new ObservableCollection<CustomerDTO>();
+            numTicket = ViewCustomerData.Count;
+
             customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
             MyListView.ItemsSource = customerView;
 
@@ -69,7 +66,7 @@ namespace GUI.View
             TicketClass_popup.ItemsSource = ticketClasses;
 
             // Test data
-            var flights = new List<FlightInforDTO>
+           /* var flights = new List<FlightInforDTO>
             {
             new FlightInforDTO{Flight = new FlightDTO{FlightID = "FL1001",SourceAirportID = "S101",DestinationAirportID = "D201",FlightDay = DateTime.Today.AddDays(1),FlightTime = TimeSpan.FromHours(3),Price = 110.00m},bookedTickets = 52,emptySeats = 148},
             new FlightInforDTO{Flight = new FlightDTO{FlightID = "FL1002",SourceAirportID = "S102",DestinationAirportID = "D202",FlightDay = DateTime.Today.AddDays(2),FlightTime = TimeSpan.FromHours(4),Price = 120.00m},bookedTickets = 54,emptySeats = 146},
@@ -85,9 +82,9 @@ namespace GUI.View
             new FlightInforDTO{Flight = new FlightDTO{FlightID = "FL10012",SourceAirportID = "S102",DestinationAirportID = "D202",FlightDay = DateTime.Today.AddDays(2),FlightTime = TimeSpan.FromHours(4),Price = 120.00m},bookedTickets = 54,emptySeats = 146},
             new FlightInforDTO{Flight = new FlightDTO{FlightID = "FL10013",SourceAirportID = "S101",DestinationAirportID = "D201",FlightDay = DateTime.Today.AddDays(1),FlightTime = TimeSpan.FromHours(3),Price = 110.00m},bookedTickets = 52,emptySeats = 148},
             new FlightInforDTO{Flight = new FlightDTO{FlightID = "FL10014",SourceAirportID = "S102",DestinationAirportID = "D202",FlightDay = DateTime.Today.AddDays(2),FlightTime = TimeSpan.FromHours(4),Price = 120.00m},bookedTickets = 54,emptySeats = 146},
-            };
+            };*/
 
-            dataGridFlights.ItemsSource = flights;
+            dataGridFlights.ItemsSource = Flights;
 
             DeleteCommand = new RelayCommand<object>(DeleteItem);
             DataContext = this;
@@ -99,6 +96,8 @@ namespace GUI.View
             if (itemToRemove != null)
             {
                 ViewCustomerData.Remove(itemToRemove);
+                numTicket = ViewCustomerData.Count;
+                TicketQuantity.Text = numTicket.ToString();
             }
         }
 
@@ -112,14 +111,49 @@ namespace GUI.View
                 {
                     SearchFlight_Popup.IsOpen = false;
                     FlightID.Text = selectedFlightInfo.Flight.FlightID;
-                    //DepartureAirport.Text = airportDictionary[selectedFlightInfo.Flight.SourceAirportID];
-                    //DestinationAirport.Text = airportDictionary[selectedFlightInfo.Flight.DestinationAirportID];
-                    //DepartureTime.Text = selectedFlightInfo.Flight.FlightDay.ToString("dd-MM-yyyy HH:mm");
+                    DepartureAirport.Text = airportDictionary[selectedFlightInfo.Flight.SourceAirportID];
+                    DestinationAirport.Text = airportDictionary[selectedFlightInfo.Flight.DestinationAirportID];
+                    DepartureTime.Text = selectedFlightInfo.Flight.FlightDay.ToString("dd-MM-yyyy HH:mm");
                     Duration.Text = selectedFlightInfo.Flight.FlightTime.ToString(@"hh\:mm");
                     TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
                     TicketPrice.Text = selectedFlightInfo.Flight.Price.ToString();
+                    maxNumTicket = selectedFlightInfo.emptySeats;
+                    TicketQuantity.Text = maxNumTicket.ToString();
+                    TotalPrice.Text = (numTicket * selectedFlightInfo.Flight.Price).ToString();
+                    var cus = new ObservableCollection<CustomerDTO>();
+                    for (int i = 0; i < maxNumTicket; i++)
+                    {
+                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "" });
+                    }
+                    ViewCustomerData = cus;
+                    customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
+                    MyListView.ItemsSource = customerView;
                 }
             }
+        }
+
+        private void SearchFlight_Click(object sender, RoutedEventArgs e)
+        {
+            /*MessageBox.Show(SourceAirport_popup.SelectedValue.ToString() + " "
+                            + DestinationAirport_popup.SelectedValue.ToString() + " "
+                            + DepartureDay_popup.SelectedDate.Value.Date.ToString() + " "
+                            + TicketClass_popup.SelectedValue.ToString() + " "
+                            + DepartureDay_popup.SelectedDate.Value.Date.AddDays(1).AddTicks(-1).ToString() + " "
+                            + "\n Chỉ dành cho debug");*/
+
+            List<FlightInforDTO> flights = new BLL.SearchProcessor().GetFlightInfoDTO(SourceAirport_popup.SelectedValue.ToString(),
+                                                               DestinationAirport_popup.SelectedValue.ToString(),
+                                                               DepartureDay_popup.SelectedDate.Value.Date,
+                                                               DepartureDay_popup.SelectedDate.Value.Date.AddDays(1).AddTicks(-1),
+                                                               TicketClass_popup.SelectedValue.ToString(),
+                                                               int.TryParse(NumTicket.Text, out int numTicket) ? numTicket : 0);
+            dataGridFlights.ItemsSource = new ObservableCollection<FlightInforDTO>(flights);
+
+            /*MessageBox.Show(flights.list.Count + flights.list[0].Flight.FlightID + flights.state + "\n Chỉ dùng cho debug", "Debug");*/
+        }
+
+        private void DepartureDay_popup_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
         }
 
         private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

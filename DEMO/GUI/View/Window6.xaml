@@ -268,7 +268,7 @@
                            FontSize="20"
                            Opacity="0.66"/>
 
-                <TextBlock x:Name="TicketPrice" Text="999999999"
+                <TextBlock x:Name="TicketPrice" Text="0"
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
                            Width="170"
@@ -373,7 +373,7 @@
 
 
             <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <TextBlock Text="Quantity:"
+                <TextBlock Text="Ticket Quantity:"
                            Margin="10 0 0 0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
@@ -387,7 +387,7 @@
                            FontSize="20"
                            Opacity="0.66"/>
 
-                <TextBlock Text="Total:"
+                <TextBlock Text="Total Price:"
                            Margin="10 0 0 0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
@@ -430,6 +430,7 @@
                     <Button Content="Search" Grid.Row="0"
                             HorizontalAlignment="Left" Margin="370 15 0 0"  VerticalAlignment="Top"
                             FontSize="18"
+                            Click="SearchFlight_Click"
                             Width="120" Height="40"/>
 
                     <TextBox  x:Name="NumTicket" Grid.Row="1"
@@ -469,6 +470,7 @@
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <DatePicker x:Name="DepartureDay_popup"
+                                    SelectedDateChanged="DepartureDay_popup_SelectedDateChanged"
                                     materialDesign:HintAssist.HelperText=""
                                     materialDesign:HintAssist.Hint="Pick Date"
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
