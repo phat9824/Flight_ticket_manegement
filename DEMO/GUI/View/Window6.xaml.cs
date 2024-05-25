@@ -98,6 +98,7 @@ namespace GUI.View
                 ViewCustomerData.Remove(itemToRemove);
                 numTicket = ViewCustomerData.Count;
                 TicketQuantity.Text = numTicket.ToString();
+                TotalPrice.Text = (numTicket * ticketPrice).ToString();
             }
         }
 
@@ -116,14 +117,16 @@ namespace GUI.View
                     DepartureTime.Text = selectedFlightInfo.Flight.FlightDay.ToString("dd-MM-yyyy HH:mm");
                     Duration.Text = selectedFlightInfo.Flight.FlightTime.ToString(@"hh\:mm");
                     TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
-                    TicketPrice.Text = selectedFlightInfo.Flight.Price.ToString();
+                    ticketPrice = Convert.ToInt64(selectedFlightInfo.Flight.Price);
+                    TicketPrice.Text = ticketPrice.ToString();
                     maxNumTicket = selectedFlightInfo.emptySeats;
+                    numTicket = maxNumTicket;
                     TicketQuantity.Text = maxNumTicket.ToString();
-                    TotalPrice.Text = (numTicket * selectedFlightInfo.Flight.Price).ToString();
+                    TotalPrice.Text = (numTicket * ticketPrice).ToString();
                     var cus = new ObservableCollection<CustomerDTO>();
                     for (int i = 0; i < maxNumTicket; i++)
                     {
-                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "" });
+                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "", Birth = new DateTime(2000, 1, 1) });
                     }
                     ViewCustomerData = cus;
                     customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
