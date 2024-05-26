@@ -10,7 +10,7 @@ namespace DTO
     {
         private string ticketClassID;
         private string ticketClassName;
-
+        private decimal baseMultiplier;
         public string TicketClassID
         {
             get => ticketClassID;
@@ -21,6 +21,12 @@ namespace DTO
         {
             get => ticketClassName;
             set => ticketClassName = value;
+        }
+
+        public decimal BaseMultiplier
+        {
+            get => baseMultiplier;
+            set => baseMultiplier = value;
         }
     }
 }

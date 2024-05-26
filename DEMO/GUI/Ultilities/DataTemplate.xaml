@@ -19,7 +19,7 @@
         <view:FlightScheduleWindow/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:Window5VM}">
+    <DataTemplate DataType="{x:Type vm:ReportVM}">
         <view:Window5/>
     </DataTemplate>
 
@@ -37,6 +37,10 @@
 
     <DataTemplate DataType="{x:Type vm:Window9VM}">
         <view:Window9/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Window10VM}">
+        <view:Window10/>
     </DataTemplate>
 
 </ResourceDictionary>

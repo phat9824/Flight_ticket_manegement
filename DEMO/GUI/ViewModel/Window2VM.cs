@@ -7,6 +7,7 @@ using GUI.Model;
 using DTO;
 using BLL;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace GUI.ViewModel
 {
@@ -36,7 +37,7 @@ namespace GUI.ViewModel
         public string SoGheTrong { get; set; }
         public string SoGheDat { get; set; }
 
-        public static Flight ConvertToFlight(FlightInformationSearchDTO flightInfo, Dictionary<string, string> airportDictionary)
+        public static Flight ConvertToFlight(FlightInforDTO flightInfo, Dictionary<string, string> airportDictionary)
         {
             Flight flight = new Flight
             {
@@ -51,7 +52,7 @@ namespace GUI.ViewModel
             return flight;
         }
 
-        public static ObservableCollection<Flight> ConvertListToObservableCollection(List<FlightInformationSearchDTO> flightInfos, Dictionary<string, string> airportDictionary)
+        public static ObservableCollection<Flight> ConvertListToObservableCollection(List<FlightInforDTO> flightInfos, Dictionary<string, string> airportDictionary)
         {
             ObservableCollection<Flight> flights = new ObservableCollection<Flight>();
             foreach (var flightInfo in flightInfos)
@@ -60,5 +61,11 @@ namespace GUI.ViewModel
             }
             return flights;
         }
+    }
+
+    public class SortPropertyPair
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }

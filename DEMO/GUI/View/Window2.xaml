@@ -556,8 +556,15 @@
             </Setter>
         </Style>
 
+        <Storyboard x:Key="RotateArrow">
+            <DoubleAnimation Storyboard.TargetProperty="Angle" To="0" Duration="0:0:0.3"/>
+        </Storyboard>
+        <Storyboard x:Key="ResetArrow">
+            <DoubleAnimation Storyboard.TargetProperty="Angle" To="-90" Duration="0:0:0.3"/>
+        </Storyboard>
+
     </UserControl.Resources>
-    <Border>
+    <Border  Background="#f8f7fc" CornerRadius="0 20 20 0">
         <Grid>
             <Grid Background="#f8f7fc" Margin="17,20,10,3">
                 <Grid.RowDefinitions>
@@ -620,14 +627,25 @@
                             Width="140"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Pick Date"
-                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="440,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
-                <ComboBox materialDesign:HintAssist.HelperText=""
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="410,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
+                <ComboBox x:Name = "SortProperty"
+                          materialDesign:HintAssist.HelperText=""
                           materialDesign:HintAssist.Hint="Sort By"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49">
-                    <ComboBoxItem Content="Item 1" />
-                    <ComboBoxItem Content="Item 2" />
-                    <ComboBoxItem Content="Item 3" />
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="535,20,8,0" Grid.Row="5"
+                          VerticalAlignment="Top" Height="49" Width="140"
+                          SelectionChanged="ComboBox_SelectionChanged"
+                          DisplayMemberPath="property"
+                          SelectedValuePath="map_peoperty">
                 </ComboBox>
+                
+                <!--
+                <Button Grid.Row="5"
+                        Margin="700 20 8 0" VerticalAlignment="Top"
+                        Width="50" Height="50"
+                        Click="Arrow_Click" Style="{StaticResource MaterialDesignFlatButton}">
+                    <materialDesign:PackIcon Kind="ArrowDownward" x:Name="arrowIcon"/>
+                </Button>
+                -->
 
                 <!--DataGrid-->
                 <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">

@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="GUI.View.Window10"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUI.View"
+             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:GUI.ViewModel"
+             d:DesignHeight="720" d:DesignWidth="805"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              Style="{StaticResource Page_Style}">
+    <UserControl.DataContext>
+        <vm:Window10VM/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <Style x:Key="textHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#acb0af"/>
+        </Style>
+
+        <Style x:Key="textBox" TargetType="Control">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#878787"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="mainbutton" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="Background" Value="#FFB9A1FA"/>
+            <Setter Property="Foreground" Value="#FDFEFE"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="#FFC1AEF6" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFB049EE"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#FF9B06F4"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Border Background="#f8f7fc" CornerRadius="0 20 20 0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Height="70">
+                <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="10 20 0 0"
+              HorizontalAlignment="Left" Foreground="#121518"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Height="120">
+                <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,12,0,74" FontSize="18"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,21" Width="280" >
+                    <Grid Margin="7 9">
+
+                        <TextBlock x:Name="textN_Airport"  MouseDown="textN_Airport_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                        <TextBox  x:Name="txtN_Airport" TextChanged="txtN_Airport_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
+
+                <Label Content="Minimum flight time" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker"
+                           Is24Hours="True"
+                          SelectedTimeChanged="PresetTimePicker_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+            </Grid>
+
+            <Grid Grid.Row="2" Height="110">
+
+                <Label Content="Minimum downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker1"
+                                           Is24Hours="True"
+                                           SelectedTimeChanged="PresetTimePicker1_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+
+                <Label Content="Maximun downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,503,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker2"
+                                           Is24Hours="True"
+                                        SelectedTimeChanged="PresetTimePicker2_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280" />
+            </Grid>
+
+            <Grid Grid.Row="3" Height="110">
+
+                <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,7,0,71" FontSize="18" Height="34"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,8" Width="280" Height="55" >
+                    <Grid Margin="7 9">
+
+                        <TextBlock x:Name="textN_Ticket_class"  MouseDown="textN_Ticket_class_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                        <TextBox  x:Name="txtN_Ticket_class" TextChanged="txtN_Ticket_class_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="4" Height="110">
+
+                <Label Content="Latest time to book tickets" HorizontalAlignment="Left"  Width="231" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,0,64" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker3"
+                           Is24Hours="True"
+                        SelectedTimeChanged="PresetTimePicker3_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280" />
+
+                <Label Content="Minimum downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
+
+                <materialDesign:TimePicker x:Name="PresetTimePicker4"
+                           Is24Hours="True"
+                           SelectedTimeChanged="PresetTimePicker4_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+
+            </Grid>
+
+            <Grid Grid.Row="5" Height="110">
+
+                <Button Content="Submit"
+                        Style="{StaticResource mainbutton}"
+                        IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0"  Height="57" VerticalAlignment="Top" Margin="292,53,313,0" />
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

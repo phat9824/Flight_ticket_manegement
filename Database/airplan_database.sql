@@ -1,4 +1,4 @@
-﻿CREATE DATABASE airplan_database
+﻿﻿CREATE DATABASE airplan_database
 USE airplan_database
 
 

@@ -18,6 +18,8 @@ namespace GUI.Model
         public string Window8 { get; set; }
         public string Window9 { get; set; }
 
+        public string Window10 { get; set; }
+
 
 
     }

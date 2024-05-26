@@ -17,10 +17,15 @@ namespace BLL
             FlightAccess flight = new FlightAccess();
             return flight.AutoID();
         }
-        public void Add_Flights(FlightDTO flight)
+        /*public void Add_Flights(FlightDTO flight)
         {
             FlightAccess flightAccess = new FlightAccess();
             flightAccess.Add_Flights(flight);
+        }*/
+
+        public string Add_Flights(FlightDTO flight)
+        {
+            return new DAL.FlightAccess().Add_Flights(flight);
         }
     }
 }

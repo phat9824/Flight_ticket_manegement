@@ -113,10 +113,18 @@
                     </Menu:Btn>
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding Window5Command}">
+                              Command="{Binding ReportWindowCommand}">
                         <Grid>
 
-                            <TextBlock Text="Window5" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Report" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+                    </Menu:Btn>
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                             Command="{Binding Window10Command}">
+                        <Grid>
+
+                            <TextBlock Text="Window10" Style="{StaticResource Text_Style}"/>
                         </Grid>
                     </Menu:Btn>
                 </StackPanel>

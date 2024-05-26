@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GUI.ViewModel;
 using System.Windows.Media.Media3D;
+using MaterialDesignThemes.Wpf;
 
 namespace GUI.View
 {
@@ -27,10 +28,19 @@ namespace GUI.View
     public partial class Window2 : UserControl
     {
         ObservableCollection<Flight> flights = new ObservableCollection<Flight>();
-        private List<string> suggestions = new List<string> { "Gợi ý 1", "Gợi ý 2", "Gợi ý 3" };
-        
-        public List<AirportDTO> airports { get; set; }
+        private List<SortPropertyPair> SortProperties = new List<SortPropertyPair>
+            {
+                new SortPropertyPair { Key = "Seq", Value = "STT"},
+                new SortPropertyPair { Key= "Departure airport", Value = "SanBayDi"},
+                new SortPropertyPair { Key = "Destination airport", Value = "SanBayDen"},
+                new SortPropertyPair { Key = "Departure time", Value = "KhoiHanh"},
+                new SortPropertyPair { Key = "Duration", Value = "ThoiGian"},
+                new SortPropertyPair { Key = "Empty seat", Value = "SoGheDat"},
+                new SortPropertyPair { Key = "Booked seat", Value = "SoGheTrong"}
+            };
         private Dictionary<string, string> airportDictionary = new Dictionary<string, string>();
+
+        public List<AirportDTO> airports { get; set; }
         public Window2()
         {
             InitializeComponent();
@@ -55,6 +65,10 @@ namespace GUI.View
             
             SourceAirport.ItemsSource = airports;
             DestinationAirport.ItemsSource = airports;
+
+            SortProperty.ItemsSource = SortProperties;
+            SortProperty.DisplayMemberPath = "Key";
+            SortProperty.SelectedValuePath = "Value";
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
@@ -87,15 +101,30 @@ namespace GUI.View
             DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);
             DateTime endDate = EndDay.SelectedDate.HasValue ? EndDay.SelectedDate.Value.Date : new DateTime(9999, 12, 31, 23, 59, 59);
 
-            SearchProcessor search = new SearchProcessor();
-            List<FlightInformationSearchDTO> flightInformationSearches = new List<FlightInformationSearchDTO>();
-            flightInformationSearches = search.GetInformationSearch(a, b, startDate, endDate);
-            FlightsDataGrid.ItemsSource = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
+            List<FlightInforDTO> flightInformationSearches = new List<FlightInforDTO>();
+            flightInformationSearches = new BLL.SearchProcessor().GetFlightInfoDTO(a, b, startDate, endDate);
+            flights = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
+            
+            //Nếu có yêu cầu sort
+            if (SortProperty.SelectedIndex != -1)
+            {
+                string sortOrder = "ASC";
+                flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
+            }
+
+            FlightsDataGrid.ItemsSource = flights;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Edit f = new Edit();
             f.Show();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string sortOrder = "ASC";
+            flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
+            FlightsDataGrid.ItemsSource = flights;
         }
     }
 }
