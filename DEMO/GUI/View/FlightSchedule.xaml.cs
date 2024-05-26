@@ -129,15 +129,11 @@ namespace GUI.View
                 MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
                 return;
             }
-<<<<<<< HEAD
-=======
-            else if (FlightDay.SelectedDate == DateTime.Today && FlightTime.SelectedTime < DateTime.Now)
+            else if (FlightDay.SelectedDate == DateTime.Today && DepartureTime.SelectedTime < DateTime.Now)
             {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Error");
                 return;
             }
-
->>>>>>> c3dfabdb0e38f688e37731788f7dbc659bbf617d
             ScheduleData data = GetScheduleData();
             FlightDTO flightDTO = data.InitializeFlightDTO();
             List<TicketClassFlightDTO> listTicketClassFlightDTO = data.InitializeListTicketClassFlightDTO();
