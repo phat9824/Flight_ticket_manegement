@@ -45,6 +45,7 @@
     <Compile Include="Airport_BLL.cs" />
     <Compile Include="DeleteDataProcessor.cs" />
     <Compile Include="Flight_BLL.cs" />
+    <Compile Include="InsertCustomer.cs" />
     <Compile Include="InsertProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchProcessor.cs" />
