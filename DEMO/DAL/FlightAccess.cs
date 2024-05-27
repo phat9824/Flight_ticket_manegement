@@ -104,15 +104,13 @@ namespace DAL
                 con.Open();
                 string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
                                 FROM FLIGHT
-                                WHERE (@sourceAirportID IS NULL OR SourceAirportID = @sourceAirportID)
-                                AND (@destinationAirportID IS NULL OR DestinationAirportID = @destinationAirportID)
-                                AND FlightDay BETWEEN @startDate AND @endDate";
-
+                                WHERE FlightDay BETWEEN @startDate AND @endDate";
+           
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     // Thiết lập các tham số
-                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
+                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
                     command.Parameters.AddWithValue("@startDate", startDate);
                     command.Parameters.AddWithValue("@endDate", endDate);
 
@@ -152,30 +150,30 @@ namespace DAL
             try
             {
                 con.Open();
-
-                string query = @"
-                                SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
+                string query = @"  SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
                                 FROM FLIGHT f
                                 INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
                                 LEFT JOIN (
                                     SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets
                                     FROM BOOKING_TICKET
                                     GROUP BY FlightID, TicketClassID
-                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID
-                                WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
+                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID"; ;
+                if (sourceAirportID != "" || destinationAirportID != "" || ticketClass != null)
+                {
+                    query += @" WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
                                 AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
                                 AND f.FlightDay BETWEEN @startDate AND @endDate
                                 AND (@ticketClass IS NULL OR tf.TicketClassID = @ticketClass)
                                 AND (tf.Quantity - ISNULL(bt.BookedTickets, 0)) >= @numTicket";
-
+                }
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     // Thiết lập các tham số
-                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
+                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
                     command.Parameters.AddWithValue("@startDate", startDate);
                     command.Parameters.AddWithValue("@endDate", endDate);
-                    command.Parameters.AddWithValue("@ticketClass", ticketClass ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@ticketClass", ticketClass == "" ? (object)DBNull.Value : ticketClass);
                     command.Parameters.AddWithValue("@numTicket", numTicket);
 
                     // Đọc kết quả truy vấn
