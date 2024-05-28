@@ -119,7 +119,8 @@ namespace GUI.View
                     TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
                     ticketPrice = Convert.ToInt64(selectedFlightInfo.Flight.Price);
                     TicketPrice.Text = ticketPrice.ToString();
-                    maxNumTicket = selectedFlightInfo.emptySeats;
+                    //maxNumTicket = selectedFlightInfo.emptySeats;
+                    maxNumTicket = Convert.ToInt32(NumTicket.Text.ToString());
                     numTicket = maxNumTicket;
                     TicketQuantity.Text = maxNumTicket.ToString();
                     TotalPrice.Text = (numTicket * ticketPrice).ToString();
