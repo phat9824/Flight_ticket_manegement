@@ -734,29 +734,7 @@
                 <!--Pagination Section-->
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
                         CornerRadius="5" Background="White">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}"/>
-                        </Button>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
-
-                        <Button Style="{StaticResource pagingButton}" Content="1"/>
-                        <Button Style="{StaticResource pagingButton}" Content="2" Background="#FF1DA2ED" Foreground="#ffffff"/>
-                        <Button Style="{StaticResource pagingButton}" Content="3"/>
-
-                        <TextBlock Text="..." Foreground="#6c7682" VerticalAlignment="Center" FontSize="15" Margin="10 0"/>
-
-                        <Button Style="{StaticResource pagingButton}" Content="7"/>
-                        <Button Style="{StaticResource pagingButton}" Content="8"/>
-                        <Button Style="{StaticResource pagingButton}" Content="9"/>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
-                        <Button Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}"/>
-                        </Button>
-
-                    </StackPanel>
+                  
                 </Border>
                 <Button Content="Search"
                         Click="Search_Click"
