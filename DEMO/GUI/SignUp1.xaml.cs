@@ -177,7 +177,8 @@ namespace GUI
                 User.PermissonID = 2;
             }
             string kq = "";
-            accBLL.SignUp(User, ref kq);
+            //accBLL.SignUp(User, ref kq);
+            new BLL.InsertProcessor().SignUp(User, ref kq);
 
             if (kq == "")
             {

@@ -105,7 +105,10 @@ namespace DAL
                 con.Open();
                 string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
                                 FROM FLIGHT
-                                WHERE FlightDay BETWEEN @startDate AND @endDate";
+                                WHERE (FlightDay BETWEEN @startDate AND @endDate)
+                                AND (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
+                                AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
+                                ";
            
                 using (SqlCommand command = new SqlCommand(query, con))
                 {

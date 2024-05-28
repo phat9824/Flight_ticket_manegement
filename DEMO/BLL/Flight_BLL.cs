@@ -14,13 +14,7 @@ namespace BLL
     {
         public string Get_ID()
         {
-            /*FlightAccess flight = new FlightAccess();
-            return flight.AutoID();*/
             return new DAL.FlightAccess().AutoID();
-        }
-        public string Add_Flights(FlightDTO flight)
-        {
-            return new DAL.FlightAccess().Add_Flights(flight);
         }
     }
 }
