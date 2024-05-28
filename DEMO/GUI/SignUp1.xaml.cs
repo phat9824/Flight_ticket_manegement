@@ -164,7 +164,7 @@ namespace GUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             User.UserName = txtFName.Text.Trim() + " " + txtLName.Text.Trim();
-            User.Email = txtMailAdd.Text.Trim();
+            User.Email = txtMailAdd.Text.Trim() + "@gmail.com";
             User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
             User.PasswordUser = txtRePassword.Password.Trim();
             User.Phone = txtPhone.Text.Trim();

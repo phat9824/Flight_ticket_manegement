@@ -4,12 +4,9 @@ USE airplanedb
 
 CREATE TABLE PERMISSION
 (
-	PermissionID VARCHAR PRIMARY KEY ,
+	PermissionID INT PRIMARY KEY ,
 	PermissionName VARCHAR(40)
 )
-
-INSERT INTO PERMISSION VALUES ('ADM1', 'Admin')
-INSERT INTO PERMISSION VALUES ('STF2', 'Staff')
 
 CREATE TABLE ACCOUNT
 (
@@ -21,10 +18,6 @@ CREATE TABLE ACCOUNT
 	PasswordUser VARCHAR(60) NOT NULL,
 	PermissonID INT FOREIGN KEY REFERENCES PERMISSION(PermissionID)
 )
-
-insert into ACCOUNT values ('0','admin','1','abc@gmail.com','2004/09/08','1','1')
-insert into ACCOUNT values ('1','s1','1','s1@gmail.com','2004/02/01','2','2')
-insert into ACCOUNT values ('2','s2','1','s2@gmail.com','2004/02/04','1','2')
 
 CREATE TABLE AIRPORT
 (
@@ -120,7 +113,19 @@ CREATE TABLE PARAMETER
 
 <<<<<<< HEAD
 
+delete from FLIGHT
+select *from FLIGHT
+select *from TICKET_CLASS
+select *from TICKETCLASS_FLIGHT
 
+
+SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price, tf.Quantity - ISNULL(bt.BookedTickets, 0)
+FROM FLIGHT f
+INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
+LEFT JOIN (                                   
+SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets
+FROM BOOKING_TICKET
+GROUP BY FlightID, TicketClassID) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID
 
 ----------TEST CASE--------
 --PERMISSION
@@ -137,6 +142,13 @@ INSERT INTO ACCOUNT VALUES ('2', 'admin1', '0123456791', 'admin1@example.com', '
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài');
 INSERT INTO AIRPORT VALUES ('001', N'Tân Sơn Nhất');
 INSERT INTO AIRPORT VALUES ('002', N'Đà Nẵng');
+insert into AIRPORT values ('003',N'Phú Quốc')
+insert into AIRPORT values ('004',N'Cam Ranh')
+insert into AIRPORT values ('005',N'Điện Biên Phủ')
+INSERT INTO AIRPORT VALUES ('006', N'Cần Thơ');
+INSERT INTO AIRPORT VALUES ('007', N'Vinh');
+INSERT INTO AIRPORT VALUES ('008', N'Hải Phòng');
+INSERT INTO AIRPORT VALUES ('009', N'Phù Cát');
 
 --TICKET_CLASS
 INSERT INTO TICKET_CLASS VALUES ('001', N'Economy', 1.0);
@@ -173,26 +185,14 @@ INSERT INTO PARAMETER VALUES (10, '08:00:00', 2, 30, 120, 3, '06:00:00', '12:00:
 INSERT INTO PARAMETER VALUES (15, '09:00:00', 3, 20, 100, 2, '05:00:00', '11:00:00');
 INSERT INTO PARAMETER VALUES (20, '10:00:00', 4, 10, 90, 1, '04:00:00', '10:00:00');
 
-
 --LASTTESTCASE
 =======
 INSERT INTO PARAMETER (AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime)
 VALUES (10, '08:00:00', 2, 30, 120, 2, '07:00:00', '06:00:00')
 
 >>>>>>> f401a6f29362a4012d1a335230a486fb6a56b53c
-insert into AIRPORT values ('000',N'Nội Bài')
-insert into AIRPORT values ('001',N'Tân Sơn Nhất')
-insert into AIRPORT values ('002',N'Đà Nẵng')
-insert into AIRPORT values ('003',N'Phú Quốc')
-insert into AIRPORT values ('004',N'Cam Ranh')
-insert into AIRPORT values ('005',N'Điện Biên Phủ')
-INSERT INTO AIRPORT VALUES ('006', N'Cần Thơ');
-INSERT INTO AIRPORT VALUES ('007', N'Vinh');
-INSERT INTO AIRPORT VALUES ('008', N'Hải Phòng');
-INSERT INTO AIRPORT VALUES ('009', N'Phù Cát');
 
-INSERT INTO TICKET_CLASS VALUES ('006', N'Economy', 1.0);
-INSERT INTO TICKET_CLASS VALUES ('007', N'Business', 1.5);
+
 
 INSERT INTO CUSTOMER VALUES ('12345678901', 'Nguyen Van A', '0123456789', 'nva@example.com', '1990-01-01');
 INSERT INTO CUSTOMER VALUES ('12345678902', 'Tran Thi B', '0123456790', 'ttb@example.com', '1992-02-02');

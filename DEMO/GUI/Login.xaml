@@ -93,7 +93,7 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Width" Value="200"/>
             <Setter Property="Margin" Value="0 20 0 0"/>
-            <Setter Property="Background" Value="#FFB9A1FA"/>
+            <Setter Property="Background" Value="#FFA3D2F3"/>
             <Setter Property="Foreground" Value="#FDFEFE"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
@@ -107,11 +107,11 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FFB049EE"/>
+                    <Setter Property="Background" Value="#FFA3D2F3"/>
                     <Setter Property="Foreground" Value="White"/>
                 </Trigger>
                 <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter Property="Background" Value="#FF9B06F4"/>
+                    <Setter Property="Background" Value="#FF3BAAF9"/>
                     <Setter Property="Foreground" Value="White"/>
                 </Trigger>
             </Style.Triggers>
