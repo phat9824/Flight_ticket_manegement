@@ -30,7 +30,7 @@ namespace BLL
             return info;
 
         }
-        public void SignUp(ACCOUNT User, ref int kq)
+        public void SignUp(ACCOUNT User, ref string kq)
         {
             AccountAccess accountAccess = new AccountAccess();
             kq = accountAccess.SignUp(User);

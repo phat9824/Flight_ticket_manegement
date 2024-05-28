@@ -115,6 +115,7 @@ CREATE TABLE PARAMETER
 
 delete from FLIGHT
 select *from FLIGHT
+select *from ACCOUNT
 select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
 

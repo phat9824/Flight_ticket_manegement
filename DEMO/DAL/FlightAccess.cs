@@ -44,7 +44,7 @@ namespace DAL
 
                         SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar)
                         {
-                            Value = new FlightAccess().AutoID()
+                            Value = AutoID()
                         };
                         SqlParameter parSouID = new SqlParameter("@SouID", SqlDbType.VarChar)
                         {
@@ -86,6 +86,7 @@ namespace DAL
                     transaction.Commit();
                     return string.Empty; // Chuỗi rỗng xem như thành công
                 }
+
                 catch (Exception ex)
                 {
                     transaction.Rollback();
