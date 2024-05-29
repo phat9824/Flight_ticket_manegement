@@ -3,36 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Security.Principal;
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
+using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace DAL
 {
-    public class AccountAccess : DatabaseAccess
+    public class CustomerAsccess : DatabaseAccess
     {
-
-        public string CheckLogic(ACCOUNT acc)
-        {
-            string info = CheckLogicDTO(acc);
-            return info;
-        }
-        private string AutoID()
+        string state = string.Empty; // Chuỗi rỗng xem như thành công
+        public string AutoID()
         {
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("select count(*) from ACCOUNT", con);
+            SqlCommand cmd = new SqlCommand("select count(*) from CUSTOMER", con);
             int i = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
-            return (i + 1).ToString("000");
+            i++;
+            return i.ToString("CS000");
         }
-        public string SignUp(ACCOUNT User)
+        public string Add_Customer(CustomerDTO customer)
         {
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
-
             using (SqlTransaction transaction = con.BeginTransaction())
             {
                 try
@@ -40,53 +36,48 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "insert into ACCOUNT values(@ID, @Name, @SDT, @Email, @Birth, @Pass, @Permission)";
+                        cmd.CommandText = "INSERT INTO CUSTOMER (ID, CustomerName, Phone, Email, Birth) VALUES (@ID, @Name, @Phone, @Mail, @Birth)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
+
                         SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20)
                         {
-                            Value = AutoID()
+                            Value = new CustomerAsccess().AutoID()
                         };
-                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.NVarChar, 40)
+                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.VarChar, 40)
                         {
-                            Value = User.UserName
+                            Value = customer.CustomerName
                         };
-                        SqlParameter parSDT = new SqlParameter("@SDT", SqlDbType.VarChar, 20)
+                        SqlParameter parPhone = new SqlParameter("@Phone", SqlDbType.VarChar, 20)
                         {
-                            Value = User.Phone
+                            Value = customer.Phone
                         };
-                        SqlParameter parEmail = new SqlParameter("@Email", SqlDbType.VarChar, 60)
+                        SqlParameter parMail = new SqlParameter("@Mail", SqlDbType.VarChar, 60)
                         {
-                            Value = User.Email
+                            Value = customer.Email
                         };
                         SqlParameter parBirth = new SqlParameter("@Birth", SqlDbType.SmallDateTime)
                         {
-                            Value = User.Birth
+                            Value = customer.Birth
                         };
-                        SqlParameter parPass = new SqlParameter("@Pass", SqlDbType.VarChar, 60)
-                        {
-                            Value = User.PasswordUser
-                        };
-                        SqlParameter parPer = new SqlParameter("@Permission", SqlDbType.Int)
-                        {
-                            Value = User.PermissonID
-                        };
+
                         cmd.Parameters.Add(parID);
                         cmd.Parameters.Add(parName);
-                        cmd.Parameters.Add(parSDT);
-                        cmd.Parameters.Add(parEmail);
+                        cmd.Parameters.Add(parPhone);
+                        cmd.Parameters.Add(parMail);
                         cmd.Parameters.Add(parBirth);
-                        cmd.Parameters.Add(parPass);
-                        cmd.Parameters.Add(parPer);
+
                         int rowsAffected = cmd.ExecuteNonQuery();
+
                         if (rowsAffected == 0)
                         {
                             transaction.Rollback();
                             return "No rows were inserted.";
                         }
-                        transaction.Commit();
-                        return string.Empty;
                     }
+
+                    transaction.Commit();
+                    return string.Empty; // Chuỗi rỗng xem như thành công
                 }
                 catch (Exception ex)
                 {

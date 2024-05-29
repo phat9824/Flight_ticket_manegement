@@ -111,30 +111,34 @@ namespace GUI.View
         {
             if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
             {
-                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
+                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
                 return;
             }
             else if (FlightDay.SelectedDate == null)
             {
-                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
+                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
                 return;
             }
             else if (!FlightTime.SelectedTime.HasValue)
             {
-                MessageBox.Show("Vui lòng nhập thời gian khời hành!", "Error");
+                MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Error");
                 return;
             }
             if (FlightDay.SelectedDate < DateTime.Today)
             {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
                 return;
             }
-            else if (FlightDay.SelectedDate == DateTime.Today && FlightTime.SelectedTime < DateTime.Now)
+            else if (FlightDay.SelectedDate == DateTime.Today && DepartureTime.SelectedTime < DateTime.Now)
             {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy h:m:s tt"), "Error");
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Error");
                 return;
             }
-
             ScheduleData data = GetScheduleData();
             FlightDTO flightDTO = data.InitializeFlightDTO();
             List<TicketClassFlightDTO> listTicketClassFlightDTO = data.InitializeListTicketClassFlightDTO();
@@ -186,7 +190,7 @@ namespace GUI.View
             ScheduleData data = new ScheduleData();
             data.sourceAirportID = SourceAirportID.Text.Trim();
             data.destinationAirportID = DestinationAirportID.Text.Trim();
-            data.flightID = fl_bll.AutoID();
+            data.flightID = fl_bll.Get_ID();
             data.price = decimal.TryParse(TicketPrice.Text.Trim(), out decimal price) ? price : -1;
             //data.flightDay = FlightDay.SelectedDate ?? DateTime.MinValue;
             data.flightDay = combinedDayTime();

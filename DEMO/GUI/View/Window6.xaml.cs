@@ -115,11 +115,20 @@ namespace GUI.View
                     DestinationAirport.Text = airportDictionary[selectedFlightInfo.Flight.DestinationAirportID];
                     DepartureTime.Text = selectedFlightInfo.Flight.FlightDay.ToString("dd-MM-yyyy HH:mm");
                     Duration.Text = selectedFlightInfo.Flight.FlightTime.ToString(@"hh\:mm");
-                    TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
+                    //TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
+                    if (TicketClass_popup.SelectedValue != null)
+                    {
+                        TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
+                    }
+                    else
+                    {
+                        TicketClass.Text = "All";
+                    }
                     TicketPrice.Text = selectedFlightInfo.Flight.Price.ToString();
                     maxNumTicket = selectedFlightInfo.emptySeats;
                     TicketQuantity.Text = maxNumTicket.ToString();
                     TotalPrice.Text = (numTicket * selectedFlightInfo.Flight.Price).ToString();
+
                     var cus = new ObservableCollection<CustomerDTO>();
                     for (int i = 0; i < maxNumTicket; i++)
                     {
@@ -140,12 +149,13 @@ namespace GUI.View
                             + TicketClass_popup.SelectedValue.ToString() + " "
                             + DepartureDay_popup.SelectedDate.Value.Date.AddDays(1).AddTicks(-1).ToString() + " "
                             + "\n Chỉ dành cho debug");*/
+            string SourceAirport = (SourceAirport_popup.SelectedValue == null ? "" : SourceAirport_popup.SelectedValue.ToString());
+            string DestinationAirport = (DestinationAirport_popup.SelectedValue == null ? "" : DestinationAirport_popup.SelectedValue.ToString());
+            string TicketClass = (TicketClass_popup.SelectedValue == null ? "" : TicketClass_popup.SelectedValue.ToString());
+            DateTime DepartureDay1 = (DepartureDay_popup.SelectedDate.HasValue ? DepartureDay_popup.SelectedDate.Value.Date : new DateTime(2024,1,1));
+            DateTime DepartureDay2 = (DepartureDay_popup.SelectedDate.HasValue ? DepartureDay_popup.SelectedDate.Value.Date.AddDays(1).AddTicks(-1) : new DateTime(3000,1,1));
 
-            List<FlightInforDTO> flights = new BLL.SearchProcessor().GetFlightInfoDTO(SourceAirport_popup.SelectedValue.ToString(),
-                                                               DestinationAirport_popup.SelectedValue.ToString(),
-                                                               DepartureDay_popup.SelectedDate.Value.Date,
-                                                               DepartureDay_popup.SelectedDate.Value.Date.AddDays(1).AddTicks(-1),
-                                                               TicketClass_popup.SelectedValue.ToString(),
+            List<FlightInforDTO> flights = new BLL.SearchProcessor().GetFlightInfoDTO(SourceAirport, DestinationAirport, DepartureDay1, DepartureDay2, TicketClass,
                                                                int.TryParse(NumTicket.Text, out int numTicket) ? numTicket : 0);
             dataGridFlights.ItemsSource = new ObservableCollection<FlightInforDTO>(flights);
 
@@ -183,8 +193,8 @@ namespace GUI.View
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-        }
 
+        }
         private void FindFlight_Click(object sender, RoutedEventArgs e)
         {
             SearchFlight_Popup.IsOpen = true;
@@ -202,6 +212,10 @@ namespace GUI.View
 
         private void ClosePopup_Click(object sender, RoutedEventArgs e)
         {
+            SourceAirport_popup.SelectedIndex = -1;
+            DestinationAirport_popup.SelectedIndex = -1;
+            DepartureDay_popup.SelectedDate = null;
+            TicketClass_popup.SelectedIndex = -1;
             SearchFlight_Popup.IsOpen = false;
         }
     }

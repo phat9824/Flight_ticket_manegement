@@ -12,8 +12,9 @@ namespace BLL
     {
         public List<TicketClassDTO> L_TicketClass()
         {
-            Ticket_classAccess ticket_class = new Ticket_classAccess();
-            return ticket_class.L_TicketClass();
+            /*Ticket_classAccess ticket_class = new Ticket_classAccess();
+            return ticket_class.L_TicketClass();*/
+            return new DAL.Ticket_classAccess().L_TicketClass();
         }
     }
 }

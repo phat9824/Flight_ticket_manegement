@@ -34,7 +34,7 @@ CREATE TABLE AIRPORT
 CREATE TABLE TICKET_CLASS
 (
 	TicketClassID VARCHAR(20) PRIMARY KEY,
-	TicketClassName VARCHAR(40)
+	TicketClassName NVARCHAR(40)
 )
 
 CREATE TABLE FLIGHT
@@ -46,11 +46,10 @@ CREATE TABLE FLIGHT
 	FlightTime TIME,
 	Price MONEY
 )
-
 CREATE TABLE CUSTOMER
 (
 	ID VARCHAR(20) PRIMARY KEY,
-	CustomerName VARCHAR(40),
+	CustomerName NVARCHAR(40),
 	Phone INT,
 	Email VARCHAR(40),
 	Birth SMALLDATETIME,
@@ -84,7 +83,7 @@ CREATE TABLE SELLING_TICKET
 	TicketClassID VARCHAR(20) FOREIGN KEY REFERENCES TICKET_CLASS(TicketClassID),
 	AirportID VARCHAR(20) FOREIGN KEY REFERENCES AIRPORT(AirportID),
 	SellingDate SMALLDATETIME,
-	CustomerName VARCHAR(40),
+	CustomerName NVARCHAR(40),
 	Phone INT,
 	Email VARCHAR(40),
 	PRIMARY KEY(FlightID, ID)
@@ -108,6 +107,12 @@ CREATE TABLE PARAMETER
     SlowestBookingTime      time,           -- Slowest booking time
     CancelTime              time            -- Cancellation time
 );
+<<<<<<< HEAD
+select *from AIRPORT
+select *from ACCOUNT
+select *from FLIGHT
+=======
+>>>>>>> 2ec5174f66589509a2857ba12d6e4e27a8020238
 
 insert into AIRPORT values ('000',N'Nội Bài')
 insert into AIRPORT values ('001',N'Tân Sơn Nhất')

@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AccountAccess.cs" />
     <Compile Include="AirportAccess.cs" />
+    <Compile Include="BookingTicketAccess.cs" />
+    <Compile Include="CustomerAsccess.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="FlightAccess.cs" />
     <Compile Include="IntermidateAirportAccess.cs" />
