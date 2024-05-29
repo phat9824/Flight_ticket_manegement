@@ -580,7 +580,7 @@
                 <!--Search Textbox-->
                 <Grid Width="225" HorizontalAlignment="Left" Margin="429,10,0,6" Grid.Row="1">
 
-                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="33" TextChanged="textBoxSearch_TextChanged" TextAlignment="Justify" Text=" Search here..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="33" TextChanged="textBoxSearch_TextChanged" TextAlignment="Justify" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
 

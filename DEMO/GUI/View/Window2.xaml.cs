@@ -129,5 +129,10 @@ namespace GUI.View
             flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
             FlightsDataGrid.ItemsSource = flights;
         }
+
+        private void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
