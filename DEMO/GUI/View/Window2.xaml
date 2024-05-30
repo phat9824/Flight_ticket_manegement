@@ -578,17 +578,14 @@
                 </Grid.RowDefinitions>
 
                 <!--Search Textbox-->
-                <Grid Width="225" HorizontalAlignment="Left" Margin="429,14,0,6" Grid.Row="1">
+                <Grid Width="225" HorizontalAlignment="Left" Margin="429,10,0,6" Grid.Row="1">
 
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                           Panel.ZIndex="1" Text="Search here ..."
-                           Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
-
-                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="37"/>
-
+                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="33" TextChanged="textBoxSearch_TextChanged" TextAlignment="Justify" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    
                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
 
                 </Grid>
+
 
 
                 <!--Page Title-->
@@ -637,7 +634,7 @@
                           DisplayMemberPath="property"
                           SelectedValuePath="map_peoperty">
                 </ComboBox>
-                
+
                 <!--
                 <Button Grid.Row="5"
                         Margin="700 20 8 0" VerticalAlignment="Top"
@@ -734,11 +731,11 @@
                 <!--Pagination Section-->
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
                         CornerRadius="5" Background="White">
-                  
+
                 </Border>
                 <Button Content="Search"
                         Click="Search_Click"
-                        HorizontalAlignment="Left" Margin="669,25,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource addButton}" Width="101"/>
+                        HorizontalAlignment="Left" Margin="667,0,0,0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource addButton}" Width="101"/>
             </Grid>
         </Grid>
     </Border>

@@ -28,43 +28,72 @@ namespace DAL
             con.Close();
             return (i + 1).ToString("000");
         }
-        public int SignUp(ACCOUNT User)
+        public string SignUp(ACCOUNT User)
         {
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert into ACCOUNT values(@ID, @name, @SDT, @Email, @Birtday, @pass, @permission)";
-
-            SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20);
-            SqlParameter parName = new SqlParameter("@name", SqlDbType.NVarChar, 40);
-            SqlParameter parSdt = new SqlParameter("@SDT", SqlDbType.Int);
-            SqlParameter parMail = new SqlParameter("@Email", SqlDbType.VarChar, 40);
-            SqlParameter parBirDay = new SqlParameter("@Birtday", SqlDbType.SmallDateTime);
-            SqlParameter parPass = new SqlParameter("@pass", SqlDbType.VarChar, 40);
-            SqlParameter parPer = new SqlParameter("@permission", SqlDbType.Int);
-
-            parID.Value = AutoID();
-            parName.Value = User.UserName;
-            parSdt.Value = User.Phone;
-            parMail.Value = User.Email;
-            parBirDay.Value = User.Birth;
-            parPass.Value = User.PasswordUser;
-            parPer.Value = User.PermissonID;
-
-            cmd.Parameters.Add(parID);
-            cmd.Parameters.Add(parName);
-            cmd.Parameters.Add(parSdt);
-            cmd.Parameters.Add(parMail);
-            cmd.Parameters.Add(parBirDay);
-            cmd.Parameters.Add(parPass);
-            cmd.Parameters.Add(parPer);
-
-            cmd.Connection = con;
-            int kq = cmd.ExecuteNonQuery();
-            con.Close();
-            return kq;
+            using (SqlTransaction transaction = con.BeginTransaction())
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "insert into ACCOUNT values(@ID, @Name, @SDT, @Email, @Birth, @Pass, @Permission, 0)";
+                        cmd.Connection = con;
+                        cmd.Transaction = transaction;
+                        SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20)
+                        {
+                            Value = AutoID()
+                        };
+                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.NVarChar, 40)
+                        {
+                            Value = User.UserName
+                        };
+                        SqlParameter parSDT = new SqlParameter("@SDT", SqlDbType.VarChar, 20)
+                        {
+                            Value = User.Phone
+                        };
+                        SqlParameter parEmail = new SqlParameter("@Email", SqlDbType.VarChar, 60)
+                        {
+                            Value = User.Email
+                        };
+                        SqlParameter parBirth = new SqlParameter("@Birth", SqlDbType.SmallDateTime)
+                        {
+                            Value = User.Birth
+                        };
+                        SqlParameter parPass = new SqlParameter("@Pass", SqlDbType.VarChar, 60)
+                        {
+                            Value = User.PasswordUser
+                        };
+                        SqlParameter parPer = new SqlParameter("@Permission", SqlDbType.Int)
+                        {
+                            Value = User.PermissonID
+                        };
+                        cmd.Parameters.Add(parID);
+                        cmd.Parameters.Add(parName);
+                        cmd.Parameters.Add(parSDT);
+                        cmd.Parameters.Add(parEmail);
+                        cmd.Parameters.Add(parBirth);
+                        cmd.Parameters.Add(parPass);
+                        cmd.Parameters.Add(parPer);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected == 0)
+                        {
+                            transaction.Rollback();
+                            return "No rows were inserted.";
+                        }
+                        transaction.Commit();
+                        return string.Empty;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return $"Insert failed: {ex.Message}";
+                }
+            }
         }
     }
 }

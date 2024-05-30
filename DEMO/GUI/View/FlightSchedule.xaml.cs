@@ -111,27 +111,32 @@ namespace GUI.View
         {
             if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
             {
-                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
+                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
                 return;
             }
             else if (FlightDay.SelectedDate == null)
             {
-                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
+                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
                 return;
             }
             else if (!FlightTime.SelectedTime.HasValue)
             {
-                MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Error");
+                MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Error");
                 return;
             }
             if (FlightDay.SelectedDate < DateTime.Today)
             {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
                 return;
             }
             else if (FlightDay.SelectedDate == DateTime.Today && DepartureTime.SelectedTime < DateTime.Now)
             {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Error");
+                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Error");
                 return;
             }
             ScheduleData data = GetScheduleData();
