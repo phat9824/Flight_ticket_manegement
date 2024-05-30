@@ -116,16 +116,6 @@ namespace GUI.View
                     DestinationAirport.Text = airportDictionary[selectedFlightInfo.Flight.DestinationAirportID];
                     DepartureTime.Text = selectedFlightInfo.Flight.FlightDay.ToString("dd-MM-yyyy HH:mm");
                     Duration.Text = selectedFlightInfo.Flight.FlightTime.ToString(@"hh\:mm");
-<<<<<<< HEAD
-                    TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
-                    ticketPrice = Convert.ToInt64(selectedFlightInfo.Flight.Price);
-                    TicketPrice.Text = ticketPrice.ToString();
-                    //maxNumTicket = selectedFlightInfo.emptySeats;
-                    maxNumTicket = Convert.ToInt32(NumTicket.Text.ToString());
-                    numTicket = maxNumTicket;
-                    TicketQuantity.Text = maxNumTicket.ToString();
-                    TotalPrice.Text = (numTicket * ticketPrice).ToString();
-=======
                     //TicketClass.Text = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()];
                     if (TicketClass_popup.SelectedValue != null)
                     {
@@ -140,7 +130,6 @@ namespace GUI.View
                     TicketQuantity.Text = maxNumTicket.ToString();
                     TotalPrice.Text = (numTicket * selectedFlightInfo.Flight.Price).ToString();
 
->>>>>>> main
                     var cus = new ObservableCollection<CustomerDTO>();
                     for (int i = 0; i < maxNumTicket; i++)
                     {
