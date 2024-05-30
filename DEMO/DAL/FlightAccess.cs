@@ -104,17 +104,20 @@ namespace DAL
             {
                 con.Open();
                 string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
-                                FROM FLIGHT
-                                WHERE (FlightDay BETWEEN @startDate AND @endDate)
-                                AND (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
-                                AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
-                                ";
+                                FROM FLIGHT FL
+                                WHERE (@sourceAirportID IS NULL OR FL.SourceAirportID = @sourceAirportID)
+                                AND (@destinationAirportID IS NULL OR FL.DestinationAirportID = @destinationAirportID)
+                                AND (FL.FlightDay BETWEEN @startDate AND @endDate)
+                                AND (FL.isDeleted = 0)";
            
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     // Thiết lập các tham số
-                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
-                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
+                    //command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
+                    //command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
+
+                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@startDate", startDate);
                     command.Parameters.AddWithValue("@endDate", endDate);
 
@@ -154,19 +157,22 @@ namespace DAL
             try
             {
                 con.Open();
-                string query = @"  SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
+                string query = @" 
+                                SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
                                 FROM FLIGHT f
-                                INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
+                                INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID and f.isDeleted = tf.isDeleted
                                 LEFT JOIN (
-                                    SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets
+                                    SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets, isDeleted
                                     FROM BOOKING_TICKET
-                                    GROUP BY FlightID, TicketClassID
-                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID"; ;
+                                    GROUP BY FlightID, TicketClassID, isDeleted
+                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID and bt.isDeleted = f.isDeleted 
+                                WHERE (f.isDeleted = 0)";
+
                 if (sourceAirportID != "" || destinationAirportID != "" || ticketClass != null)
                 {
-                    query += @" WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
+                    query += @" AND (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
                                 AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
-                                AND f.FlightDay BETWEEN @startDate AND @endDate
+                                AND (f.FlightDay BETWEEN @startDate AND @endDate)
                                 AND (@ticketClass IS NULL OR tf.TicketClassID = @ticketClass)
                                 AND (tf.Quantity - ISNULL(bt.BookedTickets, 0)) >= @numTicket";
                 }

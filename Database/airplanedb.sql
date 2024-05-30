@@ -130,7 +130,7 @@ select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
-INSERT INTO FLIGHT (FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price, isDeleted) VALUES ('FL012', '000', '001', '2024-06-01', '08:00:00', 100.0, 0)
+
 
 ----------TEST CASE--------
 --PERMISSION
