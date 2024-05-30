@@ -14,8 +14,9 @@ namespace BLL
     {
         public List<AirportDTO> L_airport()
         {
-            AirportAccess airportAccess = new AirportAccess();
-            return airportAccess.L_airport();
+            /*AirportAccess airportAccess = new AirportAccess();
+            return airportAccess.L_airport();*/
+            return new DAL.AirportAccess().L_airport();
         }
     }
 }

@@ -176,10 +176,11 @@ namespace GUI
             {
                 User.PermissonID = 2;
             }
-            int kq = 0;
-            accBLL.SignUp(User, ref kq);
+            string kq = "";
+            //accBLL.SignUp(User, ref kq);
+            new BLL.InsertProcessor().SignUp(User, ref kq);
 
-            if (kq > 0)
+            if (kq == "")
             {
                 MessageBox.Show("Sign Up Success");
                 Login f = new Login();
