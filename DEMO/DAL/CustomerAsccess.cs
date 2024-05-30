@@ -36,7 +36,7 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO CUSTOMER (ID, CustomerName, Phone, Email, Birth) VALUES (@ID, @Name, @Phone, @Mail, @Birth)";
+                        cmd.CommandText = "INSERT INTO CUSTOMER (ID, CustomerName, Phone, Email, Birth, isDeleted) VALUES (@ID, @Name, @Phone, @Mail, @Birth, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
 
