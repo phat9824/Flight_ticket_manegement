@@ -29,7 +29,7 @@ namespace DAL
                     {
                         IntermediateAirportDTO intermediateAirport = listIntermediateAirportDTO[i];
 
-                        queryBuilder.Append($"(@FlightID_{i}, @AirportID_{i}, @LayoverTime_{i}, @Note_{i}), 0");
+                        queryBuilder.Append($"(@FlightID_{i}, @AirportID_{i}, @LayoverTime_{i}, @Note_{i}, 0),");
 
                         SqlParameter flightIDParam = new SqlParameter($"@FlightID_{i}", System.Data.SqlDbType.VarChar);
                         flightIDParam.Value = intermediateAirport.FlightID;

@@ -28,7 +28,7 @@ namespace DAL
                     {
                         TicketClassFlightDTO ticketClassFlight = listTicketClassFlight[i];
 
-                        queryBuilder.Append($"(@TicketClassID_{i}, @FlightID_{i}, @Quantity_{i}, @Multiplier_{i}), 0");
+                        queryBuilder.Append($"(@TicketClassID_{i}, @FlightID_{i}, @Quantity_{i}, @Multiplier_{i}, 0),");
 
                         SqlParameter ticketClassIDParam = new SqlParameter($"@TicketClassID_{i}", System.Data.SqlDbType.VarChar);
                         ticketClassIDParam.Value = ticketClassFlight.TicketClassID;

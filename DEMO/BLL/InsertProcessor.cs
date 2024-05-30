@@ -68,11 +68,13 @@ namespace BLL
             { 
                 return processState_InsertTicketClassFlight + "_BLL_processState_InsertTicketClassFlight";
             }
-
-            string processState_InsertIntermediateAirport = new BLL.InsertProcessor().InsertIntermediateAirport(listIntermediateAirportDTO);
-            if (processState_InsertIntermediateAirport != string.Empty) 
+            if (listIntermediateAirportDTO.Count > 0)
             {
-                return processState_InsertIntermediateAirport + "_BLL_processState_InsertIntermediateAirport";
+                string processState_InsertIntermediateAirport = new BLL.InsertProcessor().InsertIntermediateAirport(listIntermediateAirportDTO);
+                if (processState_InsertIntermediateAirport != string.Empty)
+                {
+                    return processState_InsertIntermediateAirport + "_BLL_processState_InsertIntermediateAirport";
+                }
             }
             return string.Empty; // Chuỗi rỗng xem như thành công
         }

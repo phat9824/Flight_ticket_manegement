@@ -98,6 +98,7 @@ namespace GUI.View
                 ViewCustomerData.Remove(itemToRemove);
                 numTicket = ViewCustomerData.Count;
                 TicketQuantity.Text = numTicket.ToString();
+                TotalPrice.Text = (numTicket * ticketPrice).ToString();
             }
         }
 
@@ -132,7 +133,7 @@ namespace GUI.View
                     var cus = new ObservableCollection<CustomerDTO>();
                     for (int i = 0; i < maxNumTicket; i++)
                     {
-                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "" });
+                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "", Birth = new DateTime(2000, 1, 1) });
                     }
                     ViewCustomerData = cus;
                     customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
