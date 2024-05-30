@@ -21,14 +21,14 @@ namespace DAL
             {
                 try
                 {
-                    StringBuilder queryBuilder = new StringBuilder("INSERT INTO TICKETCLASS_FLIGHT (TicketClassID, FlightID, Quantity, Multiplier) VALUES ");
+                    StringBuilder queryBuilder = new StringBuilder("INSERT INTO TICKETCLASS_FLIGHT (TicketClassID, FlightID, Quantity, Multiplier, isDeleted) VALUES ");
                     List<SqlParameter> parameters = new List<SqlParameter>();
 
                     for (int i = 0; i < listTicketClassFlight.Count; i++)
                     {
                         TicketClassFlightDTO ticketClassFlight = listTicketClassFlight[i];
 
-                        queryBuilder.Append($"(@TicketClassID_{i}, @FlightID_{i}, @Quantity_{i}, @Multiplier_{i}),");
+                        queryBuilder.Append($"(@TicketClassID_{i}, @FlightID_{i}, @Quantity_{i}, @Multiplier_{i}), 0");
 
                         SqlParameter ticketClassIDParam = new SqlParameter($"@TicketClassID_{i}", System.Data.SqlDbType.VarChar);
                         ticketClassIDParam.Value = ticketClassFlight.TicketClassID;

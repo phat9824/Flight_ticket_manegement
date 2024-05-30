@@ -22,14 +22,14 @@ namespace DAL
             {
                 try
                 {
-                    StringBuilder queryBuilder = new StringBuilder("INSERT INTO INTERMEDIATE_AIRPORT (FlightID, AirportID, LayoverTime, Note) VALUES ");
+                    StringBuilder queryBuilder = new StringBuilder("INSERT INTO INTERMEDIATE_AIRPORT (FlightID, AirportID, LayoverTime, Note, isDeleted) VALUES ");
                     List<SqlParameter> parameters = new List<SqlParameter>();
 
                     for (int i = 0; i < listIntermediateAirportDTO.Count; i++)
                     {
                         IntermediateAirportDTO intermediateAirport = listIntermediateAirportDTO[i];
 
-                        queryBuilder.Append($"(@FlightID_{i}, @AirportID_{i}, @LayoverTime_{i}, @Note_{i}),");
+                        queryBuilder.Append($"(@FlightID_{i}, @AirportID_{i}, @LayoverTime_{i}, @Note_{i}), 0");
 
                         SqlParameter flightIDParam = new SqlParameter($"@FlightID_{i}", System.Data.SqlDbType.VarChar);
                         flightIDParam.Value = intermediateAirport.FlightID;

@@ -40,7 +40,7 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "insert into ACCOUNT values(@ID, @Name, @SDT, @Email, @Birth, @Pass, @Permission)";
+                        cmd.CommandText = "insert into ACCOUNT values(@ID, @Name, @SDT, @Email, @Birth, @Pass, @Permission, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
                         SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20)

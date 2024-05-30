@@ -38,7 +38,7 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO FLIGHT (FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price) VALUES (@ID, @SouID, @DesID, @FlDay, @FlTime, @Price)";
+                        cmd.CommandText = "INSERT INTO FLIGHT (FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price, isDeleted) VALUES (@ID, @SouID, @DesID, @FlDay, @FlTime, @Price, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
 
