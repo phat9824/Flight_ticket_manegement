@@ -17,13 +17,13 @@ namespace BLL
         {
             // luu khach hang
             string processState_InsertCustomer = new DAL.CustomerAsccess().Add_Customer(customer);
-            if(processState_InsertCustomer != string.Empty)
+            if (processState_InsertCustomer != string.Empty)
             {
                 return processState_InsertCustomer + "_BLL_processState_InsertCustomer";
             }
             // luu ve
             string processState_InsertBookingTicket = new DAL.BookingTicketAccess().Add_BookingTicket(customer.ID, flight.FlightID, ticketClass.TicketClassID, status, date);
-            if(processState_InsertBookingTicket != string.Empty)
+            if (processState_InsertBookingTicket != string.Empty)
             {
                 return processState_InsertCustomer + "_BLL_processState_InsertBookingTicket";
             }
@@ -50,7 +50,7 @@ namespace BLL
             return new DAL.TicketClassFlightAccess().insertListTicketClass(listTicketClassFlightDTO);
         }
         // luu intermediate airport vao db
-        public string InsertIntermediateAirport(List<IntermediateAirportDTO> listIntermediateAirportDTO) 
+        public string InsertIntermediateAirport(List<IntermediateAirportDTO> listIntermediateAirportDTO)
         {
             return new DAL.IntermidateAirportAccess().insertListItermedateAirport(listIntermediateAirportDTO);
         }
@@ -64,8 +64,8 @@ namespace BLL
             }
 
             string processState_InsertTicketClassFlight = new BLL.InsertProcessor().InsertTicketClassFlight(listTicketClassFlightDTO);
-            if (processState_InsertTicketClassFlight != string .Empty)
-            { 
+            if (processState_InsertTicketClassFlight != string.Empty)
+            {
                 return processState_InsertTicketClassFlight + "_BLL_processState_InsertTicketClassFlight";
             }
             if (listIntermediateAirportDTO.Count > 0)
@@ -77,6 +77,11 @@ namespace BLL
                 }
             }
             return string.Empty; // Chuỗi rỗng xem như thành công
+        }
+        // insert Paramater
+        public string InsertParamater(ParameterDTO parameterDTO)
+        {
+            return new DAL.ParameterAccess().InsertParamater(parameterDTO);
         }
     }
 }

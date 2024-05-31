@@ -120,9 +120,9 @@ namespace BLL
             return new ObservableCollection<T>(sortedItems);
         }
 
-        public static ParameterDTO GetParameterDTO()
+        public ParameterDTO GetParameterDTO()
         {
-            return ParameterAccess.GetParameters();
+            return new DAL.ParameterAccess().GetParameters();
         }
     }
 }
