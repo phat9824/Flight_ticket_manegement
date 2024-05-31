@@ -8,12 +8,19 @@ namespace DTO
 {
     public class BookingTicketDTO
     {
+        private string ticketID;
         private string flightID;
         private string id;
         private string ticketClassID;
         private int ticketStatus;
         private DateTime bookingDate;
         private int isDeleted;
+
+        public string TicketID
+        {
+            get => ticketID;
+            set => ticketID = value;
+        }
 
         public string FlightID
         {
