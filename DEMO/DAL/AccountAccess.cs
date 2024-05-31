@@ -12,13 +12,6 @@ namespace DAL
 {
     public class AccountAccess : DatabaseAccess
     {
-
-        public string CheckLogic(ACCOUNT acc)
-        {
-            string info = CheckLogicDTO(acc);
-            return info;
-        }
-
         public bool CheckAccountExists(string email)
         {
             using (SqlConnection conn = SqlConnectionData.Connect())
