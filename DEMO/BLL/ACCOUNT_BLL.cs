@@ -14,21 +14,21 @@ namespace BLL
 
     public class ACCOUNT_BLL
     {
-        AccountAccess accAccess = new AccountAccess();
-        public string CheckLogic(ACCOUNT acc)
+
+        public bool AuthenticateAccount(string email, string password, out int permissionID)
         {
-            if (acc.Email == "")
-            {
-                return "required tk_email";
-            }
-            if (acc.Email == "")
-            {
-                return "required pass";
-            }
+            AccountAccess accountDAL = new AccountAccess();
 
-            string info = accAccess.CheckLogic(acc);
-            return info;
-
+            if (accountDAL.CheckAccountExists(email))
+            {
+                permissionID = accountDAL.GetPermissionID(email, password);
+                return permissionID != 0;
+            }
+            else
+            {
+                permissionID = 0;
+                return false;
+            }
         }
 
     }
