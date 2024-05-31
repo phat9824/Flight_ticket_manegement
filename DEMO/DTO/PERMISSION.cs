@@ -10,5 +10,7 @@ namespace DTO
     {
         public int PermissionID { get; set; }
         public string PermissionName { get; set; }
+
+        public int isDeleted { get; set; }
     }
 }

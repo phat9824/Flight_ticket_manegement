@@ -14,6 +14,7 @@ namespace DTO
         private DateTime flightDay;
         private TimeSpan flightTime;
         private decimal price;
+        private int isDeleted;
 
         public string FlightID
         {
@@ -49,6 +50,12 @@ namespace DTO
         {
             get => price;
             set => price = value;
+        }
+
+        public int IsDeleted
+        {
+            get => isDeleted;
+            set => isDeleted = value;
         }
     }
 }

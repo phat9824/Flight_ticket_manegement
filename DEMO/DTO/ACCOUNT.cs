@@ -16,6 +16,8 @@ namespace DTO
         private DateTime birthday;
         private string passWordUser;
         private int perrmissionID;
+        private int isDeleted;
+
         public string UserID
         {
             get => this.userID;
@@ -50,6 +52,12 @@ namespace DTO
         {
             get => this.perrmissionID;
             set => this.perrmissionID = value;
+        }
+        
+        public int IsDeleted
+        {
+            get => this.isDeleted;
+            set => this.isDeleted = value;
         }
     }
 }

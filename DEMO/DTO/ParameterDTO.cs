@@ -17,6 +17,7 @@ namespace DTO
         private int seatCount;
         private TimeSpan slowestBookingTime;
         private TimeSpan cancelTime;
+        private int isDeleted;
 
         public int AirportCount
         {
