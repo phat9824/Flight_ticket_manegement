@@ -13,6 +13,7 @@ namespace DTO
         private string airportID;
         private TimeSpan layoverTime;
         private string note;
+        private int isDeleted;
 
         public string FlightID
         {
@@ -36,6 +37,11 @@ namespace DTO
         {
             get => note;
             set => note = value;
+        }
+        public int IsDeleted
+        {
+            get => isDeleted;
+            set => isDeleted = value;
         }
 
         public IntermediateAirportDTO(string flightID, string airportID, TimeSpan layoverTime, string note)

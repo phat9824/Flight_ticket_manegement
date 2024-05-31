@@ -16,6 +16,7 @@ namespace DTO
         private string customerName;
         private int phone;
         private string email;
+        private int isDeleted;
 
         public string FlightID
         {
@@ -63,6 +64,12 @@ namespace DTO
         {
             get => email;
             set => email = value;
+        }
+
+        public int IsDeleted
+        {
+            get => isDeleted;
+            set => isDeleted = value;
         }
     }
 }

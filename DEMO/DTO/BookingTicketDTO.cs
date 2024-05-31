@@ -13,6 +13,7 @@ namespace DTO
         private string ticketClassID;
         private int ticketStatus;
         private DateTime bookingDate;
+        private int isDeleted;
 
         public string FlightID
         {
@@ -42,6 +43,11 @@ namespace DTO
         {
             get => bookingDate;
             set => bookingDate = value;
+        }
+        public int IsDeleted
+        {
+            get => isDeleted;
+            set => isDeleted = value;
         }
     }
 }

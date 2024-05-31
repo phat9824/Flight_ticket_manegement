@@ -15,6 +15,7 @@ namespace DTO
         private DateTime birth;
         private string flightID;
         private string airportID;
+        private int isDeleted;
 
         public string ID
         {
@@ -56,6 +57,11 @@ namespace DTO
         {
             get => airportID;
             set => airportID = value;
+        }
+        public int IsDeleted
+        {
+            get => isDeleted;
+            set => isDeleted = value;
         }
     }
 
