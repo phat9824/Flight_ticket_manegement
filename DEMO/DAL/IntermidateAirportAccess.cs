@@ -17,7 +17,6 @@ namespace DAL
             SqlConnection con = SqlConnectionData.Connect();
             
             con.Open();
-
             using (SqlTransaction transaction = con.BeginTransaction())
             {
                 try

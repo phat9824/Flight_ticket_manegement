@@ -17,7 +17,7 @@ CREATE TABLE ACCOUNT
 	Email VARCHAR(60) NULL,
 	Birth SMALLDATETIME NOT NULL,
 	PasswordUser VARCHAR(60) NOT NULL,
-	PermissonID INT FOREIGN KEY REFERENCES PERMISSION(PermissionID),
+	PermissionID INT FOREIGN KEY REFERENCES PERMISSION(PermissionID),
 	isDeleted int
 )
 
@@ -124,6 +124,8 @@ INSERT INTO PERMISSION VALUES (2, 'Staff', 0);
 INSERT INTO ACCOUNT VALUES ('000', 'admin', '0123456789', 'admin@example.com', '1980-01-01', 'password1', 1, 0);
 INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@example.com', '1985-02-02', 'password2', 2, 0);
 INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@example.com', '1990-03-03', 'password3', 2, 0);
+
+SELECT * FROM ACCOUNT
 
 --AIRPORT 
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài', 0);

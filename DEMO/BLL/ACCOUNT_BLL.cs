@@ -31,5 +31,20 @@ namespace BLL
 
         }
 
+        public bool AuthenticateAccount(string email, string password, out int permissionID)
+        {
+            AccountAccess accountDAL = new AccountAccess();
+
+            if (accountDAL.CheckAccountExists(email))
+            {
+                permissionID = accountDAL.GetPermissionID(email, password);
+                return permissionID != 0;
+            }
+            else
+            {
+                permissionID = 0;
+                return false;
+            }
+        }
     }
 }

@@ -18,6 +18,38 @@ namespace DAL
             string info = CheckLogicDTO(acc);
             return info;
         }
+
+        public bool CheckAccountExists(string email)
+        {
+            using (SqlConnection conn = SqlConnectionData.Connect())
+            {
+                string query = "SELECT COUNT(*) FROM ACCOUNT WHERE Email = @email";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+
+                return count > 0;
+            }
+        }
+
+        public int GetPermissionID(string email, string password)
+        {
+            using (SqlConnection conn = SqlConnectionData.Connect())
+            {
+                string query = "SELECT PermissionID FROM ACCOUNT WHERE Email = @email AND PasswordUser = @password";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+
+                return result != null ? (int)result : 0;
+            }
+        }
+
         private string AutoID()
         {
             SqlConnection con = SqlConnectionData.Connect();
