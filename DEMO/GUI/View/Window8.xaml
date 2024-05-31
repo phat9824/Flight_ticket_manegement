@@ -7,11 +7,125 @@
              xmlns:vm="clr-namespace:GUI.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="805"
-              Style="{StaticResource Page_Style}">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             Style="{StaticResource Page_Style}">
     <UserControl.DataContext>
         <vm:Window8VM/>
     </UserControl.DataContext>
-    <Grid Background="Honeydew">
-            
-    </Grid>
+    <UserControl.Resources>
+        <local:IdToNameConverterTK x:Key="idToNameConverterTK"/>
+        <local:IdToNameConverterST x:Key="idToNameConverterST"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <Style x:Key="addButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF1DA2ED"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF1DA2ED"/>
+                    <Setter Property="Foreground" Value="#ffffff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Border  Background="#f8f7fc" CornerRadius="0 20 20 0">
+        <Grid>
+            <Grid Background="#f8f7fc" Margin="0 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="List of Tickets" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                           HorizontalAlignment="Left" Foreground="#121518"/>
+
+                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 1 0 10"/>
+                <DockPanel LastChildFill="False" Grid.Row="5"/>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                    <TextBox Text=""
+                             Margin="5 0 5 0" Padding="0 0 0 0"
+                             VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Width="150" Height="50"
+                             materialDesign:HintAssist.Hint="Customer ID"
+                             materialDesign:HintAssist.HintOpacity=".26"/>
+                    <TextBox Text="" x:Name="TicketID"
+                             Margin="5 0 5 0" Padding="0 0 0 0"
+                             VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Width="150" Height="50"
+                             materialDesign:HintAssist.Hint="Ticket ID"
+                             materialDesign:HintAssist.HintOpacity=".26"/>
+
+                    <TextBox Text="" x:Name="FlightID"
+                             Margin="5 0 5 0" Padding="0 0 0 0"
+                             VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Width="150" Height="50"
+                             materialDesign:HintAssist.Hint="Flight ID"
+                             materialDesign:HintAssist.HintOpacity=".26"/>
+                    
+                    <ComboBox x:Name="Status"
+                              Margin="5 0 5 0" Padding="0 0 0 0"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                              Width="150" Height="50"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="ID"
+                              materialDesign:HintAssist.Hint="Status"
+                              materialDesign:HintAssist.HintOpacity=".26"/>
+                    
+                </StackPanel>
+
+                <!--DataGrid-->
+
+                <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+                          
+                          Grid.Row="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ticket ID" Binding="{Binding TicketID}" />
+                        <DataGridTextColumn Header="Flight ID" Binding="{Binding FlightID}" />
+                        <DataGridTextColumn Header="Customer ID" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Ticket Class" Binding="{Binding TicketClassID, Converter={StaticResource idToNameConverterTK}}" />
+                        <DataGridTextColumn Header="Booking Date" Binding="{Binding BookingDate}" />
+                        <DataGridTextColumn Header="Ticket Status" Binding="{Binding TicketStatus, Converter={StaticResource idToNameConverterST}}" />
+
+                        <DataGridTemplateColumn Header="Actions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Delete" Click="Delete_Click"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Content="Search"
+                        
+                        HorizontalAlignment="Left" Margin="667,0,0,0" Grid.Row="4" VerticalAlignment="Center" Style="{StaticResource addButton}" Width="101"/>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>
