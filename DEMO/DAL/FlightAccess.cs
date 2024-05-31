@@ -8,11 +8,12 @@ using System.Data;
 using DTO;
 using System.Runtime.CompilerServices;
 using System.Collections;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace DAL
 {
     public class FlightAccess : DatabaseAccess
-    {   
+    {
         string state = string.Empty; // Chuỗi rỗng xem như thành công
         public string AutoID()
         {
@@ -99,7 +100,7 @@ namespace DAL
         {
             List<FlightDTO> data = new List<FlightDTO>();
             SqlConnection con = SqlConnectionData.Connect();
-            this.state = string.Empty; 
+            this.state = string.Empty;
             try
             {
                 con.Open();
@@ -109,7 +110,7 @@ namespace DAL
                                 AND (@destinationAirportID IS NULL OR FL.DestinationAirportID = @destinationAirportID)
                                 AND (FL.FlightDay BETWEEN @startDate AND @endDate)
                                 AND (FL.isDeleted = 0)";
-           
+
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     // Thiết lập các tham số
@@ -140,7 +141,8 @@ namespace DAL
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 state = $"Error: {ex.Message}";
             }
@@ -204,7 +206,8 @@ namespace DAL
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 state = $"Error: {ex.Message}";
             }
@@ -212,7 +215,35 @@ namespace DAL
             con.Close();
             return data;
         }
+        public int GetNumFlight(string SourID, string DesID, DateTime StartD, DateTime EndD)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            string state = string.Empty;
+            int count = 0;
+            try
+            {
+                con.Open();
+                string query = @"select count(*)from FLIGHT
+                                WHERE (@SourID IS NULL OR @SourID = SourceAirportID)
+                                AND (@DesID is NULL OR @DesID = DestinationAirportID)
+                                AND FlightDay BETWEEN @StartD and @EndD";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@SourID", SourID == "" ? (object)DBNull.Value : SourID);
+                    command.Parameters.AddWithValue("@DesID", DesID == "" ? (object)DBNull.Value : DesID);
+                    command.Parameters.AddWithValue("@startDate", StartD);
+                    command.Parameters.AddWithValue("@endDate", EndD);
 
+                    count = (int)command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return count;
+        }
         public string GetState()
         {
             return this.state;

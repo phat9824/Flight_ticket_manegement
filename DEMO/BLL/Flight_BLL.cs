@@ -16,5 +16,9 @@ namespace BLL
         {
             return new DAL.FlightAccess().AutoID();
         }
+        public int GetNumFlight(string SourID, string DesID, DateTime StartD, DateTime EndD)
+        {
+            return new DAL.FlightAccess().GetNumFlight(SourID, DesID, StartD, EndD);
+        }
     }
 }

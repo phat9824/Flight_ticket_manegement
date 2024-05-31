@@ -113,6 +113,9 @@ select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
+SELECT AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime
+                             FROM PARAMETER
+                             where isDeleted = 0
 
 
 ----------TEST CASE--------

@@ -65,7 +65,7 @@ namespace GUI.View
             InitializeComponent();
 
             //---------------------------------------------------------------------------------------------------------------------------------------------
-            parameterDTO = BLL.SearchProcessor.GetParameterDTO();
+            parameterDTO = new BLL.SearchProcessor().GetParameterDTO();
 
             /*parameterDTO = new ParameterDTO();
             parameterDTO.IntermediateAirportCount = 2;
