@@ -25,11 +25,11 @@ namespace GUI.View
 
 
     /* Mô tả:
-     Tìm kiếm vé theo CustomerID, FlightID, TicketID. Có thể bổ sung nhiều thuộc tính hơn nếu có thời gian
+     Tìm kiếm vé theo CustomerID, FlightID, TicketID, Status. Có thể bổ sung nhiều thuộc tính hơn nếu có thời gian
      Mỗi thuộc tính tìm kiếm đều có thể NULL
      
      -Cần viết phương thức để trả về List<BookingTicketDTO> thỏa mãn thuộc tính tìm kiếm và parameter - phương thức này sẽ được gọi tại nút Search
-     -Cần viết phương thức xóa vé được chọn (vé được chọn phải thỏa mãn parameter) - phương thức này sẽ được gọi tại nút Delete (không xóa thực sự)
+     -Cần viết phương thức xóa vé (hủy vé) được chọn (vé được chọn phải thỏa mãn parameter) - phương thức này sẽ được gọi tại nút Delete (không xóa thực sự)
      
      Lưu ý: Các Processor cần chứa thuộc tính state là trạng thái xử lí của Process, nếu state là chuỗi rỗng thì xem như thành công
      
@@ -52,7 +52,13 @@ namespace GUI.View
                 new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1}
             };
 
-            dataGrid.ItemsSource = listTicket; 
+            dataGrid.ItemsSource = listTicket;
+
+            Status.ItemsSource = new List<ST>
+            {
+                new ST(){ID = "1", Name = "Sold"},
+                new ST(){ID = "2", Name = "Flown"}
+            };
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
