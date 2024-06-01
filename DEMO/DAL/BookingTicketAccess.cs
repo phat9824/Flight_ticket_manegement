@@ -15,6 +15,7 @@ namespace DAL
     public class BookingTicketAccess
     {
         public BookingTicketAccess() { }
+        string state = string.Empty;
         public string AutoID()
         {
             SqlConnection con = SqlConnectionData.Connect();
@@ -91,6 +92,58 @@ namespace DAL
                     return $"Insert failed: {ex.Message}";
                 }
             }
+        }
+        public List<BookingTicketDTO> GetBookingTicket(string TicketID, string CustomerID, string FLigthID, int Status)
+        {
+            List<BookingTicketDTO> data = new List<BookingTicketDTO>(); 
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"select TicketID, FlightID, ID, TicketClassID, TicketStatus, BookingDate
+                                from BOOKING_TICKET
+                                where (isDeleted = 0)
+                                AND (@TicketID is NULL or @TicketID = TicketID)
+                                AND (@CustomerID is NULL or @CustomerID = ID)
+                                AND (@FLigthID is NULL or @FLigthID = FLigthID)
+                                AND (@Status is NULL or @Status = TicketStatus)";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@TicketID", TicketID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@CustomerID", CustomerID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@FLigthID", FLigthID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Status", Status == -1  ? (object)DBNull.Value : Status);
+
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BookingTicketDTO dto = new BookingTicketDTO() 
+                            {
+                                TicketID = reader["TicketID"].ToString(),
+                                FlightID = reader["FlightID"].ToString(),
+                                ID = reader["ID"].ToString(),
+                                TicketClassID = reader["TicketClassID"].ToString(),
+                                TicketStatus = Convert.ToInt32(reader["status"]),
+                                BookingDate = Convert.ToDateTime(reader["BookingDate"])
+                            };
+                            data.Add(dto);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return data;
+        }
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }
