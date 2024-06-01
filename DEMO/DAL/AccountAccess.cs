@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Principal;
+using System.Security.Cryptography; //MD5
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
@@ -12,6 +13,19 @@ namespace DAL
 {
     public class AccountAccess : DatabaseAccess
     {
+        static string ToMD5Hash (string s)
+        {
+            StringBuilder sb = new StringBuilder ();
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] md5HashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(s));
+                foreach (byte b in md5HashBytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+            }
+            return sb.ToString ();
+        }
         public bool CheckAccountExists(string email)
         {
             using (SqlConnection conn = SqlConnectionData.Connect())
@@ -34,7 +48,8 @@ namespace DAL
                 string query = "SELECT PermissionID FROM ACCOUNT WHERE Email = @email AND PasswordUser = @password";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@password", password);
+                //cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@password", ToMD5Hash(password));
 
                 conn.Open();
                 object result = cmd.ExecuteScalar();
@@ -91,7 +106,7 @@ namespace DAL
                         };
                         SqlParameter parPass = new SqlParameter("@Pass", SqlDbType.VarChar, 60)
                         {
-                            Value = User.PasswordUser
+                            Value = ToMD5Hash(User.PasswordUser)
                         };
                         SqlParameter parPer = new SqlParameter("@Permission", SqlDbType.Int)
                         {
