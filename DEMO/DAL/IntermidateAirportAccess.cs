@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,31 @@ namespace DAL
     {
         string state = string.Empty;
         public IntermidateAirportAccess() { }
+        public int GetNumIntermidateAirport(string FlightID)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            string state = string.Empty;
+            int count = 0;
+            try
+            {
+                con.Open();
+                string query = @"select *from INTERMEDIATE_AIRPORT
+                                where isDeleted = 0
+                                and (@FlightID is NULL or @FlightID = FlightID)";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@FlightID", FlightID ?? (object)DBNull.Value);
+                    count = (int)command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+
+            }
+            con.Close();
+            return count;
+        }
         public string insertListItermedateAirport(List<IntermediateAirportDTO> listIntermediateAirportDTO)
         {
             SqlConnection con = SqlConnectionData.Connect();

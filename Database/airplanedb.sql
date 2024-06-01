@@ -77,7 +77,7 @@ CREATE TABLE INTERMEDIATE_AIRPORT
 (
 	AirportID VARCHAR(20) FOREIGN KEY REFERENCES AIRPORT(AirportID),
 	FlightID VARCHAR(20) FOREIGN KEY REFERENCES FLIGHT(FlightID),
-	layoverTime TIME NOT NULL,
+	layoverTime TIME NOT NULL, --loi chinh ta
 	Note NVARCHAR(100) NULL,
 	isDeleted int,
 	PRIMARY KEY(AirportID, FlightID)
@@ -113,9 +113,9 @@ select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
-SELECT AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime
-                             FROM PARAMETER
-                             where isDeleted = 0
+
+select *from INTERMEDIATE_AIRPORT
+where isDeleted = 0
 
 
 ----------TEST CASE--------
