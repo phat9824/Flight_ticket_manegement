@@ -61,7 +61,7 @@ namespace DAL
                         {
                             Value = customer.ID
                         };
-                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.VarChar, 40)
+                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.NVarChar, 40)
                         {
                             Value = customer.CustomerName
                         };
