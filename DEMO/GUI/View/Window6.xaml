@@ -402,7 +402,6 @@
                            Opacity="0.66"/>
 
                 <Button Content="Confirm"
-        
                         HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                         VerticalAlignment="Center" VerticalContentAlignment="Center" 
                         Margin="0 0 0 0" Padding="0 0 0 0" Grid.Row="1" 
@@ -470,14 +469,15 @@
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <DatePicker x:Name="DepartureDay_popup"
+                                    Language="en-GB"
                                     SelectedDateChanged="DepartureDay_popup_SelectedDateChanged"
                                     materialDesign:HintAssist.HelperText=""
                                     materialDesign:HintAssist.Hint="Pick Date"
-                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     Margin="10 10 0 0" Padding="50 0 0 0"
                                     Width="160" Height="45"
                                     materialDesign:HintAssist.HintOpacity=".26"
-                                    Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False" />
+                                    Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False"
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                         <ComboBox x:Name="TicketClass_popup"
                                   Width="160" Height="40"
                                   materialDesign:HintAssist.Hint="Ticket Class"
