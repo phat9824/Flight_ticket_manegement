@@ -42,9 +42,9 @@ namespace DAL
 
                         SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20)
                         {
-                            Value = new CustomerAsccess().AutoID()
+                            Value = customer.ID
                         };
-                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.VarChar, 40)
+                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.NVarChar, 40)
                         {
                             Value = customer.CustomerName
                         };

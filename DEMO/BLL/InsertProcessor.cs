@@ -25,10 +25,31 @@ namespace BLL
             string processState_InsertBookingTicket = new DAL.BookingTicketAccess().Add_BookingTicket(customer.ID, flight.FlightID, ticketClass.TicketClassID, status, date);
             if (processState_InsertBookingTicket != string.Empty)
             {
-                return processState_InsertCustomer + "_BLL_processState_InsertBookingTicket";
+                return processState_InsertBookingTicket + "_BLL_processState_InsertBookingTicket";
             }
             return string.Empty; // Chuỗi rỗng xem như thành công
         }
+
+        public string Add_ListBookingTicket(List<CustomerDTO> listCustomer, FlightDTO flight, TicketClassDTO ticketClass, DateTime date, int status)
+        {
+            /*
+             Thêm vé vào DB, đông thời thêm cả thông tin khách hàng ứng với từng vé
+
+             Input: listCustomer - danh sách khách hàng
+                    flight - chuyến bay
+                    ticketClass - hạng vé
+                    status - trạng thái vé (các vé sẽ được mặc định ban đầu là 1 - Sold)
+
+             Output: string state - trạng thái xử lí có thể bao gồm các state của các Processor được gọi khác
+             */
+            string state = string.Empty;
+            foreach(CustomerDTO customer in listCustomer)
+            {
+                state = Add_BookingTicket(customer, flight, ticketClass, date, status);
+            }
+            return state;
+        }
+
         // luu tai khoan vao db
         public void SignUp(ACCOUNT User, ref string kq)
         {

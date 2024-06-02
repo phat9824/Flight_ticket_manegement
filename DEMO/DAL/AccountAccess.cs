@@ -50,7 +50,7 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@email", email);
                 //cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@password", ToMD5Hash(password));
-
+                
                 conn.Open();
                 object result = cmd.ExecuteScalar();
 
