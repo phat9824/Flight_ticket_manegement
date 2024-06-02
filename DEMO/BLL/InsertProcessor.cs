@@ -40,7 +40,14 @@ namespace BLL
             string kq = "";
             foreach (CustomerDTO dto in customer)
             {
-                kq = new DAL.CustomerAsccess().Add_Customer(dto);
+                if(!new DAL.CustomerAsccess().isExits(dto))
+                {
+                    kq = new DAL.CustomerAsccess().Add_Customer(dto);
+                }
+                else
+                {
+                    return "ID da ton tai";
+                }
             }
             return kq;
         }

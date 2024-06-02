@@ -10,9 +10,9 @@ namespace BLL
 {
     public class Customer_BLL
     {
-        public string Get_ID()
+        /*public string Get_ID()
         {
             return new DAL.CustomerAsccess().AutoID();
-        }
+        }*/
     }
 }
