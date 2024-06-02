@@ -7,8 +7,9 @@
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:GUI.ViewModel"
              d:DesignHeight="720" d:DesignWidth="805"
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-              Style="{StaticResource Page_Style}">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Style="{StaticResource Page_Style}">
+
     <UserControl.DataContext>
         <vm:Window10VM/>
     </UserControl.DataContext>
@@ -23,7 +24,7 @@
             <Setter Property="Foreground" Value="#acb0af"/>
         </Style>
 
-        <Style x:Key="textBox" TargetType="Control">
+        <Style x:Key="textBox" TargetType="TextBox">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="Margin" Value="10 0 0 0"/>
@@ -75,24 +76,23 @@
 
             <Grid Grid.Row="0" Height="70">
                 <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="10 20 0 0"
-              HorizontalAlignment="Left" Foreground="#121518"/>
+                           HorizontalAlignment="Left" Foreground="#121518"/>
             </Grid>
 
             <Grid Grid.Row="1" Height="120">
                 <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,12,0,74" FontSize="18"/>
                 <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,21" Width="280" >
                     <Grid Margin="7 9">
-
-                        <TextBlock x:Name="textN_Airport"  MouseDown="textN_Airport_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                        <TextBox  x:Name="txtN_Airport" TextChanged="txtN_Airport_TextChanged" Style="{StaticResource textBox}"/>
+                        <TextBlock x:Name="textN_Airport" Text="Enter number of airports" MouseDown="textN_Airport_MouseDown" Style="{StaticResource textHint}" Margin="10,0,0,0" Visibility="Visible"/>
+                        <TextBox x:Name="txtN_Airport" TextChanged="txtN_Airport_TextChanged" Style="{StaticResource textBox}" GotFocus="txtN_Airport_GotFocus" LostFocus="txtN_Airport_LostFocus"/>
                     </Grid>
                 </Border>
 
                 <Label Content="Minimum flight time" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
 
                 <materialDesign:TimePicker x:Name="PresetTimePicker"
-                           Is24Hours="True"
-                          SelectedTimeChanged="PresetTimePicker_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+                                           Is24Hours="True"
+                                           SelectedTimeChanged="PresetTimePicker_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280"/>
             </Grid>
 
             <Grid Grid.Row="2" Height="110">
@@ -101,52 +101,48 @@
 
                 <materialDesign:TimePicker x:Name="PresetTimePicker1"
                                            Is24Hours="True"
-                                           SelectedTimeChanged="PresetTimePicker1_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
+                                           SelectedTimeChanged="PresetTimePicker1_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280"/>
 
-                <Label Content="Maximun downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,503,74" Height="34"/>
+                <Label Content="Maximum downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,503,74" Height="34"/>
 
                 <materialDesign:TimePicker x:Name="PresetTimePicker2"
                                            Is24Hours="True"
-                                        SelectedTimeChanged="PresetTimePicker2_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280" />
+                                           SelectedTimeChanged="PresetTimePicker2_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280"/>
             </Grid>
 
             <Grid Grid.Row="3" Height="110">
-
                 <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,7,0,71" FontSize="18" Height="34"/>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,8" Width="280" Height="55" >
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,8" Width="280" Height="55">
                     <Grid Margin="7 9">
-
-                        <TextBlock x:Name="textN_Ticket_class"  MouseDown="textN_Ticket_class_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
-                        <TextBox  x:Name="txtN_Ticket_class" TextChanged="txtN_Ticket_class_TextChanged" Style="{StaticResource textBox}"/>
+                        <TextBlock x:Name="textN_Ticket_class" Text="Enter number of airports" MouseDown="textN_Ticket_class_MouseDown" Style="{StaticResource textHint}" Margin="10,0,0,0" Visibility="Visible"/>
+                        <TextBox x:Name="txtN_Ticket_class" TextChanged="txtN_Ticket_class_TextChanged" Style="{StaticResource textBox}" GotFocus="txtN_Ticket_class_GotFocus" LostFocus="txtN_Ticket_class_LostFocus"/>
                     </Grid>
                 </Border>
-
             </Grid>
 
             <Grid Grid.Row="4" Height="110">
-
                 <Label Content="Latest time to book tickets" HorizontalAlignment="Left"  Width="231" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="30,12,0,64" Height="34"/>
 
                 <materialDesign:TimePicker x:Name="PresetTimePicker3"
-                           Is24Hours="True"
-                        SelectedTimeChanged="PresetTimePicker3_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280" />
+                                           Is24Hours="True"
+                                           SelectedTimeChanged="PresetTimePicker3_SelectedTimeChanged" Height="55" Margin="30,44,495,0" VerticalAlignment="Top" Width="280"/>
 
                 <Label Content="Minimum downtime" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="503,12,0,74" Height="34"/>
 
                 <materialDesign:TimePicker x:Name="PresetTimePicker4"
-                           Is24Hours="True"
-                           SelectedTimeChanged="PresetTimePicker4_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280" />
-
+                                           Is24Hours="True"
+                                           SelectedTimeChanged="PresetTimePicker4_SelectedTimeChanged" Height="55" Margin="495,44,30,0" VerticalAlignment="Top" Width="280"/>
             </Grid>
 
             <Grid Grid.Row="5" Height="110">
-
                 <Button Content="Submit"
-                        Style="{StaticResource mainbutton}"
-                        IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0"  Height="57" VerticalAlignment="Top" Margin="292,53,313,0" />
-
+            Style="{StaticResource mainbutton}"
+            IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0"  Height="57" VerticalAlignment="Top" Margin="292,53,313,0"
+            Click="SubmitButton_Click"/>
             </Grid>
-
         </Grid>
+        
+        
     </Border>
+    
 </UserControl>
