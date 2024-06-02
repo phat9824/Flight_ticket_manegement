@@ -114,8 +114,10 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 
-select *from INTERMEDIATE_AIRPORT
-where isDeleted = 0
+SELECT COUNT(*)
+FROM CUSTOMER
+WHERE ID = '12345678901'
+
 
 
 ----------TEST CASE--------
