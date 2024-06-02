@@ -17,6 +17,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Button = System.Windows.Controls.Button;
@@ -179,16 +180,42 @@ namespace GUI.View
              Mô tả: Thêm dữ liệu vào DB, nếu thành công xóa toàn bộ dữ liệu trên UI để nhập tiếp
              */
 
-            MessageBox.Show(customerView.OfType<CustomerDTO>().ToList()[0].ID);
-            string state = string.Empty;
-            state = new BLL.InsertProcessor().Add_ListBookingTicket(customerView.OfType<CustomerDTO>().ToList(), selectedFlight, selectedTicketClass, DateTime.Now, 1);
-
-            MessageBox.Show(state);
+            string state = new BLL.InsertProcessor().Add_ListBookingTicket(customerView.OfType<CustomerDTO>().ToList(), selectedFlight, selectedTicketClass, DateTime.Now, 1);
             
             if (state == string.Empty)
             {
-                // ...
+                ResetData();
             }
+        }
+
+        private void ResetData()
+        {
+            FlightID.Text = string.Empty;
+            DepartureAirport.Text = string.Empty;
+            DestinationAirport.Text = string.Empty;
+            DestinationAirport_popup.Text = string.Empty;
+            DepartureTime.Text = string.Empty;
+            TicketClass.Text = string.Empty;
+            TicketPrice.Text = string.Empty;
+
+            ViewCustomerData = new ObservableCollection<CustomerDTO>();
+            numTicket = ViewCustomerData.Count;
+            customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
+            MyListView.ItemsSource = customerView;
+
+            maxNumTicket = 0;
+            numTicket = 0;
+            ticketPrice = 0;
+
+            TicketQuantity.Text = string.Empty;
+            TotalPrice.Text = string.Empty;
+            NumTicket.Text = string.Empty;
+            SourceAirport_popup.Text = string.Empty;
+            DestinationAirport_popup.Text = string.Empty;
+            TicketClass_popup.Text = string.Empty;
+
+            Flights = new ObservableCollection<FlightInforDTO>();
+            dataGridFlights.ItemsSource = Flights;
         }
 
         private void DepartureDay_popup_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
