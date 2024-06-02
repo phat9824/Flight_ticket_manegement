@@ -23,6 +23,7 @@ using DTO;
 using GUI.ViewModel;
 using System.Collections.ObjectModel;
 using BLL;
+using System.Resources;
 
 namespace GUI.View
 {
@@ -86,10 +87,17 @@ namespace GUI.View
 
         private void Search_TabMonth_Click(object sender, RoutedEventArgs e)
         {
-            DateTime start = startMonth.SelectedDate.HasValue ? startMonth.SelectedDate.Value : new DateTime(1753, 1, 1, 0, 0, 0); // Min Date của SQL
-            DateTime end = endMonth.SelectedDate.HasValue ? endMonth.SelectedDate.Value : new DateTime(9999, 12, 31, 23, 59, 59); // Max Date của SQL
-            int max = -1; // -1 tìm tất cả, có tham số này vì có thể có một số chỉnh sửa để tối ưu hóa trong tương lai
+            string state = string.Empty;
+            //state = Validate();
 
+            if (state != string.Empty)
+            {
+                MessageBox.Show(state);
+                return;
+            }
+
+            int month = Convert.ToInt32(Month_TabMonth.Text.ToString());
+            int year = Convert.ToInt32(Year_TabMonth.Text.ToString());
             List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>();
             int total = 0;
 
@@ -97,7 +105,7 @@ namespace GUI.View
                    Phương thức này cần trả về Tuple với list có kiểu List<ReportByFlightDTO>(), total có kiểu int 
                         + List<ReportByFlightDTO>(): mô tả thuộc tính có trong ReportInfoDTO
                         + total: Tổng doanh thu của tất cả chuyến bay trong list
-            var result = BLL.ProcessMethod(start, end, max);
+            var result = BLL.ProcessMethod(month, year);
             listReportByFlightDTO = result.list;
             total = result.total;
             */
@@ -108,9 +116,16 @@ namespace GUI.View
 
         private void Search_TabYear_Click(object sender, RoutedEventArgs e)
         {
-            DateTime start = DateTime.TryParse($"01/01/{startYear.Text}", out var sDate) ? sDate : new DateTime(1753, 1, 1, 0, 0, 0); // Min Date của SQL
-            DateTime end = DateTime.TryParse($"12/31/{endYear.Text}", out var eDate) ? eDate : new DateTime(9999, 12, 31, 23, 59, 59); // Max Date của SQL
-            int max = -1; // -1 tìm tất cả, có tham số này vì có thể có một số chỉnh sửa để tối ưu hóa trong tương lai
+            string state = string.Empty;
+            //state = Validate();
+
+            if (state != string.Empty)
+            {
+                MessageBox.Show(state);
+                return;
+            }
+
+            int year = Convert.ToInt32(Year_TabYear.Text.ToString());
 
             List<ReportByMonthDTO> listReportByMonthDTO = new List<ReportByMonthDTO>();
             int total = 0;
@@ -118,7 +133,7 @@ namespace GUI.View
                    Phương thức này cần trả về Tuple với list có kiểu List<ReportByMonthDTO>(), total có kiểu int 
                         + List<ReportByMonthDTO>(): mô tả thuộc tính có trong ReportInfoDTO
                         + total: Tổng doanh thu của tất cả tháng trong list
-            var result = BLL.ProcessMethod(start, end, max);
+            var result = BLL.ProcessMethod(year);
             listReportByMonthDTO = result.list;
             total = result.total;
             */
