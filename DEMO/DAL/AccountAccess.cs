@@ -13,6 +13,7 @@ namespace DAL
 {
     public class AccountAccess : DatabaseAccess
     {
+        string state = string.Empty;
         static string ToMD5Hash (string s)
         {
             StringBuilder sb = new StringBuilder ();
@@ -40,7 +41,6 @@ namespace DAL
                 return count > 0;
             }
         }
-
         public int GetPermissionID(string email, string password)
         {
             using (SqlConnection conn = SqlConnectionData.Connect())
@@ -57,8 +57,6 @@ namespace DAL
                 return result != null ? (int)result : 0;
             }
         }
-
-
         private string AutoID()
         {
             SqlConnection con = SqlConnectionData.Connect();
@@ -135,6 +133,54 @@ namespace DAL
                     return $"Insert failed: {ex.Message}";
                 }
             }
+        }
+        public List<ACCOUNT> GetMember(string UserID, string Name)
+        {
+            List<ACCOUNT> data = new List<ACCOUNT>();
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"SELECT UserID, UserName, Phone, Email, Birth, PasswordUser, PermissionID
+                                FROM ACCOUNT
+                                where isDeleted = 0
+                                AND (@UserID IS NULL OR @UserID = UserID)
+                                AND (@UserName IS NULL OR @UserName = UserName)";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@UserName", Name ?? (object)DBNull.Value);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ACCOUNT account = new ACCOUNT()
+                            {
+                                UserID = reader["UserID"].ToString(),
+                                UserName = reader["UserName"].ToString(),
+                                Phone = reader["Phone"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                Birth = Convert.ToDateTime(reader["Email"]),
+                                PasswordUser = reader["PasswordUser"].ToString(),
+                                PermissonID = Convert.ToInt32(reader["PermissionID"]),
+                                IsDeleted = 0
+                            };data.Add(account);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) 
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return data;
+        }
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }
