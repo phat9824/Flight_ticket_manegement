@@ -21,7 +21,7 @@ namespace DAL
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("select *from BOOKING_TICKET", con);
+            SqlCommand cmd = new SqlCommand("select COUNT(*) from BOOKING_TICKET", con);
             int i = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
             i++;
@@ -38,7 +38,7 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO BOOKING_TICKET (TicketID, FlightID, ID, TicketClassID, TicketStatus, BookingDate, isDeleted) VALUES (@TID, @FID, @ID, @TCID, @Status, @date, 0)";
+                        cmd.CommandText = "INSERT INTO BOOKING_TICKET (TicketID, FlightID, ID, TicketClassID, TicketStatus, BookingDate, isDeleted) VALUES (@TID, @FID, @ID, @TCID, @Status, @Date, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
 
@@ -66,6 +66,8 @@ namespace DAL
                         {
                             Value = date
                         };
+
+                        state = FligthID + CusID + TicketClassID + TicketStatus + date.ToString();
 
                         cmd.Parameters.Add(parTID);
                         cmd.Parameters.Add(parFID);
