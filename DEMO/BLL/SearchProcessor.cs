@@ -160,5 +160,18 @@ namespace BLL
             }
             return count;
         }
+        public List<ACCOUNT> GetAccounts(string UserID, string UserName)
+        {
+            List <ACCOUNT> data = new List<ACCOUNT>();  
+            try
+            {
+                data = new DAL.AccountAccess().GetMember(UserID, UserName);
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+            return data;
+        }
     }
 }

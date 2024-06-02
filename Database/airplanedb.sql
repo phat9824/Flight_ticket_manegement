@@ -114,9 +114,8 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 
-SELECT COUNT(*)
-FROM CUSTOMER
-WHERE ID = '12345678901'
+SELECT UserID, UserName, Phone, Email, Birth, PasswordUser, PermissionID
+FROM ACCOUNT
 
 
 
