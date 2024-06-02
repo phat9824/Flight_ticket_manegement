@@ -62,7 +62,7 @@ namespace DAL
                         {
                             Value = TicketStatus
                         };
-                        SqlParameter parDate = new SqlParameter("@Date", SqlDbType.SmallDateTime)
+                        SqlParameter parDate = new SqlParameter("@date", SqlDbType.SmallDateTime)
                         {
                             Value = date
                         };
