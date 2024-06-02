@@ -126,9 +126,12 @@ INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
 INSERT INTO PERMISSION VALUES (2, 'Staff', 0);
 
 --ACCOUNT
-INSERT INTO ACCOUNT VALUES ('000', 'admin', '0123456789', 'admin@example.com', '1980-01-01', 'password1', 1, 0);
-INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@example.com', '1985-02-02', 'password2', 2, 0);
-INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@example.com', '1990-03-03', 'password3', 2, 0);
+-- tk: admin@example.com; pass: password1
+-- tk: staff1@example.com; pass: password2
+-- tk: admin1@example.com; pass: password3
+INSERT INTO ACCOUNT VALUES ('000', 'admin', '0123456789', 'admin@example.com', '1980-01-01', '7c6a180b36896a0a8c02787eeafb0e4c', 1, 0);
+INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@example.com', '1985-02-02', '6cb75f652a9b52798eb6cf2201057c73', 2, 0);
+INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@example.com', '1990-03-03', '819b0643d6b89dc9b579fdfc9094f28e', 2, 0);
 
 --AIRPORT 
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài', 0);
