@@ -114,18 +114,13 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 
-SELECT UserID, UserName, Phone, Email, Birth, PasswordUser, PermissionID
-FROM ACCOUNT
-
-
-
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
 INSERT INTO PERMISSION VALUES (2, 'Staff', 0);
 
 --ACCOUNT
-<<<<<<< HEAD
+
 -- tk: admin@example.com; pass: password1
 -- tk: staff1@example.com; pass: password2
 -- tk: admin1@example.com; pass: password3
@@ -134,8 +129,6 @@ INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@example.com',
 INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@example.com', '1990-03-03', '819b0643d6b89dc9b579fdfc9094f28e', 2, 0);
 INSERT INTO ACCOUNT VALUES ('003', 'Quan', '0987654321', 'quan@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 1, 0);
 INSERT INTO ACCOUNT VALUES ('007', 'Quan', '0987654322', 'quan2@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 2, 0);
->>>>>>> 6080b84eab2cd62513a0ae26be6ba31bea8b657c
-
 --AIRPORT 
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài', 0);
 INSERT INTO AIRPORT VALUES ('001', N'Tân Sơn Nhất', 0);

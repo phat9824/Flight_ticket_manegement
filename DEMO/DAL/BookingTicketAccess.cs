@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,7 +63,7 @@ namespace DAL
                         {
                             Value = TicketStatus
                         };
-                        SqlParameter parDate = new SqlParameter("@date", SqlDbType.SmallDateTime)
+                        SqlParameter parDate = new SqlParameter("@Date", SqlDbType.SmallDateTime)
                         {
                             Value = date
                         };
@@ -142,6 +143,52 @@ namespace DAL
             }
             con.Close();
             return data;
+        }
+        public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightDAL()
+        {
+            List<ReportByFlightDTO> data = new List<ReportByFlightDTO>();
+            int sum = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                //lay ma chuyen bay, voi moi ma lay doanh thu cua chuyen bay do, so ve va tong doanh thu cac chuyen bay
+                string query = @"select F.FlightID, B.TONG_DOANH_THU2, SUM(F.Price * TC.BaseMultiplier) AS TONG_DOANH_THU, COUNT(BT.ID) AS SO_LUONG_VE
+                                from BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
+			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU2
+						                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
+						                WHERE BT2.TicketClassID = TC2.TicketClassID AND BT2.FlightID = F2.FlightID
+						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0) AS B
+                                WHERE BT.TicketClassID = TC.TicketClassID AND BT.FlightID = F.FlightID
+	                            AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TC.isDeleted = 0
+                                GROUP BY F.FlightID, B.TONG_DOANH_THU2";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            sum = Convert.ToInt32(reader["B.TONG_DOANH_THU2"]);
+                            ReportByFlightDTO dto = new ReportByFlightDTO()
+                            {
+                                flightID = reader["F.FlightID"].ToString(),
+                                ticketsSold = Convert.ToInt32(reader["SO_LUONG_VE"]),
+                                revenue = Convert.ToDecimal(reader["B.TONG_DOANH_THU"]),
+                                ratio = Convert.ToDecimal(reader["B.TONG_DOANH_THU"]) / Convert.ToDecimal(reader["B.TONG_DOANH_THU2"])
+                            };
+                            data.Add(dto);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return (data, sum);
         }
         public string GetState()
         {
