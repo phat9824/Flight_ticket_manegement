@@ -80,17 +80,17 @@
             </Grid>
 
             <Grid Grid.Row="1" Height="120">
-                <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="30,10,0,76" FontSize="18"/>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,21" Width="280" >
+                <Label Content="Number of airports" HorizontalAlignment="Left"  Width="171" Foreground="#FF565857" Background="{x:Null}" Margin="493,10,0,76" FontSize="18"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="493,45,32,20" Width="280" >
                     <Grid Margin="7 9">
                         <TextBlock x:Name="textN_Airport" Text="Enter number of airports" MouseDown="textN_Airport_MouseDown" Style="{StaticResource textHint}" Margin="5,0,5,0" Visibility="Visible" RenderTransformOrigin="0.45,0.411"/>
                         <TextBox x:Name="txtN_Airport" TextChanged="txtN_Airport_TextChanged" Style="{StaticResource textBox}" GotFocus="txtN_Airport_GotFocus" LostFocus="txtN_Airport_LostFocus"/>
                     </Grid>
                 </Border>
 
-                <Label Content="Maximum number of intermediate airports" HorizontalAlignment="Left"  Width="280" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="495,10,0,76" Height="34" RenderTransformOrigin="-0.072,0.238"/>
+                <Label Content="Maximum number of intermediate airports" HorizontalAlignment="Left"  Width="359" Foreground="#FF565857" Background="{x:Null}" FontSize="18" Margin="23,11,0,75" Height="34" RenderTransformOrigin="-0.072,0.238"/>
 
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="495,44,30,21" Width="280">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="23,45,428,19">
                     <Grid Margin="7 9">
                         <TextBlock x:Name="textN_Intermediate_Airports" Text="Enter max number of intermediate airports" MouseDown="textN_Intermediate_Airports_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,0,0" Visibility="Visible"/>
                         <TextBox x:Name="txtN_Intermediate_Airports" TextChanged="txtN_Intermediate_Airports_TextChanged" Style="{StaticResource textBox}" GotFocus="txtN_Intermediate_Airports_GotFocus" LostFocus="txtN_Intermediate_Airports_LostFocus"/>
@@ -128,7 +128,7 @@
 
             <Grid Grid.Row="4" Height="110">
                 <Label Content="Number of ticket classes" HorizontalAlignment="Left"  Width="207" Foreground="#FF565857" Background="{x:Null}" Margin="30,6,0,70" FontSize="18" Height="34"/>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,44,495,8" Width="280" Height="55">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,46,487,10" Height="55">
                     <Grid Margin="7 9">
                         <TextBlock x:Name="textN_Ticket_class" Text="Enter number of ticket classes" MouseDown="textN_Ticket_class_MouseDown" Style="{StaticResource textHint}" Margin="10,0,0,0" Visibility="Visible"/>
                         <TextBox x:Name="txtN_Ticket_class" TextChanged="txtN_Ticket_class_TextChanged" Style="{StaticResource textBox}" GotFocus="txtN_Ticket_class_GotFocus" LostFocus="txtN_Ticket_class_LostFocus"/>
