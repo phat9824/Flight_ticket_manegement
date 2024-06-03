@@ -142,7 +142,7 @@ namespace GUI.View
 
         private void CheckAirportCount(int enteredAirportCount)
         {
-            int currentAirportCount = GetCurrentAirportCount();
+            int currentAirportCount = 10;
             if (enteredAirportCount != currentAirportCount)
             {
                     MessageBox.Show("Số lượng sân bay nhập vào ít hơn số lượng hiện có. Hãy thêm thêm sân bay hoặc xóa bớt sân bay.");
@@ -153,19 +153,6 @@ namespace GUI.View
             }
         }
 
-        private int GetCurrentAirportCount()
-        {
-            int count = 0;
-            string query = "SELECT COUNT(*) FROM AIRPORT";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                count = (int)command.ExecuteScalar();
-            }
-
-            return count;
-        }
     }
 }
