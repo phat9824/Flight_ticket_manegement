@@ -83,7 +83,6 @@ namespace DAL
                             return "No rows were inserted.";
                         }
                     }
-
                     transaction.Commit();
                     return string.Empty; // Chuỗi rỗng xem như thành công
                 }
