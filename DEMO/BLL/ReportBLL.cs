@@ -13,9 +13,9 @@ namespace BLL
 {
     public class ReportBLL
     {
-        public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightBLL()
+        public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightBLL(int Month, int Year)
         {
-            return new DAL.BookingTicketAccess().GetReportByFlightDAL();
+            return new DAL.BookingTicketAccess().GetReportByFlightDAL(Month, Year);
         }
     }
 }

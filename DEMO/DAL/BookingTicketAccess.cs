@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.IO.Ports;
 using System.Linq;
@@ -144,7 +145,7 @@ namespace DAL
             con.Close();
             return data;
         }
-        public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightDAL()
+        public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightDAL(int month, int year)
         {
             List<ReportByFlightDTO> data = new List<ReportByFlightDTO>();
             int sum = 0;
@@ -162,10 +163,15 @@ namespace DAL
 						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0) AS B
                                 WHERE BT.TicketClassID = TC.TicketClassID AND BT.FlightID = F.FlightID
 	                            AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TC.isDeleted = 0
+                                AND YEAR(BT.BookingDate) = @Year
+                                AND MONTH(BT.BookingDate) = @Month
                                 GROUP BY F.FlightID, B.TONG_DOANH_THU2";
 
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
+                    command.Parameters.AddWithValue("@Year", year);
+                    command.Parameters.AddWithValue("@Month", month);
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
