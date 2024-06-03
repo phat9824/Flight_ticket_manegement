@@ -196,6 +196,74 @@ namespace DAL
             con.Close();
             return (data, sum);
         }
+
+        public (List<ReportByMonthDTO> reportByMonthDTOs, int total) GetReportByMonthDAL(int Year)
+        {
+            List<ReportByMonthDTO> data = new List<ReportByMonthDTO>();
+            int sum = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                
+                // vô sql coi giải thích comment 
+                string query = @"
+                        select 
+                                    MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, 
+                                    SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_THEO_THANG,
+                                    COUNT(F.FlightID) AS SO_CHUYEN_BAY, DOANH_THU_CA_NAM
+
+                        from 
+                                    BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
+
+                                    (
+                                    select 
+                                        SUM(F2.Price * TC2.BaseMultiplier) AS DOANH_THU_CA_NAM
+	                                from 
+                                        BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
+                                    where 
+                                        BT2.FlightID = F2.FlightID AND BT2.TicketClassID = TC2.TicketClassID
+                                        AND BT2.isDeleted = 0 AND F2.isDeleted = 0 AND TC2.isDeleted = 0
+                                    ) AS A
+                        where 
+                                    BT.FlightID = F.FlightID 
+                                    AND BT.TicketClassID = TC.TicketClassID
+                                    AND (YEAR(BT.BookingDate) = @Year)
+                                    AND (BT.isDeleted = 0 AND F.isDeleted = 0 AND TC.isDeleted = 0)
+
+                        group by 
+                                    MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, DOANH_THU_CA_NAM";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@Year", Year);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            sum = Convert.ToInt32(reader["DOANH_THU_CA_NAM"]);
+                            ReportByMonthDTO dto = new ReportByMonthDTO()
+                            {
+                                time = new DateTime(Convert.ToInt32(reader["nam"]), Convert.ToInt32(reader["thang"]), 1),
+                                flightQuantity = Convert.ToInt32(reader["SO_CHUYEN_BAY"]),
+                                revenue = Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]),
+                                ratio = Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]) / Convert.ToDecimal(reader["DOANH_THU_CA_NAM"])
+                            }; data.Add(dto);
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+
+            con.Close();
+            return (data, sum);
+        }
+
         public string GetState()
         {
             return this.state;
