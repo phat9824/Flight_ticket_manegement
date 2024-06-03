@@ -7,13 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI.View
 {
@@ -86,7 +80,35 @@ namespace GUI.View
             }
         }
 
-        private void PresetTimePicker_SelectedTimeChanged(object sender, RoutedEventArgs e) { }
+        private void textN_Intermediate_Airports_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtN_Intermediate_Airports.Focus();
+        }
+
+        private void txtN_Intermediate_Airports_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtN_Intermediate_Airports.Text) && txtN_Intermediate_Airports.Text.Length > 0)
+            {
+                textN_Intermediate_Airports.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textN_Intermediate_Airports.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtN_Intermediate_Airports_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textN_Intermediate_Airports.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtN_Intermediate_Airports_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtN_Intermediate_Airports.Text))
+            {
+                textN_Intermediate_Airports.Visibility = Visibility.Visible;
+            }
+        }
 
         private void PresetTimePicker_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
@@ -94,6 +116,14 @@ namespace GUI.View
             var newValue = e.NewValue.HasValue ? e.NewValue.Value.ToLongTimeString() : "NULL";
 
             Debug.WriteLine($"PresetTimePicker's SelectedTime changed from {oldValue} to {newValue}");
+        }
+
+        private void PresetTimePickerMaxFlightTime_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+            var oldValue = e.OldValue.HasValue ? e.OldValue.Value.ToLongTimeString() : "NULL";
+            var newValue = e.NewValue.HasValue ? e.NewValue.Value.ToLongTimeString() : "NULL";
+
+            Debug.WriteLine($"PresetTimePickerMaxFlightTime's SelectedTime changed from {oldValue} to {newValue}");
         }
 
         private void PresetTimePicker1_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
@@ -145,14 +175,12 @@ namespace GUI.View
             int currentAirportCount = 10;
             if (enteredAirportCount != currentAirportCount)
             {
-                    MessageBox.Show("Số lượng sân bay nhập vào ít hơn số lượng hiện có. Hãy thêm thêm sân bay hoặc xóa bớt sân bay.");
+                MessageBox.Show("Số lượng sân bay nhập vào ít hơn số lượng hiện có. Hãy thêm thêm sân bay hoặc xóa bớt sân bay.");
             }
             else
             {
                 MessageBox.Show("Số lượng sân bay nhập vào khớp với số lượng hiện có.");
             }
         }
-
-
     }
 }
