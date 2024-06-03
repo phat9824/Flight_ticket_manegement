@@ -106,6 +106,28 @@ namespace DAL
                 
             }
         }
+        //
+        public int GetNumIntermidiateAirport()
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            string state = string.Empty;
+            int count = 0;
+            try
+            {
+                con.Open();
+                string query = @"select count(*) from INTERMEDIATE_AIRPORT";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    count = (int)command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return count;
+        }
         public string GetState()
         {
             return this.state;

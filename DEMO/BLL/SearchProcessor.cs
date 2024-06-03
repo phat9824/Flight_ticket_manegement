@@ -173,5 +173,18 @@ namespace BLL
             }
             return data;
         }
+        public int GetNumIntermidiateAirport()
+        {
+            int count = 0;
+            try
+            {
+                count = new DAL.IntermidateAirportAccess().GetNumIntermidiateAirport();
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+            return count;
+        }
     }
 }

@@ -172,7 +172,7 @@ namespace GUI.View
 
         private void CheckAirportCount(int enteredAirportCount)
         {
-            int currentAirportCount = 10;
+            int currentAirportCount = new BLL.SearchProcessor().GetNumIntermidiateAirport();
             if (enteredAirportCount != currentAirportCount)
             {
                 MessageBox.Show("Số lượng sân bay nhập vào ít hơn số lượng hiện có. Hãy thêm thêm sân bay hoặc xóa bớt sân bay.");

@@ -114,6 +114,8 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 
+select count(*) from INTERMEDIATE_AIRPORT
+
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
