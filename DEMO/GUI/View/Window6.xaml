@@ -176,7 +176,7 @@
                 <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Sell Ticket" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 10 0 0"
+            <TextBlock Text="Sell Ticket" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="20 10 0 0"
                        HorizontalAlignment="Left" Foreground="#121518"/>
 
             <TextBlock x:Name="Duration" Text="00:00"

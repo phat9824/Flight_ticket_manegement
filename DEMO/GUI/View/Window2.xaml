@@ -565,67 +565,62 @@
 
     </UserControl.Resources>
     <Border  Background="#f8f7fc" CornerRadius="0 20 20 0">
-        <Grid>
-            <Grid Background="#f8f7fc" Margin="17,20,10,3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+        <Grid Background="#f8f7fc" Margin="17,20,10,3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-                <!--Search Textbox-->
-                <Grid Width="225" HorizontalAlignment="Left" Margin="429,10,0,6" Grid.Row="1">
+            <!--Search Textbox-->
+            <Grid Width="225" HorizontalAlignment="Left" Margin="429,10,0,6" Grid.Row="1">
 
-                    <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="33" TextChanged="textBoxSearch_TextChanged" TextAlignment="Justify" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
+                <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="33" TextChanged="textBoxSearch_TextChanged" TextAlignment="Justify" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-                </Grid>
+                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
 
+            </Grid>
 
 
-                <!--Page Title-->
-                <TextBlock Text="List of flights" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+
+            <!--Page Title-->
+            <TextBlock Text="List of flights" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="10 7 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
-                <!--Add Button-->
-
-                <!--Seprator-->
-                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 1 0 10"/>
-                <DockPanel LastChildFill="False" Grid.Row="5"/>
+            <!--Add Button-->
 
 
 
-                <ComboBox x:Name="SourceAirport"
+            <ComboBox x:Name="SourceAirport"
                           materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying From"
                           materialDesign:HintAssist.HintOpacity=".26"
                           IsEditable="True" Margin="15,20,647,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100"
                           DisplayMemberPath="AirportName"
                           SelectedValuePath="AirportID">
-                </ComboBox>
-                <ComboBox x:Name="DestinationAirport" materialDesign:ComboBoxAssist.MaxLength="2"
+            </ComboBox>
+            <ComboBox x:Name="DestinationAirport" materialDesign:ComboBoxAssist.MaxLength="2"
                           materialDesign:HintAssist.Hint="Flying To"
                           materialDesign:HintAssist.HintOpacity=".26"
                           IsEditable="True" Margin="146,20,516,0" Grid.Row="5" VerticalAlignment="Top" Height="50" MaxWidth="100"
                           DisplayMemberPath="AirportName"
                           SelectedValuePath="AirportID">
-                </ComboBox>
+            </ComboBox>
 
-                <DatePicker x:Name="StartDay"
+            <DatePicker x:Name="StartDay"
                             Width="140"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Pick Date"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="276,20,346,0" Grid.Row="5" VerticalAlignment="Top" IsTodayHighlighted="False" />
-                <DatePicker x:Name="EndDay"
+            <DatePicker x:Name="EndDay"
                             Width="140"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Pick Date"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="410,20,182,0" Grid.Row="5" VerticalAlignment="Top" />
-                <ComboBox x:Name = "SortProperty"
+            <ComboBox x:Name = "SortProperty"
                           materialDesign:HintAssist.HelperText=""
                           materialDesign:HintAssist.Hint="Sort By"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="535,20,8,0" Grid.Row="5"
@@ -633,9 +628,9 @@
                           SelectionChanged="ComboBox_SelectionChanged"
                           DisplayMemberPath="property"
                           SelectedValuePath="map_peoperty">
-                </ComboBox>
+            </ComboBox>
 
-                <!--
+            <!--
                 <Button Grid.Row="5"
                         Margin="700 20 8 0" VerticalAlignment="Top"
                         Width="50" Height="50"
@@ -644,52 +639,52 @@
                 </Button>
                 -->
 
-                <!--DataGrid-->
-                <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="50" ElementStyle="{StaticResource CheckBoxStyle1}">
-                            <DataGridCheckBoxColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
-                                </DataTemplate>
-                            </DataGridCheckBoxColumn.HeaderTemplate>
-                        </DataGridCheckBoxColumn>
+            <!--DataGrid-->
+            <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn CanUserResize="False" Width="50" ElementStyle="{StaticResource CheckBoxStyle1}">
+                        <DataGridCheckBoxColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+                            </DataTemplate>
+                        </DataGridCheckBoxColumn.HeaderTemplate>
+                    </DataGridCheckBoxColumn>
 
-                        <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
+                    <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
 
-                        <DataGridTemplateColumn Header="Departure airport" IsReadOnly="True" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
-                                            <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                        </Border>
-                                        <TextBlock Text="{Binding SanBayDi}" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Departure airport" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
+                                        <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding SanBayDi}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Destination airport" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
-                        <DataGridTextColumn Header="Departure time" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
-                        <DataGridTextColumn Header="Duration" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
-                        <DataGridTextColumn Header="Empty seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
-                        <DataGridTextColumn Header="Booked seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
-                        <DataGridTemplateColumn IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
-                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                        <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
+                    <DataGridTextColumn Header="Destination airport" IsReadOnly="True" Width="*" Binding="{Binding SanBayDen}"/>
+                    <DataGridTextColumn Header="Departure time" IsReadOnly="True" Width="*" Binding="{Binding KhoiHanh}"/>
+                    <DataGridTextColumn Header="Duration" IsReadOnly="True" Width="*" Binding="{Binding ThoiGian}"/>
+                    <DataGridTextColumn Header="Empty seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheTrong}"/>
+                    <DataGridTextColumn Header="Booked seat" IsReadOnly="True" Width="*" Binding="{Binding SoGheDat}"/>
+                    <DataGridTemplateColumn IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
                             <DataGridTextColumn.Binding>
                                 <Binding Path="SanBayDi"/>
                             </DataGridTextColumn.Binding>
@@ -725,18 +720,17 @@
                             </DataGridTextColumn.Binding>
                         </DataGridTextColumn>-->
 
-                    </DataGrid.Columns>
-                </DataGrid>
+                </DataGrid.Columns>
+            </DataGrid>
 
-                <!--Pagination Section-->
-                <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
+            <!--Pagination Section-->
+            <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
                         CornerRadius="5" Background="White">
 
-                </Border>
-                <Button Content="Search"
+            </Border>
+            <Button Content="Search"
                         Click="Search_Click"
                         HorizontalAlignment="Left" Margin="667,0,0,0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource addButton}" Width="101"/>
-            </Grid>
         </Grid>
     </Border>
 </UserControl>

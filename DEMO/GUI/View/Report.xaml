@@ -69,9 +69,10 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-    </UserControl.Resources>
 
+    </UserControl.Resources>
+    
+    
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -82,7 +83,7 @@
                    Grid.Row="0"
                    FontSize="32" FontWeight="SemiBold"
                    HorizontalAlignment="Left" VerticalAlignment="Top"
-                   Margin="10 7 0 0" Height="43" Width="341"/>
+                   Margin="20 10 0 0" Height="43" Width="341"/>
 
         <TabControl Grid.Row="1">
             <TabItem Header="Month"

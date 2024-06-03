@@ -586,7 +586,7 @@
 
 
             <!--Page Title-->
-            <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+            <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 10 0 0"
                         HorizontalAlignment="Left" Foreground="#121518"/>
             <!--Add Button-->
 
@@ -596,9 +596,6 @@
                     <TextBlock Text="Add New Member"/>
                 </StackPanel>
             </Button>
-            <!--Seprator-->
-            <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 1 0 10"/>
-            <DockPanel LastChildFill="False" Grid.Row="5"/>
 
             <ComboBox materialDesign:HintAssist.HelperText=""
                        materialDesign:HintAssist.Hint="Sort By"

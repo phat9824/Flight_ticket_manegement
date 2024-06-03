@@ -123,7 +123,7 @@
                              Command="{Binding Window10Command}">
                         <Grid>
 
-                            <TextBlock Text="Window10" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
+                            <TextBlock Text="General rules" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
                 </StackPanel>

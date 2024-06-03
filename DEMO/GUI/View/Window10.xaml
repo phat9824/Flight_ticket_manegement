@@ -75,7 +75,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Height="70">
-                <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="10 20 0 0"
+                <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="20 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
             </Grid>
 
