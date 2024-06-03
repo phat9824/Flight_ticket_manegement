@@ -111,5 +111,19 @@ namespace BLL
         {
             return new DAL.ParameterAccess().InsertParamater(parameterDTO);
         }
+        // insert Intermidiate Airport
+        public string InsertIntermidiateAirport(List<IntermediateAirportDTO> data)
+        {
+            string st = string.Empty;
+            foreach (IntermediateAirportDTO dto in data)
+            {
+                st = new DAL.IntermidateAirportAccess().InsertIntermidiateAirport(dto);
+                if(st != string.Empty)
+                {
+                    return st;
+                }
+            }
+            return st;
+        }
     }
 }
