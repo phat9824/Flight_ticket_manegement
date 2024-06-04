@@ -92,10 +92,11 @@ namespace GUI.View
 
             if (state != string.Empty)
             {
+                
                 MessageBox.Show(state);
                 return;
             }
-
+            
             int month = Convert.ToInt32(Month_TabMonth.Text.ToString());
             int year = Convert.ToInt32(Year_TabMonth.Text.ToString());
             List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>();
@@ -107,8 +108,11 @@ namespace GUI.View
             total = result.total;
             state = prc.GetState();
 
+            
+
             if (state != string.Empty)
             {
+
                 MessageBox.Show(state);
             }
 

@@ -155,9 +155,9 @@ namespace DAL
             {
                 con.Open();
                 //lay ma chuyen bay, voi moi ma lay doanh thu cua chuyen bay do, so ve va tong doanh thu cac chuyen bay
-                string query = @"select F.FlightID, B.TONG_DOANH_THU2, SUM(F.Price * TC.BaseMultiplier) AS TONG_DOANH_THU, COUNT(BT.ID) AS SO_LUONG_VE
+                string query = @"select F.FlightID AS FLIGHTID, TONG_DOANH_THU , SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_CB, COUNT(BT.ID) AS SO_LUONG_VE
                                 from BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
-			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU2
+			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU
 						                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
 						                WHERE BT2.TicketClassID = TC2.TicketClassID AND BT2.FlightID = F2.FlightID
 						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0) AS B
@@ -165,7 +165,7 @@ namespace DAL
 	                            AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TC.isDeleted = 0
                                 AND YEAR(BT.BookingDate) = @Year
                                 AND MONTH(BT.BookingDate) = @Month
-                                GROUP BY F.FlightID, B.TONG_DOANH_THU2";
+                                GROUP BY F.FlightID, B.TONG_DOANH_THU";
 
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
@@ -176,14 +176,14 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            sum = Convert.ToInt32(reader["B.TONG_DOANH_THU2"]);
+                            sum = Convert.ToInt32(reader["TONG_DOANH_THU"]);
                             ReportByFlightDTO dto = new ReportByFlightDTO()
                             {
-                                flightID = reader["F.FlightID"].ToString(),
+                                flightID = reader["FLIGHTID"].ToString(),
                                 ticketsSold = Convert.ToInt32(reader["SO_LUONG_VE"]),
-                                revenue = Convert.ToDecimal(reader["B.TONG_DOANH_THU"]),
-                                ratio = Convert.ToDecimal(reader["B.TONG_DOANH_THU"]) / Convert.ToDecimal(reader["B.TONG_DOANH_THU2"])
-                            };
+                                revenue = Convert.ToDecimal(reader["DOANH_THU_CB"]),
+                                ratio = Math.Round(Convert.ToDecimal(reader["DOANH_THU_CB"]) / sum, 2)
+                        };
                             data.Add(dto);
                         }
                     }
