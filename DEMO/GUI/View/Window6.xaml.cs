@@ -17,6 +17,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Button = System.Windows.Controls.Button;
@@ -28,12 +29,15 @@ namespace GUI.View
     /// </summary>
     public partial class Window6 : UserControl
     {
-        private ObservableCollection<CustomerDTO> ViewCustomerData { get; set; }
-        public ObservableCollection<FlightInforDTO> Flights { get; set; }
+        private ObservableCollection<CustomerDTO> ViewCustomerData { get; set; } // Danh sách khách hàng được nhập
+        public ObservableCollection<FlightInforDTO> Flights { get; set; } // Danh sách chuyến bay thảo mãn
 
-        private int maxNumTicket = 0;
-        private int numTicket = 0;
-        private Int64 ticketPrice = 0;
+        private FlightDTO selectedFlight { get; set; } // Chuyến bay được chọn
+        private TicketClassDTO selectedTicketClass { get; set; } // Hạng vé ứng với chuyến bay được chọn
+
+        private Int32 maxNumTicket = 0; // Số vé tôi đa cho phép nhập = số ghế trống của chuyến bay được chọn
+        private Int32 numTicket = 0; // Số vé cần/đang nhập
+        private Int64 ticketPrice = 0; // Giá mỗi vé
 
         private ICollectionView customerView;
 
@@ -98,17 +102,24 @@ namespace GUI.View
                 ViewCustomerData.Remove(itemToRemove);
                 numTicket = ViewCustomerData.Count;
                 TicketQuantity.Text = numTicket.ToString();
+                TotalPrice.Text = (numTicket * ticketPrice).ToString();
             }
         }
 
         private void SelectButton_Click_1(object sender, RoutedEventArgs e)
-        {
+        {   
+            /*
+             Sau khi nhấn nút chọn, các thuộc tính cần thiết sẽ được điền
+             */
             Button selectButton = sender as System.Windows.Controls.Button;
             if (selectButton != null)
             {
                 FlightInforDTO selectedFlightInfo = selectButton.DataContext as FlightInforDTO;
                 if (selectedFlightInfo != null)
                 {
+                    selectedFlight = selectedFlightInfo.Flight;
+                    selectedTicketClass = new TicketClassDTO() { TicketClassID = TicketClass_popup.SelectedValue.ToString(), TicketClassName = ticketClassDictionary[TicketClass_popup.SelectedValue.ToString()] };
+                    
                     SearchFlight_Popup.IsOpen = false;
                     FlightID.Text = selectedFlightInfo.Flight.FlightID;
                     DepartureAirport.Text = airportDictionary[selectedFlightInfo.Flight.SourceAirportID];
@@ -124,15 +135,16 @@ namespace GUI.View
                     {
                         TicketClass.Text = "All";
                     }
-                    TicketPrice.Text = selectedFlightInfo.Flight.Price.ToString();
+                    TicketPrice.Text = (Convert.ToInt64(selectedFlightInfo.Flight.Price)).ToString() + "  VND";
                     maxNumTicket = selectedFlightInfo.emptySeats;
-                    TicketQuantity.Text = maxNumTicket.ToString();
-                    TotalPrice.Text = (numTicket * selectedFlightInfo.Flight.Price).ToString();
+                    numTicket = Convert.ToInt32(NumTicket.Text.ToString());
+                    TicketQuantity.Text = numTicket.ToString();
+                    TotalPrice.Text = Convert.ToInt64((numTicket * selectedFlightInfo.Flight.Price)).ToString() + "  VND";
 
                     var cus = new ObservableCollection<CustomerDTO>();
-                    for (int i = 0; i < maxNumTicket; i++)
+                    for (int i = 0; i < numTicket; i++)
                     {
-                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "" });
+                        cus.Add(new CustomerDTO { ID = "", CustomerName = "", Phone = "", Email = "", Birth = new DateTime(2000, 1, 1) });
                     }
                     ViewCustomerData = cus;
                     customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
@@ -160,6 +172,50 @@ namespace GUI.View
             dataGridFlights.ItemsSource = new ObservableCollection<FlightInforDTO>(flights);
 
             /*MessageBox.Show(flights.list.Count + flights.list[0].Flight.FlightID + flights.state + "\n Chỉ dùng cho debug", "Debug");*/
+        }
+
+        private void Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+             Mô tả: Thêm dữ liệu vào DB, nếu thành công xóa toàn bộ dữ liệu trên UI để nhập tiếp
+             */
+
+            string state = new BLL.InsertProcessor().Add_ListBookingTicket(customerView.OfType<CustomerDTO>().ToList(), selectedFlight, selectedTicketClass, DateTime.Now, 1);
+            
+            if (state == string.Empty)
+            {
+                ResetData();
+            }
+        }
+
+        private void ResetData()
+        {
+            FlightID.Text = string.Empty;
+            DepartureAirport.Text = string.Empty;
+            DestinationAirport.Text = string.Empty;
+            DestinationAirport_popup.Text = string.Empty;
+            DepartureTime.Text = string.Empty;
+            TicketClass.Text = string.Empty;
+            TicketPrice.Text = string.Empty;
+
+            ViewCustomerData = new ObservableCollection<CustomerDTO>();
+            numTicket = ViewCustomerData.Count;
+            customerView = CollectionViewSource.GetDefaultView(ViewCustomerData);
+            MyListView.ItemsSource = customerView;
+
+            maxNumTicket = 0;
+            numTicket = 0;
+            ticketPrice = 0;
+
+            TicketQuantity.Text = string.Empty;
+            TotalPrice.Text = string.Empty;
+            NumTicket.Text = string.Empty;
+            SourceAirport_popup.Text = string.Empty;
+            DestinationAirport_popup.Text = string.Empty;
+            TicketClass_popup.Text = string.Empty;
+
+            Flights = new ObservableCollection<FlightInforDTO>();
+            dataGridFlights.ItemsSource = Flights;
         }
 
         private void DepartureDay_popup_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -191,10 +247,7 @@ namespace GUI.View
 
         }
 
-        private void Confirm_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
         private void FindFlight_Click(object sender, RoutedEventArgs e)
         {
             SearchFlight_Popup.IsOpen = true;

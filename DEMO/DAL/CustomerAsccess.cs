@@ -8,22 +8,39 @@ using System.Data;
 using DTO;
 using System.Runtime.CompilerServices;
 using System.Collections;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace DAL
 {
     public class CustomerAsccess : DatabaseAccess
     {
         string state = string.Empty; // Chuỗi rỗng xem như thành công
-        public string AutoID()
+        public bool isExits(CustomerDTO customer)
         {
             SqlConnection con = SqlConnectionData.Connect();
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand("select count(*) from CUSTOMER", con);
-            int i = Convert.ToInt32(cmd.ExecuteScalar());
+            string state = string.Empty;
+            bool ok = false;
+            try
+            {
+                con.Open();
+                string query = @"SELECT COUNT(*)
+                                FROM CUSTOMER
+                                WHERE ID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", customer.ID);
+                    if((int)command.ExecuteScalar() != 0)
+                    {
+                        ok = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
             con.Close();
-            i++;
-            return i.ToString("CS000");
+            return ok;
         }
         public string Add_Customer(CustomerDTO customer)
         {
@@ -36,15 +53,15 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO CUSTOMER (ID, CustomerName, Phone, Email, Birth) VALUES (@ID, @Name, @Phone, @Mail, @Birth)";
+                        cmd.CommandText = "INSERT INTO CUSTOMER (ID, CustomerName, Phone, Email, Birth, isDeleted) VALUES (@ID, @Name, @Phone, @Mail, @Birth, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
 
                         SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20)
                         {
-                            Value = new CustomerAsccess().AutoID()
+                            Value = customer.ID
                         };
-                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.VarChar, 40)
+                        SqlParameter parName = new SqlParameter("@Name", SqlDbType.NVarChar, 40)
                         {
                             Value = customer.CustomerName
                         };

@@ -62,7 +62,7 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="10 7 0 0" Height="43" Width="341"/>
+            <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="20 10 0 0" Height="43" Width="341"/>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

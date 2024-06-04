@@ -48,6 +48,7 @@
     <Compile Include="Customer_BLL.cs" />
     <Compile Include="InsertProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportBLL.cs" />
     <Compile Include="SearchProcessor.cs" />
     <Compile Include="Ticket_Class_BLL.cs" />
     <Compile Include="UpdateDataProcessor.cs" />

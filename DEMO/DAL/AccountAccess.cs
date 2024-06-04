@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Principal;
+using System.Security.Cryptography; //MD5
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
@@ -12,11 +13,49 @@ namespace DAL
 {
     public class AccountAccess : DatabaseAccess
     {
-
-        public string CheckLogic(ACCOUNT acc)
+        string state = string.Empty;
+        static string ToMD5Hash (string s)
         {
-            string info = CheckLogicDTO(acc);
-            return info;
+            StringBuilder sb = new StringBuilder ();
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] md5HashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(s));
+                foreach (byte b in md5HashBytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+            }
+            return sb.ToString ();
+        }
+        public bool CheckAccountExists(string email)
+        {
+            using (SqlConnection conn = SqlConnectionData.Connect())
+            {
+                string query = "SELECT COUNT(*) FROM ACCOUNT WHERE Email = @email";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+
+                return count > 0;
+            }
+        }
+        public int GetPermissionID(string email, string password)
+        {
+            using (SqlConnection conn = SqlConnectionData.Connect())
+            {
+                string query = "SELECT PermissionID FROM ACCOUNT WHERE Email = @email AND PasswordUser = @password";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                //cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@password", ToMD5Hash(password));
+                
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+
+                return result != null ? (int)result : 0;
+            }
         }
         private string AutoID()
         {
@@ -40,7 +79,7 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "insert into ACCOUNT values(@ID, @Name, @SDT, @Email, @Birth, @Pass, @Permission)";
+                        cmd.CommandText = "insert into ACCOUNT values(@ID, @Name, @SDT, @Email, @Birth, @Pass, @Permission, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
                         SqlParameter parID = new SqlParameter("@ID", SqlDbType.VarChar, 20)
@@ -65,7 +104,7 @@ namespace DAL
                         };
                         SqlParameter parPass = new SqlParameter("@Pass", SqlDbType.VarChar, 60)
                         {
-                            Value = User.PasswordUser
+                            Value = ToMD5Hash(User.PasswordUser)
                         };
                         SqlParameter parPer = new SqlParameter("@Permission", SqlDbType.Int)
                         {
@@ -94,6 +133,58 @@ namespace DAL
                     return $"Insert failed: {ex.Message}";
                 }
             }
+        }
+        public List<ACCOUNT> GetMember(ACCOUNT dto)
+        {
+            List<ACCOUNT> data = new List<ACCOUNT>();
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"SELECT UserID, UserName, Phone, Email, Birth, PasswordUser, PermissionID
+                                FROM ACCOUNT
+                                where isDeleted = 0
+                                AND (@UserID IS NULL OR @UserID = UserID)
+                                AND (@UserName IS NULL OR @UserName = UserName)
+                                AND (@Email IS NULL OR @Email = Email)
+                                AND (@Phone IS NULL OR @Phone = Phone)";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@UserID", dto.UserID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@UserName", dto.UserName ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Email", dto.Email ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Phone", dto.Phone ?? (object)DBNull.Value);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ACCOUNT account = new ACCOUNT()
+                            {
+                                UserID = reader["UserID"].ToString(),
+                                UserName = reader["UserName"].ToString(),
+                                Phone = reader["Phone"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                Birth = Convert.ToDateTime(reader["Email"]),
+                                PasswordUser = reader["PasswordUser"].ToString(),
+                                PermissonID = Convert.ToInt32(reader["PermissionID"]),
+                                IsDeleted = 0
+                            };data.Add(account);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex) 
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return data;
+        }
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }

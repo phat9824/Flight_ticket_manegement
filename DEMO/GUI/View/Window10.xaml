@@ -81,6 +81,10 @@
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,5">
                 <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="10 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518" Width="250"/>
+            <Grid Grid.Row="0" Height="70">
+                <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="20 20 0 0"
+                           HorizontalAlignment="Left" Foreground="#121518"/>
+
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="0">

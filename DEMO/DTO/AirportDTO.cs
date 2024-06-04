@@ -10,6 +10,7 @@ namespace DTO
     {
         private string airportID;
         private string airportName;
+        private int isDeleted;
 
         public string AirportID
         {
@@ -21,6 +22,11 @@ namespace DTO
         {
             get => airportName;
             set => airportName = value;
+        }
+        public int IsDeleted
+        {
+               get => isDeleted;    
+               set => isDeleted = value;
         }
     }
 

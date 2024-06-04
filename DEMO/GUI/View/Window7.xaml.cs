@@ -93,11 +93,11 @@ namespace GUI.View
             string b = DestinationAirport.SelectedValue as string;
 
             // Check if SourceAirport or DestinationAirport are empty
-            if (IsEmpty(a) || IsEmpty(b))
+            /*if (IsEmpty(a) || IsEmpty(b))
             {
                 MessageBox.Show("Source or Destination airport cannot be empty.");
                 return;
-            }
+            }*/
 
             // 2 Giá trị dưới là min và max cho phép của SQL
             DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);

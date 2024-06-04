@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    internal class DeleteDataProcessor
+    public class DeleteDataProcessor
     {
+        string state = string.Empty;
+        public DeleteDataProcessor() { }
+        public int DeleteIntermidiateAirport(string AirportID)
+        {
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = new DAL.IntermidateAirportAccess().DeleteIntermidiateAirport(AirportID);
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            return rowsAffected;
+        }
+        public string getState()
+        { 
+            return state;
+        }
     }
 }

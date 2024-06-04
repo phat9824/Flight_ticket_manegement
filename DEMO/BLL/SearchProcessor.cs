@@ -120,9 +120,71 @@ namespace BLL
             return new ObservableCollection<T>(sortedItems);
         }
 
-        public static ParameterDTO GetParameterDTO()
+        public ParameterDTO GetParameterDTO()
         {
-            return ParameterAccess.GetParameters();
+            ParameterDTO parameterDTO = new ParameterDTO();
+            try
+            {
+                parameterDTO = new DAL.ParameterAccess().GetParameters();
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+
+            }
+            return parameterDTO;
+        }
+        public List<BookingTicketDTO> GetBookingTicket(string TicketID, string CustomerID, string FLigthID, int Status)
+        {
+            List<BookingTicketDTO> data = new List<BookingTicketDTO>();
+            try
+            {
+                data = new DAL.BookingTicketAccess().GetBookingTicket(TicketID, CustomerID, FLigthID, Status);
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+            return data;
+        }
+        public int GetNumIntermidateAirport(string FlightID)
+        {
+            int count = 0;
+            try
+            {
+                count = new DAL.IntermidateAirportAccess().GetNumIntermidateAirport(FlightID);
+            }
+            catch (Exception ex) 
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+            return count;
+        }
+        public List<ACCOUNT> GetAccounts(ACCOUNT account)
+        {
+            List <ACCOUNT> data = new List<ACCOUNT>();  
+            try
+            {
+                data = new DAL.AccountAccess().GetMember(account);
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+            return data;
+        }
+        public int GetNumIntermidiateAirport()
+        {
+            int count = 0;
+            try
+            {
+                count = new DAL.IntermidateAirportAccess().GetNumIntermidiateAirport();
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+            return count;
         }
     }
 }

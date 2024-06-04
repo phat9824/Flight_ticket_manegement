@@ -8,11 +8,12 @@ using System.Data;
 using DTO;
 using System.Runtime.CompilerServices;
 using System.Collections;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace DAL
 {
     public class FlightAccess : DatabaseAccess
-    {   
+    {
         string state = string.Empty; // Chuỗi rỗng xem như thành công
         public string AutoID()
         {
@@ -38,7 +39,7 @@ namespace DAL
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO FLIGHT (FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price) VALUES (@ID, @SouID, @DesID, @FlDay, @FlTime, @Price)";
+                        cmd.CommandText = "INSERT INTO FLIGHT (FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price, isDeleted) VALUES (@ID, @SouID, @DesID, @FlDay, @FlTime, @Price, 0)";
                         cmd.Connection = con;
                         cmd.Transaction = transaction;
 
@@ -82,7 +83,6 @@ namespace DAL
                             return "No rows were inserted.";
                         }
                     }
-
                     transaction.Commit();
                     return string.Empty; // Chuỗi rỗng xem như thành công
                 }
@@ -99,22 +99,25 @@ namespace DAL
         {
             List<FlightDTO> data = new List<FlightDTO>();
             SqlConnection con = SqlConnectionData.Connect();
-            this.state = string.Empty; 
+            this.state = string.Empty;
             try
             {
                 con.Open();
                 string query = @"SELECT FlightID, SourceAirportID, DestinationAirportID, FlightDay, FlightTime, Price
-                                FROM FLIGHT
-                                WHERE (FlightDay BETWEEN @startDate AND @endDate)
-                                AND (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
-                                AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
-                                ";
-           
+                                FROM FLIGHT FL
+                                WHERE (@sourceAirportID IS NULL OR FL.SourceAirportID = @sourceAirportID)
+                                AND (@destinationAirportID IS NULL OR FL.DestinationAirportID = @destinationAirportID)
+                                AND (FL.FlightDay BETWEEN @startDate AND @endDate)
+                                AND (FL.isDeleted = 0)";
+
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     // Thiết lập các tham số
-                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
-                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
+                    //command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
+                    //command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
+
+                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@startDate", startDate);
                     command.Parameters.AddWithValue("@endDate", endDate);
 
@@ -137,7 +140,8 @@ namespace DAL
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 state = $"Error: {ex.Message}";
             }
@@ -154,19 +158,22 @@ namespace DAL
             try
             {
                 con.Open();
-                string query = @"  SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
+                string query = @" 
+                                SELECT f.FlightID, f.SourceAirportID, f.DestinationAirportID, f.FlightDay, f.FlightTime, f.Price
                                 FROM FLIGHT f
-                                INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID
+                                INNER JOIN TICKETCLASS_FLIGHT tf ON f.FlightID = tf.FlightID and f.isDeleted = tf.isDeleted
                                 LEFT JOIN (
-                                    SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets
+                                    SELECT FlightID, TicketClassID, COUNT(*) AS BookedTickets, isDeleted
                                     FROM BOOKING_TICKET
-                                    GROUP BY FlightID, TicketClassID
-                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID"; ;
+                                    GROUP BY FlightID, TicketClassID, isDeleted
+                                ) bt ON f.FlightID = bt.FlightID AND tf.TicketClassID = bt.TicketClassID and bt.isDeleted = f.isDeleted 
+                                WHERE (f.isDeleted = 0)";
+
                 if (sourceAirportID != "" || destinationAirportID != "" || ticketClass != null)
                 {
-                    query += @" WHERE (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
+                    query += @" AND (@sourceAirportID IS NULL OR f.SourceAirportID = @sourceAirportID)
                                 AND (@destinationAirportID IS NULL OR f.DestinationAirportID = @destinationAirportID)
-                                AND f.FlightDay BETWEEN @startDate AND @endDate
+                                AND (f.FlightDay BETWEEN @startDate AND @endDate)
                                 AND (@ticketClass IS NULL OR tf.TicketClassID = @ticketClass)
                                 AND (tf.Quantity - ISNULL(bt.BookedTickets, 0)) >= @numTicket";
                 }
@@ -198,7 +205,8 @@ namespace DAL
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 state = $"Error: {ex.Message}";
             }
@@ -206,7 +214,35 @@ namespace DAL
             con.Close();
             return data;
         }
+        public int GetNumFlight(string SourID, string DesID, DateTime StartD, DateTime EndD)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            string state = string.Empty;
+            int count = 0;
+            try
+            {
+                con.Open();
+                string query = @"select count(*)from FLIGHT
+                                WHERE (@SourID IS NULL OR @SourID = SourceAirportID)
+                                AND (@DesID is NULL OR @DesID = DestinationAirportID)
+                                AND FlightDay BETWEEN @StartD and @EndD";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@SourID", SourID == "" ? (object)DBNull.Value : SourID);
+                    command.Parameters.AddWithValue("@DesID", DesID == "" ? (object)DBNull.Value : DesID);
+                    command.Parameters.AddWithValue("@startDate", StartD);
+                    command.Parameters.AddWithValue("@endDate", EndD);
 
+                    count = (int)command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return count;
+        }
         public string GetState()
         {
             return this.state;

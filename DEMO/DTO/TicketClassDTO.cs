@@ -11,6 +11,7 @@ namespace DTO
         private string ticketClassID;
         private string ticketClassName;
         private decimal baseMultiplier;
+        private int isDeleted;
         public string TicketClassID
         {
             get => ticketClassID;
@@ -27,6 +28,12 @@ namespace DTO
         {
             get => baseMultiplier;
             set => baseMultiplier = value;
+        }
+        
+        public int IsDeleted
+        {
+            get => isDeleted;
+            set => isDeleted = value;
         }
     }
 }

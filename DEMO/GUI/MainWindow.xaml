@@ -81,8 +81,7 @@
                IsChecked="True" >
                         <Grid>
 
-
-                            <TextBlock Text="Window1" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Window1" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
 
                         </Grid>
 
@@ -92,7 +91,7 @@
                               Command="{Binding Window2Command}">
                         <Grid>
 
-                            <TextBlock Text="Flight list" Style="{StaticResource Text_Style}" />
+                            <TextBlock Text="Flight list" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -100,7 +99,7 @@
                               Command="{Binding Window3Command}">
                         <Grid>
 
-                            <TextBlock Text="Window3" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Staff management" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -108,7 +107,7 @@
                               Command="{Binding FlightScheduleWindowCommand}">
                         <Grid>
 
-                            <TextBlock Text="Add Schedule" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Add Schedule" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -116,7 +115,7 @@
                               Command="{Binding ReportWindowCommand}">
                         <Grid>
 
-                            <TextBlock Text="Report" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Report" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -124,7 +123,7 @@
                              Command="{Binding Window10Command}">
                         <Grid>
 
-                            <TextBlock Text="Window10" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="General rules" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
                 </StackPanel>
