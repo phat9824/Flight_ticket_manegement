@@ -233,7 +233,7 @@ namespace DAL
                                     AND (BT.isDeleted = 0 AND F.isDeleted = 0 AND TC.isDeleted = 0)
 
                         group by 
-                                    MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, DOANH_THU_CA_NAM";
+                                    MONTH(BT.BookingDate), YEAR(BT.BookingDate), DOANH_THU_CA_NAM";
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     command.Parameters.AddWithValue("@Year", Year);

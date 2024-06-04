@@ -101,14 +101,17 @@ namespace GUI.View
             List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>();
             int total = 0;
 
-            /*Cần code BE xử lý ở đây:
-                   Phương thức này cần trả về Tuple với list có kiểu List<ReportByFlightDTO>(), total có kiểu int 
-                        + List<ReportByFlightDTO>(): mô tả thuộc tính có trong ReportInfoDTO
-                        + total: Tổng doanh thu của tất cả chuyến bay trong list
-            var result = BLL.ProcessMethod(month, year);
-            listReportByFlightDTO = result.list;
+            BLL.ReportBLL prc = new ReportBLL();
+            var result = prc.GetReportByFlightBLL(month, year);
+            listReportByFlightDTO = result.reportByFlightDTOs;
             total = result.total;
-            */
+            state = prc.GetState();
+
+            if (state != string.Empty)
+            {
+                MessageBox.Show(state);
+            }
+
             reportsByFlightData = ReportByFlightData.ConvertListDTOToObservableCollectionData(listReportByFlightDTO);
             GridRP_Month.ItemsSource = reportsByFlightData;
             TotalRevenue_Month.Text = total.ToString();
@@ -129,14 +132,18 @@ namespace GUI.View
 
             List<ReportByMonthDTO> listReportByMonthDTO = new List<ReportByMonthDTO>();
             int total = 0;
-            /*Cần code BE xử lý ở đây:
-                   Phương thức này cần trả về Tuple với list có kiểu List<ReportByMonthDTO>(), total có kiểu int 
-                        + List<ReportByMonthDTO>(): mô tả thuộc tính có trong ReportInfoDTO
-                        + total: Tổng doanh thu của tất cả tháng trong list
-            var result = BLL.ProcessMethod(year);
-            listReportByMonthDTO = result.list;
+
+            BLL.ReportBLL prc = new ReportBLL();
+            var result = prc.GetReportByMonthDAL(year);
+            listReportByMonthDTO = result.reportByMonthDTOs;
             total = result.total;
-            */
+            state = prc.GetState();
+
+            if (state != string.Empty)
+            {
+                MessageBox.Show(state);
+            }
+
             reportsByMonthData = ReportByMonthData.ConvertListDTOToObservableCollectionData(listReportByMonthDTO);
             GridRP_Year.ItemsSource = reportsByMonthData;
             TotalRevenue_Year.Text = total.ToString();
