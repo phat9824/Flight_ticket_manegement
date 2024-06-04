@@ -155,7 +155,7 @@ namespace DAL
             {
                 con.Open();
                 //lay ma chuyen bay, voi moi ma lay doanh thu cua chuyen bay do, so ve va tong doanh thu cac chuyen bay
-                string query = @"select F.FlightID AS FLIGHTID, TONG_DOANH_THU , SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_CB, COUNT(BT.ID) AS SO_LUONG_VE
+                string query = @"select F.FlightID, TONG_DOANH_THU , SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_CB, COUNT(BT.ID) AS SO_LUONG_VE
                                 from BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
 			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU
 						                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
@@ -179,7 +179,7 @@ namespace DAL
                             sum = Convert.ToInt32(reader["TONG_DOANH_THU"]);
                             ReportByFlightDTO dto = new ReportByFlightDTO()
                             {
-                                flightID = reader["FLIGHTID"].ToString(),
+                                flightID = reader["FlightID"].ToString(),
                                 ticketsSold = Convert.ToInt32(reader["SO_LUONG_VE"]),
                                 revenue = Convert.ToDecimal(reader["DOANH_THU_CB"]),
                                 ratio = Math.Round(Convert.ToDecimal(reader["DOANH_THU_CB"]) / sum, 2)
@@ -248,7 +248,7 @@ namespace DAL
                                 time = new DateTime(Convert.ToInt32(reader["nam"]), Convert.ToInt32(reader["thang"]), 1),
                                 flightQuantity = Convert.ToInt32(reader["SO_CHUYEN_BAY"]),
                                 revenue = Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]),
-                                ratio = Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]) / Convert.ToDecimal(reader["DOANH_THU_CA_NAM"])
+                                ratio = Math.Round( Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]) / sum, 2 )
                             }; data.Add(dto);
                         }
                     }
