@@ -160,12 +160,12 @@ namespace BLL
             }
             return count;
         }
-        public List<ACCOUNT> GetAccounts(string UserID, string UserName)
+        public List<ACCOUNT> GetAccounts(ACCOUNT account)
         {
             List <ACCOUNT> data = new List<ACCOUNT>();  
             try
             {
-                data = new DAL.AccountAccess().GetMember(UserID, UserName);
+                data = new DAL.AccountAccess().GetMember(account);
             }
             catch (Exception ex)
             {

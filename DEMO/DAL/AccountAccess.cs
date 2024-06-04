@@ -134,7 +134,7 @@ namespace DAL
                 }
             }
         }
-        public List<ACCOUNT> GetMember(string UserID, string Name)
+        public List<ACCOUNT> GetMember(ACCOUNT dto)
         {
             List<ACCOUNT> data = new List<ACCOUNT>();
             SqlConnection con = SqlConnectionData.Connect();
@@ -146,11 +146,15 @@ namespace DAL
                                 FROM ACCOUNT
                                 where isDeleted = 0
                                 AND (@UserID IS NULL OR @UserID = UserID)
-                                AND (@UserName IS NULL OR @UserName = UserName)";
+                                AND (@UserName IS NULL OR @UserName = UserName)
+                                AND (@Email IS NULL OR @Email = Email)
+                                AND (@Phone IS NULL OR @Phone = Phone)";
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
-                    command.Parameters.AddWithValue("@UserID", UserID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@UserName", Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@UserID", dto.UserID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@UserName", dto.UserName ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Email", dto.Email ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Phone", dto.Phone ?? (object)DBNull.Value);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
