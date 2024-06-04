@@ -168,12 +168,7 @@
                 <Button Content="Sign In"
                         Style="{StaticResource mainbutton}"
                         IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54" Click="Button_Click"/>
-                <Label Margin="530,356,134,16" FontFamily="Book Antiqua">
-                    <Label Content="Don't have an account?" Foreground="#FFCBCACA"/>
-                </Label>
 
-                <Button Content="Sign Up" HorizontalAlignment="Left" Margin="652,357,0,0" VerticalAlignment="Top" Height="27" Width="87" FontFamily="Arial Rounded MT Bold" Foreground="#FFA3D2F3" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_1"/>
-              
                 <TextBlock Margin="583,277,135,111">
        <Hyperlink NavigateUri="http://example.com">Forget Password</Hyperlink>
                 </TextBlock>
