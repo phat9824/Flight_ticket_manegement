@@ -41,8 +41,6 @@ namespace DAL
 
             return ticketclass;
         }
-
-
         public int getTotalSeat_byFlightID(string flightID)
         {
             int number = 0;
