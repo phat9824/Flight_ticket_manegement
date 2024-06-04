@@ -12,10 +12,14 @@ using System.Threading.Tasks;
 namespace BLL
 {
     public class ReportBLL
-    {
+    { 
+        string state = string.Empty;
         public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightBLL(int Month, int Year)
-        {
-            return new DAL.BookingTicketAccess().GetReportByFlightDAL(Month, Year);
+        {   
+            DAL.BookingTicketAccess prc = new DAL.BookingTicketAccess();
+            var result = prc.GetReportByFlightDAL(Month, Year);
+            this.state = prc.GetState();
+            return result;
         }
 
         public (List<ReportByMonthDTO> reportByMonthDTOs, int total) GetReportByMonthDAL(int year)
@@ -25,7 +29,9 @@ namespace BLL
 
             
                 // Gọi phương thức DAL để lấy dữ liệu báo cáo
-                var (data, total) = new DAL.BookingTicketAccess().GetReportByMonthDAL(year);
+                DAL.BookingTicketAccess prc = new BookingTicketAccess();
+                var (data, total) = prc.GetReportByMonthDAL(year);
+                this.state = prc.GetState();
 
                 // Tạo một dictionary để lưu trữ dữ liệu cho việc tra cứu dễ dàng
                 var monthData = data.ToDictionary(dto => dto.time.Month);
@@ -60,6 +66,11 @@ namespace BLL
 
             //return new DAL.BookingTicketAccess().GetReportByMonthDAL(year);
 
+        }
+
+        public string GetState()
+        {
+            return this.state;
         }
 
     }
