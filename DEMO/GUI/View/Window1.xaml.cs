@@ -20,6 +20,7 @@ using System.Windows.Controls.Primitives;
 using BLL;
 using DTO;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GUI.View
 {
@@ -31,6 +32,45 @@ namespace GUI.View
         public Window1()
         {
             InitializeComponent();
+
+            // test session
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                MessageBox.Show("Mail: " + ClientSession.Instance.mail + "\nPermissions: " + ClientSession.Instance.permissions[0], "Test Session");
+            }));
+
+            BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
+            var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail});
+
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                MessageBox.Show(result.ToString() + result.Count, "Test Method");
+            }));
+
+            Load(result[0]);
+
+        }
+
+        private void Load(ACCOUNT acc)
+        {
+            Dictionary<int, string> dr = new Dictionary<int, string>()
+            {
+                {1, "Admin"},
+                {2, "Staff"}
+            };
+            UserName.Text = acc.UserName;
+            Birth.Text = acc.Birth.ToString();
+            Email.Text = acc.Email;
+            Phone.Text = acc.Phone;
+            if (acc.PermissonID != 0)
+            {
+                Role.Text = dr[acc.PermissonID].ToString();
+            }
+            else
+            {
+                Role.Text = "Unknown";
+            }
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
