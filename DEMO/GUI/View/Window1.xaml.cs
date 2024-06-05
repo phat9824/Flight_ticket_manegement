@@ -54,7 +54,7 @@ namespace GUI.View
                 {2, "Staff"}
             };
             UserName.Text = acc.UserName;
-            Birth.Text = acc.Birth.ToString();
+            Birth.Text = acc.Birth.ToString("dd-MM-yyyy");
             Email.Text = acc.Email;
             Phone.Text = acc.Phone;
             if (acc.PermissonID != 0)

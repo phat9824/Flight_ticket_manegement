@@ -639,7 +639,21 @@
                 -->
 
                 <!--DataGrid-->
-                <DataGrid x:Name="Staff_FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
+                <DataGrid x:Name="Staff_FlightsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+
+Grid.Row="5" Margin="0,84,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Seq" Binding="{Binding STT}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Departure ariport" Binding="{Binding SanBayDi}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Destination ariport" Binding="{Binding SanBayDen}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Time" Binding="{Binding KhoiHanh}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Duration" Binding="{Binding ThoiGian}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Empty seat" Binding="{Binding SoGheTrong}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Booked seat" Binding="{Binding SoGheDat}" IsReadOnly="True"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<DataGrid x:Name="Staff_FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" Width="50" ElementStyle="{StaticResource CheckBoxStyle1}">
                             <DataGridCheckBoxColumn.HeaderTemplate>
@@ -683,7 +697,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
+                        --><!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
                             <DataGridTextColumn.Binding>
                                 <Binding Path="SanBayDi"/>
                             </DataGridTextColumn.Binding>
@@ -717,10 +731,10 @@
                             <DataGridTextColumn.Binding>
                                 <Binding Path="SoGheDat"/>
                             </DataGridTextColumn.Binding>
-                        </DataGridTextColumn>-->
+                        </DataGridTextColumn>--><!--
 
                     </DataGrid.Columns>
-                </DataGrid>
+                </DataGrid>-->
 
                
                 <Button Content="Search"
