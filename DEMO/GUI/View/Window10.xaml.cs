@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace GUI.View
 {
     public partial class Window10 : UserControl
     {
-    
+        
         public Window10()
         {
             InitializeComponent();
@@ -27,6 +27,11 @@ namespace GUI.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
+        }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
