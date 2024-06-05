@@ -160,7 +160,9 @@ namespace DAL
 			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU
 						                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
 						                WHERE BT2.TicketClassID = TC2.TicketClassID AND BT2.FlightID = F2.FlightID
-						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0) AS B
+						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0
+                                        AND YEAR(BT2.BookingDate) = @Year
+		                                AND MONTH(BT2.BookingDate) = @Month) AS B
                                 WHERE BT.TicketClassID = TC.TicketClassID AND BT.FlightID = F.FlightID
 	                            AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TC.isDeleted = 0
                                 AND YEAR(BT.BookingDate) = @Year
@@ -225,6 +227,7 @@ namespace DAL
                                     where 
                                         BT2.FlightID = F2.FlightID AND BT2.TicketClassID = TC2.TicketClassID
                                         AND BT2.isDeleted = 0 AND F2.isDeleted = 0 AND TC2.isDeleted = 0
+                                        AND (YEAR(BT2.BookingDate) = @Year
                                     ) AS A
                         where 
                                     BT.FlightID = F.FlightID 

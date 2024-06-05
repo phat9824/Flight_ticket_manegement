@@ -114,16 +114,6 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 
-select MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_THEO_THANG, COUNT(F.FlightID) AS SO_CHUYEN_BAY, DOANH_THU_CA_NAM
-from BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
-    (select SUM(F2.Price * TC2.BaseMultiplier) AS DOANH_THU_CA_NAM
-	from BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
-	where BT2.FlightID = F2.FlightID AND BT2.TicketClassID = TC2.TicketClassID
-    AND BT2.isDeleted = 0 AND F2.isDeleted = 0 AND TC2.isDeleted = 0) AS A
-where BT.FlightID = F.FlightID AND BT.TicketClassID = TC.TicketClassID
-AND (BT.isDeleted = 0 AND F.isDeleted = 0 AND TC.isDeleted = 0)
-group by MONTH(BT.BookingDate), YEAR(BT.BookingDate), DOANH_THU_CA_NAM
-
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
