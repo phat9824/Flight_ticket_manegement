@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL;
 
 namespace GUI
 {
@@ -31,6 +32,8 @@ namespace GUI
 
         private void Btn_Checked(object sender, RoutedEventArgs e)
         {
+            BLL.SessionManager.EndSession(ClientSession.Instance.mail);
+            GUI.ClientSession.Instance.EndSession();
             Login f = new Login();
             f.Show();
             Window.GetWindow(this).Close();

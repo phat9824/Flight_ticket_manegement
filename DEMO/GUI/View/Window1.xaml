@@ -60,7 +60,7 @@
                         <TextBlock Text="Fullname:"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="250" Margin="5" Text="{Binding Fullname}"/>
+                        <TextBox x:Name="UserName" Width="250" Margin="5" Text=""/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
@@ -78,7 +78,7 @@
                         <TextBlock Text="Birth"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="250" Margin="5"/>
+                        <TextBox x:Name="Birth" Width="250" Margin="5"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
@@ -86,7 +86,7 @@
                         <TextBlock Text="Phone"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="250" Margin="5"/>
+                        <TextBox x:Name ="Phone" Width="250" Margin="5"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -96,7 +96,7 @@
                         <TextBlock Text="Email"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="488" Margin="5"/>
+                        <TextBox x:Name="Email" Width="488" Margin="5"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -133,7 +133,7 @@
                             <TextBlock Text="Role:"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Width="150" Margin="5" Text="{Binding Role}"/>
+                            <TextBox x:Name="Role" Width="150" Margin="5" Text=""/>
                         </StackPanel>
                     </StackPanel>
 
