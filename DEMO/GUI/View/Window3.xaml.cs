@@ -48,5 +48,11 @@ namespace GUI.View
             public string Phone { get; set; }
             public string Birth {  get; set; }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Addmenber f = new Addmenber();
+            f.Show();
+        }
     }
 }
