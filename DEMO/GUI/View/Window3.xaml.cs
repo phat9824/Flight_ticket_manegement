@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static GUI.View.Window3;
@@ -36,6 +37,8 @@ namespace GUI.View
             members.Add(new Members { Seq = "2", ID = "000000", Name = "Reza Alavi", Birth = "00/00/00", Position = "Administrator", Email = "reza110@hotmail.com", Phone = "254-451-7893" });
             members.Add(new Members { Seq = "3", ID = "000000", Name = "Dennis Castillo", Birth = "00/00/00", Position = "Coach", Email = "deny.cast@gmail.com", Phone = "125-520-0141" });
             members.Add(new Members { Seq = "4", ID = "000000", Name = "Gabriel Cox", Birth = "00/00/00", Position = "Coach", Email = "coxcox@gmail.com", Phone = "808-635-1221" });
+
+            MembersDataGrid.ItemsSource = members;
         }
 
         public class Members
