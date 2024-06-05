@@ -13,7 +13,7 @@ namespace GUI.View
 {
     public partial class Window10 : UserControl
     {
-    
+
         public Window10()
         {
             InitializeComponent();
@@ -28,5 +28,6 @@ namespace GUI.View
         {
 
 
+        }
     }
 }
