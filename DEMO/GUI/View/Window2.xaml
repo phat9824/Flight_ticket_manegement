@@ -645,12 +645,12 @@
            Grid.Row="5" Margin="0,84,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Seq" Binding="{Binding STT}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Departure ariport" Binding="{Binding SanBayDi}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Destination ariport" Binding="{Binding SanBayDen}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Time" Binding="{Binding KhoiHanh}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding ThoiGian}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Empty seat" Binding="{Binding SoGheTrong}"  IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Booked seat" Binding="{Binding SoGheDat}"  IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Departure ariport" Binding="{Binding SanBayDi}"/>
+                    <DataGridTextColumn Header="Destination ariport" Binding="{Binding SanBayDen}" />
+                    <DataGridTextColumn Header="Time" Binding="{Binding KhoiHanh}" />
+                    <DataGridTextColumn Header="Duration" Binding="{Binding ThoiGian}" />
+                    <DataGridTextColumn Header="Empty seat" Binding="{Binding SoGheTrong}"/>
+                    <DataGridTextColumn Header="Booked seat" Binding="{Binding SoGheDat}"/>
 
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
