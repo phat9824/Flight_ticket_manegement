@@ -31,5 +31,11 @@ namespace BLL
             }
         }
 
+
+        public List<ACCOUNT> List_acc(ACCOUNT dto)
+        {
+            return new DAL.AccountAccess().GetMember(dto);
+        }
+
     }
 }
