@@ -155,16 +155,17 @@ namespace DAL
             {
                 con.Open();
                 //lay ma chuyen bay, voi moi ma lay doanh thu cua chuyen bay do, so ve va tong doanh thu cac chuyen bay
-                string query = @"select F.FlightID, TONG_DOANH_THU , SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_CB, COUNT(BT.ID) AS SO_LUONG_VE
-                                from BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
-			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU
-						                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
-						                WHERE BT2.TicketClassID = TC2.TicketClassID AND BT2.FlightID = F2.FlightID
-						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0
+                string query = @"select F.FlightID, TONG_DOANH_THU, SUM(F.Price * TCF.Multiplier) AS DOANH_THU_CB, COUNT(BT.ID) AS SO_LUONG_VE
+                                from BOOKING_TICKET BT, FLIGHT F, TICKETCLASS_FLIGHT TCF, 
+		                                (SELECT SUM(F2.Price * TCF2.Multiplier) AS TONG_DOANH_THU
+		                                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKETCLASS_FLIGHT TCF2
+		                                WHERE BT2.FlightID = F2.FlightID 
+		                                AND (BT2.FlightID = TCF2.FlightID AND BT2.TicketClassID = TCF2.TicketClassID)
+		                                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TCF2.isDeleted = 0
                                         AND YEAR(BT2.BookingDate) = @Year
 		                                AND MONTH(BT2.BookingDate) = @Month) AS B
-                                WHERE BT.TicketClassID = TC.TicketClassID AND BT.FlightID = F.FlightID
-	                            AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TC.isDeleted = 0
+                                WHERE BT.FlightID = F.FlightID 
+                                AND (BT.FlightID = TCF.FlightID AND BT.TicketClassID = TCF.TicketClassID)
                                 AND YEAR(BT.BookingDate) = @Year
                                 AND MONTH(BT.BookingDate) = @Month
                                 GROUP BY F.FlightID, B.TONG_DOANH_THU";
@@ -211,32 +212,20 @@ namespace DAL
                 
                 // vô sql coi giải thích comment 
                 string query = @"
-                        select 
-                                    MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, 
-                                    SUM(F.Price * TC.BaseMultiplier) AS DOANH_THU_THEO_THANG,
-                                    COUNT(F.FlightID) AS SO_CHUYEN_BAY, DOANH_THU_CA_NAM
-
-                        from 
-                                    BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
-
-                                    (
-                                    select 
-                                        SUM(F2.Price * TC2.BaseMultiplier) AS DOANH_THU_CA_NAM
-	                                from 
-                                        BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
-                                    where 
-                                        BT2.FlightID = F2.FlightID AND BT2.TicketClassID = TC2.TicketClassID
-                                        AND BT2.isDeleted = 0 AND F2.isDeleted = 0 AND TC2.isDeleted = 0
-                                        AND (YEAR(BT2.BookingDate) = @Year
-                                    ) AS A
-                        where 
-                                    BT.FlightID = F.FlightID 
-                                    AND BT.TicketClassID = TC.TicketClassID
-                                    AND (YEAR(BT.BookingDate) = @Year)
-                                    AND (BT.isDeleted = 0 AND F.isDeleted = 0 AND TC.isDeleted = 0)
-
-                        group by 
-                                    MONTH(BT.BookingDate), YEAR(BT.BookingDate), DOANH_THU_CA_NAM";
+                        select MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, 
+                        SUM(F.Price * TCF.Multiplier) AS DOANH_THU_THEO_THANG, COUNT(F.FlightID) AS SO_CHUYEN_BAY, DOANH_THU_NAM
+                        from BOOKING_TICKET BT, FLIGHT F, TICKETCLASS_FLIGHT TCF, 
+		                        (select SUM(F2.Price * TCF2.Multiplier) AS DOANH_THU_NAM
+		                        from BOOKING_TICKET BT2, FLIGHT F2, TICKETCLASS_FLIGHT TCF2        
+		                        where BT2.FlightID = F2.FlightID 
+		                        AND (BT2.TicketClassID = TCF2.TicketClassID AND BT2.FlightID = TCF2.FlightID)
+		                        AND YEAR(BT2.BookingDate) = @Year
+		                        AND BT2.isDeleted = 0 AND F2.isDeleted = 0 AND TCF2.isDeleted = 0) AS A
+                        where BT.FlightID = F.FlightID 
+		                        AND (BT.TicketClassID = TCF.TicketClassID AND BT.FlightID = TCF.FlightID)
+		                        AND YEAR(BT.BookingDate) = @Year
+		                        AND BT.isDeleted = 0 AND F.isDeleted = 0 AND TCF.isDeleted = 0
+                        group by MONTH(BT.BookingDate), YEAR(BT.BookingDate), DOANH_THU_NAM";
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     command.Parameters.AddWithValue("@Year", Year);
@@ -245,7 +234,7 @@ namespace DAL
                     {
                         while (reader.Read())
                         {
-                            sum = Convert.ToInt32(reader["DOANH_THU_CA_NAM"]);
+                            sum = Convert.ToInt32(reader["DOANH_THU_NAM"]);
                             ReportByMonthDTO dto = new ReportByMonthDTO()
                             {
                                 time = new DateTime(Convert.ToInt32(reader["nam"]), Convert.ToInt32(reader["thang"]), 1),

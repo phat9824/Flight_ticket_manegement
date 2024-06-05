@@ -176,7 +176,9 @@ INSERT INTO INTERMEDIATE_AIRPORT VALUES ('002', 'FL002', '01:30:00', 'Refuel', 0
 INSERT INTO INTERMEDIATE_AIRPORT VALUES ('000', 'FL003', '02:00:00', 'Maintenance', 0);
 
 --TICKETCLASS_FLIGHT
-INSERT INTO TICKETCLASS_FLIGHT VALUES ('001', 'FL001', 50, 1.0, 0);
+INSERT INTO TICKETCLASS_FLIGHT VALUES ('001', 'FL001', 30, 1.0, 0);
+INSERT INTO TICKETCLASS_FLIGHT VALUES ('002', 'FL001', 20, 1.5, 0);
+INSERT INTO TICKETCLASS_FLIGHT VALUES ('001', 'FL002', 30, 1.0, 0);
 INSERT INTO TICKETCLASS_FLIGHT VALUES ('002', 'FL002', 30, 1.5, 0);
 INSERT INTO TICKETCLASS_FLIGHT VALUES ('003', 'FL003', 20, 2.0, 0);
 
@@ -189,22 +191,3 @@ INSERT INTO PARAMETER VALUES (20, '10:00:00', 4, 10, 90, 1, '04:00:00', '10:00:0
 =======
 INSERT INTO PARAMETER (AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime)
 VALUES (10, '08:00:00', 2, 30, 120, 2, '07:00:00', '06:00:00')
-
-
-select * from BOOKING_TICKET
-
-
-
-select F.FlightID, B.TONG_DOANH_THU2, SUM(F.Price * TC.BaseMultiplier) AS Doanh_Thu_FLight, COUNT(BT.ID) AS SO_LUONG_VE
-                                from BOOKING_TICKET BT, FLIGHT F, TICKET_CLASS TC, 
-			                            (SELECT SUM(F2.Price * TC2.BaseMultiplier)	AS TONG_DOANH_THU2
-						                FROM BOOKING_TICKET BT2, FLIGHT F2, TICKET_CLASS TC2
-						                WHERE BT2.TicketClassID = TC2.TicketClassID AND BT2.FlightID = F2.FlightID
-						                AND F2.isDeleted = 0 AND BT2.isDeleted = 0 AND TC2.isDeleted = 0) AS B
-                               
-							   
-							   WHERE BT.TicketClassID = TC.TicketClassID AND BT.FlightID = F.FlightID
-	                            AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TC.isDeleted = 0
-                                AND YEAR(BT.BookingDate) = 2024
-                                AND MONTH(BT.BookingDate) = 5
-                                GROUP BY F.FlightID, B.TONG_DOANH_THU2
