@@ -166,7 +166,7 @@ namespace DAL
                                 UserName = reader["UserName"].ToString(),
                                 Phone = reader["Phone"].ToString(),
                                 Email = reader["Email"].ToString(),
-                                Birth = Convert.ToDateTime(reader["Email"]),
+                                Birth = Convert.ToDateTime(reader["Birth"]),
                                 PasswordUser = reader["PasswordUser"].ToString(),
                                 PermissonID = Convert.ToInt32(reader["PermissionID"]),
                                 IsDeleted = 0

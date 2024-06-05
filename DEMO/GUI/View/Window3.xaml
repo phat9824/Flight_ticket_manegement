@@ -16,6 +16,8 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <local:IdToNameConverterPS x:Key="idToNameConverterPS"/>
+        <local:DateTimeToStringConverter x:Key="dateTimeToStringConverter"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <Style x:Key="textboxSearch" TargetType="TextBox">
             <Setter Property="Background" Value="#ffffff"/>
@@ -590,7 +592,7 @@
                         HorizontalAlignment="Left" Foreground="#121518"/>
             <!--Add Button-->
 
-            <Button Style="{StaticResource addButton}">
+            <Button Style="{StaticResource addButton}" Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 1 8 0" Width="11" Height="11"/>
                     <TextBlock Text="Add New Member"/>
@@ -608,7 +610,37 @@
 
 
             <!--DataGrid-->
-            <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,87,0,30" Grid.RowSpan="2">
+            <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+
+Grid.Row="5" Margin="0,97,0,0">
+                <DataGrid.Columns>
+                    <!--
+                    <DataGridTextColumn Header="Seq" Binding="{Binding STT}" IsReadOnly="True"/>
+                    -->
+                    <DataGridTextColumn Header="ID" Binding="{Binding UserID}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding UserName}" />
+                    <DataGridTextColumn Header="Position" Binding="{Binding PermissonID, Converter={StaticResource idToNameConverterPS}}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Birth" Binding="{Binding Birth, Converter={StaticResource dateTimeToStringConverter}}"/>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--<DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,87,0,30" Grid.RowSpan="2">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn CanUserResize="False" Width="50" ElementStyle="{StaticResource CheckBoxStyle1}">
                         <DataGridCheckBoxColumn.HeaderTemplate>
@@ -653,7 +685,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
 
             <!--Pagination Section-->
             <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"

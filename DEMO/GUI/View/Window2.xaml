@@ -640,7 +640,35 @@
                 -->
 
             <!--DataGrid-->
-            <DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
+            <DataGrid x:Name="FlightsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+           
+           Grid.Row="5" Margin="0,84,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Seq" Binding="{Binding STT}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Departure ariport" Binding="{Binding SanBayDi}"/>
+                    <DataGridTextColumn Header="Destination ariport" Binding="{Binding SanBayDen}" />
+                    <DataGridTextColumn Header="Time" Binding="{Binding KhoiHanh}" />
+                    <DataGridTextColumn Header="Duration" Binding="{Binding ThoiGian}" />
+                    <DataGridTextColumn Header="Empty seat" Binding="{Binding SoGheTrong}"/>
+                    <DataGridTextColumn Header="Booked seat" Binding="{Binding SoGheDat}"/>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--<DataGrid x:Name="FlightsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" Margin="0,100,0,30" Grid.RowSpan="2">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn CanUserResize="False" Width="50" ElementStyle="{StaticResource CheckBoxStyle1}">
                         <DataGridCheckBoxColumn.HeaderTemplate>
@@ -651,7 +679,7 @@
                     </DataGridCheckBoxColumn>
 
                     <DataGridTextColumn Header="Seq" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding STT}"/>
-
+                 
                     <DataGridTemplateColumn Header="Departure airport" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -684,7 +712,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
+                    --><!--<DataGridTextColumn Header="Sân bay đi" IsReadOnly="True" Width="*">
                             <DataGridTextColumn.Binding>
                                 <Binding Path="SanBayDi"/>
                             </DataGridTextColumn.Binding>
@@ -718,10 +746,10 @@
                             <DataGridTextColumn.Binding>
                                 <Binding Path="SoGheDat"/>
                             </DataGridTextColumn.Binding>
-                        </DataGridTextColumn>-->
+                        </DataGridTextColumn>--><!--
 
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
 
             <!--Pagination Section-->
             <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
