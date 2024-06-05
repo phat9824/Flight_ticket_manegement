@@ -56,7 +56,7 @@ namespace GUI.View
 
         private void maxInterAirportTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Add your logic here
+        
         }
 
     }
