@@ -43,6 +43,7 @@ namespace GUI.View
             flights.Add(new Flight { STT = "3", SanBayDi = "ccc", SanBayDen = "ccc", KhoiHanh = "20:00", ThoiGian = "3", SoGheDat = "", SoGheTrong = "" });
             flights.Add(new Flight { STT = "4", SanBayDi = "ddd", SanBayDen = "bbb", KhoiHanh = "20:00", ThoiGian = "4", SoGheDat = "", SoGheTrong = "" });
             flights.Add(new Flight { STT = "5", SanBayDi = "eee", SanBayDen = "aaa", KhoiHanh = "20:00", ThoiGian = "5", SoGheDat = "", SoGheTrong = "" });
+
             FlightsDataGrid.ItemsSource = flights;
 
             Airport_BLL airport_bll = new Airport_BLL();
