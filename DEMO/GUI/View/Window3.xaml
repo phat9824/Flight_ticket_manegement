@@ -16,6 +16,8 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <local:IdToNameConverterPS x:Key="idToNameConverterPS"/>
+        <local:DateTimeToStringConverter x:Key="dateTimeToStringConverter"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <Style x:Key="textboxSearch" TargetType="TextBox">
             <Setter Property="Background" Value="#ffffff"/>
@@ -612,13 +614,15 @@
 
 Grid.Row="5" Margin="0,97,0,0">
                 <DataGrid.Columns>
+                    <!--
                     <DataGridTextColumn Header="Seq" Binding="{Binding STT}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Position" Binding="{Binding Position}" />
+                    -->
+                    <DataGridTextColumn Header="ID" Binding="{Binding UserID}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding UserName}" />
+                    <DataGridTextColumn Header="Position" Binding="{Binding PermissonID, Converter={StaticResource idToNameConverterPS}}" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                     <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
-                    <DataGridTextColumn Header="Birth" Binding="{Binding Birth}"/>
+                    <DataGridTextColumn Header="Birth" Binding="{Binding Birth, Converter={StaticResource dateTimeToStringConverter}}"/>
 
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
