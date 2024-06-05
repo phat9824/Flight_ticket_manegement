@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,8 @@ namespace GUI
 
         private void Btn_Checked(object sender, RoutedEventArgs e)
         {
+            BLL.SessionManager.EndSession(ClientSession.Instance.mail);
+            GUI.ClientSession.Instance.EndSession();
             Login f = new Login();
             f.Show();
             Window.GetWindow(this).Close();

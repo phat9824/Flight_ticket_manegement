@@ -72,16 +72,22 @@ namespace GUI
         {
             Application.Current.Shutdown();
         }
-        private void openAdminForm()
+        private void openAdminForm(string mail, List<string> permissions)
         {
+            ClientSession.Instance.StartSession(mail, permissions);
+            SessionManager.StartSession(mail, mail, permissions);
+
             // Mở giao diện admin
             MainWindow f = new MainWindow();
             f.Show();
             Window.GetWindow(this).Close();
         }
 
-        private void openUserForm()
+        private void openUserForm(string mail, List<string> permissions)
         {
+            ClientSession.Instance.StartSession(mail, permissions);
+            SessionManager.StartSession(mail, mail, permissions);
+
             // Mở giao diện người dùng thông thường
             StaffWindow f = new StaffWindow();
             f.Show();
@@ -105,11 +111,11 @@ namespace GUI
                 {
                     case 1:
                         // Xử lý khi permissionID = 1 (Ví dụ: mở giao diện admin)
-                        openAdminForm();
+                        openAdminForm(email, new[] {permissionID.ToString()}.ToList());
                         break;
                     case 2:
                         // Xử lý khi permissionID = 2 (Ví dụ: mở giao diện người dùng thông thường)
-                        openUserForm();
+                        openUserForm(email, new[] { permissionID.ToString() }.ToList());
                         break;
                     default:
                         MessageBox.Show("Quyền không hợp lệ");
