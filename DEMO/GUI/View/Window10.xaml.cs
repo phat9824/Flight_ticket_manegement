@@ -13,8 +13,7 @@ namespace GUI.View
 {
     public partial class Window10 : UserControl
     {
-        private string connectionString = "Data Source=<your_database_server>;Initial Catalog=<your_database_name>;User ID=<your_username>;Password=<your_password>";
-
+    
         public Window10()
         {
             InitializeComponent();
