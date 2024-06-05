@@ -38,11 +38,11 @@ namespace GUI.View
             var converter = new BrushConverter();
 
             // Create DataGrid Items
-            flights.Add(new Flight { STT = "1", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "2", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "3", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "4", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "5", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "1", SanBayDi = "AAA", SanBayDen = "eee", KhoiHanh = "20:00", ThoiGian = "1", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "2", SanBayDi = "bbb", SanBayDen = "ddd", KhoiHanh = "20:00", ThoiGian = "2", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "3", SanBayDi = "ccc", SanBayDen = "ccc", KhoiHanh = "20:00", ThoiGian = "3", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "4", SanBayDi = "ddd", SanBayDen = "bbb", KhoiHanh = "20:00", ThoiGian = "4", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "5", SanBayDi = "eee", SanBayDen = "aaa", KhoiHanh = "20:00", ThoiGian = "5", SoGheDat = "", SoGheTrong = "" });
             FlightsDataGrid.ItemsSource = flights;
 
             Airport_BLL airport_bll = new Airport_BLL();
@@ -134,5 +134,7 @@ namespace GUI.View
         {
 
         }
+
+
     }
 }
