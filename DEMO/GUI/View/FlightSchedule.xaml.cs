@@ -26,6 +26,7 @@ using BLL;
 using System.Data.SqlClient;
 using static GUI.View.Window2;
 using TextBox = System.Windows.Controls.TextBox;
+using System.Security.Cryptography.X509Certificates;
 
 namespace GUI.View
 {
@@ -34,16 +35,6 @@ namespace GUI.View
     /// </summary>
     /// 
 
-    /*
-     Xong:
-        Convert dữ liệu sang DTO
-        Sync ID-Name
-        Giới hạn số ticket class và IA theo parameter
-
-     Cần:
-        Tiếp tục giới hạn miền giá trị thuộc tính theo parameter
-        Màn hình báo lỗi
-     */
     public partial class FlightScheduleWindow : UserControl
     {
         Flight_BLL fl_bll = new Flight_BLL();
@@ -64,43 +55,23 @@ namespace GUI.View
         {
             InitializeComponent();
 
-            //---------------------------------------------------------------------------------------------------------------------------------------------
             parameterDTO = new BLL.SearchProcessor().GetParameterDTO();
-
-            /*parameterDTO = new ParameterDTO();
-            parameterDTO.IntermediateAirportCount = 2;
-            parameterDTO.TicketClassCount = 2;*/
-
-            //---------------------------------------------------------------------------------------------------------------------------------------------
-            // airports = BAL.GetAirports();
-            // ticketclasses =BAL.GetTicketClass();
-
             airports = airport_bll.L_airport();
             ticketClasses = ticket_class_bll.L_TicketClass();
-            /*ticketClasses = new List<TicketClassDTO>
-            {
-                new TicketClassDTO { TicketClassID = "TC1", TicketClassName = "Economy", BaseMultiplier = 1.0m },
-                new TicketClassDTO { TicketClassID = "TC2", TicketClassName = "Business", BaseMultiplier = 1.5m },
-                new TicketClassDTO { TicketClassID = "TC3", TicketClassName = "First Class", BaseMultiplier = 2.0m },
-                new TicketClassDTO { TicketClassID = "TC4", TicketClassName = "Premium Economy", BaseMultiplier = 1.2m },
-                new TicketClassDTO { TicketClassID = "TC5", TicketClassName = "Budget", BaseMultiplier = 0.8m }
-            };*/
-            //----------------------------------------------------------------------------------------------------------------------------------
+
             ticketList = new ObservableCollection<TicketClass>
             {
                 new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 },
             };
-            collectionViewTicketClass = CollectionViewSource.GetDefaultView(ticketList);
-            dataGrid1.ItemsSource = collectionViewTicketClass;
-
             IAList = new ObservableCollection<IntermediateAirport>
             {
                 new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
                 new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
             };
+            collectionViewTicketClass = CollectionViewSource.GetDefaultView(ticketList);
             collectionViewIA = CollectionViewSource.GetDefaultView(IAList);
+            dataGrid1.ItemsSource = collectionViewTicketClass;
             dataGrid2.ItemsSource = collectionViewIA;
-
             DestinationAirport.ItemsSource = airports;
             DestinationAirportID.ItemsSource = airports;
             SourceAirport.ItemsSource = airports;
@@ -109,50 +80,31 @@ namespace GUI.View
         }
         private void ConfirmSchedule_Click(object sender, RoutedEventArgs e)
         {
-            if (FlightDay.SelectedDate == null && !FlightTime.SelectedTime.HasValue)
+            string state = string.Empty;
+
+            state = ValidateInput();
+            if (state != string.Empty)
             {
-                MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
-                //MessageBox.Show("Vui lòng nhập ngày và thời gian khởi hành!", "Error");
+                MessageBox.Show(state, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            else if (FlightDay.SelectedDate == null)
-            {
-                MessageBox.Show("Vui lòng nhập ngày khời hành!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
-                //MessageBox.Show("Vui lòng nhập ngày khời hành!", "Error");
-                return;
-            }
-            else if (!FlightTime.SelectedTime.HasValue)
-            {
-                MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
-                //MessageBox.Show("Vui lòng nhập thời gian bay của chuyến bay!", "Error");
-                return;
-            }
-            if (FlightDay.SelectedDate < DateTime.Today)
-            {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
-                //MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Today.ToString("MM/dd/yyyy"), "Error");
-                return;
-            }
-            else if (FlightDay.SelectedDate == DateTime.Today && DepartureTime.SelectedTime < DateTime.Now)
-            {
-                MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information);
-                //MessageBox.Show("Vui lòng chọn ngày khởi hành bắt đầu từ " + DateTime.Now.ToString("MM/dd/yyyy H:m:s"), "Error");
-                return;
-            }
+
             ScheduleData data = GetScheduleData();
             FlightDTO flightDTO = data.InitializeFlightDTO();
             List<TicketClassFlightDTO> listTicketClassFlightDTO = data.InitializeListTicketClassFlightDTO();
             List<IntermediateAirportDTO> listIntermediateAirportDTO = data.InitializeListIntermediateAirportDTO();
-            string processState = new BLL.InsertProcessor().AddFlightInfor(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
 
-            // Debug datatype bằng cách huyền thoại, sẽ được xóa sau
-            MessageBox.Show(data.ToString() + "\n Chỉ dùng cho debug, cửa sổ này nằm trong phương thức ConfirmSchedule_Click thuộc Code-Behind FlightSchedule.xaml", "Debug");
-
-
-            // Nếu thành công/hợp lệ - reset dữ liệu trên màn hình để nhập tiếp
-            if (String.IsNullOrWhiteSpace(processState))
+            state = ValidateLogicDB(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
+            if (state != string.Empty)
             {
-                MessageBox.Show("Succesful" + "\n Chỉ dùng cho debug, cửa sổ này nằm trong phương thức ConfirmSchedule_Click thuộc Code-Behind FlightSchedule.xaml", "Debug");
+                MessageBox.Show(state, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            state = new BLL.InsertProcessor().AddFlightInfor(flightDTO, listTicketClassFlightDTO, listIntermediateAirportDTO);
+            if (state == string.Empty)
+            {
+                MessageBox.Show("Succesful");
                 ResetDataWindow();
                 var newTicket = new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 };
                 ticketList.Add(newTicket);
@@ -160,8 +112,70 @@ namespace GUI.View
             }
             else
             {
-                string state = "Error";
-                MessageBox.Show(processState, state);
+                MessageBox.Show(state, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        public string ValidateInput()
+        {   if (SourceAirportID.SelectedIndex == -1 || DestinationAirportID.SelectedIndex == -1)
+            {
+                return "Please select airport!";
+            }
+            else if (SourceAirportID.SelectedValue == DestinationAirportID.SelectedValue)
+            {
+                return "The departure and destination airports must not be the same!";
+            }
+            else if (FlightDay.SelectedDate == null)
+            {
+                return "Please enter a departure date!";
+            }
+            else if (!DepartureTime.SelectedTime.HasValue)
+            {
+                return "Please enter a departure time!";
+            }
+            else if (!FlightTime.SelectedTime.HasValue)
+            {
+                return "Please enter the flight duration!";
+            }
+            if (FlightDay.SelectedDate < DateTime.Today)
+            {
+                return "Please select a departure date from " + DateTime.Today.ToString("dd/MM/yyyy");
+            }
+            else if (FlightDay.SelectedDate == DateTime.Today && DepartureTime.SelectedTime < DateTime.Now)
+            {
+                return "Please select a departure time starting from " + DateTime.Now.ToString("dd/MM/yyyy H:m:s");
+            }
+            else if (TicketPrice.Text == string.Empty)
+            {
+                return "Please enter the ticket price!";
+            }
+            else if (isNatural(TicketPrice.Text) == false)
+            {
+                return "The ticket price must be a natural number!";
+            }
+            return string.Empty;
+        }
+
+        private string ValidateLogicDB(FlightDTO flightDTO, List<TicketClassFlightDTO> listTicketClassFlightDTO, List<IntermediateAirportDTO> listIntermediateAirportDTO)
+        {
+            string state = string.Empty;
+            return state;
+        }
+
+        private bool isNatural(string input)
+        {
+            try
+            {
+                Int64 t = Convert.ToInt64(input);
+                if (t > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
             }
         }
 

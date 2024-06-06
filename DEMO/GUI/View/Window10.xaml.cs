@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -13,21 +13,51 @@ namespace GUI.View
 {
     public partial class Window10 : UserControl
     {
-
         public Window10()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Add_Airport(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Button_Delete_Airport(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Edit_Airport(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Add_TC(object sender, RoutedEventArgs e)
+        {
 
         }
+
+        private void Button_Delete_TC(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Edit_TC(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Edit_main(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+
+        private void maxInterAirportTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        
+        }
+
     }
 }

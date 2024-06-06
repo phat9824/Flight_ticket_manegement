@@ -1,4 +1,4 @@
-
+﻿
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ using BLL;
 using DTO;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Win32;
 
 namespace GUI.View
 {
@@ -42,11 +43,6 @@ namespace GUI.View
             BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
             var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail});
 
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                MessageBox.Show(result.ToString() + result.Count, "Test Method");
-            }));
-
             Load(result[0]);
 
         }
@@ -59,7 +55,7 @@ namespace GUI.View
                 {2, "Staff"}
             };
             UserName.Text = acc.UserName;
-            Birth.Text = acc.Birth.ToString();
+            Birth.Text = acc.Birth.ToString("dd-MM-yyyy");
             Email.Text = acc.Email;
             Phone.Text = acc.Phone;
             if (acc.PermissonID != 0)
@@ -101,6 +97,26 @@ namespace GUI.View
         private void TextBox_TextChanged_5(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedFileName = openFileDialog.FileName; // Lấy đường dẫn tệp được chọn
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(selectedFileName); // Trỏ đến file ảnh.
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;  // Tải ảnh vào bitmap
+                bitmap.EndInit();
+
+                ImageBrush imageBrush = new ImageBrush();
+                imageBrush.ImageSource = bitmap;
+                imageBrush.Stretch = Stretch.UniformToFill;
+                AvatarBrush.ImageSource = bitmap;
+            }
         }
     }
 }

@@ -15,36 +15,27 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-
-        <Style x:Key="textHint" TargetType="TextBlock">
+        <Style x:Key="textBoxUnderline" TargetType="TextBox">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="Panel.ZIndex" Value="1"/>
-            <Setter Property="Margin" Value="10 0 0 0"/>
-            <Setter Property="Foreground" Value="#acb0af"/>
-        </Style>
-
-        <Style x:Key="textBox" TargetType="TextBox">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="Margin" Value="10 0 0 0"/>
             <Setter Property="Foreground" Value="#878787"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0,0,0,2"/>
         </Style>
 
-        <Style x:Key="mainbutton" TargetType="Button">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Margin" Value="0,10"/>
+        <Style x:Key="squareButton" TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="Background" Value="#FFB9A1FA"/>
-            <Setter Property="Foreground" Value="#FDFEFE"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="#FFC1AEF6" Padding="15">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="0" BorderThickness="1" BorderBrush="#FFC1AEF6">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -53,15 +44,12 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FFB049EE"/>
-                    <Setter Property="Foreground" Value="White"/>
                 </Trigger>
-                <Trigger Property="IsMouseCaptured" Value="True">
+                <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#FF9B06F4"/>
-                    <Setter Property="Foreground" Value="White"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-
     </UserControl.Resources>
 
     <Border Background="#f8f7fc" CornerRadius="0 20 20 0">
@@ -84,89 +72,135 @@
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="0">
-                <!-- Adjust airport lists -->
-                <TextBlock Text="Adjust airport lists" FontSize="16" FontWeight="Bold" Margin="10,5,0,152"/>
-                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,30,10,10">
+                <TextBlock Text="Adjust airport lists" FontSize="16" FontWeight="Bold" Margin="10,5,0,0"/>
+                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,30,10,10" RenderTransformOrigin="0.51,0.427">
                     <StackPanel>
-                        <TextBlock Text="AirportID:" RenderTransformOrigin="0.5,0.5">
-
-                            <TextBlock.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform AngleX="1.701"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform X="0.237"/>
-                                </TransformGroup>
-                            </TextBlock.RenderTransform>
-                        </TextBlock>
-                        <TextBlock Text="AirportName:"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="AirportID:" VerticalAlignment="Center" Height="31"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="AirportName:" VerticalAlignment="Top" Margin="0,8,0,0"/>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0" Height="71">
+                            <Button Content="Add" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Add_Airport" Background="#2E86C1"/>
+                            <Button Content="Delete" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Delete_Airport" Background="#2E86C1"/>
+                            <Button Content="Edit" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Edit_Airport" Background="#2E86C1"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </Grid>
 
-            <Grid Grid.Row="1" Grid.Column="0" Margin="0,148,0,11" Grid.RowSpan="2">
-                <!-- Adjust airports -->
-                <TextBlock Text="Adjust ticket classes" FontSize="16" FontWeight="Bold" Margin="10,33,0,142"/>
-
-
-                <!-- Adjust ticket classes -->
-                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,68,10,-28">
+            <Grid Grid.Row="2" Grid.Column="0" Margin="0,20,0,0">
+                <TextBlock Text="Adjust ticket classes" FontSize="16" FontWeight="Bold" Margin="5,-14,5,0"/>
+                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,19,10,-19">
                     <StackPanel>
-                        <TextBlock Text="TicketClassID:"/>
-                        <TextBlock Text="TicketClassName:"/>
-                        <TextBlock Text="BaseMultiplier:"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="TicketClassID:" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Margin="0,0,167,0"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="TicketClassName:" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="29" Margin="0,10,147,0"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="BaseMultiplier:" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,7,151,0" Height="39"/>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Height="52" Width="157">
+                            <Button Content="Add" Style="{StaticResource squareButton}" Width="40" Height="40" Click="Button_Add_TC" Background="#2E86C1"/>
+                            <Button Content="Delete" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Delete_TC" Background="#2E86C1"/>
+                            <Button Content="Edit" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Edit_TC" Background="#2E86C1"/>
+
+                        </StackPanel>
                     </StackPanel>
                 </Border>
+                <TextBox x:Name="otherParamTextBox1_Copy" Margin="114,87,29,49" RenderTransformOrigin="0.665,0.563"/>
             </Grid>
 
             <Grid Grid.Row="1" Margin="6,0,0,0" Grid.Column="1">
-                <!-- List of airports -->
-                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="0,34,10,10">
-                    <TextBlock Text="AirportID:" Margin="9,-1,418,-1"/>
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="List of airports" FontSize="16" FontWeight="Bold" Margin="0,0,371,81" RenderTransformOrigin="0.507,0.239"/>
+                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="0,34,10,10" Grid.RowSpan="2">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding AirportList}" CanUserAddRows="True" Margin="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="AirportID" Binding="{Binding AirportID}" Width="*"/>
+                            <DataGridTextColumn Header="AirportName" Binding="{Binding AirportName}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Border>
-                <TextBlock Text="List of airports" FontSize="16" FontWeight="Bold" Margin="0,0,371,146" RenderTransformOrigin="0.507,0.239"/>
-                <TextBlock Text="AirportName:" Margin="115,34,222,10"/>
             </Grid>
 
             <Grid Grid.Row="2" Margin="10,5,-4,96" Grid.RowSpan="2" Grid.Column="1">
-                <!-- List of ticket classes -->
-                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="0,29,10,0">
-                    <TextBlock Text="TicketClassID:" Margin="0,0,396,-1"/>
-                </Border>
                 <TextBlock Text="List of ticket classes" FontSize="16" FontWeight="Bold" Margin="0,0,371,160" RenderTransformOrigin="0.507,0.239"/>
-                <TextBlock Text="TicketClassName:" Margin="135,30,164,0" RenderTransformOrigin="0.566,0.5"/>
-                <TextBlock Text="BaseMultiplier:" Margin="379,30,51,0"/>
+                <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="0,36,10,0">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding TicketClassList}" CanUserAddRows="True" Margin="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="TicketClassID" Binding="{Binding TicketClassID}" Width="*"/>
+                            <DataGridTextColumn Header="TicketClassName" Binding="{Binding TicketClassName}" Width="*"/>
+                            <DataGridTextColumn Header="BaseMultiplier" Binding="{Binding BaseMultiplier}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
             </Grid>
 
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,7,0,0">
-                <!-- Adjust other paramemters -->
-                <TextBlock Text="Adjust other parameters" FontSize="16" FontWeight="Bold" Margin="9,36,585,204" RenderTransformOrigin="0.5,0.5">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleX="0.826"/>
-                            <RotateTransform/>
-                            <TranslateTransform X="0.786"/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
+                <!-- Adjust other parameters -->
+                <TextBlock Text="Adjust other parameters" FontSize="16" FontWeight="Bold" Margin="9,36,585,204" RenderTransformOrigin="0.5,0.5"/>
                 <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,71,10,10">
-                    <TextBlock Margin="24,-14,534,185"/>
+                    <TextBox x:Name="maxInterAirportTextBox" Margin="248,19,508,146" RenderTransformOrigin="0.594,1.164" TextChanged="maxInterAirportTextBox_TextChanged"/>
                 </Border>
-                <TextBlock Text="Minimum flight time: " Margin="36,122,544,122"/>
-                <TextBlock Text="Minimum down time: " Margin="264,71,316,168"/>
-                <TextBlock Text="Maximum down time: " Margin="264,122,316,122"/>
-                <TextBlock Text="Last time to book tickets: " Margin="524,74,56,168"/>
-                <TextBlock Text="Last time to cancel tickets: " Margin="524,122,56,122"/>
-                <TextBlock Text="Number of intermediate airports:" Margin="36,72,544,166"/>
-                <Button Content="Edit" Style="{StaticResource mainbutton}" Width="NaN" Height="35" Margin="338,182,339,53" Background="#2E86C1" Click="Button_Click_1"/>
-
-
+                <TextBlock Text="Minimum flight time: " Margin="19,164,664,80" RenderTransformOrigin="0.497,0.923"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
+                            materialDesign:HintAssist.Hint="Pick Time"
+                            Is24Hours="True"
+                            Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="141,144,561,0" VerticalAlignment="Top" Height="48" />
+                <TextBlock Text="Minimum down time: " Margin="315,95,367,144" RenderTransformOrigin="0.402,0.594"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
+             materialDesign:HintAssist.Hint="Pick Time"
+             Is24Hours="True"
+             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="438,77,264,0" VerticalAlignment="Top" Height="50" />
+                <TextBlock Text="Maximum down time: " Margin="315,164,367,80"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
+             materialDesign:HintAssist.Hint="Pick Time"
+             Is24Hours="True"
+             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="438,142,264,0" VerticalAlignment="Top" Height="48" />
+                <TextBlock Text="Last time to book tickets: " Margin="546,98,117,144" RenderTransformOrigin="0.661,0.586"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
+             materialDesign:HintAssist.Hint="Pick Time"
+             Is24Hours="True"
+             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="688,78,14,0" VerticalAlignment="Top" Height="48" />
+                <TextBlock Text="Last time to cancel tickets: " Margin="546,164,117,80" RenderTransformOrigin="0.411,0.5"/>
+                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
+             materialDesign:HintAssist.Hint="Pick Time"
+             Is24Hours="True"
+             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="688,142,14,0" VerticalAlignment="Top" Height="48" />
+                <TextBlock Text="Maximum number of intermediate airports:" Margin="19,94,556,144"/>
+                <Button Content="Edit" Style="{StaticResource squareButton}" Width="NaN" Height="35" Margin="338,212,339,23" Background="#2E86C1" Click="Button_Edit_main"/>
+                <TextBox x:Name="maxIntermediateAirportsTextBox" Margin="114,-151,574,396" RenderTransformOrigin="0.665,0.563"/>
+                <TextBox x:Name="otherParamTextBox1" Margin="114,-121,573,365" RenderTransformOrigin="0.665,0.563"/>
+                <TextBox x:Name="maxIntermediateAirportsTextBox_Copy" Margin="114,-339,574,584" RenderTransformOrigin="0.665,0.563"/>
+                <TextBox x:Name="maxIntermediateAirportsTextBox_Copy1" Margin="114,-309,574,554" RenderTransformOrigin="0.665,0.563"/>
             </Grid>
-
-            <!-- Add or modify other controls here -->
-
         </Grid>
     </Border>
 </UserControl>

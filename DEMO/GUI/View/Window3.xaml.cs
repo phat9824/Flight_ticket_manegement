@@ -1,7 +1,10 @@
-﻿using GUI.ViewModel;
+﻿using BLL;
+using DTO;
+using GUI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,20 +27,20 @@ namespace GUI.View
     /// </summary>
     public partial class Window3 : UserControl
     {
-        ObservableCollection<Members> members = new ObservableCollection<Members>();
+        ObservableCollection<ACCOUNT> members = new ObservableCollection<ACCOUNT>();
         private List<string> suggestions = new List<string> { "Gợi ý 1", "Gợi ý 2", "Gợi ý 3" };
         public Window3()
         {
             InitializeComponent();
-
             var converter = new BrushConverter();
-            ObservableCollection<Members> members = new ObservableCollection<Members>();
+            LoadMembers();
+        }
 
-            members.Add(new Members { Seq = "1", ID = "000000",Name = "John Doe", Birth = "00/00/00",Position = "Coach", Email = "john.doe@gmail.com", Phone = "415-954-1475" });
-            members.Add(new Members { Seq = "2", ID = "000000", Name = "Reza Alavi", Birth = "00/00/00", Position = "Administrator", Email = "reza110@hotmail.com", Phone = "254-451-7893" });
-            members.Add(new Members { Seq = "3", ID = "000000", Name = "Dennis Castillo", Birth = "00/00/00", Position = "Coach", Email = "deny.cast@gmail.com", Phone = "125-520-0141" });
-            members.Add(new Members { Seq = "4", ID = "000000", Name = "Gabriel Cox", Birth = "00/00/00", Position = "Coach", Email = "coxcox@gmail.com", Phone = "808-635-1221" });
-
+        private void LoadMembers()
+        {
+            BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
+            var result = prc.List_acc(new DTO.ACCOUNT());
+            members = new ObservableCollection<ACCOUNT>(result);
             MembersDataGrid.ItemsSource = members;
         }
 
@@ -56,6 +59,51 @@ namespace GUI.View
         {
             Addmenber f = new Addmenber();
             f.Show();
+        }
+    }
+    public class IdToNameConverterPS : IValueConverter
+    {
+        private Dictionary<string, string> idToNameMap = new Dictionary<string, string>() { { "1", "Admin" }, { "2", "Staff" } };
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null)
+                return "";
+
+            string id = value.ToString();
+            if (idToNameMap.TryGetValue(id, out string name))
+            {
+                return name;
+            }
+            return "Unknown";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotSupportedException("ConvertBack is not supported.");
+        }
+    }
+
+    public class DateTimeToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is DateTime dateTime)
+            {
+                return dateTime.ToString("dd-MM-yyyy");
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string dateString)
+            {
+                if (DateTime.TryParseExact(dateString, "dd-MM-yyyy", culture, DateTimeStyles.None, out DateTime dateTime))
+                {
+                    return dateTime;
+                }
+            }
+            return value;
         }
     }
 }
