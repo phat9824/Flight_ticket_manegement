@@ -271,9 +271,9 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-        public string InsertParamater(ParameterDTO parameter)
+        public string getState()
         {
-            return "";
+            return state;
         }
     }
 }

@@ -106,11 +106,6 @@ namespace BLL
             }
             return string.Empty; // Chuỗi rỗng xem như thành công
         }
-        // insert Paramater
-        public string InsertParamater(ParameterDTO parameterDTO)
-        {
-            return new DAL.ParameterAccess().InsertParamater(parameterDTO);
-        }
         // insert Intermidiate Airport
         public string InsertIntermidiateAirport(List<IntermediateAirportDTO> data)
         {
