@@ -38,8 +38,8 @@ namespace DAL
                                 AirportCount = Convert.ToInt32(reader["AirportCount"]),
                                 DepartureTime = (TimeSpan)reader["DepartureTime"],
                                 IntermediateAirportCount = Convert.ToInt32(reader["IntermediateAirportCount"]),
-                                MinStopTime = Convert.ToInt32(reader["MinStopTime"]),
-                                MaxStopTime = Convert.ToInt32(reader["MaxStopTime"]),
+                                MinStopTime = (TimeSpan)reader["MinStopTime"],
+                                MaxStopTime = (TimeSpan)reader["MaxStopTime"],
                                 TicketClassCount = Convert.ToInt32(reader["TicketClassCount"]),
                                 SlowestBookingTime = (TimeSpan)reader["SlowestBookingTime"],
                                 CancelTime = (TimeSpan)reader["CancelTime"]
@@ -108,11 +108,11 @@ namespace DAL
                         {
                             Value = parameter.IntermediateAirportCount
                         };
-                        SqlParameter parMinStopTime = new SqlParameter("@MinStopTime", SqlDbType.Int)
+                        SqlParameter parMinStopTime = new SqlParameter("@MinStopTime", SqlDbType.Time)
                         {
                             Value = parameter.MinStopTime
                         };
-                        SqlParameter parMaxStopTime = new SqlParameter("@MaxStopTime", SqlDbType.Int)
+                        SqlParameter parMaxStopTime = new SqlParameter("@MaxStopTime", SqlDbType.Time)
                         {
                             Value = parameter.MaxStopTime
                         };

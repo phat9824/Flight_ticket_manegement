@@ -98,16 +98,18 @@ CREATE TABLE PARAMETER
     AirportCount            int,            -- Number of airports
     DepartureTime           time,           -- Departure time
     IntermediateAirportCount int,           -- Number of intermediate airports
-    MinStopTime             int,            -- Minimum stop time
-    MaxStopTime             int,            -- Maximum stop time
+    MinStopTime             time,            -- Minimum stop time
+    MaxStopTime             time,            -- Maximum stop time
     TicketClassCount        int,            -- Number of ticket class
     SlowestBookingTime      time,           -- Slowest booking time
     CancelTime              time,            -- Cancellation time
 	isDeleted int,
 );
 
-delete from FLIGHT
+delete from PARAMETER
+
 select *from FLIGHT
+select *from AIRPORT
 select *from ACCOUNT
 select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
@@ -129,6 +131,9 @@ INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@example.com',
 INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@example.com', '1990-03-03', '819b0643d6b89dc9b579fdfc9094f28e', 2, 0);
 INSERT INTO ACCOUNT VALUES ('003', 'Quan', '0987654321', 'quan@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 1, 0);
 INSERT INTO ACCOUNT VALUES ('007', 'Quan', '0987654322', 'quan2@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 2, 0);
+
+
+INSERT INTO ACCOUNT VALUES ('008', 'admin', '1', '1@gmail.com', '1980-01-01', 'c4ca4238a0b923820dcc509a6f75849b', 1, 0);
 --AIRPORT 
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài', 0);
 INSERT INTO AIRPORT VALUES ('001', N'Tân Sơn Nhất', 0);
@@ -189,5 +194,9 @@ INSERT INTO PARAMETER VALUES (20, '10:00:00', 4, 10, 90, 1, '04:00:00', '10:00:0
 
 --LASTTESTCASE
 =======
-INSERT INTO PARAMETER (AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime)
+INSERT INTO PARAMETER (AirportCount, DepartureTime, 
+IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount,
+SlowestBookingTime, CancelTime)
 VALUES (10, '08:00:00', 2, 30, 120, 2, '07:00:00', '06:00:00')
+
+select * from PARAMETER
