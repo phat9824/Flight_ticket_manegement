@@ -324,17 +324,17 @@
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Detailed information" Style="{StaticResource titleText1}" VerticalAlignment="Top" Width="243" Height="31" Margin="0,18,0,0" FontSize="22"/>
         </Border>
 
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="12,88,253,387" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="12,88,253,380" >
             <Grid Margin="7 9">
 
                 <TextBlock x:Name="textMaChuyenBay"  MouseDown="textMaChuyenBay_MouseDown" Style="{StaticResource textHint}" Margin="-7,-8,-6,-7"/>
                 <TextBox  x:Name="txtMaChuyenBay" TextChanged="txtMaChuyenBay_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="253,89,12,386" >
+        <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="10"  Background="White" Margin="243,88,12,380" >
             <Grid Margin="7 9">
 
-                <TextBlock x:Name="textGiaVe"  MouseDown="textGiaVe_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBlock x:Name="textGiaVe"  MouseDown="textGiaVe_MouseDown" Style="{StaticResource textHint}" Margin="-7,-14,-6,-8"/>
                 <TextBox  x:Name="txtGiaVe" TextChanged="txtGiaVe_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
