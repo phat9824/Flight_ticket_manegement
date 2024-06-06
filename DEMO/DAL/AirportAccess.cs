@@ -19,21 +19,21 @@ namespace DAL
             try
             {
                 con.Open();
-                string query = "select * from AIRPORT";
+                string query = "select * from AIRPORT WHERE isDeleted = 0";
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        while (reader.Read()) 
+                        while (reader.Read())
                         {
-                            AirportDTO airport = new AirportDTO() 
+                            AirportDTO airport = new AirportDTO()
                             {
                                 AirportID = reader[0].ToString(),
                                 AirportName = reader[1].ToString(),
                             };
                             data.Add(airport);
                         }
-                        
+
                     }
                 }
             }

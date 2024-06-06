@@ -14,9 +14,9 @@ namespace DAL
     public class AccountAccess : DatabaseAccess
     {
         string state = string.Empty;
-        static string ToMD5Hash (string s)
+        static string ToMD5Hash(string s)
         {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
             using (MD5 md5 = MD5.Create())
             {
                 byte[] md5HashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(s));
@@ -25,13 +25,13 @@ namespace DAL
                     sb.Append(b.ToString("x2"));
                 }
             }
-            return sb.ToString ();
+            return sb.ToString();
         }
         public bool CheckAccountExists(string email)
         {
             using (SqlConnection conn = SqlConnectionData.Connect())
             {
-                string query = "SELECT COUNT(*) FROM ACCOUNT WHERE Email = @email";
+                string query = "SELECT COUNT(*) FROM ACCOUNT WHERE Email = @email AND isDeleted = 0";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@email", email);
 
@@ -45,12 +45,12 @@ namespace DAL
         {
             using (SqlConnection conn = SqlConnectionData.Connect())
             {
-                string query = "SELECT PermissionID FROM ACCOUNT WHERE Email = @email AND PasswordUser = @password";
+                string query = "SELECT PermissionID FROM ACCOUNT WHERE Email = @email AND PasswordUser = @password AND isDeleted = 0";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@email", email);
                 //cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@password", ToMD5Hash(password));
-                
+
                 conn.Open();
                 object result = cmd.ExecuteScalar();
 
@@ -170,12 +170,12 @@ namespace DAL
                                 PasswordUser = reader["PasswordUser"].ToString(),
                                 PermissonID = Convert.ToInt32(reader["PermissionID"]),
                                 IsDeleted = 0
-                            };data.Add(account);
+                            }; data.Add(account);
                         }
                     }
                 }
             }
-            catch (SqlException ex) 
+            catch (SqlException ex)
             {
                 state = $"Error: {ex.Message}";
             }
