@@ -17,7 +17,8 @@ namespace DAL
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
             string query = @"SELECT TicketClassID, TicketClassName, BaseMultiplier
-                             FROM TICKET_CLASS";
+                             FROM TICKET_CLASS
+                             WHERE isDeleted = 0";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -28,7 +29,8 @@ namespace DAL
                 {
                     while (reader.Read())
                     {
-                        ticketclass.Add(new TicketClassDTO() {
+                        ticketclass.Add(new TicketClassDTO()
+                        {
                             TicketClassID = (string)reader["TicketClassID"],
                             TicketClassName = (string)reader["TicketClassName"],
                             BaseMultiplier = (decimal)(double)reader["BaseMultiplier"]
@@ -48,7 +50,8 @@ namespace DAL
             con.Open();
             string query = @"SELECT ISNULL(SUM(Quantity), 0) AS TotalSeat
                             FROM TICKETCLASS_FLIGHT
-                            WHERE (@flightID IS NULL OR FlightID = @flightID)";
+                            WHERE (@flightID IS NULL OR FlightID = @flightID)
+                            AND isDeleted = 0";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -58,7 +61,7 @@ namespace DAL
                 // Đọc kết quả truy vấn
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    if (reader.Read()) 
+                    if (reader.Read())
                     {
                         number = (int)reader["TotalSeat"];
                     }
@@ -78,7 +81,8 @@ namespace DAL
             string query = @"SELECT ISNULL(SUM(Quantity), 0) AS TotalSeat
                             FROM TICKETCLASS_FLIGHT
                             WHERE (@flightID IS NULL OR FlightID = @flightID)
-                            AND (@ticketClassID IS NULL OR TicketClassID = @ticketClassID)";
+                            AND (@ticketClassID IS NULL OR TicketClassID = @ticketClassID)
+                            AND isDeleted = 0";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {

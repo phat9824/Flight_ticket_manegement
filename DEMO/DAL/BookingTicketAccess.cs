@@ -99,7 +99,7 @@ namespace DAL
         }
         public List<BookingTicketDTO> GetBookingTicket(string TicketID, string CustomerID, string FLigthID, int Status)
         {
-            List<BookingTicketDTO> data = new List<BookingTicketDTO>(); 
+            List<BookingTicketDTO> data = new List<BookingTicketDTO>();
             SqlConnection con = SqlConnectionData.Connect();
             this.state = string.Empty;
             try
@@ -117,14 +117,14 @@ namespace DAL
                     command.Parameters.AddWithValue("@TicketID", TicketID ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@CustomerID", CustomerID ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@FLigthID", FLigthID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Status", Status == -1  ? (object)DBNull.Value : Status);
+                    command.Parameters.AddWithValue("@Status", Status == -1 ? (object)DBNull.Value : Status);
 
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            BookingTicketDTO dto = new BookingTicketDTO() 
+                            BookingTicketDTO dto = new BookingTicketDTO()
                             {
                                 TicketID = reader["TicketID"].ToString(),
                                 FlightID = reader["FlightID"].ToString(),
@@ -165,6 +165,7 @@ namespace DAL
                                         AND YEAR(BT2.BookingDate) = @Year
 		                                AND MONTH(BT2.BookingDate) = @Month) AS B
                                 WHERE BT.FlightID = F.FlightID 
+								AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TCF.isDeleted = 0
                                 AND (BT.FlightID = TCF.FlightID AND BT.TicketClassID = TCF.TicketClassID)
                                 AND YEAR(BT.BookingDate) = @Year
                                 AND MONTH(BT.BookingDate) = @Month
@@ -186,7 +187,7 @@ namespace DAL
                                 ticketsSold = Convert.ToInt32(reader["SO_LUONG_VE"]),
                                 revenue = Convert.ToDecimal(reader["DOANH_THU_CB"]),
                                 ratio = Math.Round(Convert.ToDecimal(reader["DOANH_THU_CB"]) / sum, 2)
-                        };
+                            };
                             data.Add(dto);
                         }
                     }
@@ -209,7 +210,7 @@ namespace DAL
             try
             {
                 con.Open();
-                
+
                 // vô sql coi giải thích comment 
                 string query = @"
                         select MONTH(BT.BookingDate) as thang, YEAR(BT.BookingDate) as nam, 
@@ -223,6 +224,7 @@ namespace DAL
 		                        AND BT2.isDeleted = 0 AND F2.isDeleted = 0 AND TCF2.isDeleted = 0) AS A
                         where BT.FlightID = F.FlightID 
 		                        AND (BT.TicketClassID = TCF.TicketClassID AND BT.FlightID = TCF.FlightID)
+                                AND F.isDeleted = 0 AND BT.isDeleted = 0 AND TCF.isDeleted = 0
 		                        AND YEAR(BT.BookingDate) = @Year
 		                        AND BT.isDeleted = 0 AND F.isDeleted = 0 AND TCF.isDeleted = 0
                         group by MONTH(BT.BookingDate), YEAR(BT.BookingDate), DOANH_THU_NAM";
@@ -240,7 +242,7 @@ namespace DAL
                                 time = new DateTime(Convert.ToInt32(reader["nam"]), Convert.ToInt32(reader["thang"]), 1),
                                 flightQuantity = Convert.ToInt32(reader["SO_CHUYEN_BAY"]),
                                 revenue = Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]),
-                                ratio = Math.Round( Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]) / sum, 2 )
+                                ratio = Math.Round(Convert.ToDecimal(reader["DOANH_THU_THEO_THANG"]) / sum, 2)
                             }; data.Add(dto);
                         }
                     }
@@ -255,7 +257,6 @@ namespace DAL
             con.Close();
             return (data, sum);
         }
-
         public string GetState()
         {
             return this.state;
