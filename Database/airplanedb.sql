@@ -96,8 +96,9 @@ CREATE TABLE TICKETCLASS_FLIGHT
 CREATE TABLE PARAMETER
 (
     AirportCount            int,            -- Number of airports
-    DepartureTime           time,           -- Departure time
-    IntermediateAirportCount int,           -- Number of intermediate airports
+    --DepartureTime           time,           -- Departure time // thời gian bay tối thiểu, sai từ vựng tiếng anh
+    MinFlightTime			time,
+	IntermediateAirportCount int,           -- Number of intermediate airports
     MinStopTime             time,            -- Minimum stop time
     MaxStopTime             time,            -- Maximum stop time
     TicketClassCount        int,            -- Number of ticket class
@@ -115,7 +116,7 @@ select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
-
+select *from PARAMETER
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
