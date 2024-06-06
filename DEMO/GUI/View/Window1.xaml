@@ -12,139 +12,82 @@
              d:DesignHeight="720" d:DesignWidth="805"
              Style="{StaticResource Page_Style}"
              Background="White">
-    <!-- Set background to white -->
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="262"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <!-- Page Title -->
-        <TextBlock Text="Setting" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
-    HorizontalAlignment="Left" Foreground="#121518"/>
+        <TextBlock Text="Setting" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="10"
+                   HorizontalAlignment="Left" Foreground="#121518" Width="104"/>
 
-        <!-- Personal Information Label -->
-        <TextBlock Text="Personal Information" FontSize="20" FontWeight="Bold" Margin="10,95,0,366"
-    HorizontalAlignment="Left" Foreground="#121518"/>
-
-
-
-        <!-- Username information -->
-        <Grid Grid.Column="0" Margin="20,152,0,-132">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- Avatar -->
-
-            <Ellipse Grid.Row="0" Width="150" Height="150" Stroke="Gray" StrokeThickness="1" Margin="0 0 10 10">
+        <!-- Avatar and Change Avatar Button -->
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Width="529">
+            <Ellipse Width="250" Height="250" Stroke="Gray" StrokeThickness="1">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="AvatarBrush" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
-
-            <!-- Change avatar button -->
-            <Button Grid.Row="1" Content="Change Avatar" HorizontalAlignment="Center" Margin="10" Click="ChangeAvatarButton_Click" Height="30"/>
-        </Grid>
-
-        <!-- User information -->
-        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,132,10,92">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Fullname:"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="UserName" Width="250" Margin="5" Text=""/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Gender"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Width="250" Margin="5"/>
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Birth"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="Birth" Width="250" Margin="5"/>
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Phone"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name ="Phone" Width="250" Margin="5"/>
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Email"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="Email" Width="488" Margin="5"/>
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-
-            <!-- Update button -->
-            <Button Content="Update" HorizontalAlignment="Stretch" Margin="10" Command="{Binding UpdateUserCommand}" Height="30"/>
+            <Button Content="Change Avatar" Click="ChangeAvatarButton_Click" Height="40" Width="150" Margin="0,20,0,0"/>
         </StackPanel>
 
-        <!-- Account Information Label -->
-        <TextBlock Text="Account Information" Grid.Row="2" FontSize="20" FontWeight="Bold" Margin="10,5,0,405"
-    HorizontalAlignment="Left" Foreground="#121518"/>
-
-        <!-- Account information -->
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="10,63,10,284" Grid.Row="4">
+        <!-- User Information -->
+        <Grid Grid.Row="1" VerticalAlignment="Bottom" Margin="42,0,30,37" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="383"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <!-- Username and role -->
-            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Username:"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Width="150" Margin="5" Text="{Binding Username}"/>
-                        </StackPanel>
-                    </StackPanel>
+            <!-- Fullname and Birth -->
+            <TextBlock Text="Fullname:" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="21"/>
+            <TextBox x:Name="UserName" Grid.Row="0" Margin="82,20,275,19"
+                     materialDesign:HintAssist.Hint="Nguyen Van A"
+                     FontSize="16"
+                     VerticalContentAlignment="Center"
+                     Padding="0,0,0,-10" Grid.ColumnSpan="3"/>
+            <TextBlock Text="Birth:" Grid.Row="0" Grid.Column="2" Margin="107,17,157,0" FontSize="16" VerticalAlignment="Top" Height="21"/>
+            <DatePicker x:Name="Birth"
+                        materialDesign:HintAssist.HelperText=""
+                        materialDesign:HintAssist.Hint="Pick Date"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="175,-4,17,0" IsTodayHighlighted="False" FontSize="16" VerticalAlignment="Top" Height="55" Grid.Column="2"/>
 
-                    <StackPanel Grid.Row="0"  Orientation="Vertical" Margin="10">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Role:"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox x:Name="Role" Width="150" Margin="5" Text=""/>
-                        </StackPanel>
-                    </StackPanel>
+            <!-- Email and Phone -->
+            <TextBlock Text="Email:" Grid.Row="1" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
+            <TextBox x:Name="Email" Grid.Row="1" Margin="82,20,275,21"
+                     IsReadOnly="True"
+                     IsReadOnlyCaretVisible="True"
+                     materialDesign:HintAssist.Hint="example@gmail.com"
+                     FontSize="16"
+                     VerticalContentAlignment="Center"
+                     Padding="0,0,0,-10" Grid.ColumnSpan="3"/>
+            <TextBlock Text="Phone:" Grid.Row="1" Grid.Column="2" Margin="107,19,147,0" FontSize="16" VerticalAlignment="Top" Height="20"/>
+            <TextBox x:Name="Phone" Grid.Row="1" Grid.Column="2" Margin="175,20,17,22"
+                     materialDesign:HintAssist.Hint="0123456789"
+                     FontSize="16"
+                     VerticalContentAlignment="Center"
+                     Padding="0,0,0,-10"
+                     PreviewTextInput="Phone_PreviewTextInput" RenderTransformOrigin="0.494,0.479"/>
 
-                </StackPanel>
-            </StackPanel>
+            <!-- Role -->
+            <TextBlock Text="Role:" Grid.Row="2" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
+            <TextBlock x:Name="Role" Grid.Row="2" Margin="82,0,104,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
 
-            <!-- Change password button -->
-            <Button Content="Change Password" HorizontalAlignment="Left" Margin="470,30,0,31" Command="{Binding ChangePasswordCommand}" Height="30" Width="221" Grid.Row="0"/>
+            <!-- Buttons -->
+            <Button Content="Change Password" Grid.Row="2" Grid.Column="2" Width="178" Margin="0,14,0,25" HorizontalAlignment="Center"/>
+            <Button Content="Update" Grid.Row="3" Width="188" Margin="258,0,0,26" HorizontalAlignment="Left" Click="UpdateButton_Click" Grid.ColumnSpan="3"/>
         </Grid>
     </Grid>
 </UserControl>

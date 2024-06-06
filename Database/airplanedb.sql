@@ -188,6 +188,5 @@ INSERT INTO PARAMETER VALUES (15, '09:00:00', 3, 20, 100, 2, '05:00:00', '11:00:
 INSERT INTO PARAMETER VALUES (20, '10:00:00', 4, 10, 90, 1, '04:00:00', '10:00:00', 1);
 
 --LASTTESTCASE
-=======
 INSERT INTO PARAMETER (AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime)
 VALUES (10, '08:00:00', 2, 30, 120, 2, '07:00:00', '06:00:00')
