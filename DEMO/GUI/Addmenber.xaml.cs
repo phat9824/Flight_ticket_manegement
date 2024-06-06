@@ -74,5 +74,22 @@ namespace GUI
                 textID.Visibility = Visibility.Visible;
             }
         }
+
+        private void textPhone_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtPhone.Focus();
+        }
+
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPhone.Text) && txtPhone.Text.Length > 0)
+            {
+                textPhone.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textPhone.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

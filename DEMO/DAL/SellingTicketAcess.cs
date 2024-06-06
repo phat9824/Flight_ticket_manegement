@@ -19,7 +19,8 @@ namespace DAL
             con.Open();
             string query = @"SELECT COUNT(FlightID) AS SoldTickets
                             FROM BOOKING_TICKET
-                            WHERE (@flightID IS NULL OR FlightID = @flightID)";
+                            WHERE (@flightID IS NULL OR FlightID = @flightID)
+                            AND isDeleted = 0";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -49,7 +50,8 @@ namespace DAL
             string query = @"SELECT COUNT(FlightID) AS SoldTickets
                             FROM BOOKING_TICKET
                             WHERE (@flightID IS NULL OR FlightID = @flightID)
-                            AND(@ticketClassID IS NULL OR TicketClassID = @ticketClassID)";
+                            AND(@ticketClassID IS NULL OR TicketClassID = @ticketClassID)
+                            AND isDeleted = 0";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {

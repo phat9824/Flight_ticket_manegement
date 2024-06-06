@@ -8,7 +8,7 @@ CREATE TABLE PERMISSION
 	PermissionName VARCHAR(40),
 	isDeleted int
 )
-
+select * from ACCOUNT
 CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
@@ -96,24 +96,26 @@ CREATE TABLE TICKETCLASS_FLIGHT
 CREATE TABLE PARAMETER
 (
     AirportCount            int,            -- Number of airports
-    DepartureTime           time,           -- Departure time
-    IntermediateAirportCount int,           -- Number of intermediate airports
-    MinStopTime             int,            -- Minimum stop time
-    MaxStopTime             int,            -- Maximum stop time
+    MinFlightTime			time,
+	IntermediateAirportCount int,           -- Number of intermediate airports
+    MinStopTime             time,            -- Minimum stop time
+    MaxStopTime             time,            -- Maximum stop time
     TicketClassCount        int,            -- Number of ticket class
     SlowestBookingTime      time,           -- Slowest booking time
     CancelTime              time,            -- Cancellation time
 	isDeleted int,
 );
 
-delete from FLIGHT
+delete from ACCOUNT
+
 select *from FLIGHT
+select *from AIRPORT
 select *from ACCOUNT
 select *from TICKET_CLASS
 select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
-
+select *from PARAMETER
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
@@ -127,8 +129,12 @@ INSERT INTO PERMISSION VALUES (2, 'Staff', 0);
 INSERT INTO ACCOUNT VALUES ('000', 'admin', '0123456789', 'admin@example.com', '1980-01-01', '7c6a180b36896a0a8c02787eeafb0e4c', 1, 0);
 INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@example.com', '1985-02-02', '6cb75f652a9b52798eb6cf2201057c73', 2, 0);
 INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@example.com', '1990-03-03', '819b0643d6b89dc9b579fdfc9094f28e', 2, 0);
+
 INSERT INTO ACCOUNT VALUES ('003', 'Quan', '0987654321', 'quan@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 1, 0);
-INSERT INTO ACCOUNT VALUES ('007', 'Quan', '0987654322', 'quan2@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 2, 0);
+INSERT INTO ACCOUNT VALUES ('005', 'Quan', '0987654322', 'quan2@gmail.com', '2004-10-14', 'e80b5017098950fc58aad83c8c14978e', 2, 0);
+
+
+INSERT INTO ACCOUNT VALUES ('004', 'admin', '1', '1@gmail.com', '1980-01-01', 'c4ca4238a0b923820dcc509a6f75849b', 1, 0);
 --AIRPORT 
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài', 0);
 INSERT INTO AIRPORT VALUES ('001', N'Tân Sơn Nhất', 0);
@@ -183,6 +189,7 @@ INSERT INTO TICKETCLASS_FLIGHT VALUES ('002', 'FL002', 30, 1.5, 0);
 INSERT INTO TICKETCLASS_FLIGHT VALUES ('003', 'FL003', 20, 2.0, 0);
 
 --PARAMETER
+
 INSERT INTO PARAMETER VALUES (10, '08:00:00', 2, 30, 120, 3, '06:00:00', '12:00:00', 0);
 INSERT INTO PARAMETER VALUES (15, '09:00:00', 3, 20, 100, 2, '05:00:00', '11:00:00', 1);
 INSERT INTO PARAMETER VALUES (20, '10:00:00', 4, 10, 90, 1, '04:00:00', '10:00:00', 1);
@@ -190,3 +197,6 @@ INSERT INTO PARAMETER VALUES (20, '10:00:00', 4, 10, 90, 1, '04:00:00', '10:00:0
 --LASTTESTCASE
 INSERT INTO PARAMETER (AirportCount, DepartureTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime)
 VALUES (10, '08:00:00', 2, 30, 120, 2, '07:00:00', '06:00:00')
+
+INSERT INTO PARAMETER VALUES (10, '08:00:00', 2, '10:00:00', '20:00:00', 2, '07:00:00', '06:00:00', 0)
+

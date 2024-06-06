@@ -225,7 +225,8 @@ namespace DAL
                 string query = @"select count(*)from FLIGHT
                                 WHERE (@SourID IS NULL OR @SourID = SourceAirportID)
                                 AND (@DesID is NULL OR @DesID = DestinationAirportID)
-                                AND FlightDay BETWEEN @StartD and @EndD";
+                                AND FlightDay BETWEEN @StartD and @EndD
+                                AND isDeleted = 0";
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     command.Parameters.AddWithValue("@SourID", SourID == "" ? (object)DBNull.Value : SourID);

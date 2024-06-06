@@ -9,11 +9,11 @@ namespace DTO
     public class ParameterDTO
     {
         private int airportCount;
-        private TimeSpan departureTime;
+        private TimeSpan minFlighTime;
         private int intermediateAirportCount;
         private int ticketClassCount;
-        private int minStopTime;
-        private int maxStopTime;
+        private TimeSpan minStopTime;
+        private TimeSpan maxStopTime;
         private int seatCount;
         private TimeSpan slowestBookingTime;
         private TimeSpan cancelTime;
@@ -25,10 +25,10 @@ namespace DTO
             set => airportCount = value;
         }
 
-        public TimeSpan DepartureTime
+        public TimeSpan MinFlighTime
         {
-            get => departureTime;
-            set => departureTime = value;
+            get => minFlighTime;
+            set => minFlighTime = value;
         }
 
         public int IntermediateAirportCount
@@ -43,13 +43,13 @@ namespace DTO
             set => ticketClassCount = value;
         }
 
-        public int MinStopTime
+        public TimeSpan MinStopTime
         {
             get => minStopTime;
             set => minStopTime = value;
         }
 
-        public int MaxStopTime
+        public TimeSpan MaxStopTime
         {
             get => maxStopTime;
             set => maxStopTime = value;
