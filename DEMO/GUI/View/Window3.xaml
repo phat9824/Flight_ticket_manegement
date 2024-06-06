@@ -531,12 +531,12 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Padding" Value="15 10" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0 10" />
+            <Setter Property="Margin" Value="0 10 0 0" />
             <!--<Setter Property="Effect" >
-              <Setter.Value>
-                  <DropShadowEffect BlurRadius="2" Opacity="0.1" ShadowDepth="1"/>
-              </Setter.Value>
-          </Setter>-->
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.1" ShadowDepth="1"/>
+                </Setter.Value>
+            </Setter>-->
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -574,15 +574,15 @@
             </Grid.RowDefinitions>
 
             <!--Search Textbox-->
-            <Grid Width="363" HorizontalAlignment="Left" Margin="32,59,0,518" Grid.Row="1" Grid.RowSpan="5">
+            <Grid Width="351" HorizontalAlignment="Left" Margin="32,26,0,572" Grid.Row="5">
 
-                <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+                <TextBlock Name="textBoxSearch" MouseDown="textBoxSearch_MouseDown" Margin="20,49,37,0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                         Panel.ZIndex="1" Text="Search here ..."
-                        Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+                        Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"  />
 
-                <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" Height="37"/>
+                <TextBox Name="txtBoxSearch" TextChanged="txtBoxSearch_TextChanged" Style="{StaticResource searchTextbox}"  Text="ffhfh" Margin="0,0,26,0" Height="26"/>
 
-                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
+                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="300,0,0,0" Foreground="#B0B9C6" VerticalAlignment="Center" />
 
             </Grid>
 

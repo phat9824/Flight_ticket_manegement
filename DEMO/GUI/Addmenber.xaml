@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Addmenber" Height="300" Width="550">
+        Title="Addmenber" Height="320" Width="570">
     <Window.Resources>
         <Style x:Key="normalText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
@@ -131,8 +131,8 @@
                     </Grid.ColumnDefinitions>
 
                     <Image Source="/Images/phone.png" Height="20"/>
-                    <TextBlock x:Name="textPhone"  MouseDown="textID_MouseDown" Text="Phone" Style="{StaticResource textHint}"/>
-                    <TextBox x:Name="txtPhone" TextChanged="txtID_TextChanged" Style="{StaticResource textBox}"/>
+                    <TextBlock x:Name="textPhone"  MouseDown="textPhone_MouseDown" Text="Phone" Style="{StaticResource textHint}"/>
+                    <TextBox x:Name="txtPhone" TextChanged="txtPhone_TextChanged" Style="{StaticResource textBox}"/>
                 </Grid>
             </Border>
 
@@ -148,7 +148,7 @@
         <Grid Grid.Row="3" Margin="0,27,0,0">
             <Button Content="Add"
                     Style="{StaticResource mainbutton}"
-                    IsDefault="True" Background="#FFA3D2F3" Margin="175,-10,175,0"/>
+                    IsDefault="True" Background="#FFA3D2F3" Margin="175,-3,175,0"/>
         </Grid>
 
 
