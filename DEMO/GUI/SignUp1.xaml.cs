@@ -183,13 +183,13 @@ namespace GUI
             if (kq == "")
             {
                 MessageBox.Show("Sign Up Success");
-                Login f = new Login();
-                f.Show();
+                /*Login f = new Login();
+                f.Show();*/
                 Window.GetWindow(this).Close();
             }
             else
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(kq);
             }
         }
     }

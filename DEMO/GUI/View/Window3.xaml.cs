@@ -57,7 +57,8 @@ namespace GUI.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Addmenber f = new Addmenber();
+            //Addmenber f = new Addmenber();
+            SignUp1 f = new SignUp1();
             f.Show();
         }
 
