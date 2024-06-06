@@ -96,7 +96,6 @@ CREATE TABLE TICKETCLASS_FLIGHT
 CREATE TABLE PARAMETER
 (
     AirportCount            int,            -- Number of airports
-    --DepartureTime           time,           -- Departure time // thời gian bay tối thiểu, sai từ vựng tiếng anh
     MinFlightTime			time,
 	IntermediateAirportCount int,           -- Number of intermediate airports
     MinStopTime             time,            -- Minimum stop time
