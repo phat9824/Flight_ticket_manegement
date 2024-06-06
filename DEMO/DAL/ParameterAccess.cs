@@ -22,7 +22,7 @@ namespace DAL
             try
             {
                 con.Open();
-                string query = @"SELECT AirportCount, MinFlighTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime
+                string query = @"SELECT AirportCount, MinFlightTime, IntermediateAirportCount, MinStopTime, MaxStopTime, TicketClassCount, SlowestBookingTime, CancelTime
                              FROM PARAMETER
                              where isDeleted = 0";
 
@@ -36,7 +36,7 @@ namespace DAL
                             parameter = new ParameterDTO()
                             {
                                 AirportCount = Convert.ToInt32(reader["AirportCount"]),
-                                MinFlighTime = (TimeSpan)reader["MinFlighTime"],
+                                MinFlighTime = (TimeSpan)reader["MinFlightTime"],
                                 IntermediateAirportCount = Convert.ToInt32(reader["IntermediateAirportCount"]),
                                 MinStopTime = (TimeSpan)reader["MinStopTime"],
                                 MaxStopTime = (TimeSpan)reader["MaxStopTime"],
@@ -79,9 +79,200 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
+        public int UpdateAirportCount(int number)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set AirportCount = @number
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@number", number);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateMinFligthTime(TimeSpan timeSpan)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set MinFlightTime = @time
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@time", timeSpan);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateIntermediateAirportCount(int number)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set IntermediateAirportCount = @number
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@number", number);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateMinStopTime(int time)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set MinStopTime = @time
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@time", time);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateMaxStopTime(int time)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set MaxStopTime = @time
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@time", time);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateSlowestBookingTime(int time)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set SlowestBookingTime = @time
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@time", time);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateCancelTime(int time)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set CancelTime = @time
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@time", time);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateTicketClassCount(int number)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update PARAMETER
+                    set TicketClassCount = @number
+                    where isDeleted = 0";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@number", number);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
         public string InsertParamater(ParameterDTO parameter)
         {
-
             return "";
         }
     }
