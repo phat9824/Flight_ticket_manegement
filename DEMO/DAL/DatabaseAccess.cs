@@ -17,10 +17,10 @@ namespace DAL
     {
         public static SqlConnection Connect()
         {
-            //string strcon = @"Data Source=HUNG;Initial Catalog=airplanedb;Integrated Security=True";
+            string strcon = @"Data Source=HUNG;Initial Catalog=airplanedb;Integrated Security=True";
             //string strcon = @"Data Source=LAPTOP-978A4PM7;Initial Catalog=airplanedb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
             //string strcon = @"Data Source=SPIDEY;Initial Catalog=airplanedb;Integrated Security=True";
-            string strcon = @"Data Source=PHUONGVY\SQLEXPRESS;Initial Catalog=airplanedb;Integrated Security=True";
+            //string strcon = @"Data Source=PHUONGVY\SQLEXPRESS;Initial Catalog=airplanedb;Integrated Security=True";
             SqlConnection conn = new SqlConnection(strcon); // khởi tạo connect
             return conn;
         }
