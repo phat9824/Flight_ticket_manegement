@@ -11,6 +11,17 @@ namespace DAL
 {
     public class Ticket_classAccess : DatabaseAccess
     {
+        string state = string.Empty;
+        public string AutoID()
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("select count(*) from TICKET_CLASS", con);
+            int i = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+            i++;
+            return i.ToString("000");
+        }
         public List<TicketClassDTO> L_TicketClass()
         {
             List<TicketClassDTO> ticketclass = new List<TicketClassDTO>();

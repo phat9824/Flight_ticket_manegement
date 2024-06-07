@@ -151,7 +151,7 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-        public int UpdateMinStopTime(int time)
+        public int UpdateMinStopTime(TimeSpan time)
         {
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;
@@ -175,7 +175,7 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-        public int UpdateMaxStopTime(int time)
+        public int UpdateMaxStopTime(TimeSpan time)
         {
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;
@@ -199,7 +199,7 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-        public int UpdateSlowestBookingTime(int time)
+        public int UpdateSlowestBookingTime(TimeSpan time)
         {
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;
@@ -223,7 +223,7 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-        public int UpdateCancelTime(int time)
+        public int UpdateCancelTime(TimeSpan time)
         {
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;

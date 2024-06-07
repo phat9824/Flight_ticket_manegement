@@ -125,6 +125,7 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
+
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);

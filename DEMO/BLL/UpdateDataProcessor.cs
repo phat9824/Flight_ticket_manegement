@@ -21,19 +21,19 @@ namespace BLL
         {
             return new DAL.ParameterAccess().UpdateIntermediateAirportCount(number);
         }
-        public int UpdateMinStopTime(int time)
+        public int UpdateMinStopTime(TimeSpan time)
         {
             return new DAL.ParameterAccess().UpdateMinStopTime(time);
         }
-        public int UpdateMaxStopTime(int time)
+        public int UpdateMaxStopTime(TimeSpan time)
         {
             return new DAL.ParameterAccess().UpdateMaxStopTime(time);
         }
-        public int UpdateSlowestBookingTime(int time)
+        public int UpdateSlowestBookingTime(TimeSpan time)
         {
             return new DAL.ParameterAccess().UpdateSlowestBookingTime(time);
         }
-        public int UpdateCancelTime(int time)
+        public int UpdateCancelTime(TimeSpan time)
         {
             return new DAL.ParameterAccess().UpdateCancelTime(time);
         }
