@@ -41,6 +41,8 @@ namespace GUI.View
                 {1, "Admin"},
                 {2, "Staff"}
             };
+            UserName.Text = acc.UserName;
+
             Birth.Text = acc.Birth.ToString("dd-MM-yyyy");
             Email.Text = acc.Email;
             Phone.Text = acc.Phone;
