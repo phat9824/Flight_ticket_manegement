@@ -141,7 +141,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="List of airports" FontSize="16" FontWeight="Bold" Margin="0,0,371,81" RenderTransformOrigin="0.507,0.239"/>
                 <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="0,34,10,10" Grid.RowSpan="2">
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding AirportList}" CanUserAddRows="True" Margin="10">
+                    <DataGrid x:Name="ListAirport" AutoGenerateColumns="False" ItemsSource="{Binding AirportList}" CanUserAddRows="True" Margin="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="AirportID" Binding="{Binding AirportID}" Width="*"/>
                             <DataGridTextColumn Header="AirportName" Binding="{Binding AirportName}" Width="*"/>
@@ -153,7 +153,7 @@
             <Grid Grid.Row="2" Margin="10,5,-4,96" Grid.RowSpan="2" Grid.Column="1">
                 <TextBlock Text="List of ticket classes" FontSize="16" FontWeight="Bold" Margin="0,0,371,160" RenderTransformOrigin="0.507,0.239"/>
                 <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="0,36,10,0">
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding TicketClassList}" CanUserAddRows="True" Margin="10">
+                    <DataGrid x:Name="ListTicketClass" AutoGenerateColumns="False" ItemsSource="{Binding TicketClassList}" CanUserAddRows="True" Margin="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="TicketClassID" Binding="{Binding TicketClassID}" Width="*"/>
                             <DataGridTextColumn Header="TicketClassName" Binding="{Binding TicketClassName}" Width="*"/>
@@ -167,35 +167,67 @@
                 <!-- Adjust other parameters -->
                 <TextBlock Text="Adjust other parameters" FontSize="16" FontWeight="Bold" Margin="9,36,585,204" RenderTransformOrigin="0.5,0.5"/>
                 <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,71,10,10">
-                    <TextBox x:Name="maxInterAirportTextBox" Margin="248,19,508,146" RenderTransformOrigin="0.594,1.164" TextChanged="maxInterAirportTextBox_TextChanged"/>
+                    <TextBox x:Name="maxInterAirportTextBox"
+                             Margin="248,19,508,146" RenderTransformOrigin="0.594,1.164"
+                             TextChanged="maxInterAirportTextBox_TextChanged"
+                             IsEnabled="False"/>
                 </Border>
                 <TextBlock Text="Minimum flight time: " Margin="19,164,664,80" RenderTransformOrigin="0.497,0.923"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
-                            materialDesign:HintAssist.Hint="Pick Time"
-                            Is24Hours="True"
-                            Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="141,144,561,0" VerticalAlignment="Top" Height="48" />
+                <materialDesign:TimePicker x:Name="MinFlightTime"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           Is24Hours="True"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="141,144,561,0" VerticalAlignment="Top" Height="48" 
+                                           IsEnabled="False"/>
                 <TextBlock Text="Minimum down time: " Margin="315,95,367,144" RenderTransformOrigin="0.402,0.594"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
-             materialDesign:HintAssist.Hint="Pick Time"
-             Is24Hours="True"
-             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="438,77,264,0" VerticalAlignment="Top" Height="50" />
+                <materialDesign:TimePicker x:Name="MinDownTime"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           Is24Hours="True"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="438,77,264,0" VerticalAlignment="Top" Height="50"
+                                           IsEnabled="False"/>     
                 <TextBlock Text="Maximum down time: " Margin="315,164,367,80"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
-             materialDesign:HintAssist.Hint="Pick Time"
-             Is24Hours="True"
-             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="438,142,264,0" VerticalAlignment="Top" Height="48" />
+                <materialDesign:TimePicker x:Name="MaxDownTime"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           Is24Hours="True"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="438,142,264,0" VerticalAlignment="Top" Height="48"
+                                           IsEnabled="False"/>
                 <TextBlock Text="Last time to book tickets: " Margin="546,98,117,144" RenderTransformOrigin="0.661,0.586"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
-             materialDesign:HintAssist.Hint="Pick Time"
-             Is24Hours="True"
-             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="688,78,14,0" VerticalAlignment="Top" Height="48" />
+                <materialDesign:TimePicker x:Name="LastBookTicket"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           Is24Hours="True"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="688,78,14,0" VerticalAlignment="Top" Height="48"
+                                           IsEnabled="False"/>
                 <TextBlock Text="Last time to cancel tickets: " Margin="546,164,117,80" RenderTransformOrigin="0.411,0.5"/>
-                <materialDesign:TimePicker materialDesign:HintAssist.HelperText=""
-             materialDesign:HintAssist.Hint="Pick Time"
-             Is24Hours="True"
-             Style="{StaticResource MaterialDesignOutlinedTimePicker}" Margin="688,142,14,0" VerticalAlignment="Top" Height="48" />
+                <materialDesign:TimePicker x:Name="LastCancelTicket"
+                                           materialDesign:HintAssist.HelperText=""
+                                           materialDesign:HintAssist.Hint="Pick Time"
+                                           Is24Hours="True"
+                                           Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                           Margin="688,142,14,0" VerticalAlignment="Top" Height="48"
+                                           IsEnabled="False"/>
                 <TextBlock Text="Maximum number of intermediate airports:" Margin="19,94,556,144"/>
-                <Button Content="Edit" Style="{StaticResource squareButton}" Width="NaN" Height="35" Margin="338,212,339,23" Background="#2E86C1" Click="Button_Edit_main"/>
+
+                
+                <StackPanel x:Name="EditPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="338,212,339,23">
+                    <Button x:Name="Confirm" Content="Accept"
+                            Width="75" Height="35" Background="#27AE60" Margin="0 0 2.5 0" Padding="2.5 0 2.5 0"
+                            Click="Button_Accept_Click"/>
+                    <Button x:Name="Undo" Content="X"
+                            Width="35" Height="35" Background="#E74C3C" Margin="2.5 0 0 0" Padding="2.5 0 2.5 0"
+                            Click="Button_Cancel_Click"/>
+                </StackPanel>
+
+                <Button Content="Edit" x:Name="EditButton"
+                        Width="NaN" Height="35" Margin="338,212,339,23" Background="#2E86C1"
+                        Click="Button_Edit_main"/>
+                
                 <TextBox x:Name="maxIntermediateAirportsTextBox" Margin="114,-151,574,396" RenderTransformOrigin="0.665,0.563"/>
                 <TextBox x:Name="otherParamTextBox1" Margin="114,-121,573,365" RenderTransformOrigin="0.665,0.563"/>
                 <TextBox x:Name="maxIntermediateAirportsTextBox_Copy" Margin="114,-339,574,584" RenderTransformOrigin="0.665,0.563"/>

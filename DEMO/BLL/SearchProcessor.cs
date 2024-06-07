@@ -138,8 +138,10 @@ namespace BLL
         {
             List<BookingTicketDTO> data = new List<BookingTicketDTO>();
             try
-            {
-                data = new DAL.BookingTicketAccess().GetBookingTicket(TicketID, CustomerID, FLigthID, Status);
+            {   
+                DAL.BookingTicketAccess prc = new DAL.BookingTicketAccess();
+                data = prc.GetBookingTicket(TicketID, CustomerID, FLigthID, Status);
+                this.state = prc.GetState();
             }
             catch (Exception ex)
             {
@@ -185,6 +187,11 @@ namespace BLL
                 this.state = $"Error: {ex.Message}";
             }
             return count;
+        }
+
+        public string GetState()
+        {
+            return this.state;
         }
     }
 }

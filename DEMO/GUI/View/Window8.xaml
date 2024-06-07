@@ -66,7 +66,7 @@
                 <DockPanel LastChildFill="False" Grid.Row="5"/>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
-                    <TextBox Text=""
+                    <TextBox Text="" x:Name="CustomerID"
                              Margin="5 0 5 0" Padding="0 0 0 0"
                              VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                              Width="150" Height="50"
@@ -123,7 +123,7 @@
                 </DataGrid>
 
                 <Button Content="Search"
-                        
+                        Click="Click_Search"
                         HorizontalAlignment="Left" Margin="667,0,0,0" Grid.Row="4" VerticalAlignment="Center" Style="{StaticResource addButton}" Width="101"/>
             </Grid>
         </Grid>
