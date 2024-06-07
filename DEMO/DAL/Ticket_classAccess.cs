@@ -115,5 +115,86 @@ namespace DAL
 
             return number;
         }
+
+        public string Add_TicketClass(TicketClassDTO ticketClassDTO)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+
+            using (SqlTransaction transaction = con.BeginTransaction())
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "INSERT INTO TICKET_CLASS (TicketClassID, TicketClassName, BaseMultiplier, isDeleted) VALUES (@ICD, @TCNAME, @BASE, 0)";
+                        cmd.Connection = con;
+                        cmd.Transaction = transaction;
+
+                        SqlParameter parID = new SqlParameter("@ICD", SqlDbType.VarChar)
+                        {
+                            Value = AutoID()
+                        };
+                        SqlParameter parName = new SqlParameter("@TCNAME", SqlDbType.NVarChar)
+                        {
+                            Value = ticketClassDTO.TicketClassName
+                        };
+                        SqlParameter parBase = new SqlParameter("@BASE", SqlDbType.Float)
+                        {
+                            Value = ticketClassDTO.BaseMultiplier
+                        };
+                        cmd.Parameters.Add(parID);
+                        cmd.Parameters.Add(parName);
+                        cmd.Parameters.Add(parBase);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            transaction.Rollback();
+                            return "No rows were inserted.";
+                        }
+                    }
+                    transaction.Commit();
+                    return string.Empty; // Chuỗi rỗng xem như thành công
+                }
+
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return $"Insert failed: {ex.Message}";
+                }
+            }
+        }
+        public int DeleteTicketClass(string ID)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update TICKET_CLASS
+                            set isDeleted = 1
+                            where isDeleted = 0
+                            AND TicketClassID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", ID);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public string GetState()
+        {
+            return state;
+        }
     }
 }
