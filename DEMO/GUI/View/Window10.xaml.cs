@@ -132,32 +132,36 @@ namespace GUI.View
                 if (newParameter.AirportCount != parameter.AirportCount)
                 {
                     prc.UpdateAirportCount(numIAirports);
-                    MessageBox.Show("A");
+                    //MessageBox.Show("A");
                 }
 
                 if (newParameter.CancelTime != parameter.CancelTime)
-                {
-                    MessageBox.Show("B");
+                {   
+                    prc.UpdateCancelTime(newParameter.CancelTime);
+                    //MessageBox.Show("B");
                 }
 
                 if (newParameter.SlowestBookingTime != parameter.SlowestBookingTime)
-                {
-                    MessageBox.Show("C");
+                {   
+                    prc.UpdateSlowestBookingTime(newParameter.SlowestBookingTime);
+                    //MessageBox.Show("C");
                 }
 
                 if (newParameter.MinStopTime != parameter.MinStopTime)
                 {
-                    MessageBox.Show("D");
+                    prc.UpdateMinStopTime(newParameter.MinStopTime);
+                    //MessageBox.Show("D");
                 }
 
                 if (newParameter.MaxStopTime != parameter.MaxStopTime)
-                {
-                    MessageBox.Show("E");
+                {   
+                    prc.UpdateMaxStopTime(newParameter.MaxStopTime);
+                    //MessageBox.Show("E");
                 }
 
                 if (newParameter.MinFlighTime != parameter.MinFlighTime)
-                {
-                    MessageBox.Show("F");
+                {   prc.UpdateMinFligthTime(newParameter.MinFlighTime);
+                    //MessageBox.Show("F");
                 }
             }
             catch (Exception ex)
