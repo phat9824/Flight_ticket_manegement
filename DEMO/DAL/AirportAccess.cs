@@ -78,5 +78,35 @@ namespace DAL
             con.Close();
             return state;
         }
+
+        public int DeleteAirport(string ID)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update AIRPORT
+                            set isDeleted = 1
+                            where isDeleted = 0
+                            AND AirportID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", ID);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public string GetState()
+        {
+            return state;
+        }
     }
 }

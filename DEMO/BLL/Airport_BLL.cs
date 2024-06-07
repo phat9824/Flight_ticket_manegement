@@ -22,5 +22,10 @@ namespace BLL
         {
             return new DAL.AirportAccess().AddAirport(airportName);
         }
+        public int deleteAirport(string airportID)
+        {
+            return new DAL.AirportAccess().DeleteAirport(airportID);
+        }
+        
     }
 }
