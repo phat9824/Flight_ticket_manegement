@@ -28,15 +28,12 @@ namespace GUI.View
      Tìm kiếm vé theo CustomerID, FlightID, TicketID, Status. Có thể bổ sung nhiều thuộc tính hơn nếu có thời gian
      Mỗi thuộc tính tìm kiếm đều có thể NULL
      
-     -Cần viết phương thức để trả về List<BookingTicketDTO> thỏa mãn thuộc tính tìm kiếm và parameter - phương thức này sẽ được gọi tại nút Search
-     -Cần viết phương thức xóa vé (hủy vé) được chọn (vé được chọn phải thỏa mãn parameter) - phương thức này sẽ được gọi tại nút Delete (không xóa thực sự)
-     
      Lưu ý: Các Processor cần chứa thuộc tính state là trạng thái xử lí của Process, nếu state là chuỗi rỗng thì xem như thành công
      
      Khác: Khi vé được chèn vào db, sẽ có Status mặc định là 1 - Sold
                  Khi chuyến bay cất cánh, Status của vé chuyển sang 0 - Flown
                  Khi hủy vé, isDeleted = 1;
-     
+
      */
     public partial class Window8 : UserControl
     {
@@ -56,9 +53,35 @@ namespace GUI.View
 
             Status.ItemsSource = new List<ST>
             {
+                new ST(){ID = "-1", Name = "All"},
                 new ST(){ID = "1", Name = "Sold"},
                 new ST(){ID = "2", Name = "Flown"}
             };
+            Status.SelectedValue = "-1";
+        }
+
+        private void Click_Search(object sender, RoutedEventArgs e)
+        {
+            string state = string.Empty;
+            try
+            {
+                string customerID = CustomerID.Text;
+                string ticketID = TicketID.Text;
+                string flightID = FlightID.Text;
+                int status = Convert.ToInt32(Status.SelectedValue.ToString());
+                BLL.SearchProcessor prc = new BLL.SearchProcessor();
+                var result = prc.GetBookingTicket(ticketID, customerID, flightID, status);
+                if (prc.GetState() == string.Empty)
+                {
+                    listTicket = new ObservableCollection<BookingTicketDTO>(result);
+                    dataGrid.ItemsSource = listTicket;
+                }
+            }
+            catch(Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+                MessageBox.Show(state);
+            }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
