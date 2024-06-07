@@ -18,5 +18,9 @@ namespace BLL
             return airportAccess.L_airport();*/
             return new DAL.AirportAccess().L_airport();
         }
+        public string insertAirport(string airportName)
+        {
+            return new DAL.AirportAccess().AddAirport(airportName);
+        }
     }
 }

@@ -44,5 +44,39 @@ namespace DAL
             con.Close();
             return data;
         }
+
+        private string AutoID()
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("select count(*) from FLIGHT", con);
+            int i = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+            i++;
+            return i.ToString("FL000");
+        }
+        public string AddAirport(string airportName)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            try
+            {
+                con.Open();
+                string query = "INSERT INTO AIRPORT VALUES(@AirportID, @AirportName, 0)";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@AirportID", AutoID());
+                    command.Parameters.AddWithValue("@AirportName", airportName);
+                    command.ExecuteNonQuery();
+                    state = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return state;
+        }
     }
 }

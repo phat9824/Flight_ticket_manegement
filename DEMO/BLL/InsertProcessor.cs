@@ -11,6 +11,7 @@ namespace BLL
 {
     public class InsertProcessor
     {
+
         public InsertProcessor() { }
         // luu booking ticket vao db
         public string Add_BookingTicket(CustomerDTO customer, FlightDTO flight, TicketClassDTO ticketClass, DateTime date, int status)
