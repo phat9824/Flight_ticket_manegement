@@ -20,10 +20,13 @@ namespace GUI
         {
             base.OnStartup(e);
             // Đổi start up ở đây
-            var startUpWindow = new Login();
-            //UserSession.Instance.StartSession("test", new[] { "test" }.ToList());
+            //var startUpWindow = new Login();
+
+            //ClientSession.Instance.StartSession("admin@example.com", new[] { "1" }.ToList());
             //var startUpWindow = new MainWindow();
-            //var startUpWindow = new StaffWindow();
+
+            ClientSession.Instance.StartSession("staff1@example.com", new[] { "2" }.ToList());
+            var startUpWindow = new StaffWindow();
             startUpWindow.Show();
         }
     }

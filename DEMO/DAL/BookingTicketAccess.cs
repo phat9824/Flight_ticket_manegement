@@ -97,7 +97,7 @@ namespace DAL
                 }
             }
         }
-        public List<BookingTicketDTO> GetBookingTicket(string TicketID, string CustomerID, string FLigthID, int Status)
+        public List<BookingTicketDTO> GetBookingTicket(string TicketID, string CustomerID, string FligthID, int Status)
         {
             List<BookingTicketDTO> data = new List<BookingTicketDTO>();
             SqlConnection con = SqlConnectionData.Connect();
@@ -110,13 +110,13 @@ namespace DAL
                                 where (isDeleted = 0)
                                 AND (@TicketID is NULL or @TicketID = TicketID)
                                 AND (@CustomerID is NULL or @CustomerID = ID)
-                                AND (@FLigthID is NULL or @FLigthID = FLigthID)
+                                AND (@FlightID is NULL or @FlightID = FlightID)
                                 AND (@Status is NULL or @Status = TicketStatus)";
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
-                    command.Parameters.AddWithValue("@TicketID", TicketID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@CustomerID", CustomerID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@FLigthID", FLigthID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@TicketID", TicketID == "" ? (object)DBNull.Value : TicketID);
+                    command.Parameters.AddWithValue("@CustomerID", CustomerID == "" ? (object)DBNull.Value : CustomerID);
+                    command.Parameters.AddWithValue("@FlightID", FligthID == "" ? (object)DBNull.Value : FligthID);
                     command.Parameters.AddWithValue("@Status", Status == -1 ? (object)DBNull.Value : Status);
 
 
@@ -130,7 +130,7 @@ namespace DAL
                                 FlightID = reader["FlightID"].ToString(),
                                 ID = reader["ID"].ToString(),
                                 TicketClassID = reader["TicketClassID"].ToString(),
-                                TicketStatus = Convert.ToInt32(reader["status"]),
+                                TicketStatus = Convert.ToInt32(reader["TicketStatus"]),
                                 BookingDate = Convert.ToDateTime(reader["BookingDate"])
                             };
                             data.Add(dto);
