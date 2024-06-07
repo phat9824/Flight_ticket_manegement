@@ -1,27 +1,15 @@
-﻿
-using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GUI.ViewModel;
-using System.Windows.Controls.Primitives;
+using Microsoft.Win32;
 using BLL;
 using DTO;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.Win32;
+using System.Windows.Media;
 
 namespace GUI.View
 {
@@ -41,10 +29,9 @@ namespace GUI.View
             }));
 
             BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
-            var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail});
+            var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail });
 
             Load(result[0]);
-
         }
 
         private void Load(ACCOUNT acc)
@@ -55,6 +42,7 @@ namespace GUI.View
                 {2, "Staff"}
             };
             UserName.Text = acc.UserName;
+
             Birth.Text = acc.Birth.ToString("dd-MM-yyyy");
             Email.Text = acc.Email;
             Phone.Text = acc.Phone;
@@ -66,37 +54,33 @@ namespace GUI.View
             {
                 Role.Text = "Unknown";
             }
-            
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Phone_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            e.Handled = !IsTextAllowed(e.Text);
         }
 
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        private static bool IsTextAllowed(string text)
         {
-
+            return Array.TrueForAll(text.ToCharArray(), Char.IsDigit);
         }
 
-        private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(UserName.Text) || string.IsNullOrWhiteSpace(Email.Text) || string.IsNullOrWhiteSpace(Phone.Text) || string.IsNullOrWhiteSpace(Birth.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                return;
+            }
 
-        }
+            if (!Phone.Text.StartsWith("0"))
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ");
+                return;
+            }
 
-        private void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged_4(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged_5(object sender, TextChangedEventArgs e)
-        {
-
+            // Code cập nhật thông tin người dùng ở đây
         }
 
         private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)

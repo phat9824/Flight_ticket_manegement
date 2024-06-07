@@ -582,8 +582,9 @@
 
                 <TextBox Name="txtBoxSearch" TextChanged="txtBoxSearch_TextChanged" Style="{StaticResource searchTextbox}"  Text="ffhfh" Margin="0,0,26,0" Height="26"/>
 
-                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="300,0,0,0" Foreground="#B0B9C6" VerticalAlignment="Center" />
+                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="328,0,0,0" Foreground="#FF56B7FA" VerticalAlignment="Center" />
 
+               
             </Grid>
 
 
