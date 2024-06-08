@@ -298,8 +298,8 @@
                         Width="160" Height="30" Margin="5 0 0 0"
                         Click="AddTicket_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Add" Margin="0 0 5 0"></TextBlock>
                         <Icon:PackIconMaterial Kind="Plus"/>
+                        <TextBlock Text="Add" Margin="5 0 0 0"></TextBlock>
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Column="1"
@@ -314,9 +314,9 @@
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetTicket_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Reset" Margin="0 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        </TextBlock>
                         <Icon:PackIconMaterial Kind="Refresh"/>
+                        <TextBlock Text="Reset" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        </TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -442,8 +442,8 @@
                         Width="160" Height="30" Margin="5 0 0 0" 
                         Click="AddIA_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Add" Margin="0 0 5 0"></TextBlock>
                         <Icon:PackIconMaterial Kind="Plus"/>
+                        <TextBlock Text="Add" Margin="5 0 0 0"></TextBlock>
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Column="1"
@@ -458,8 +458,8 @@
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetIA_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Reset" Margin="0 0 5 0"></TextBlock>
                         <Icon:PackIconMaterial Kind="Refresh"/>
+                        <TextBlock Text="Reset" Margin="5 0 0 0"></TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>

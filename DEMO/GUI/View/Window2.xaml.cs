@@ -55,10 +55,6 @@ namespace GUI.View
 
             SourceAirport.ItemsSource = airports;
             DestinationAirport.ItemsSource = airports;
-
-            SortProperty.ItemsSource = SortProperties;
-            SortProperty.DisplayMemberPath = "Key";
-            SortProperty.SelectedValuePath = "Value";
         }
 
         private bool IsEmpty(object value)
@@ -90,8 +86,16 @@ namespace GUI.View
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            string a = SourceAirport.SelectedValue as string;
-            string b = DestinationAirport.SelectedValue as string;
+            string a = string.Empty;
+            string b = string.Empty;
+            if (SourceAirport.SelectedIndex != -1)
+            {
+                a = SourceAirport.SelectedValue as string;
+            }
+            if (DestinationAirport.SelectedIndex != -1)
+            {
+                b = DestinationAirport.SelectedValue as string;
+            }
 
             // Check if SourceAirport or DestinationAirport are empty
             if (IsEmpty(a) || IsEmpty(b))
@@ -108,13 +112,6 @@ namespace GUI.View
             flightInformationSearches = new BLL.SearchProcessor().GetFlightInfoDTO(a, b, startDate, endDate);
             flights = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
 
-            // Nếu có yêu cầu sort
-            if (SortProperty.SelectedIndex != -1)
-            {
-                string sortOrder = "ASC";
-                flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
-            }
-
             FlightsDataGrid.ItemsSource = flights;
         }
 
@@ -122,13 +119,6 @@ namespace GUI.View
         {
             Edit f = new Edit();
             f.Show();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string sortOrder = "ASC";
-            flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
-            FlightsDataGrid.ItemsSource = flights;
         }
 
         private void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)

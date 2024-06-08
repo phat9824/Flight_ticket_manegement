@@ -116,8 +116,8 @@ namespace DAL
                     //command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID == "" ? (object)DBNull.Value : sourceAirportID);
                     //command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID == "" ? (object)DBNull.Value : destinationAirportID);
 
-                    command.Parameters.AddWithValue("@sourceAirportID", sourceAirportID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@destinationAirportID", destinationAirportID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@sourceAirportID", (sourceAirportID == "")? (object)DBNull.Value : sourceAirportID);
+                    command.Parameters.AddWithValue("@destinationAirportID", (destinationAirportID == "")? (object)DBNull.Value : destinationAirportID);
                     command.Parameters.AddWithValue("@startDate", startDate);
                     command.Parameters.AddWithValue("@endDate", endDate);
 
