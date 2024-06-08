@@ -560,9 +560,9 @@
 
     </UserControl.Resources>
 
-    <Border  Background="#f8f7fc" CornerRadius="0 20 20 0">
+    <Border  Background="WhiteSmoke" CornerRadius="0 20 20 0">
 
-        <Grid Background="#f8f7fc" Margin="17,20,10,3">
+        <Grid Background="WhiteSmoke" Margin="17,20,10,3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>

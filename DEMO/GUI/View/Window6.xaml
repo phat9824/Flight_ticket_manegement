@@ -164,7 +164,7 @@
         <Label Content="Mã chuyến bay" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="39,136,0,0" FontFamily="Cooper Black"/>
         <Label Content="Giá vé" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="107" Foreground="Black" Margin="501,141,0,0" FontFamily="Cooper Black"/>
         -->
-        <Border Background="#f8f7fc" CornerRadius="0 20 20 0"/>
+        <Border Background="WhiteSmoke" CornerRadius="0 20 20 0"/>
 
 
         <Grid>

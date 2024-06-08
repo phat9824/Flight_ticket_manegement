@@ -11,7 +11,7 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              d:DesignHeight="720" d:DesignWidth="805"
              Style="{StaticResource Page_Style}">
-    <Border Background="White" CornerRadius="0 20 20 0">
+    <Border Background="WhiteSmoke" CornerRadius="0 20 20 0">
         <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
