@@ -61,16 +61,47 @@
                 <RowDefinition Height="115*"/>
                 <RowDefinition Height="162*"/>
             </Grid.RowDefinitions>
+            <!--
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="261*"/>
                 <ColumnDefinition Width="544*"/>
             </Grid.ColumnDefinitions>
+            -->
 
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,5">
                 <TextBlock Text="General rules" FontSize="32" FontWeight="SemiBold" Margin="10 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518" Width="250"/>
             </Grid>
 
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <StackPanel>
+                        
+                    </StackPanel>
+
+                    <DataGrid x:Name="ListAirport" AutoGenerateColumns="False" ItemsSource="{Binding AirportList}" CanUserAddRows="False" Margin="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="AirportID" Binding="{Binding AirportID}" Width="*"/>
+                            <DataGridTextColumn Header="AirportName" Binding="{Binding AirportName}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Width="450">
+                    <StackPanel>
+                        
+                    </StackPanel>
+
+                    <DataGrid x:Name="ListTicketClass" AutoGenerateColumns="False" ItemsSource="{Binding TicketClassList}" CanUserAddRows="False" Margin="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="TicketClassID" Binding="{Binding TicketClassID}" Width="*"/>
+                            <DataGridTextColumn Header="TicketClassName" Binding="{Binding TicketClassName}" Width="*"/>
+                            <DataGridTextColumn Header="BaseMultiplier" Binding="{Binding BaseMultiplier}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+            <!--
             <Grid Grid.Row="1" Grid.Column="0">
                 <TextBlock Text="Adjust airport lists" FontSize="16" FontWeight="Bold" Margin="10,5,0,0"/>
                 <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Margin="10,30,10,10" RenderTransformOrigin="0.51,0.427">
@@ -97,6 +128,7 @@
                     </StackPanel>
                 </Border>
             </Grid>
+            -->
 
             <Grid Grid.Row="2" Grid.Column="0" Margin="0,20,0,0">
                 <TextBlock Text="Adjust ticket classes" FontSize="16" FontWeight="Bold" Margin="5,-14,5,0"/>
@@ -133,7 +165,7 @@
                 </Border>
                 <TextBox x:Name="otherParamTextBox1_Copy" Margin="114,87,29,49" RenderTransformOrigin="0.665,0.563"/>
             </Grid>
-
+            <!--
             <Grid Grid.Row="1" Margin="6,0,0,0" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="9*"/>
@@ -162,6 +194,7 @@
                     </DataGrid>
                 </Border>
             </Grid>
+            -->
 
             <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,7,0,0">
                 <!-- Adjust other parameters -->
@@ -227,11 +260,6 @@
                 <Button Content="Edit" x:Name="EditButton"
                         Width="NaN" Height="35" Margin="338,212,339,23" Background="#2E86C1"
                         Click="Button_Edit_main"/>
-                
-                <TextBox x:Name="maxIntermediateAirportsTextBox" Margin="114,-151,574,396" RenderTransformOrigin="0.665,0.563"/>
-                <TextBox x:Name="otherParamTextBox1" Margin="114,-121,573,365" RenderTransformOrigin="0.665,0.563"/>
-                <TextBox x:Name="maxIntermediateAirportsTextBox_Copy" Margin="114,-339,574,584" RenderTransformOrigin="0.665,0.563"/>
-                <TextBox x:Name="maxIntermediateAirportsTextBox_Copy1" Margin="114,-309,574,554" RenderTransformOrigin="0.665,0.563"/>
             </Grid>
         </Grid>
     </Border>
