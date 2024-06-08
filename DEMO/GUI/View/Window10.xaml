@@ -90,9 +90,9 @@
                             <TextBlock Text="AirportName:" VerticalAlignment="Top" Margin="0,8,0,0"/>
                         </Grid>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0" Height="71">
-                            <Button Content="Add" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Add_Airport" Background="#2E86C1"/>
-                            <Button Content="Delete" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Delete_Airport" Background="#2E86C1"/>
-                            <Button Content="Edit" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Edit_Airport" Background="#2E86C1"/>
+                            <Button Content="Add" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Add_Airport" Background="#FF1DA2ED"/>
+                            <Button Content="Delete" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Delete_Airport" Background="#FF1DA2ED"/>
+                            <Button Content="Edit" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Edit_Airport" Background="#FF1DA2ED"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -124,9 +124,9 @@
                             <TextBlock Text="BaseMultiplier:" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,7,151,0" Height="39"/>
                         </Grid>
                         <StackPanel Orientation="Horizontal" Height="52" Width="157">
-                            <Button Content="Add" Style="{StaticResource squareButton}" Width="40" Height="40" Click="Button_Add_TC" Background="#2E86C1"/>
-                            <Button Content="Delete" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Delete_TC" Background="#2E86C1"/>
-                            <Button Content="Edit" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Edit_TC" Background="#2E86C1"/>
+                            <Button Content="Add" Style="{StaticResource squareButton}" Width="40" Height="40" Click="Button_Add_TC" Background="#FF1DA2ED"/>
+                            <Button Content="Delete" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Delete_TC" Background="#FF1DA2ED"/>
+                            <Button Content="Edit" Style="{StaticResource squareButton}" Height="40" Width="40" Click="Button_Edit_TC" Background="#FF1DA2ED"/>
 
                         </StackPanel>
                     </StackPanel>
@@ -225,7 +225,7 @@
                 </StackPanel>
 
                 <Button Content="Edit" x:Name="EditButton"
-                        Width="NaN" Height="35" Margin="338,212,339,23" Background="#2E86C1"
+                        Width="NaN" Height="35" Margin="338,212,339,23" Background="#FF1DA2ED"
                         Click="Button_Edit_main"/>
                 
                 <TextBox x:Name="maxIntermediateAirportsTextBox" Margin="114,-151,574,396" RenderTransformOrigin="0.665,0.563"/>

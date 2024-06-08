@@ -10,9 +10,9 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              d:DesignHeight="720" d:DesignWidth="805"
-             Style="{StaticResource Page_Style}"
-             Background="White">
-    <Grid>
+             Style="{StaticResource Page_Style}">
+    <Border Background="White" CornerRadius="0 20 20 0">
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -34,7 +34,7 @@
                     <ImageBrush x:Name="AvatarBrush" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Button Content="Change Avatar" Click="ChangeAvatarButton_Click" Height="40" Width="150" Margin="0,20,0,0"/>
+            <Button Content="Change Avatar" Click="ChangeAvatarButton_Click" Height="40" Width="150" Margin="0,20,0,0" Background="#FF1DA2ED"/>
         </StackPanel>
 
         <!-- User Information -->
@@ -86,8 +86,9 @@
             <TextBlock x:Name="Role" Grid.Row="2" Margin="82,0,104,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
 
             <!-- Buttons -->
-            <Button Content="Change Password" Grid.Row="2" Grid.Column="2" Width="178" Margin="0,14,0,25" HorizontalAlignment="Center"/>
-            <Button Content="Update" Grid.Row="3" Width="188" Margin="258,0,0,26" HorizontalAlignment="Left" Click="UpdateButton_Click" Grid.ColumnSpan="3"/>
+            <Button Content="Change Password" Grid.Row="2" Grid.Column="2" Width="178" Margin="0,14,0,25" HorizontalAlignment="Center" Background="#FF1DA2ED"/>
+            <Button Content="Update" Grid.Row="3" Width="188" Margin="258,0,0,26" HorizontalAlignment="Left" Click="UpdateButton_Click" Grid.ColumnSpan="3" Background="#FF1DA2ED"/>
         </Grid>
     </Grid>
+    </Border>
 </UserControl>
