@@ -54,7 +54,7 @@ namespace DAL
             int i = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
             i++;
-            return i.ToString("FL000");
+            return i.ToString("000");
         }
         public string AddAirport(string airportName)
         {
