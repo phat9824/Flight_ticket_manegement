@@ -18,6 +18,7 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
         <!--==========================================================-->
         <Style x:Key="CenterAlignedTextBlock" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -45,18 +46,56 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="gridEditButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF1DA2ED" />
+            <Setter Property="BorderBrush" Value="#FF5593FF" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="5">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF46BAFC" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="gridRemoveButton" TargetType="Button" BasedOn="{StaticResource gridEditButton}">
+            <Setter Property="Background" Value="#D32F2F" />
+            <Setter Property="BorderBrush" Value="#B71C1C" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F44336" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="gridButtonIcon" TargetType="Icon:PackIconMaterial">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="12" />
+        </Style>
     </UserControl.Resources>
 
     <Border Background="WhiteSmoke" CornerRadius="0 20 20 0">
 
         <Grid >
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="4"/>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="4"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
@@ -245,8 +284,8 @@
 
             <Border  Grid.Row="3" BorderBrush="Black" BorderThickness="2" Width="777" Height="1"
                      HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="0.0"/>
-            
-            
+
+
             <Grid Grid.Row="4" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -254,11 +293,15 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" 
-                        Content="Add" 
                         Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
-                        Width="160" Height="30" Margin="5 0 0 0" 
-                        Click="AddTicket_Click"/>
+                        Width="160" Height="30" Margin="5 0 0 0"
+                        Click="AddTicket_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Add" Margin="0 0 5 0"></TextBlock>
+                        <Icon:PackIconMaterial Kind="Plus"/>
+                    </StackPanel>
+                </Button>
                 <TextBlock Grid.Column="1"
                            Text="Ticket Class" 
                            VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -266,12 +309,16 @@
                            Width="160" Height="30" Margin="0 0 0 0"
                            LineHeight="20" FontSize="20"
                            FontWeight="SemiBold"/>
-                <Button Grid.Column="2" 
-                        Content="Reset" 
-                        Background="#FF1DA2ED"
+                <Button Grid.Column="2" Style="{StaticResource gridRemoveButton}"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="0 0 5 0" 
-                        Click="ResetTicket_Click"/>
+                        Click="ResetTicket_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Reset" Margin="0 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        </TextBlock>
+                        <Icon:PackIconMaterial Kind="Refresh"/>
+                    </StackPanel>
+                </Button>
             </Grid>
 
            
@@ -283,7 +330,7 @@
                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Ticket Class ID" Width="125" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Header="Ticket Class ID" Width="140" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxID"
@@ -298,7 +345,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Ticket Class Name" Width="225" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Header="Ticket Class Name" Width="250" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxName"
@@ -322,7 +369,7 @@
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
                         -->
 
-                        <DataGridTemplateColumn Header="Multiplier" Width="115" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Header="Multiplier" Width="120" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox x:Name="TextBoxMultiplier"
@@ -348,25 +395,29 @@
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
                         -->
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"
-                                            Width="180"
+                                            Width="190"
                                             CanUserSort="False"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
 
-                        <DataGridTemplateColumn Width="150" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Width="100" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.Header>
-                                <TextBlock Text="Actions"
+                                <TextBlock Text=""
                                            HorizontalAlignment="Center"/>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Delete"
+                                    <Button Style="{StaticResource gridRemoveButton}"
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Margin="0,0,0,0"
-                                            Width = "100"
-                                            Click="DeleteButton_Click_1"/>
+                                            Width = "50"
+                                            Click="DeleteButton_Click_1">
+                                        <StackPanel>
+                                            <Icon:PackIconMaterial Kind="DeleteOutline"/>
+                                        </StackPanel>
+                                    </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -386,11 +437,15 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" 
-                        Content="Add" 
                         Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="5 0 0 0" 
-                        Click="AddIA_Click"/>
+                        Click="AddIA_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Add" Margin="0 0 5 0"></TextBlock>
+                        <Icon:PackIconMaterial Kind="Plus"/>
+                    </StackPanel>
+                </Button>
                 <TextBlock Grid.Column="1"
                            Text="Intermidate Airport" 
                            VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -398,12 +453,15 @@
                            Width="200" Height="30" Margin="0 0 0 0"
                            LineHeight="20" FontSize="20"
                            FontWeight="SemiBold"/>
-                <Button Grid.Column="2" 
-                        Content="Reset" 
-                        Background="#FF1DA2ED"
+                <Button Grid.Column="2" Style="{StaticResource gridRemoveButton}"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="0 0 5 0" 
-                        Click="ResetIA_Click"/>
+                        Click="ResetIA_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Reset" Margin="0 0 5 0"></TextBlock>
+                        <Icon:PackIconMaterial Kind="Refresh"/>
+                    </StackPanel>
+                </Button>
             </Grid>
 
             <!--R6___________________________________-->
@@ -431,7 +489,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Intermidate Airport" Width="200" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Header="Intermidate Airport" Width="230" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox x:Name="ComboBoxIAName"
@@ -446,30 +504,36 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
-                        <DataGridTextColumn Header="Layover Time" Binding="{Binding LayoverTime}"
+
+                        <DataGridTextColumn Header="Layover Time" Binding="{Binding LayoverTime, Converter={StaticResource TimeSpanToStringConverter}}"
                                             Width="130"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
                         <DataGridTextColumn Header="Note" Binding="{Binding Note}"
-                                            Width="200"
+                                            Width="220"
                                             HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                                             ElementStyle="{StaticResource CenterAlignedTextBlock}"
                                             EditingElementStyle="{StaticResource CenterAlignedTextBox}"/>
 
-                        <DataGridTemplateColumn Width="150" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
+                        <DataGridTemplateColumn Width="100" HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}">
                             <DataGridTemplateColumn.Header>
-                                <TextBlock Text="Actions"
+                                <TextBlock Text=""
                                            HorizontalAlignment="Center"/>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Content="Delete"
-                                                HorizontalAlignment="Center" Margin="10,0,0,0"
-                                                Width = "100"
-                                                Click="DeleteButton_Click_2" />
+                                    <StackPanel Orientation="Horizontal" Width="100">
+                                        <Button Style="{StaticResource gridRemoveButton}"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                Margin="10 0 0 0"
+                                                Width = "50"
+                                                Click="DeleteButton_Click_2">
+                                            <StackPanel>
+                                                <Icon:PackIconMaterial Kind="DeleteOutline"/>
+                                            </StackPanel>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -480,7 +544,7 @@
 
             <!--R7___________________________________-->
             <Grid Grid.Row="9" VerticalAlignment="Bottom">
-                <Button Height="50" Width="200"
+                <Button Height="50" Width="200" FontSize="20"
                         Content="Confirm"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"

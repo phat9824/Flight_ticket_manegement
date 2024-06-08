@@ -62,11 +62,10 @@ namespace GUI.View
             ticketList = new ObservableCollection<TicketClass>
             {
                 new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 },
+                new TicketClass { ID = "Default", Name = "Default", Quantity = -1, Multiplier = 0 }
             };
             IAList = new ObservableCollection<IntermediateAirport>
             {
-                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
-                new IntermediateAirport { ID = "Default", Name = "Default", LayoverTime = TimeSpan.FromMinutes(0), Note = "..." },
             };
             collectionViewTicketClass = CollectionViewSource.GetDefaultView(ticketList);
             collectionViewIA = CollectionViewSource.GetDefaultView(IAList);
@@ -157,9 +156,60 @@ namespace GUI.View
         }
 
         private string ValidateLogicDB(FlightDTO flightDTO, List<TicketClassFlightDTO> listTicketClassFlightDTO, List<IntermediateAirportDTO> listIntermediateAirportDTO)
-        {
-            string state = string.Empty;
-            return state;
+        {   
+            if (FlightTime.SelectedTime.Value.TimeOfDay < parameterDTO.MinFlighTime)
+            {
+                return $"Flight time must be greater than  {parameterDTO.MinFlighTime}";
+            }
+
+            try
+            {
+                HashSet<string> set = new HashSet<string>();
+                foreach (TicketClassFlightDTO obj in listTicketClassFlightDTO)
+                {
+                    if (!set.Add(obj.TicketClassID))
+                    {
+                        return "Ticket classes must be different";
+                    }
+
+                    if (obj.Quantity <= 0)
+                    {
+                        return "Ticket quantity must be greater than 0";
+                    }
+
+                    if (obj.Multiplier <= 0)
+                    {
+                        return "Ticket class multiplier must be greater than 0";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+
+            try
+            {
+                HashSet<string> set = new HashSet<string>();
+                foreach (IntermediateAirportDTO obj in listIntermediateAirportDTO)
+                {
+                    if (!set.Add(obj.AirportID))
+                    {
+                        return "Intermediate airports must be different";
+                    }
+
+                    if (obj.LayoverTime < parameterDTO.MinStopTime || obj.LayoverTime > parameterDTO.MaxStopTime)
+                    {
+                        return $"Layover time must be greater than  {parameterDTO.MinStopTime.Hours}h{parameterDTO.MinStopTime.Minutes}m and less than {parameterDTO.MaxStopTime.Hours}h {parameterDTO.MaxStopTime.Minutes}m";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+
+            return string.Empty;
         }
 
         private bool isNatural(string input)
@@ -526,6 +576,26 @@ namespace GUI.View
         }
 
         /*---------------------------------------------END Data Grid 2 aka IA---------------------------------------------------------*/
+    }
 
+    public class TimeSpanToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is TimeSpan timeSpan)
+            {
+                return timeSpan.ToString(@"hh\:mm");
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string str && TimeSpan.TryParseExact(str, @"hh\:mm", CultureInfo.InvariantCulture, out var timeSpan))
+            {
+                return timeSpan;
+            }
+            return null;
+        }
     }
 }
