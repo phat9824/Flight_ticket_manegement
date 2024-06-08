@@ -47,8 +47,9 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid Background="#FFFCFBFF" Margin="0 0 0 0">
+    <Border Background="WhiteSmoke" CornerRadius="0 20 20 0">
+
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -512,5 +513,6 @@
                 </Button>
             </Grid>
         </Grid>
-    </Grid>
+ 
+    </Border>
 </UserControl>
