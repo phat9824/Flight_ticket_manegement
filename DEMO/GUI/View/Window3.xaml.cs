@@ -61,23 +61,6 @@ namespace GUI.View
             SignUp1 f = new SignUp1();
             f.Show();
         }
-
-        private void textBoxSearch_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            txtBoxSearch.Focus();
-        }
-
-        private void txtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtBoxSearch.Text) && txtBoxSearch.Text.Length > 0)
-            {
-                textBoxSearch.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textBoxSearch.Visibility = Visibility.Visible;
-            }
-        }
     }
     public class IdToNameConverterPS : IValueConverter
     {

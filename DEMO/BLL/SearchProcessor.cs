@@ -69,7 +69,17 @@ namespace BLL
                     return data;
                 }
 
+                var parameter = new BLL.SearchProcessor().GetParameterDTO();
+                List<FlightDTO> resultflights = new List<FlightDTO>();
                 foreach (FlightDTO flight in flights)
+                {
+                    if (flight.FlightDay > DateTime.Now.Add(parameter.SlowestBookingTime))
+                    {
+                        resultflights.Add(flight);
+                    }
+                }
+
+                foreach (FlightDTO flight in resultflights)
                 {
                     FlightInforDTO flightInformationSearchDTO = new FlightInforDTO();
                     flightInformationSearchDTO.Flight = flight;

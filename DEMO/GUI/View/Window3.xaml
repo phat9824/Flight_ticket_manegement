@@ -573,21 +573,6 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <!--Search Textbox-->
-            <Grid Width="351" HorizontalAlignment="Left" Margin="32,26,0,572" Grid.Row="5">
-
-                <TextBlock Name="textBoxSearch" MouseDown="textBoxSearch_MouseDown" Margin="20,49,37,0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                        Panel.ZIndex="1" Text="Search here ..."
-                        Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"  />
-
-                <TextBox Name="txtBoxSearch" TextChanged="txtBoxSearch_TextChanged" Style="{StaticResource searchTextbox}"  Text="ffhfh" Margin="0,0,26,0" Height="26"/>
-
-                <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="328,0,0,0" Foreground="#FF56B7FA" VerticalAlignment="Center" />
-
-               
-            </Grid>
-
-
             <!--Page Title-->
             <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 10 0 0"
                         HorizontalAlignment="Left" Foreground="#121518"/>
@@ -599,7 +584,8 @@
                     <TextBlock Text="Add New Member"/>
                 </StackPanel>
             </Button>
-
+            
+            <!--
             <ComboBox materialDesign:HintAssist.HelperText=""
                        materialDesign:HintAssist.Hint="Sort By"
                        Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="595,20,8,0" Grid.Row="5" VerticalAlignment="Top" Height="49">
@@ -607,31 +593,34 @@
                 <ComboBoxItem Content="Item 2" />
                 <ComboBoxItem Content="Item 3" />
             </ComboBox>
+            -->
 
 
 
             <!--DataGrid-->
             <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
 
-Grid.Row="5" Margin="0,97,0,0">
+Grid.Row="5" Margin="0,23,0,0">
                 <DataGrid.Columns>
                     <!--
                     <DataGridTextColumn Header="Seq" Binding="{Binding STT}" IsReadOnly="True"/>
                     -->
-                    <DataGridTextColumn Header="ID" Binding="{Binding UserID}"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding UserName}" />
-                    <DataGridTextColumn Header="Position" Binding="{Binding PermissonID, Converter={StaticResource idToNameConverterPS}}" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="ID" Width="60" Binding="{Binding UserID}"/>
+                    <DataGridTextColumn Header="Name" Width="200" Binding="{Binding UserName}" />
+                    <DataGridTextColumn Header="Position" Width="90" Binding="{Binding PermissonID, Converter={StaticResource idToNameConverterPS}}" />
+                    <DataGridTextColumn Header="Email" Width="150" Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="Phone" Width="110" Binding="{Binding Phone}"/>
                     <DataGridTextColumn Header="Birth" Binding="{Binding Birth, Converter={StaticResource dateTimeToStringConverter}}"/>
 
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
+                                    <!--
                                     <Button Style="{StaticResource gridEditButton}" Click="Button_Click">
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
+                                    -->
                                     <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
                                         <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>

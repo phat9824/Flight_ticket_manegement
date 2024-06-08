@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:GUI.View"
              xmlns:vm="clr-namespace:GUI.ViewModel"
              mc:Ignorable="d" 
@@ -187,14 +188,17 @@
                        Opacity="0.66" Grid.Row="1"/>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Content="Find Flight"
-        
+                <Button
                         HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                         VerticalAlignment="Center" VerticalContentAlignment="Center" 
                         Margin="0 0 0 0" Padding="0 0 0 0" Grid.Row="1" 
                         FontSize="20"
                         Width="120" Height="50"
-                        Click="FindFlight_Click"/>
+                        Click="FindFlight_Click">
+                    <StackPanel>
+                        <Icon:PackIconMaterial Kind="Magnify"/>
+                    </StackPanel>
+                </Button>
 
                 <TextBlock Text="Flight ID:"
                            Margin="20 0 0 0"
@@ -203,7 +207,7 @@
                            FontSize="20"
                            Opacity="0.66"/>
 
-                <TextBlock x:Name="FlightID" Text="HGX000000"
+                <TextBlock x:Name="FlightID" Text=""
                            Margin="20 0 0 0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
@@ -275,12 +279,6 @@
                            FontSize="20"
                            Opacity="0.66"/>
             </StackPanel>
-
-
-
-
-
-
             <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="0" Margin="5" Grid.Row="3">
                 <ListView x:Name="MyListView" Grid.Row="3">
                     <ListView.ItemTemplate>
