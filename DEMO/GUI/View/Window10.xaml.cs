@@ -198,6 +198,7 @@ namespace GUI.View
                 prc.insertAirport(NewAirport.Text.ToString());
                 airports = new ObservableCollection<AirportDTO>(new BLL.Airport_BLL().L_airport());
                 ListAirport.ItemsSource = airports;
+                NewAirport.Text = string.Empty;
             }
         }
 
@@ -209,6 +210,8 @@ namespace GUI.View
                 prc.InsertTicketClass(new TicketClassDTO() { TicketClassName = NewClassName.Text, BaseMultiplier = Convert.ToDecimal(NewMultiplier.Text.ToString())});
                 ticketClassDTOs = new ObservableCollection<TicketClassDTO>(new BLL.Ticket_Class_BLL().L_TicketClass());
                 ListTicketClass.ItemsSource = ticketClassDTOs;
+                NewClassName.Text = string.Empty;
+                NewMultiplier.Text = string.Empty;
             }
         }
 
