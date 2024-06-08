@@ -50,7 +50,7 @@ namespace DAL
             SqlConnection con = SqlConnectionData.Connect();
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("select count(*) from FLIGHT", con);
+            SqlCommand cmd = new SqlCommand("select count(*) from AIRPORT", con);
             int i = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
             i++;

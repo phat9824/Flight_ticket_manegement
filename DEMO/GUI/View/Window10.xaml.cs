@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DTO;
+using GUI.ViewModel;
 
 namespace GUI.View
 {
@@ -16,6 +18,8 @@ namespace GUI.View
     {   
         private ParameterDTO parameter = null;
         private ParameterDTO newParameter = null;
+        private ObservableCollection<AirportDTO> airports = new ObservableCollection<AirportDTO>();
+        private ObservableCollection<TicketClassDTO> ticketClassDTOs = new ObservableCollection<TicketClassDTO>();
         public Window10()
         {
             InitializeComponent();
@@ -26,8 +30,10 @@ namespace GUI.View
         private void LoadData()
         {
             LoadParameter();
-            ListAirport.ItemsSource = new BLL.Airport_BLL().L_airport();
-            ListTicketClass.ItemsSource = new BLL.Ticket_Class_BLL().L_TicketClass();
+            airports = new ObservableCollection<AirportDTO>(new BLL.Airport_BLL().L_airport());
+            ticketClassDTOs = new ObservableCollection<TicketClassDTO>(new BLL.Ticket_Class_BLL().L_TicketClass());
+            ListAirport.ItemsSource = airports;
+            ListTicketClass.ItemsSource = ticketClassDTOs;
         }
 
         private void LoadParameter()
@@ -182,6 +188,48 @@ namespace GUI.View
             maxInterAirportTextBox.IsEnabled = false;
 
             LoadParameter();
+        }
+
+        private void Add_Airport_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(NewAirport.Text))
+            {
+                BLL.Airport_BLL prc = new BLL.Airport_BLL();
+                prc.insertAirport(NewAirport.Text.ToString());
+                airports = new ObservableCollection<AirportDTO>(new BLL.Airport_BLL().L_airport());
+                ListAirport.ItemsSource = airports;
+            }
+        }
+
+        private void Add_Class_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
+            {
+                BLL.Ticket_Class_BLL prc = new BLL.Ticket_Class_BLL();
+                prc.InsertTicketClass(new TicketClassDTO() { TicketClassName = NewClassName.Text, BaseMultiplier = Convert.ToDecimal(NewMultiplier.Text.ToString())});
+                ticketClassDTOs = new ObservableCollection<TicketClassDTO>(new BLL.Ticket_Class_BLL().L_TicketClass());
+                ListTicketClass.ItemsSource = ticketClassDTOs;
+            }
+        }
+
+        private void Delete_Airport_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is AirportDTO airport)
+            {
+                airports.Remove(airport);
+                BLL.Airport_BLL prc = new BLL.Airport_BLL();
+                prc.deleteAirport(airport.AirportID);
+            }
+        }
+
+        private void Delete_Class_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is TicketClassDTO ticketClass)
+            {
+                ticketClassDTOs.Remove(ticketClass);
+                BLL.Ticket_Class_BLL prc = new BLL.Ticket_Class_BLL();
+                prc.DeleteTicketClass(ticketClass.TicketClassID);
+            }
         }
     }
 }
