@@ -254,6 +254,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" 
                         Content="Add" 
+                        Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="5 0 0 0" 
                         Click="AddTicket_Click"/>
@@ -266,6 +267,7 @@
                            FontWeight="SemiBold"/>
                 <Button Grid.Column="2" 
                         Content="Reset" 
+                        Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetTicket_Click"/>
@@ -384,6 +386,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" 
                         Content="Add" 
+                        Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="5 0 0 0" 
                         Click="AddIA_Click"/>
@@ -396,6 +399,7 @@
                            FontWeight="SemiBold"/>
                 <Button Grid.Column="2" 
                         Content="Reset" 
+                        Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetIA_Click"/>
@@ -489,7 +493,7 @@
                                         <Border x:Name="border"
                                     BorderBrush="Transparent"
                                     BorderThickness="1"
-                                    Background="#94dde6"
+                                    Background="#FF1DA2ED"
                                     CornerRadius="25">
                                             <ContentPresenter HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"/>
