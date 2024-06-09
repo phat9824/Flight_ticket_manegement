@@ -23,6 +23,20 @@ namespace BLL
             }
             return rowsAffected;
         }
+
+        public int DeleteTicket(string ticketID)
+        {
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = new DAL.BookingTicketAccess().DeleteTicket(ticketID);
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            return rowsAffected;
+        }
         public string getState()
         { 
             return state;

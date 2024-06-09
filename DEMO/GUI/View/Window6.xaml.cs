@@ -102,7 +102,7 @@ namespace GUI.View
                 ViewCustomerData.Remove(itemToRemove);
                 numTicket = ViewCustomerData.Count;
                 TicketQuantity.Text = numTicket.ToString();
-                TotalPrice.Text = (numTicket * ticketPrice).ToString();
+                TotalPrice.Text = (numTicket * ticketPrice).ToString() + "  VND";
             }
         }
 
@@ -154,7 +154,13 @@ namespace GUI.View
         }
 
         private void SearchFlight_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+
+            string state = string.Empty;
+            if (state != string.Empty)
+            {
+                return;
+            }
             /*MessageBox.Show(SourceAirport_popup.SelectedValue.ToString() + " "
                             + DestinationAirport_popup.SelectedValue.ToString() + " "
                             + DepartureDay_popup.SelectedDate.Value.Date.ToString() + " "
