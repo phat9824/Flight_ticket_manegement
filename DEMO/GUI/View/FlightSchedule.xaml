@@ -415,7 +415,7 @@
                                             Width = "50"
                                             Click="DeleteButton_Click_1">
                                         <StackPanel>
-                                            <Icon:PackIconMaterial Kind="DeleteOutline"/>
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                         </StackPanel>
                                     </Button>
                                 </DataTemplate>

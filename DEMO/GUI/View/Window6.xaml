@@ -15,6 +15,44 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <Style x:Key="gridEditButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF1DA2ED" />
+            <Setter Property="BorderBrush" Value="#FF5593FF" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="5">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF46BAFC" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="gridRemoveButton" TargetType="Button" BasedOn="{StaticResource gridEditButton}">
+            <Setter Property="Background" Value="#D32F2F" />
+            <Setter Property="BorderBrush" Value="#B71C1C" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F44336" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="gridButtonIcon" TargetType="Icon:PackIconMaterial">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="12" />
+        </Style>
         <Style x:Key="textHint" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Grid.Column" Value="1"/>
@@ -193,9 +231,9 @@
                         VerticalAlignment="Center" VerticalContentAlignment="Center" 
                         Margin="0 0 0 0" Padding="0 0 0 0" Grid.Row="1" 
                         FontSize="20"
-                        Width="120" Height="50"
+                        Width="120" Height="45"
                         Click="FindFlight_Click">
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Magnify"/>
                     </StackPanel>
                 </Button>
@@ -261,7 +299,7 @@
                 <TextBlock x:Name="TicketClass" Text=""
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Left"
-                           Width="220"
+                           Width="160"
                            FontSize="20"
                            Opacity="0.66"/>
 
@@ -357,9 +395,13 @@
                                                         materialDesign:HintAssist.Hint="mm/dd/yyyy"
                                                         Grid.Row="5" VerticalAlignment="Top" />
 
-                                            <Button Content="Delete" Width="80" Margin="10 0 0 0"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.DeleteCommand, ElementName=MyListView}" CommandParameter="{Binding}"/>
+                                            <Button Width="Auto" Margin="40 0 30 0" Style="{StaticResource gridRemoveButton}"
+                                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    Command="{Binding DataContext.DeleteCommand, ElementName=MyListView}" CommandParameter="{Binding}">
+                                                <StackPanel>
+                                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                                </StackPanel>
+                                            </Button>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>

@@ -91,7 +91,14 @@ namespace GUI.View
             {
                 var item = button.DataContext as BookingTicketDTO;
                 if (item != null)
-                {
+                {   
+                    BLL.DeleteDataProcessor prc = new BLL.DeleteDataProcessor();
+                    prc.DeleteTicket(item.TicketID);
+                    if (prc.getState() != string.Empty)
+                    {
+                        MessageBox.Show(prc.getState());
+                        return;
+                    }
                     listTicket.Remove(item);
                 }
             }

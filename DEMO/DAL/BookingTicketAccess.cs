@@ -257,6 +257,31 @@ namespace DAL
             con.Close();
             return (data, sum);
         }
+
+        public int DeleteTicket(string ticketID)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update BOOKING_TICKET
+                                set isDeleted = 1
+                                where isDeleted = 0 
+                                AND @TicketID = TicketID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@TicketID", ticketID);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            return rowsAffected;
+        }
         public string GetState()
         {
             return this.state;
