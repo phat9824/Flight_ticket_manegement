@@ -577,25 +577,4 @@ namespace GUI.View
 
         /*---------------------------------------------END Data Grid 2 aka IA---------------------------------------------------------*/
     }
-
-    public class TimeSpanToStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is TimeSpan timeSpan)
-            {
-                return timeSpan.ToString(@"hh\:mm");
-            }
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is string str && TimeSpan.TryParseExact(str, @"hh\:mm", CultureInfo.InvariantCulture, out var timeSpan))
-            {
-                return timeSpan;
-            }
-            return null;
-        }
-    }
 }
