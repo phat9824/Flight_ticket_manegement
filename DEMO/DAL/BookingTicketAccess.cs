@@ -183,6 +183,32 @@ namespace DAL
             con.Close();
             return data;
         }
+
+        public int UpdateStatus(string ticketID)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update BOOKING_TICKET
+                                set TicketStatus = 2
+                                where isDeleted = 0 
+                                AND @TicketID = TicketID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@TicketID", ticketID);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            return rowsAffected;
+        }
+
         public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightDAL(int month, int year)
         {
             List<ReportByFlightDTO> data = new List<ReportByFlightDTO>();
