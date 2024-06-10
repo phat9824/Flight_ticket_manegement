@@ -18,7 +18,8 @@ namespace GUI.View
     /// Interaction logic for Window1.xaml
     /// </summary>
     public partial class Window1 : UserControl
-    {
+    {   
+        private ACCOUNT account;
         public Window1()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace GUI.View
 
         private void Load(ACCOUNT acc)
         {
+            account = acc;
             Dictionary<int, string> dr = new Dictionary<int, string>()
             {
                 {1, "Admin"},
@@ -117,6 +119,39 @@ namespace GUI.View
                 imageBrush.Stretch = Stretch.UniformToFill;
                 AvatarBrush.ImageSource = bitmap;
             }
+        }
+
+        private void ChangePass_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = true;
+        }
+
+        private void ConfirmPass_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = false;
+            if (newPassword.Password == confirmPassword.Password)
+            {
+                BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
+                prc.UpdateAccountPassword(account.UserID, confirmPassword.Password);
+            }
+        }
+
+        private void Popup_Loaded(object sender, RoutedEventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = true;
+        }
+
+        private void Popup_Deactivated(object sender, EventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = false;
+        }
+
+        private void CancelPass_Click(object sender, RoutedEventArgs e)
+        {
+            oldPassword.Password = string.Empty;
+            newPassword.Password = string.Empty;
+            confirmPassword.Password = string.Empty;
+            ChangePass_popupWin.IsOpen = false;
         }
 
         /*private void Phone_TextChanged(object sender, TextChangedEventArgs e)
