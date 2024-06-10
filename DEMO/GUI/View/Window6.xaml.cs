@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
@@ -157,8 +158,13 @@ namespace GUI.View
         {   
 
             string state = string.Empty;
+            state = ValidateInput_Search();
             if (state != string.Empty)
             {
+                var originalTopmost = Application.Current.MainWindow.Topmost;
+                Application.Current.MainWindow.Topmost = true;
+                MessageBox.Show(Application.Current.MainWindow, state);
+                Application.Current.MainWindow.Topmost = originalTopmost;
                 return;
             }
             /*MessageBox.Show(SourceAirport_popup.SelectedValue.ToString() + " "
@@ -178,6 +184,52 @@ namespace GUI.View
             dataGridFlights.ItemsSource = new ObservableCollection<FlightInforDTO>(flights);
 
             /*MessageBox.Show(flights.list.Count + flights.list[0].Flight.FlightID + flights.state + "\n Chỉ dùng cho debug", "Debug");*/
+        }
+
+        private string ValidateInput_Search()
+        {
+            if (isNatural(NumTicket.Text.ToString()) == false)
+            {
+                return "The number of tickets must be a positive number!";
+            }
+
+            if (SourceAirport_popup.SelectedIndex == -1)
+            {
+                return "Please select departure airport!";
+            }
+
+            if (DestinationAirport_popup.SelectedIndex == -1)
+            {
+                return "Please select destination airport";
+            }
+
+            if (TicketClass_popup.SelectedIndex == -1)
+            {
+                return "Please select ticket class";
+            }
+            
+            if (DepartureDay_popup.SelectedDate.HasValue == false)
+            {
+                return "Please select a departure date";
+            }
+
+            return string.Empty;
+        }
+        private bool isNatural(string input)
+        {
+            try
+            {
+                Int64 t = Convert.ToInt64(input);
+                if (t > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
