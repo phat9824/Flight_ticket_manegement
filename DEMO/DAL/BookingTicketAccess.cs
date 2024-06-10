@@ -145,6 +145,44 @@ namespace DAL
             con.Close();
             return data;
         }
+        public DateTime GetBookingTicket_DepartureTime(string TicketID)
+        {
+            DateTime data = new DateTime();
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"select F.FlightDay as FlightDay
+                                from FLIGHT F, BOOKING_TICKET BT
+                                WHERE F.FlightID = BT.FlightID 
+                                and F.isDeleted = 0 and BT.isDeleted = 0
+                                and BT.TicketID = @ticketID";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    // Thiết lập các tham số
+                
+                    command.Parameters.AddWithValue("@ticketID", TicketID);
+
+                    // Đọc kết quả truy vấn
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            data = Convert.ToDateTime(reader["FlightDay"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            // Đóng kết nối
+            con.Close();
+            return data;
+        }
         public (List<ReportByFlightDTO> reportByFlightDTOs, int total) GetReportByFlightDAL(int month, int year)
         {
             List<ReportByFlightDTO> data = new List<ReportByFlightDTO>();

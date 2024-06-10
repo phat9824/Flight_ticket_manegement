@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ACCOUNT_BLL.cs" />
     <Compile Include="Airport_BLL.cs" />
+    <Compile Include="BookingTicket_BLL.cs" />
     <Compile Include="DeleteDataProcessor.cs" />
     <Compile Include="Flight_BLL.cs" />
     <Compile Include="Customer_BLL.cs" />
