@@ -57,7 +57,7 @@ namespace GUI.View
                 new ST(){ID = "1", Name = "Sold"},
                 new ST(){ID = "2", Name = "Flown"}
             };
-            Status.SelectedValue = "-1";
+            Status.SelectedValue = "1";
         }
 
         private void Click_Search(object sender, RoutedEventArgs e)
@@ -90,6 +90,11 @@ namespace GUI.View
             if (button != null)
             {
                 var item = button.DataContext as BookingTicketDTO;
+                if (item.TicketStatus == 2)
+                {
+                    MessageBox.Show($"Flown tickets cannot be canceled");
+                    return;
+                }
                 BLL.BookingTicket_BLL checkprc = new BookingTicket_BLL();
                 DateTime dpt = checkprc.GetBookingTicket_DepartureTime(item.TicketID);
                 var para = new BLL.SearchProcessor().GetParameterDTO();
