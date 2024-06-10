@@ -85,17 +85,32 @@ namespace GUI.View
 
         }
 
+        public string ValidateInputTabMonth()
+        {
+            if (Month_TabMonth.Text.ToString() == string.Empty)
+            {
+                return "Please enter a Month!";
+            }
+            else if(Year_TabMonth.Text.ToString() == string.Empty)
+            {
+                return "Please enter a Year!";
+            }  
+            return string.Empty;
+        }
+
+
         private void Search_TabMonth_Click(object sender, RoutedEventArgs e)
         {
             string state = string.Empty;
-            //state = Validate();
+            state = ValidateInputTabMonth();
 
             if (state != string.Empty)
             {
-                
                 MessageBox.Show(state);
                 return;
+
             }
+
             
             foreach (char c in Month_TabMonth.Text.ToString())
             {
@@ -115,6 +130,7 @@ namespace GUI.View
                     return;
                 }
             }
+
             int month = Convert.ToInt32(Month_TabMonth.Text.ToString());
             int year = Convert.ToInt32(Year_TabMonth.Text.ToString());
             List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>();
@@ -139,10 +155,19 @@ namespace GUI.View
             TotalRevenue_Month.Text = total.ToString();
         }
 
+        public string ValidateInputTabYear()
+        {
+            if (Year_TabYear.Text.ToString() == string.Empty)
+            {
+                return "Please enter a Year!";
+            }
+            return string.Empty;
+        }
+
         private void Search_TabYear_Click(object sender, RoutedEventArgs e)
         {
             string state = string.Empty;
-            //state = Validate();
+            state = ValidateInputTabYear();
 
             if (state != string.Empty)
             {
