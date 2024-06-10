@@ -116,7 +116,7 @@ namespace GUI.View
             {
                 if(char.IsLetter(c))
                 {
-                    MessageBox.Show("Tháng không hợp lệ");
+                    MessageBox.Show("Month error");
                     Month_TabMonth.Text = string.Empty;
                     return;
                 }
@@ -125,7 +125,7 @@ namespace GUI.View
             {
                 if (char.IsLetter(c))
                 {
-                    MessageBox.Show("năm không hợp lệ");
+                    MessageBox.Show("Year error");
                     Year_TabMonth.Text = string.Empty;
                     return;
                 }
@@ -178,7 +178,7 @@ namespace GUI.View
             {
                 if (char.IsLetter(c))
                 {
-                    MessageBox.Show("năm không hợp lệ");
+                    MessageBox.Show("Year error");
                     Year_TabYear.Text = string.Empty;
                     return;
                 }
