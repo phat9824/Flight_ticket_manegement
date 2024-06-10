@@ -311,7 +311,21 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
+        public bool IsPassExits(string id, string pass)
+        {
+            using (SqlConnection conn = SqlConnectionData.Connect())
+            {
+                string query = "SELECT COUNT(*) FROM ACCOUNT WHERE @UserID = @UserID AND @PasswordUser = PasswordUser AND isDeleted = 0";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserID", id);
+                cmd.Parameters.AddWithValue("@PasswordUser", pass);
 
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+
+                return count > 0;
+            }
+        }
         public int UpdateAccountPassword(string id, string password)
         {
             SqlConnection con = SqlConnectionData.Connect();
@@ -326,7 +340,7 @@ namespace DAL
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
                     command.Parameters.AddWithValue("@ID", id);
-                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@password", ToMD5Hash(password));
                     rowsAffected = command.ExecuteNonQuery();
                 }
             }
