@@ -260,7 +260,6 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-
         public int UpdateAccountBirth(string id, DateTime birth)
         {
             SqlConnection con = SqlConnectionData.Connect();
@@ -318,7 +317,7 @@ namespace DAL
                 string query = "SELECT COUNT(*) FROM ACCOUNT WHERE @UserID = @UserID AND @PasswordUser = PasswordUser AND isDeleted = 0";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@UserID", id);
-                cmd.Parameters.AddWithValue("@PasswordUser", pass);
+                cmd.Parameters.AddWithValue("@PasswordUser", ToMD5Hash(pass));
 
                 conn.Open();
                 int count = (int)cmd.ExecuteScalar();
