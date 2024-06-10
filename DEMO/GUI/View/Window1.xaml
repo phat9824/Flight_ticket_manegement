@@ -67,12 +67,12 @@
                 <!-- Email and Phone -->
                 <TextBlock Text="Email:" Grid.Row="1" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
                 <TextBox x:Name="Email" Grid.Row="1" Margin="82,20,275,21"
-                     IsReadOnly="True"
+                     IsReadOnly="False"
                      IsReadOnlyCaretVisible="True"
                      materialDesign:HintAssist.Hint="example@gmail.com"
                      FontSize="16"
                      VerticalContentAlignment="Center"
-                     Padding="0,0,0,-10" Grid.ColumnSpan="3"/>
+                     Padding="0,0,0,-10" Grid.ColumnSpan="3" TextChanged="Email_TextChanged"/>
                 <TextBlock Text="Phone:" Grid.Row="1" Grid.Column="2" Margin="107,19,147,0" FontSize="16" VerticalAlignment="Top" Height="20"/>
                 <TextBox x:Name="Phone" Grid.Row="1" Grid.Column="2" Margin="175,20,17,22"
                      materialDesign:HintAssist.Hint="0123456789"

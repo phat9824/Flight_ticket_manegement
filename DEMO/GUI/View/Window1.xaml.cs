@@ -19,6 +19,7 @@ namespace GUI.View
     /// </summary>
     public partial class Window1 : UserControl
     {   
+        private List<string> pms = new List<string>();
         private ACCOUNT account;
         public Window1()
         {
@@ -32,7 +33,7 @@ namespace GUI.View
 
             BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
             var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail });
-
+            pms = ClientSession.Instance.permissions;
             Load(result[0]);
         }
 
@@ -98,7 +99,38 @@ namespace GUI.View
                 }
             }
 
-            // Code cập nhật thông tin người dùng ở đây
+            BLL.ACCOUNT_BLL prc = new ACCOUNT_BLL();
+            try
+            {
+                if (account.UserName != UserName.Text.ToString())
+                {
+                    prc.UpdateAccountName(account.UserID, UserName.Text.ToString());
+                }
+
+                if (account.Birth != Birth.SelectedDate.Value)
+                {
+                    prc.UpdateAccountBirth(account.UserID, Birth.SelectedDate.Value);
+                }
+
+                if (account.Email != Email.Text.ToString())
+                {
+                    prc.UpdateAccountEmail(account.UserID, Email.Text.ToString());
+                    account.Email = Email.Text.ToString();
+                    BLL.SessionManager.EndSession(ClientSession.Instance.mail);
+                    GUI.ClientSession.Instance.EndSession();
+                    ClientSession.Instance.StartSession(account.Email, pms);
+                    SessionManager.StartSession(account.Email, account.Email, pms);
+                }
+
+                if (account.Phone != Phone.Text.ToString())
+                {
+                    prc.UpdateAccountPhone(account.UserID, Phone.Text.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
@@ -132,7 +164,7 @@ namespace GUI.View
             if (newPassword.Password == confirmPassword.Password)
             {
                 BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
-                prc.UpdateAccountPassword(account.UserID, confirmPassword.Password);
+                prc.UpdateAccountPassword(account.UserID, confirmPassword.Password, oldPassword.Password);
             }
         }
 
@@ -152,6 +184,11 @@ namespace GUI.View
             newPassword.Password = string.Empty;
             confirmPassword.Password = string.Empty;
             ChangePass_popupWin.IsOpen = false;
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         /*private void Phone_TextChanged(object sender, TextChangedEventArgs e)
