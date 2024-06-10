@@ -126,12 +126,14 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
-BT.TicketID , F.FlightDay
 
-select *
-from FLIGHT F, BOOKING_TICKET BT
-WHERE F.FlightID = BT.FlightID 
-and F.isDeleted = 0 and BT.isDeleted = 0
+select COUNT(*) as SL
+from TICKET_CLASS tc, TICKETCLASS_FLIGHT tcf
+WHERE tc.TicketClassID = tcf.TicketClassID
+AND tc.TicketClassID = 001 
+AND tc.isDeleted = 0 AND tcf.isDeleted = 0
+
+
 
 ----------TEST CASE--------
 --PERMISSION
