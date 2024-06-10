@@ -208,7 +208,7 @@ namespace GUI.View
             {
                 if(char.IsLetter(c))
                 {
-                    return "Vui lòng nhập lại hệ số";
+                    return "Please re-enter the coefficient";
                 }
             }
             return st;
@@ -235,12 +235,12 @@ namespace GUI.View
             {
                 if(string.IsNullOrWhiteSpace(NewClassName.Text))
                 {
-                    MessageBox.Show("Vui lòng nhập tên hạng vé", "Error");
+                    MessageBox.Show("Please enter the ticket class", "Error");
                     return;
                 }
                 if(string.IsNullOrWhiteSpace(NewMultiplier.Text))
                 {
-                    MessageBox.Show("Vui lòng nhập hệ số của hạng vé", "Error");
+                    MessageBox.Show("Please enter the coefficient of the ticket class", "Error");
                     return;
                 }
             }

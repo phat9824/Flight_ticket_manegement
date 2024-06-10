@@ -76,19 +76,19 @@ namespace GUI.View
         {
             if (string.IsNullOrWhiteSpace(UserName.Text) || string.IsNullOrWhiteSpace(Email.Text) || string.IsNullOrWhiteSpace(Phone.Text) || string.IsNullOrWhiteSpace(Birth.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                MessageBox.Show("Please enter all required information", "Error");
                 return;
             }
 
             if (!Phone.Text.StartsWith("0"))
             {
-                MessageBox.Show("Số điện thoại không hợp lệ");
+                MessageBox.Show("Invalid phone number", "Error");
                 return;
             }
             
             if(Phone.Text.Length != 10)
             {
-                MessageBox.Show("Số điện thoại không hợp lệ", "Error");
+                MessageBox.Show("Invalid phone number", "Error");
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace GUI.View
             {
                 if (char.IsLetter(c))
                 {
-                    MessageBox.Show("Số điện thoại không hợp lệ", "Error");
+                    MessageBox.Show("Invalid phone number", "Error");
                     return;
                 }
             }
@@ -209,13 +209,13 @@ namespace GUI.View
             if(!new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, oldPassword.Password))
             {
                 ChangePass_popupWin.IsOpen = false;
-                MessageBox.Show("Mật khẩu cũ không đúng");
+                MessageBox.Show("Incorrect old password", "Error");
                 return;
             }
             if(new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, newPassword.Password))
             {
                 ChangePass_popupWin.IsOpen = false;
-                MessageBox.Show("Mật khẩu đã dùng");
+                MessageBox.Show("Password already used", "Error");
                 return;
             }
             ChangePass_popupWin.IsOpen = false;
