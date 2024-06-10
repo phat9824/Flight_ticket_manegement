@@ -51,8 +51,8 @@ CREATE TABLE FLIGHT
 	FlightID VARCHAR(20) PRIMARY KEY,
 	SourceAirportID VARCHAR(20) NOT NULL,
 	DestinationAirportID VARCHAR(20) NOT NULL,
-	FlightDay SMALLDATETIME NOT NULL,
-	FlightTime TIME NOT NULL,
+	FlightDay SMALLDATETIME NOT NULL, -- Ngay khoi hanh
+	FlightTime TIME NOT NULL, -- Thoi gian bay
 	Price MONEY NOT NULL,
 	isDeleted int,
 	FOREIGN KEY (SourceAirportID) REFERENCES AIRPORT(AirportID),
@@ -126,6 +126,12 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
+BT.TicketID , F.FlightDay
+
+select *
+from FLIGHT F, BOOKING_TICKET BT
+WHERE F.FlightID = BT.FlightID 
+and F.isDeleted = 0 and BT.isDeleted = 0
 
 ----------TEST CASE--------
 --PERMISSION
