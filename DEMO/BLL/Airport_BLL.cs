@@ -12,6 +12,7 @@ namespace BLL
 {
     public class Airport_BLL
     {
+        string state = string.Empty;
         public List<AirportDTO> L_airport()
         {
             /*AirportAccess airportAccess = new AirportAccess();
@@ -24,6 +25,16 @@ namespace BLL
         }
         public int deleteAirport(string airportID)
         {
+            if (new DAL.AirportAccess().Get_cnt_Airport_Flight(airportID))
+            {
+                state = "This airport is in use";
+                return 0;
+            }
+            else if (new DAL.AirportAccess().Get_cnt_Airport_IntermidiateAirport(airportID))
+            {
+                state = "This airport is in use";
+                return 0;
+            }
             return new DAL.AirportAccess().DeleteAirport(airportID);
         }
         

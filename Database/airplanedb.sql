@@ -8,7 +8,6 @@ CREATE TABLE PERMISSION
 	PermissionName VARCHAR(40),
 	isDeleted int
 )
-select * from ACCOUNT
 CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
@@ -126,13 +125,19 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
-BT.TicketID , F.FlightDay
 
-select *
-from FLIGHT F, BOOKING_TICKET BT
-WHERE F.FlightID = BT.FlightID 
-and F.isDeleted = 0 and BT.isDeleted = 0
 
+select COUNT(*) AS FIGURE
+from AIRPORT A, INTERMEDIATE_AIRPORT IA
+where A.AirportID = IA.AirportID
+
+select * -- COUNT(*) AS FIGURE
+from AIRPORT A, FLIGHT F
+where (A.AirportID = F.SourceAirportID or A.AirportID = F.DestinationAirportID)
+and A.AirportID  = '011' and A.isDeleted = 0
+
+
+ select * from AIRPORT
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);

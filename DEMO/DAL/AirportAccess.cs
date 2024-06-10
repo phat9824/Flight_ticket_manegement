@@ -79,6 +79,83 @@ namespace DAL
             return state;
         }
 
+        public bool Get_cnt_Airport_IntermidiateAirport(string ID)
+        {
+            int cnt = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"select COUNT(*) AS FIGURE
+                                 from AIRPORT A, INTERMEDIATE_AIRPORT IA
+                                 where A.AirportID = IA.AirportID
+                                        and A.isDeleted = 0 and IA.isDeleted = 0
+                                        and @airportID = A.AirportID";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    // Thiết lập các tham số
+
+                    command.Parameters.AddWithValue("@airportID", ID);
+
+                    // Đọc kết quả truy vấn
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cnt = Convert.ToInt32(reader["FIGURE"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            // Đóng kết nối
+            con.Close();
+            return cnt > 0;
+        }
+        public bool Get_cnt_Airport_Flight(string ID)
+        {
+            int cnt = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"select COUNT(*) AS FIGURE
+                                 from AIRPORT A, FLIGHT F
+                                 where (A.AirportID = F.SourceAirportID or A.AirportID = F.DestinationAirportID)
+                                 and A.isDeleted = 0 and F.isDeleted = 0
+                                 and @airportID = A.AirportID";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    // Thiết lập các tham số
+
+                    command.Parameters.AddWithValue("@airportID", ID);
+
+                    // Đọc kết quả truy vấn
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cnt = Convert.ToInt32(reader["FIGURE"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            // Đóng kết nối
+            con.Close();
+            return cnt > 0;
+        }
+
         public int DeleteAirport(string ID)
         {
             SqlConnection con = SqlConnectionData.Connect();
@@ -104,6 +181,11 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
+
+
+        
+
+
         public string GetState()
         {
             return state;

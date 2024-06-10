@@ -167,8 +167,44 @@ namespace DAL
                 }
             }
         }
+        public bool isUsed(string id)
+        {
+            int number = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            con.Open();
+            string query = @"select COUNT(*) as SL
+                            from TICKET_CLASS tc, TICKETCLASS_FLIGHT tcf
+                            WHERE tc.TicketClassID = tcf.TicketClassID
+                            AND tc.TicketClassID = @TicketClassID 
+                            AND tc.isDeleted = 0 AND tcf.isDeleted = 0";
+
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                // Thiết lập các tham số
+                command.Parameters.AddWithValue("@TicketClassID", id);
+
+                // Đọc kết quả truy vấn
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        number = (int)reader["SL"];
+                    }
+                }
+            }
+            // Đóng kết nối
+            con.Close();
+            return number > 0;
+        }
         public int DeleteTicketClass(string ID)
         {
+
+            if (isUsed(ID))
+            {
+                return 0;
+            }
+            
+
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;
             this.state = string.Empty;

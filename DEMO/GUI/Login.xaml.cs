@@ -118,14 +118,14 @@ namespace GUI
                         openUserForm(email, new[] { permissionID.ToString() }.ToList());
                         break;
                     default:
-                        MessageBox.Show("Quyền không hợp lệ");
+                        MessageBox.Show("Invalid permission", "Error");
                         break;
                 }
             }
             else
             {
                 // Tài khoản hoặc mật khẩu không đúng
-                MessageBox.Show("Tài khoản không hợp lệ");
+                MessageBox.Show("Invalid account", "Error");
             }
 
 

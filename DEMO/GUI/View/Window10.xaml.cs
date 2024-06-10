@@ -208,7 +208,7 @@ namespace GUI.View
             {
                 if(char.IsLetter(c))
                 {
-                    return "Vui lòng nhập lại hệ số";
+                    return "Please re-enter the coefficient";
                 }
             }
             return st;
@@ -235,12 +235,12 @@ namespace GUI.View
             {
                 if(string.IsNullOrWhiteSpace(NewClassName.Text))
                 {
-                    MessageBox.Show("Vui lòng nhập tên hạng vé", "Error");
+                    MessageBox.Show("Please enter the ticket class", "Error");
                     return;
                 }
                 if(string.IsNullOrWhiteSpace(NewMultiplier.Text))
                 {
-                    MessageBox.Show("Vui lòng nhập hệ số của hạng vé", "Error");
+                    MessageBox.Show("Please enter the coefficient of the ticket class", "Error");
                     return;
                 }
             }
@@ -250,9 +250,19 @@ namespace GUI.View
         {
             if (sender is Button button && button.DataContext is AirportDTO airport)
             {
-                airports.Remove(airport);
+                
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
-                prc.deleteAirport(airport.AirportID);
+                int result = prc.deleteAirport(airport.AirportID);
+                if (result == 0)
+                {
+                    MessageBox.Show("Cannot Delete this Airport", "Error");
+                }
+                else
+                {
+                    airports.Remove(airport);
+                    MessageBox.Show("Delete Successfully", "Success");
+                }
+
             }
         }
 
@@ -260,9 +270,18 @@ namespace GUI.View
         {
             if (sender is Button button && button.DataContext is TicketClassDTO ticketClass)
             {
-                ticketClassDTOs.Remove(ticketClass);
+                
                 BLL.Ticket_Class_BLL prc = new BLL.Ticket_Class_BLL();
-                prc.DeleteTicketClass(ticketClass.TicketClassID);
+                int result = prc.DeleteTicketClass(ticketClass.TicketClassID);
+                if (result == 0)
+                {
+                    MessageBox.Show("Cannot Delete this Ticket Class", "Error");
+                }
+                else
+                {
+                    ticketClassDTOs.Remove(ticketClass);
+                    MessageBox.Show("Delete Successfully", "Success");
+                }
             }
         }
     }
