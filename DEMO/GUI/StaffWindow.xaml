@@ -80,7 +80,7 @@
                         <Grid>
 
 
-                            <TextBlock Text="Window1" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Standard" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
 
                         </Grid>
 
@@ -90,7 +90,7 @@
                           Command="{Binding Window6Command}">
                         <Grid>
 
-                            <TextBlock Text="Window6" Style="{StaticResource Text_Style}" />
+                            <TextBlock Text="Sell Ticket" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -98,7 +98,7 @@
                           Command="{Binding Window7Command}">
                         <Grid>
 
-                            <TextBlock Text="Window7" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="List of flights" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -106,7 +106,7 @@
                           Command="{Binding Window8Command}">
                         <Grid>
 
-                            <TextBlock Text="Window8" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="List of Tickets" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
 
@@ -114,7 +114,7 @@
                           Command="{Binding Window9Command}">
                         <Grid>
 
-                            <TextBlock Text="Window9" Style="{StaticResource Text_Style}"/>
+                            <TextBlock Text="Add Schedule" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
                         </Grid>
                     </Menu:Btn>
                 </StackPanel>

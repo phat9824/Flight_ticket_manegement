@@ -201,17 +201,48 @@ namespace GUI.View
                 NewAirport.Text = string.Empty;
             }
         }
-
+        public string check()
+        {
+            string st = string.Empty;
+            foreach(char c in NewMultiplier.Text.ToString())
+            {
+                if(char.IsLetter(c))
+                {
+                    return "Vui lòng nhập lại hệ số";
+                }
+            }
+            return st;
+        }
         private void Add_Class_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
             {
+                string st = check();
+                if(st != string.Empty)
+                {
+                    MessageBox.Show(st, "Error");
+                    NewMultiplier.Text = string.Empty;
+                    return;
+                }
                 BLL.Ticket_Class_BLL prc = new BLL.Ticket_Class_BLL();
                 prc.InsertTicketClass(new TicketClassDTO() { TicketClassName = NewClassName.Text, BaseMultiplier = Convert.ToDecimal(NewMultiplier.Text.ToString())});
                 ticketClassDTOs = new ObservableCollection<TicketClassDTO>(new BLL.Ticket_Class_BLL().L_TicketClass());
                 ListTicketClass.ItemsSource = ticketClassDTOs;
                 NewClassName.Text = string.Empty;
                 NewMultiplier.Text = string.Empty;
+            }
+            else
+            {
+                if(string.IsNullOrWhiteSpace(NewClassName.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập tên hạng vé", "Error");
+                    return;
+                }
+                if(string.IsNullOrWhiteSpace(NewMultiplier.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập hệ số của hạng vé", "Error");
+                    return;
+                }
             }
         }
 

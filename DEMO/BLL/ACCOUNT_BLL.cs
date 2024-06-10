@@ -30,8 +30,6 @@ namespace BLL
                 return false;
             }
         }
-
-
         public List<ACCOUNT> List_acc(ACCOUNT dto)
         {
             return new DAL.AccountAccess().GetMember(dto);
@@ -59,9 +57,13 @@ namespace BLL
         {
             return new DAL.AccountAccess().UpdateAccountEmail(id, email);
         }
-        public int UpdateAccountPassword(string id, string password)
+        public int UpdateAccountPassword(string id, string password, string oldpassword)
         {
             return new DAL.AccountAccess().UpdateAccountPassword(id, password);
+        }
+        public bool IsPassExits(string id, string pass)
+        {
+            return new DAL.AccountAccess().IsPassExits(id, pass);
         }
 
     }

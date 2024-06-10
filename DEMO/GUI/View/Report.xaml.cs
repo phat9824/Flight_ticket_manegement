@@ -111,6 +111,26 @@ namespace GUI.View
 
             }
 
+            
+            foreach (char c in Month_TabMonth.Text.ToString())
+            {
+                if(char.IsLetter(c))
+                {
+                    MessageBox.Show("Tháng không hợp lệ");
+                    Month_TabMonth.Text = string.Empty;
+                    return;
+                }
+            }
+            foreach (char c in Year_TabMonth.Text.ToString())
+            {
+                if (char.IsLetter(c))
+                {
+                    MessageBox.Show("năm không hợp lệ");
+                    Year_TabMonth.Text = string.Empty;
+                    return;
+                }
+            }
+
             int month = Convert.ToInt32(Month_TabMonth.Text.ToString());
             int year = Convert.ToInt32(Year_TabMonth.Text.ToString());
             List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>();
@@ -154,7 +174,15 @@ namespace GUI.View
                 MessageBox.Show(state);
                 return;
             }
-
+            foreach (char c in Year_TabYear.Text.ToString())
+            {
+                if (char.IsLetter(c))
+                {
+                    MessageBox.Show("năm không hợp lệ");
+                    Year_TabYear.Text = string.Empty;
+                    return;
+                }
+            }
             int year = Convert.ToInt32(Year_TabYear.Text.ToString());
 
             List<ReportByMonthDTO> listReportByMonthDTO = new List<ReportByMonthDTO>();

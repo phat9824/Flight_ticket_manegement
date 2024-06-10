@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using BLL;
 using DTO;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GUI.View
 {
@@ -17,7 +18,9 @@ namespace GUI.View
     /// Interaction logic for Window1.xaml
     /// </summary>
     public partial class Window1 : UserControl
-    {
+    {   
+        private List<string> pms = new List<string>();
+        private ACCOUNT account;
         public Window1()
         {
             InitializeComponent();
@@ -30,12 +33,13 @@ namespace GUI.View
 
             BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
             var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail });
-
+            pms = ClientSession.Instance.permissions;
             Load(result[0]);
         }
 
         private void Load(ACCOUNT acc)
         {
+            account = acc;
             Dictionary<int, string> dr = new Dictionary<int, string>()
             {
                 {1, "Admin"},
@@ -79,10 +83,55 @@ namespace GUI.View
                 MessageBox.Show("Số điện thoại không hợp lệ");
                 return;
             }
+            
+            if(Phone.Text.Length != 10)
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ", "Error");
+                return;
+            }
 
-            // Code cập nhật thông tin người dùng ở đây
+            foreach (char c in Phone.Text)
+            {
+                if (char.IsLetter(c))
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ", "Error");
+                    return;
+                }
+            }
+
+            BLL.ACCOUNT_BLL prc = new ACCOUNT_BLL();
+            try
+            {
+                if (account.UserName != UserName.Text.ToString())
+                {
+                    prc.UpdateAccountName(account.UserID, UserName.Text.ToString());
+                }
+
+                if (account.Birth != Birth.SelectedDate.Value)
+                {
+                    prc.UpdateAccountBirth(account.UserID, Birth.SelectedDate.Value);
+                }
+
+                if (account.Email != Email.Text.ToString())
+                {
+                    prc.UpdateAccountEmail(account.UserID, Email.Text.ToString());
+                    account.Email = Email.Text.ToString();
+                    BLL.SessionManager.EndSession(ClientSession.Instance.mail);
+                    GUI.ClientSession.Instance.EndSession();
+                    ClientSession.Instance.StartSession(account.Email, pms);
+                    SessionManager.StartSession(account.Email, account.Email, pms);
+                }
+
+                if (account.Phone != Phone.Text.ToString())
+                {
+                    prc.UpdateAccountPhone(account.UserID, Phone.Text.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
-
         private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -102,5 +151,75 @@ namespace GUI.View
                 AvatarBrush.ImageSource = bitmap;
             }
         }
+        private void ChangePass_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = true;
+        }
+        private void ConfirmPass_Click(object sender, RoutedEventArgs e)
+        {
+            if(!new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, oldPassword.Password))
+            {
+                ChangePass_popupWin.IsOpen = false;
+                MessageBox.Show("Mật khẩu cũ không đúng");
+                return;
+            }
+            if(new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, newPassword.Password))
+            {
+                ChangePass_popupWin.IsOpen = false;
+                MessageBox.Show("Mật khẩu đã dùng");
+                return;
+            }
+            ChangePass_popupWin.IsOpen = false;
+            if (newPassword.Password == confirmPassword.Password)
+            {
+                BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
+                prc.UpdateAccountPassword(account.UserID, confirmPassword.Password, oldPassword.Password);
+            }
+        }
+        private void Popup_Loaded(object sender, RoutedEventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = true;
+        }
+
+        private void Popup_Deactivated(object sender, EventArgs e)
+        {
+            ChangePass_popupWin.IsOpen = false;
+        }
+
+        private void CancelPass_Click(object sender, RoutedEventArgs e)
+        {
+            oldPassword.Password = string.Empty;
+            newPassword.Password = string.Empty;
+            confirmPassword.Password = string.Empty;
+            ChangePass_popupWin.IsOpen = false;
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        /*private void Phone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string text = textBox.Text;
+
+            // Kiểm tra xem văn bản có chứa chữ cái không
+            if (HasLetters(text))
+            {
+                MessageBox.Show("Số điện thoại có chứ chữ cái");
+            }
+        }
+        private bool HasLetters(string text)
+        {
+            foreach (char c in text)
+            {
+                if (char.IsLetter(c))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }*/
     }
 }
