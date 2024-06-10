@@ -127,14 +127,6 @@ select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
 
-select COUNT(*) as SL
-from TICKET_CLASS tc, TICKETCLASS_FLIGHT tcf
-WHERE tc.TicketClassID = tcf.TicketClassID
-AND tc.TicketClassID = 001 
-AND tc.isDeleted = 0 AND tcf.isDeleted = 0
-
-
-
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);

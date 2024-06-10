@@ -22,11 +22,11 @@ namespace GUI
             // Đổi start up ở đây
             //var startUpWindow = new Login();
 
-            //ClientSession.Instance.StartSession("admin@example.com", new[] { "1" }.ToList());
-            //var startUpWindow = new MainWindow();
+            ClientSession.Instance.StartSession("admin@example.com", new[] { "1" }.ToList());
+            var startUpWindow = new MainWindow();
 
-            ClientSession.Instance.StartSession("staff1@example.com", new[] { "2" }.ToList());
-            var startUpWindow = new StaffWindow();
+            //ClientSession.Instance.StartSession("staff1@example.com", new[] { "2" }.ToList());
+            //var startUpWindow = new StaffWindow();
             startUpWindow.Show();
         }
     }

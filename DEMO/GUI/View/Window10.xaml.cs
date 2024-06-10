@@ -252,7 +252,11 @@ namespace GUI.View
             {
                 airports.Remove(airport);
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
-                prc.deleteAirport(airport.AirportID);
+                int result = prc.deleteAirport(airport.AirportID);
+                if (result == 0)
+                {
+                    MessageBox.Show("Cannot Delete this Airport", "Error");
+                }   
             }
         }
 
@@ -262,7 +266,11 @@ namespace GUI.View
             {
                 ticketClassDTOs.Remove(ticketClass);
                 BLL.Ticket_Class_BLL prc = new BLL.Ticket_Class_BLL();
-                prc.DeleteTicketClass(ticketClass.TicketClassID);
+                int result = prc.DeleteTicketClass(ticketClass.TicketClassID);
+                if (result == 0)
+                {
+                    MessageBox.Show("Cannot Delete this Ticket Class", "Error");
+                }
             }
         }
     }
