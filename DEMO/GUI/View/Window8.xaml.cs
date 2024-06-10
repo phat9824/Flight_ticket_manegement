@@ -58,6 +58,7 @@ namespace GUI.View
                 new ST(){ID = "2", Name = "Flown"}
             };
             Status.SelectedValue = "1";
+            BLL.BookingTicket_BLL.UpdateStatus();
         }
 
         private void Click_Search(object sender, RoutedEventArgs e)
@@ -65,6 +66,8 @@ namespace GUI.View
             string state = string.Empty;
             try
             {
+                var str = BLL.BookingTicket_BLL.UpdateStatus();
+                MessageBox.Show(str);
                 string customerID = CustomerID.Text;
                 string ticketID = TicketID.Text;
                 string flightID = FlightID.Text;
@@ -156,7 +159,7 @@ namespace GUI.View
         private Dictionary<string, string> idToNameMap = new Dictionary<string, string>
         {
             {"1", "Sold"},
-            {"0", "Flown"}
+            {"2", "Flown"}
         };
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
