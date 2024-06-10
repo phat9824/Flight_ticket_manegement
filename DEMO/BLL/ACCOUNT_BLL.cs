@@ -37,5 +37,32 @@ namespace BLL
             return new DAL.AccountAccess().GetMember(dto);
         }
 
+        public int deleteAccount(string ID)
+        {
+            return new DAL.AccountAccess().DeleteAccount(ID);
+        }
+
+        public int UpdateAccountName(string id, string name)
+        {
+            return new DAL.AccountAccess().UpdateAccountName(id, name);
+        }
+        public int UpdateAccountPhone(string id, string phone)
+        {
+            return new DAL.AccountAccess().UpdateAccountPhone(id, phone);
+        }
+        public int UpdateAccountBirth(string id, DateTime birth)
+        {
+            return new DAL.AccountAccess().UpdateAccountBirth(id, birth);
+        }
+
+        public int UpdateAccountEmail(string id, string email)
+        {
+            return new DAL.AccountAccess().UpdateAccountEmail(id, email);
+        }
+        public int UpdateAccountPassword(string id, string password)
+        {
+            return new DAL.AccountAccess().UpdateAccountPassword(id, password);
+        }
+
     }
 }
