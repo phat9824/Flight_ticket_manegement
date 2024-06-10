@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using BLL;
 using DTO;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GUI.View
 {
@@ -79,6 +80,21 @@ namespace GUI.View
                 MessageBox.Show("Số điện thoại không hợp lệ");
                 return;
             }
+            
+            if(Phone.Text.Length != 10)
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ", "Error");
+                return;
+            }
+
+            foreach (char c in Phone.Text)
+            {
+                if (char.IsLetter(c))
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ", "Error");
+                    return;
+                }
+            }
 
             // Code cập nhật thông tin người dùng ở đây
         }
@@ -102,5 +118,28 @@ namespace GUI.View
                 AvatarBrush.ImageSource = bitmap;
             }
         }
+
+        /*private void Phone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string text = textBox.Text;
+
+            // Kiểm tra xem văn bản có chứa chữ cái không
+            if (HasLetters(text))
+            {
+                MessageBox.Show("Số điện thoại có chứ chữ cái");
+            }
+        }
+        private bool HasLetters(string text)
+        {
+            foreach (char c in text)
+            {
+                if (char.IsLetter(c))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }*/
     }
 }
