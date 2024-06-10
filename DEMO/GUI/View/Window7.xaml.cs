@@ -37,13 +37,6 @@ namespace GUI.View
             InitializeComponent();
             var converter = new BrushConverter();
 
-            // Create DataGrid Items
-            flights.Add(new Flight { STT = "1", SanBayDi = "AAA", SanBayDen = "eee", KhoiHanh = "20:00", ThoiGian = "1", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "2", SanBayDi = "bbb", SanBayDen = "ddd", KhoiHanh = "20:00", ThoiGian = "2", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "3", SanBayDi = "ccc", SanBayDen = "ccc", KhoiHanh = "20:00", ThoiGian = "3", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "4", SanBayDi = "ddd", SanBayDen = "bbb", KhoiHanh = "20:00", ThoiGian = "4", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "5", SanBayDi = "eee", SanBayDen = "aaa", KhoiHanh = "20:00", ThoiGian = "5", SoGheDat = "", SoGheTrong = "" });
-
             FlightsDataGrid.ItemsSource = flights;
 
             Airport_BLL airport_bll = new Airport_BLL();
@@ -55,6 +48,18 @@ namespace GUI.View
 
             SourceAirport.ItemsSource = airports;
             DestinationAirport.ItemsSource = airports;
+
+            LoadFlight();
+        }
+
+        private void LoadFlight()
+        {
+            DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);
+            DateTime endDate = EndDay.SelectedDate.HasValue ? EndDay.SelectedDate.Value.Date : new DateTime(9999, 12, 31, 23, 59, 59);
+            List<FlightInforDTO> flightInformationSearches = new List<FlightInforDTO>();
+            flightInformationSearches = new BLL.SearchProcessor().GetFlightInfoDTO(string.Empty, string.Empty, startDate, endDate);
+            flights = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
+            FlightsDataGrid.ItemsSource = flights;
         }
 
         private bool IsEmpty(object value)
@@ -97,12 +102,12 @@ namespace GUI.View
                 b = DestinationAirport.SelectedValue as string;
             }
 
-            // Check if SourceAirport or DestinationAirport are empty
+            /*// Check if SourceAirport or DestinationAirport are empty
             if (IsEmpty(a) || IsEmpty(b))
             {
                 MessageBox.Show("Source or Destination airport cannot be empty.");
                 return;
-            }
+            }*/
 
             // 2 Giá trị dưới là min và max cho phép của SQL
             DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);
