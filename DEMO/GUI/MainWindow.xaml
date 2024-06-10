@@ -81,7 +81,7 @@
                IsChecked="True" >
                         <Grid>
 
-                            <TextBlock Text="Window1" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
+                            <TextBlock Text="Standard" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
 
                         </Grid>
 
