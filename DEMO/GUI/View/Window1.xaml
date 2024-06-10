@@ -86,9 +86,49 @@
                 <TextBlock x:Name="Role" Grid.Row="2" Margin="82,0,104,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
 
                 <!-- Buttons -->
-                <Button Content="Change Password" Grid.Row="2" Grid.Column="2" Width="178" Margin="0,14,0,25" HorizontalAlignment="Center" Background="#FF1DA2ED"/>
+                <Button Content="Change Password"
+                        Grid.Row="2" Grid.Column="2" Width="178" Margin="0,14,0,25"
+                        HorizontalAlignment="Center" Background="#FF1DA2ED"
+                        Click="ChangePass_Click"/>
                 <Button Content="Update" Grid.Row="3" Width="188" Margin="258,0,0,26" HorizontalAlignment="Left" Click="UpdateButton_Click" Grid.ColumnSpan="3" Background="#FF1DA2ED"/>
             </Grid>
+
+
+            <Popup Name="ChangePass_popupWin" Placement="Center" IsOpen="False"
+                AllowsTransparency="True" Focusable="True" PopupAnimation="Fade">
+                <Border Background="LightGray" BorderBrush="#FF1DA2ED"
+                        BorderThickness="2" CornerRadius="10"
+                        Width="350" Height="260">
+                    <StackPanel>
+                        <Label Grid.Row="0" Content="Old Password:" FontSize="15"/>
+                        <PasswordBox Grid.Row="0" Margin="5 0 5 0" x:Name="oldPassword"
+                                     Background="White" Height="40"
+                                     VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="1" Content="New Password:" FontSize="15"/>
+                        <PasswordBox Grid.Row="1" Margin="5 0 5 0" x:Name="newPassword"
+                                     Background="White" Height="40"
+                                     VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+
+                        <Label Grid.Row="2" Content="Confirm New Password:" FontSize="15"/>
+                        <PasswordBox Grid.Row="2" Margin="5 0 5 0" x:Name="confirmPassword"
+                                     Background="White" Height="40"
+                                     VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Button x:Name="Confirm_Pass" Content="Change"
+                                    Height="35" Width="80" Margin="90 10 5 0"
+                                    VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                    Click="ConfirmPass_Click">
+                            </Button>
+                            <Button x:Name="Cancel_Pass" Content="Cancel"
+                                    Height="35" Width="80" Margin="5 10 0 0"
+                                    VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                    Click="CancelPass_Click">
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
         </Grid>
     </Border>
 </UserControl>
