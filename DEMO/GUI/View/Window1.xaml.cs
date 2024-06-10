@@ -11,6 +11,7 @@ using BLL;
 using DTO;
 using System.Windows.Media;
 using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace GUI.View
 {
@@ -35,6 +36,7 @@ namespace GUI.View
             var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail });
             pms = ClientSession.Instance.permissions;
             Load(result[0]);
+            LoadImage();
         }
 
         private void Load(ACCOUNT acc)
@@ -149,8 +151,55 @@ namespace GUI.View
                 imageBrush.ImageSource = bitmap;
                 imageBrush.Stretch = Stretch.UniformToFill;
                 AvatarBrush.ImageSource = bitmap;
+
+                byte[] imageData = ImageToByteArray(bitmap);
+                BLL.ACCOUNT_BLL prc = new ACCOUNT_BLL();
+                prc.UpdateImage(account.UserID, imageData);
             }
         }
+
+        private void LoadImage()
+        {
+            BLL.ACCOUNT_BLL prc = new ACCOUNT_BLL();
+            BitmapImage bitmap = ConvertByteArrayToBitmapImage(prc.GetImage(account.UserID));
+
+            if (bitmap != null)
+            {
+                AvatarBrush.ImageSource = bitmap;
+            }
+
+        }
+
+        private byte[] ImageToByteArray(BitmapImage bitmapImage)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                encoder.Save(ms);
+                return ms.ToArray();
+            }
+        }
+        private BitmapImage ConvertByteArrayToBitmapImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+
+            return image;
+        }
+
         private void ChangePass_Click(object sender, RoutedEventArgs e)
         {
             ChangePass_popupWin.IsOpen = true;

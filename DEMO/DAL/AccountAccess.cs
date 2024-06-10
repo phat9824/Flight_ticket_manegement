@@ -351,6 +351,58 @@ namespace DAL
             return rowsAffected;
         }
 
+        public void UpdateImageInDatabase(string id, byte[] imageBytes)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            try
+            {
+                string query = "UPDATE ACCOUNT SET Image = @Image WHERE UserID = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Image", imageBytes);
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+        }
+
+        public byte[] GetImageFromDatabase(string id)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            byte[] imageData = null;
+
+            try
+            {
+                string sql = "SELECT Image FROM ACCOUNT WHERE UserID = @Id";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    con.Open();
+                    var dataObj = cmd.ExecuteScalar();
+
+                    if (dataObj != null)
+                    {
+                        imageData = (byte[])dataObj;
+                    }
+
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.state = $"Error: {ex.Message}";
+            }
+
+            return imageData;
+        }
         public string GetState()
         {
             return this.state;

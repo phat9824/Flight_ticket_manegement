@@ -30,6 +30,26 @@ namespace BLL
                 return false;
             }
         }
+
+        public string UpdateImage(string id, byte[] imageBytes)
+        {
+            DAL.AccountAccess prc = new DAL.AccountAccess();
+            prc.UpdateImageInDatabase(id, imageBytes);
+            if (prc.GetState() != string.Empty)
+            {
+                return prc.GetState();
+            }
+            return string.Empty;
+        }
+
+        public byte[] GetImage(string id)
+        {
+            byte[] imageBytes = null;
+            DAL.AccountAccess prc = new DAL.AccountAccess();
+            imageBytes = prc.GetImageFromDatabase(id);
+            return imageBytes;
+        }
+
         public List<ACCOUNT> List_acc(ACCOUNT dto)
         {
             return new DAL.AccountAccess().GetMember(dto);
