@@ -68,7 +68,7 @@ namespace BLL
                 }
                 else
                 {
-                    return "ID da ton tai";
+                    return "ID already exists";
                 }
             }
             return kq;

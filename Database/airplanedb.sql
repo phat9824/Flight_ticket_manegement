@@ -8,7 +8,6 @@ CREATE TABLE PERMISSION
 	PermissionName VARCHAR(40),
 	isDeleted int
 )
-select * from ACCOUNT
 CREATE TABLE ACCOUNT
 (
 	UserID VARCHAR(20) PRIMARY KEY,
