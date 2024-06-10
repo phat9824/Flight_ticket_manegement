@@ -8,6 +8,7 @@ using System.Security.Cryptography; //MD5
 using System.Data.SqlClient;
 using System.Data;
 using DTO;
+using System.Xml.Linq;
 
 namespace DAL
 {
@@ -182,6 +183,161 @@ namespace DAL
             con.Close();
             return data;
         }
+
+        public int DeleteAccount(string ID)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update ACCOUNT
+                            set isDeleted = 1
+                            where isDeleted = 0
+                            AND UserID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", ID);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+
+        public int UpdateAccountName(string id, string name)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update ACCOUNT
+                    set UserName = @name
+                    where isDeleted = 0 AND UserID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@name", name);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateAccountPhone(string id, string phone)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update ACCOUNT
+                    set Phone = @phone
+                    where isDeleted = 0 AND UserID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("phone", phone);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+
+        public int UpdateAccountBirth(string id, DateTime birth)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update ACCOUNT
+                    set Birth = @birthday
+                    where isDeleted = 0 AND UserID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@birthday", birth);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+        public int UpdateAccountEmail(string id, string email)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update ACCOUNT
+                    set Email = @email
+                    where isDeleted = 0 AND UserID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@email", email);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+
+        public int UpdateAccountPassword(string id, string password)
+        {
+            SqlConnection con = SqlConnectionData.Connect();
+            int rowsAffected = 0;
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"update ACCOUNT
+                    set PasswordUser = @password
+                    where isDeleted = 0 AND UserID = @ID";
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@password", password);
+                    rowsAffected = command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            con.Close();
+            return rowsAffected;
+        }
+
         public string GetState()
         {
             return this.state;
