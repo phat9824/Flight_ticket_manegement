@@ -256,7 +256,12 @@ namespace GUI.View
                 if (result == 0)
                 {
                     MessageBox.Show("Cannot Delete this Airport", "Error");
-                }   
+                }
+                else
+                {
+                    MessageBox.Show("Delete Successfully", "Success");
+                }
+
             }
         }
 
@@ -270,6 +275,10 @@ namespace GUI.View
                 if (result == 0)
                 {
                     MessageBox.Show("Cannot Delete this Ticket Class", "Error");
+                }
+                else
+                {
+                    MessageBox.Show("Delete Successfully", "Success");
                 }
             }
         }
