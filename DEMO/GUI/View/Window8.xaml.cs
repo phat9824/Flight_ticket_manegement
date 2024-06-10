@@ -90,9 +90,18 @@ namespace GUI.View
             if (button != null)
             {
                 var item = button.DataContext as BookingTicketDTO;
+                BLL.BookingTicket_BLL checkprc = new BookingTicket_BLL();
+                DateTime dpt = checkprc.GetBookingTicket_DepartureTime(item.TicketID);
+                var para = new BLL.SearchProcessor().GetParameterDTO();
+                if (DateTime.Now.Add(para.CancelTime) >= dpt)
+                {
+                    MessageBox.Show($"Tickets can only be cancelled at least {para.CancelTime.Hours}h{para.CancelTime.Minutes}m before departure");
+                    return;
+                }
                 if (item != null)
                 {   
                     BLL.DeleteDataProcessor prc = new BLL.DeleteDataProcessor();
+
                     prc.DeleteTicket(item.TicketID);
                     if (prc.getState() != string.Empty)
                     {
