@@ -27,7 +27,7 @@ namespace BLL
         {
             if(new DAL.Ticket_classAccess().isUsed(ID))
             {
-                state = "Hạng vé này đang được sử dụng";
+                state = "This ticket class is in use";
                 return 0;
             }
             return new DAL.Ticket_classAccess().DeleteTicketClass(ID);

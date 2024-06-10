@@ -79,7 +79,7 @@ namespace DAL
             return state;
         }
 
-        public int Get_cnt_Airport_IntermidiateAirport(string ID)
+        public bool Get_cnt_Airport_IntermidiateAirport(string ID)
         {
             int cnt = 0;
             SqlConnection con = SqlConnectionData.Connect();
@@ -114,9 +114,9 @@ namespace DAL
             }
             // Đóng kết nối
             con.Close();
-            return cnt;
+            return cnt > 0;
         }
-        public int Get_cnt_Airport_Flight(string ID)
+        public bool Get_cnt_Airport_Flight(string ID)
         {
             int cnt = 0;
             SqlConnection con = SqlConnectionData.Connect();
@@ -151,20 +151,11 @@ namespace DAL
             }
             // Đóng kết nối
             con.Close();
-            return cnt;
+            return cnt > 0;
         }
 
         public int DeleteAirport(string ID)
         {
-            if(Get_cnt_Airport_IntermidiateAirport(ID) > 0)
-            {
-                return 0;
-            }
-            if(Get_cnt_Airport_Flight(ID) > 0)
-            {
-                return 0;
-            }   
-
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;
             this.state = string.Empty;

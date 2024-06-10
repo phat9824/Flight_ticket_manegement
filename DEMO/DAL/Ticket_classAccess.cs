@@ -198,6 +198,13 @@ namespace DAL
         }
         public int DeleteTicketClass(string ID)
         {
+
+            if (isUsed(ID))
+            {
+                return 0;
+            }
+            
+
             SqlConnection con = SqlConnectionData.Connect();
             int rowsAffected = 0;
             this.state = string.Empty;
