@@ -90,7 +90,8 @@ namespace DAL
                 string query = @"select COUNT(*) AS FIGURE
                                  from AIRPORT A, INTERMEDIATE_AIRPORT IA
                                  where A.AirportID = IA.AirportID
-                                 and @airportID = A.AirportID";
+                                        and A.isDeleted = 0 and IA.isDeleted = 0
+                                        and @airportID = A.AirportID";
 
                 using (SqlCommand command = new SqlCommand(query, con))
                 {
@@ -126,7 +127,8 @@ namespace DAL
                 con.Open();
                 string query = @"select COUNT(*) AS FIGURE
                                  from AIRPORT A, FLIGHT F
-                                 where A.AirportID = F.SourceAirportID or A.AirportID = F.DestinationAirportID
+                                 where (A.AirportID = F.SourceAirportID or A.AirportID = F.DestinationAirportID)
+                                 and A.isDeleted = 0 and F.isDeleted = 0
                                  and @airportID = A.AirportID";
 
                 using (SqlCommand command = new SqlCommand(query, con))
