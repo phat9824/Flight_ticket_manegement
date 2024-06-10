@@ -14,7 +14,7 @@ using System.Windows.Media;
 namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for Window7.xaml
+    /// Interaction logic for Window2.xaml
     /// </summary>
     public partial class Window7 : UserControl
     {
@@ -22,7 +22,7 @@ namespace GUI.View
         private List<SortPropertyPair> SortProperties = new List<SortPropertyPair>
         {
             new SortPropertyPair { Key = "Seq", Value = "STT"},
-            new SortPropertyPair { Key = "Departure airport", Value = "SanBayDi"},
+            new SortPropertyPair { Key= "Departure airport", Value = "SanBayDi"},
             new SortPropertyPair { Key = "Destination airport", Value = "SanBayDen"},
             new SortPropertyPair { Key = "Departure time", Value = "KhoiHanh"},
             new SortPropertyPair { Key = "Duration", Value = "ThoiGian"},
@@ -38,12 +38,13 @@ namespace GUI.View
             var converter = new BrushConverter();
 
             // Create DataGrid Items
-            flights.Add(new Flight { STT = "1", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "2", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "3", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "4", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            flights.Add(new Flight { STT = "5", SanBayDi = "", SanBayDen = "", KhoiHanh = "", ThoiGian = "", SoGheDat = "", SoGheTrong = "" });
-            Staff_FlightsDataGrid.ItemsSource = flights;
+            flights.Add(new Flight { STT = "1", SanBayDi = "AAA", SanBayDen = "eee", KhoiHanh = "20:00", ThoiGian = "1", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "2", SanBayDi = "bbb", SanBayDen = "ddd", KhoiHanh = "20:00", ThoiGian = "2", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "3", SanBayDi = "ccc", SanBayDen = "ccc", KhoiHanh = "20:00", ThoiGian = "3", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "4", SanBayDi = "ddd", SanBayDen = "bbb", KhoiHanh = "20:00", ThoiGian = "4", SoGheDat = "", SoGheTrong = "" });
+            flights.Add(new Flight { STT = "5", SanBayDi = "eee", SanBayDen = "aaa", KhoiHanh = "20:00", ThoiGian = "5", SoGheDat = "", SoGheTrong = "" });
+
+            FlightsDataGrid.ItemsSource = flights;
 
             Airport_BLL airport_bll = new Airport_BLL();
 
@@ -54,10 +55,6 @@ namespace GUI.View
 
             SourceAirport.ItemsSource = airports;
             DestinationAirport.ItemsSource = airports;
-
-            SortProperty.ItemsSource = SortProperties;
-            SortProperty.DisplayMemberPath = "Key";
-            SortProperty.SelectedValuePath = "Value";
         }
 
         private bool IsEmpty(object value)
@@ -89,15 +86,23 @@ namespace GUI.View
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            string a = SourceAirport.SelectedValue as string;
-            string b = DestinationAirport.SelectedValue as string;
+            string a = string.Empty;
+            string b = string.Empty;
+            if (SourceAirport.SelectedIndex != -1)
+            {
+                a = SourceAirport.SelectedValue as string;
+            }
+            if (DestinationAirport.SelectedIndex != -1)
+            {
+                b = DestinationAirport.SelectedValue as string;
+            }
 
             // Check if SourceAirport or DestinationAirport are empty
-            /*if (IsEmpty(a) || IsEmpty(b))
+            if (IsEmpty(a) || IsEmpty(b))
             {
                 MessageBox.Show("Source or Destination airport cannot be empty.");
                 return;
-            }*/
+            }
 
             // 2 Giá trị dưới là min và max cho phép của SQL
             DateTime startDate = StartDay.SelectedDate.HasValue ? StartDay.SelectedDate.Value.Date : new DateTime(1753, 1, 1, 0, 0, 0);
@@ -107,14 +112,7 @@ namespace GUI.View
             flightInformationSearches = new BLL.SearchProcessor().GetFlightInfoDTO(a, b, startDate, endDate);
             flights = Flight.ConvertListToObservableCollection(flightInformationSearches, airportDictionary);
 
-            // Nếu có yêu cầu sort
-            if (SortProperty.SelectedIndex != -1)
-            {
-                string sortOrder = "ASC";
-                flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
-            }
-
-            Staff_FlightsDataGrid.ItemsSource = flights;
+            FlightsDataGrid.ItemsSource = flights;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -123,16 +121,11 @@ namespace GUI.View
             f.Show();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string sortOrder = "ASC";
-            flights = SearchProcessor.SortItems<Flight>(flights, SortProperty.SelectedValue.ToString(), sortOrder);
-            Staff_FlightsDataGrid.ItemsSource = flights;
-        }
-
         private void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+
+
     }
 }

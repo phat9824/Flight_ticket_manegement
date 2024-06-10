@@ -164,7 +164,10 @@ namespace GUI.View
             if (newPassword.Password == confirmPassword.Password)
             {
                 BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
-                prc.UpdateAccountPassword(account.UserID, confirmPassword.Password, oldPassword.Password);
+                if (prc.IsPassExits(account.UserID, oldPassword.Password))
+                {
+                    prc.UpdateAccountPassword(account.UserID, confirmPassword.Password, oldPassword.Password);
+                };
             }
         }
 
