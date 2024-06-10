@@ -621,7 +621,7 @@ Grid.Row="5" Margin="0,23,0,0">
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                     -->
-                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                    <Button Click="Delete_Click" Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
                                         <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

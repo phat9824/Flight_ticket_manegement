@@ -46,13 +46,13 @@ namespace GUI.View
 
         public class Members
         {
-            public string Seq {  get; set; }
+            public string Seq { get; set; }
             public string ID { get; set; }
             public string Name { get; set; }
             public string Position { get; set; }
             public string Email { get; set; }
             public string Phone { get; set; }
-            public string Birth {  get; set; }
+            public string Birth { get; set; }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -60,6 +60,29 @@ namespace GUI.View
             //Addmenber f = new Addmenber();
             SignUp1 f = new SignUp1();
             f.Show();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                var data = button.DataContext as ACCOUNT;
+                if (data != null && MembersDataGrid.ItemsSource is ObservableCollection<ACCOUNT> collection)
+                {   
+                    if (data.PermissonID == 1)
+                    {
+                        MessageBox.Show("You do not have permission to delete this member");
+                        return;
+                    }
+                    var result = MessageBox.Show("Are you sure you want to delete this member?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {   BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
+                        prc.deleteAccount(data.UserID);
+                        collection.Remove(data);
+                    }
+                }
+            }
         }
     }
     public class IdToNameConverterPS : IValueConverter
