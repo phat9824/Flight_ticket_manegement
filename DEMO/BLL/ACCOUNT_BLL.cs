@@ -59,7 +59,7 @@ namespace BLL
         {
             return new DAL.AccountAccess().UpdateAccountEmail(id, email);
         }
-        public int UpdateAccountPassword(string id, string password)
+        public int UpdateAccountPassword(string id, string password, string oldpassword)
         {
             return new DAL.AccountAccess().UpdateAccountPassword(id, password);
         }
