@@ -260,7 +260,6 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-
         public int UpdateAccountBirth(string id, DateTime birth)
         {
             SqlConnection con = SqlConnectionData.Connect();
