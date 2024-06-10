@@ -126,12 +126,15 @@ select *from TICKETCLASS_FLIGHT
 select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
-BT.TicketID , F.FlightDay
 
-select *
-from FLIGHT F, BOOKING_TICKET BT
-WHERE F.FlightID = BT.FlightID 
-and F.isDeleted = 0 and BT.isDeleted = 0
+
+select COUNT(*) AS FIGURE
+from AIRPORT A, INTERMEDIATE_AIRPORT IA
+where A.AirportID = IA.AirportID
+
+select * -- COUNT(*) AS FIGURE
+from AIRPORT A, FLIGHT F
+where A.AirportID = F.SourceAirportID or A.AirportID = F.DestinationAirportID
 
 ----------TEST CASE--------
 --PERMISSION
