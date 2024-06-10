@@ -132,7 +132,6 @@ namespace GUI.View
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
         private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -152,14 +151,24 @@ namespace GUI.View
                 AvatarBrush.ImageSource = bitmap;
             }
         }
-
         private void ChangePass_Click(object sender, RoutedEventArgs e)
         {
             ChangePass_popupWin.IsOpen = true;
         }
-
         private void ConfirmPass_Click(object sender, RoutedEventArgs e)
         {
+            if(!new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, oldPassword.Password))
+            {
+                ChangePass_popupWin.IsOpen = false;
+                MessageBox.Show("Mật khẩu cũ không đúng");
+                return;
+            }
+            if(new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, newPassword.Password))
+            {
+                ChangePass_popupWin.IsOpen = false;
+                MessageBox.Show("Mật khẩu đã dùng");
+                return;
+            }
             ChangePass_popupWin.IsOpen = false;
             if (newPassword.Password == confirmPassword.Password)
             {
@@ -167,7 +176,6 @@ namespace GUI.View
                 prc.UpdateAccountPassword(account.UserID, confirmPassword.Password, oldPassword.Password);
             }
         }
-
         private void Popup_Loaded(object sender, RoutedEventArgs e)
         {
             ChangePass_popupWin.IsOpen = true;
