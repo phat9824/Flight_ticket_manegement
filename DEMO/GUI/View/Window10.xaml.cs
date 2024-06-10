@@ -250,7 +250,7 @@ namespace GUI.View
         {
             if (sender is Button button && button.DataContext is AirportDTO airport)
             {
-                airports.Remove(airport);
+                
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
                 int result = prc.deleteAirport(airport.AirportID);
                 if (result == 0)
@@ -259,6 +259,7 @@ namespace GUI.View
                 }
                 else
                 {
+                    airports.Remove(airport);
                     MessageBox.Show("Delete Successfully", "Success");
                 }
 
@@ -269,7 +270,7 @@ namespace GUI.View
         {
             if (sender is Button button && button.DataContext is TicketClassDTO ticketClass)
             {
-                ticketClassDTOs.Remove(ticketClass);
+                
                 BLL.Ticket_Class_BLL prc = new BLL.Ticket_Class_BLL();
                 int result = prc.DeleteTicketClass(ticketClass.TicketClassID);
                 if (result == 0)
@@ -278,6 +279,7 @@ namespace GUI.View
                 }
                 else
                 {
+                    ticketClassDTOs.Remove(ticketClass);
                     MessageBox.Show("Delete Successfully", "Success");
                 }
             }
