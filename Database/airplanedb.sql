@@ -127,15 +127,6 @@ select *from BOOKING_TICKET
 select *from CUSTOMER
 select *from PARAMETER
 
-
-select COUNT(*) AS FIGURE
-from AIRPORT A, INTERMEDIATE_AIRPORT IA
-where A.AirportID = IA.AirportID
-
-select * -- COUNT(*) AS FIGURE
-from AIRPORT A, FLIGHT F
-where A.AirportID = F.SourceAirportID or A.AirportID = F.DestinationAirportID
-
 ----------TEST CASE--------
 --PERMISSION
 INSERT INTO PERMISSION VALUES (1, 'Admin', 0);
