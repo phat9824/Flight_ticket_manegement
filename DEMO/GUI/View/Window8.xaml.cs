@@ -60,8 +60,7 @@ namespace GUI.View
             string state = string.Empty;
             try
             {
-                var str = BLL.BookingTicket_BLL.UpdateStatus();
-                MessageBox.Show(str);
+                BLL.BookingTicket_BLL.UpdateStatus();
                 string customerID = CustomerID.Text;
                 string ticketID = TicketID.Text;
                 string flightID = FlightID.Text;
@@ -72,6 +71,7 @@ namespace GUI.View
                 {
                     listTicket = new ObservableCollection<BookingTicketDTO>(result);
                     dataGrid.ItemsSource = listTicket;
+                    MessageBox.Show($"Found {listTicket.Count} tickets");
                 }
             }
             catch(Exception ex)

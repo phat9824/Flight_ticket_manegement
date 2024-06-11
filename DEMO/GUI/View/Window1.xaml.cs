@@ -27,10 +27,6 @@ namespace GUI.View
             InitializeComponent();
 
             // test session
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                MessageBox.Show("Mail: " + ClientSession.Instance.mail + "\nPermissions: " + ClientSession.Instance.permissions[0], "Test Session");
-            }));
 
             BLL.ACCOUNT_BLL prc = new BLL.ACCOUNT_BLL();
             var result = prc.List_acc(new ACCOUNT() { Email = ClientSession.Instance.mail });
