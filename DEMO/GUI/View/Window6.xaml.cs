@@ -195,7 +195,7 @@ namespace GUI.View
             try
             {
                 // Sử dụng biểu thức chính quy để kiểm tra định dạng email
-                string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                string pattern = @"^[a-zA-Z]+@gmail\.com$";
                 Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
                 return regex.IsMatch(email);
             }

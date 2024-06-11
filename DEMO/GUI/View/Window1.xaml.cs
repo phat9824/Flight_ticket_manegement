@@ -12,6 +12,7 @@ using DTO;
 using System.Windows.Media;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace GUI.View
 {
@@ -19,7 +20,7 @@ namespace GUI.View
     /// Interaction logic for Window1.xaml
     /// </summary>
     public partial class Window1 : UserControl
-    {   
+    {
         private List<string> pms = new List<string>();
         private ACCOUNT account;
         public Window1()
@@ -67,7 +68,25 @@ namespace GUI.View
         {
             return Array.TrueForAll(text.ToCharArray(), Char.IsDigit);
         }
+        static bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
 
+            try
+            {
+                // Sử dụng biểu thức chính quy để kiểm tra định dạng email
+                string pattern = @"^[a-zA-Z]+@gmail\.com$";
+                Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+                return regex.IsMatch(email);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có lỗi xảy ra
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(UserName.Text) || string.IsNullOrWhiteSpace(Email.Text) || string.IsNullOrWhiteSpace(Phone.Text) || string.IsNullOrWhiteSpace(Birth.Text))
@@ -81,8 +100,8 @@ namespace GUI.View
                 MessageBox.Show("Invalid phone number", "Error");
                 return;
             }
-            
-            if(Phone.Text.Length != 10)
+
+            if (Phone.Text.Length != 10)
             {
                 MessageBox.Show("Invalid phone number", "Error");
                 return;
@@ -95,6 +114,11 @@ namespace GUI.View
                     MessageBox.Show("Invalid phone number", "Error");
                     return;
                 }
+            }
+            if (!IsValidEmail(Email.Text.ToString()))
+            {
+                MessageBox.Show("Invalid Email", "Error");
+                return;
             }
 
             BLL.ACCOUNT_BLL prc = new ACCOUNT_BLL();
@@ -129,6 +153,7 @@ namespace GUI.View
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
+            MessageBox.Show("Update Success");
         }
         private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -202,13 +227,13 @@ namespace GUI.View
         }
         private void ConfirmPass_Click(object sender, RoutedEventArgs e)
         {
-            if(!new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, oldPassword.Password))
+            if (!new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, oldPassword.Password))
             {
                 ChangePass_popupWin.IsOpen = false;
                 MessageBox.Show("Incorrect old password", "Error");
                 return;
             }
-            if(new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, newPassword.Password))
+            if (new BLL.ACCOUNT_BLL().IsPassExits(account.UserID, newPassword.Password))
             {
                 ChangePass_popupWin.IsOpen = false;
                 MessageBox.Show("Password already used", "Error");
