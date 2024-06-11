@@ -43,10 +43,10 @@ namespace GUI.View
             InitializeComponent();
             listTicket = new ObservableCollection<BookingTicketDTO>()
             {
-                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "001", TicketStatus = 1},
+                /*new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "001", TicketStatus = 1},
                 new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1},
                 new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1},
-                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1}
+                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1}*/
             };
 
             dataGrid.ItemsSource = listTicket;
