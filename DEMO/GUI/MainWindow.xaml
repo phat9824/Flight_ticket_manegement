@@ -104,14 +104,6 @@
                     </Menu:Btn>
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding FlightScheduleWindowCommand}">
-                        <Grid>
-
-                            <TextBlock Text="Add Schedule" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
-                        </Grid>
-                    </Menu:Btn>
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding ReportWindowCommand}">
                         <Grid>
 
