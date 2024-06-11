@@ -497,7 +497,7 @@ namespace GUI.View
 
         private void AddIA_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGrid2.Items.Count >= parameterDTO.TicketClassCount)
+            if (dataGrid2.Items.Count >= parameterDTO.IntermediateAirportCount)
             {
                 MessageBox.Show($"Cannot add intermidate airport. The maximum intermidate airport is {parameterDTO.IntermediateAirportCount}");
                 return;
