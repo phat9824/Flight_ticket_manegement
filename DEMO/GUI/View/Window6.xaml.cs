@@ -8,9 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Remoting.Lifetime;
-using System.Security.Policy;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows;
@@ -187,67 +185,7 @@ namespace GUI.View
 
             /*MessageBox.Show(flights.list.Count + flights.list[0].Flight.FlightID + flights.state + "\n Chỉ dùng cho debug", "Debug");*/
         }
-        static bool IsValidEmail(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
 
-            try
-            {
-                // Sử dụng biểu thức chính quy để kiểm tra định dạng email
-                string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-                Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-                return regex.IsMatch(email);
-            }
-            catch (Exception ex)
-            {
-                // Xử lý ngoại lệ nếu có lỗi xảy ra
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-        private string CheckInfo()
-        {
-            List <CustomerDTO> customers = customerView.OfType<CustomerDTO>().ToList();
-            foreach(CustomerDTO customer in customers)
-            {
-                if(customer.CustomerName == string.Empty)
-                {
-                    return "Please enter Customer Name";
-                }
-                foreach (char c in customer.ID)
-                {
-                    if (char.IsLetter(c))
-                    {
-                        return "Invalid ID";
-                    }
-                }
-                if (customer.ID.Length != 12)
-                {
-                    return "CCCD has 12 number";
-                }  
-                if (customer.Birth == null)
-                {
-                    return "Please enter Customer birthday";
-                }
-                foreach (char c in customer.Phone)
-                {
-                    if (char.IsLetter(c))
-                    {
-                        return "Invalid phone number";
-                    }
-                }
-                if(customer.Phone.Length != 10)
-                {
-                    return "Invalid phone number";
-                }
-                if (!IsValidEmail(customer.Email))
-                {
-                    return "Please enter a valid email";
-                }
-            }
-            return string.Empty;
-        }
         private string ValidateInput_Search()
         {
             if (isNatural(NumTicket.Text.ToString()) == false)
@@ -299,19 +237,9 @@ namespace GUI.View
             /*
              Mô tả: Thêm dữ liệu vào DB, nếu thành công xóa toàn bộ dữ liệu trên UI để nhập tiếp
              */
-            string state = CheckInfo();
-            if (state == string.Empty)
-            {
-                state = new BLL.InsertProcessor().Add_ListBookingTicket(customerView.OfType<CustomerDTO>().ToList(), selectedFlight, selectedTicketClass, DateTime.Now, 1);
-            }
-            else
-            {
-                var originalTopmost = Application.Current.MainWindow.Topmost;
-                Application.Current.MainWindow.Topmost = true;
-                MessageBox.Show(Application.Current.MainWindow, state, "Error");
-                Application.Current.MainWindow.Topmost = originalTopmost;
-                return;
-            }
+
+            string state = new BLL.InsertProcessor().Add_ListBookingTicket(customerView.OfType<CustomerDTO>().ToList(), selectedFlight, selectedTicketClass, DateTime.Now, 1);
+            
             if (state == string.Empty)
             {
                 ResetData();
