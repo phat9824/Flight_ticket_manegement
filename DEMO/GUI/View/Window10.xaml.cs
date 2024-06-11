@@ -125,7 +125,7 @@ namespace GUI.View
 
                 newParameter = new ParameterDTO()
                 {
-                    AirportCount = numIAirports,
+                    IntermediateAirportCount = numIAirports,
                     CancelTime = LastCancelTicketSpan,
                     SlowestBookingTime = LastBookTicketSpan,
                     MinStopTime = MinDownTimeSpan,
@@ -135,9 +135,9 @@ namespace GUI.View
 
                 BLL.UpdateDataProcessor prc = new BLL.UpdateDataProcessor();
 
-                if (newParameter.AirportCount != parameter.AirportCount)
+                if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
                 {
-                    prc.UpdateAirportCount(numIAirports);
+                    prc.UpdateIntermediateAirportCount(numIAirports);
                     //MessageBox.Show("A");
                 }
 
