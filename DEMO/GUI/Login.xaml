@@ -118,7 +118,7 @@
         </Style>
     </Window.Resources>
     <Grid >
-        <Image Source="/Images/close.jpg" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+        <Image x:Name="img_close" Source="/Images/close.jpg" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
 
 
         <Border CornerRadius="20 20 20 20">
@@ -132,12 +132,6 @@
 
             <Grid Margin="0,-8,0,0">
 
-
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Sign Up" Style="{StaticResource titleText1}"/>
-                    <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
-                    <Button Content="Sign Up" Style="{StaticResource button}"/>
-                </StackPanel>
                 <Image Source="/Images/Slice 1.png" Width="500" Margin="-1,4,311,-5"/>
                 <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="473,163,18,205">
                     <Grid Margin="7 9">
@@ -176,7 +170,7 @@
             </Grid>
 
         </Border>
-        <TextBlock HorizontalAlignment="Left" Margin="502,32,0,0" TextWrapping="Wrap" Text="Quản lý vé   máy bay" Style="{StaticResource titleText1}" Foreground="#FFA3D2F3" VerticalAlignment="Top" Width="274" Height="104"/>
+        <TextBlock x:Name="app_name" HorizontalAlignment="Left" Margin="502,32,0,0" TextWrapping="Wrap" Text="Quản lý vé   máy bay" Style="{StaticResource titleText1}" Foreground="#FFA3D2F3" VerticalAlignment="Top" Width="274" Height="104"/>
  
     </Grid>
 </Window>
