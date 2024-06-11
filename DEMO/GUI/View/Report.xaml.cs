@@ -45,34 +45,12 @@ namespace GUI.View
             InitializeComponent();
 
             //----------BEGIN-Test UI-----------------------------------------------------------------------------//
-            // Tất cả trong khối này sẽ được xóa sau khi có BE để query, các query sẽ được gọi trong các EventHandler
             List<ReportByFlightDTO> listReportByFlightDTO = new List<ReportByFlightDTO>()
             {
-                new ReportByFlightDTO { flightID = "FL1001", ticketsSold = 150, revenue = 75000, ratio = 0.05m },
-                new ReportByFlightDTO { flightID = "FL1002", ticketsSold = 200, revenue = 100000, ratio = 0.08m },
-                new ReportByFlightDTO { flightID = "FL1003", ticketsSold = 180, revenue = 90000, ratio = 0.07m },
-                new ReportByFlightDTO { flightID = "FL1004", ticketsSold = 220, revenue = 110000, ratio = 0.09m },
-                new ReportByFlightDTO { flightID = "FL1005", ticketsSold = 140, revenue = 70000, ratio = 0.06m },
-                new ReportByFlightDTO { flightID = "FL1006", ticketsSold = 160, revenue = 80000, ratio = 0.065m },
-                new ReportByFlightDTO { flightID = "FL1007", ticketsSold = 210, revenue = 105000, ratio = 0.085m },
-                new ReportByFlightDTO { flightID = "FL1008", ticketsSold = 130, revenue = 65000, ratio = 0.05m },
-                new ReportByFlightDTO { flightID = "FL1009", ticketsSold = 250, revenue = 125000, ratio = 0.10m },
-                new ReportByFlightDTO { flightID = "FL1010", ticketsSold = 170, revenue = 85000, ratio = 0.07m }
             };
 
             List<ReportByMonthDTO> listReportByMonthDTO = new List<ReportByMonthDTO>()
             {
-                new ReportByMonthDTO { time = DateTime.UtcNow, flightQuantity = 999, revenue = 99877000, ratio = 0.78m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-1), flightQuantity = 980, revenue = 89877000, ratio = 0.75m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-2), flightQuantity = 970, revenue = 79877000, ratio = 0.72m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-3), flightQuantity = 960, revenue = 69877000, ratio = 0.70m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-4), flightQuantity = 950, revenue = 59877000, ratio = 0.68m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-5), flightQuantity = 940, revenue = 49877000, ratio = 0.65m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-6), flightQuantity = 930, revenue = 39877000, ratio = 0.63m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-7), flightQuantity = 920, revenue = 29877000, ratio = 0.60m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-8), flightQuantity = 910, revenue = 19877000, ratio = 0.58m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-9), flightQuantity = 900, revenue = 9877000, ratio = 0.55m },
-                new ReportByMonthDTO { time = DateTime.UtcNow.AddMonths(-10), flightQuantity = 890, revenue = 877000, ratio = 0.50m }
             };
 
             reportsByFlightData = ReportByFlightData.ConvertListDTOToObservableCollectionData(listReportByFlightDTO);

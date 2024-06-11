@@ -41,13 +41,7 @@ namespace GUI.View
         public Window8()
         {
             InitializeComponent();
-            listTicket = new ObservableCollection<BookingTicketDTO>()
-            {
-                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "001", TicketStatus = 1},
-                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1},
-                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1},
-                new BookingTicketDTO() {TicketID = "..", FlightID = "..", ID = "..", TicketClassID = "..", TicketStatus = 1}
-            };
+            listTicket = new ObservableCollection<BookingTicketDTO>(){};
 
             dataGrid.ItemsSource = listTicket;
 
@@ -66,8 +60,7 @@ namespace GUI.View
             string state = string.Empty;
             try
             {
-                var str = BLL.BookingTicket_BLL.UpdateStatus();
-                MessageBox.Show(str);
+                BLL.BookingTicket_BLL.UpdateStatus();
                 string customerID = CustomerID.Text;
                 string ticketID = TicketID.Text;
                 string flightID = FlightID.Text;
@@ -78,6 +71,7 @@ namespace GUI.View
                 {
                     listTicket = new ObservableCollection<BookingTicketDTO>(result);
                     dataGrid.ItemsSource = listTicket;
+                    MessageBox.Show($"Found {listTicket.Count} tickets");
                 }
             }
             catch(Exception ex)
