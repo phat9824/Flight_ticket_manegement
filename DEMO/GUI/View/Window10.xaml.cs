@@ -40,7 +40,7 @@ namespace GUI.View
         {
             if (parameter != null)
             {
-                int numIAirports = parameter.AirportCount;
+                int numIAirports = parameter.IntermediateAirportCount;
                 TimeSpan minFlightTime = parameter.MinFlighTime;
                 TimeSpan minDownTime = parameter.MinStopTime;
                 TimeSpan maxDownTime = parameter.MaxStopTime;
@@ -133,12 +133,14 @@ namespace GUI.View
                     MinFlighTime = MinFlightTimeSpan,
                 };
 
+                
+
                 BLL.UpdateDataProcessor prc = new BLL.UpdateDataProcessor();
 
                 if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
                 {
                     prc.UpdateIntermediateAirportCount(numIAirports);
-                    //MessageBox.Show("A");
+                    //MessageBox.Show($"{numIAirports}");
                 }
 
                 if (newParameter.CancelTime != parameter.CancelTime)
@@ -169,6 +171,8 @@ namespace GUI.View
                 {   prc.UpdateMinFligthTime(newParameter.MinFlighTime);
                     //MessageBox.Show("F");
                 }
+
+                parameter = newParameter;
             }
             catch (Exception ex)
             {
