@@ -163,9 +163,7 @@
                         Style="{StaticResource mainbutton}"
                         IsDefault="True" Background="#FFA3D2F3" Margin="528,304,82,54" Click="Button_Click"/>
 
-                <TextBlock Margin="583,277,135,111">
-       <Hyperlink NavigateUri="http://example.com">Forget Password</Hyperlink>
-                </TextBlock>
+                
 
             </Grid>
 

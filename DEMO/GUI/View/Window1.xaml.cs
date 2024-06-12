@@ -246,8 +246,11 @@ namespace GUI.View
                 if (prc.IsPassExits(account.UserID, oldPassword.Password))
                 {
                     prc.UpdateAccountPassword(account.UserID, confirmPassword.Password, oldPassword.Password);
+                    MessageBox.Show("Change password success");
+                    return;
                 };
             }
+            MessageBox.Show("Change password failed");  
         }
         private void Popup_Loaded(object sender, RoutedEventArgs e)
         {
