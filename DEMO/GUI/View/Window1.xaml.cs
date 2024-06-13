@@ -70,8 +70,13 @@ namespace GUI.View
         }
         static bool HasSpecialCharacters(string str)
         {
-            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
-            Regex regex = new Regex("[^a-zA-Z0-9]");
+            // Regex pattern để kiểm tra ký tự đặc biệt (ngoại trừ khoảng trắng)
+            string pattern = @"[^\w\sÀ-ỹ]"; // \w bao gồm chữ cái và số, \s là khoảng trắng, À-ỹ cho các ký tự tiếng Việt
+
+            // Tạo đối tượng Regex với pattern
+            Regex regex = new Regex(pattern);
+
+            // Kiểm tra nếu chuỗi có chứa ký tự đặc biệt
             return regex.IsMatch(str);
         }
         static bool IsValidEmail(string email)
