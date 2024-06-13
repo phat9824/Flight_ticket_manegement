@@ -72,7 +72,19 @@ namespace GUI.View
             else if(Year_TabMonth.Text.ToString() == string.Empty)
             {
                 return "Please enter a Year!";
-            }  
+            } 
+            if (Convert.ToInt32(Month_TabMonth.Text) <= 0 || Convert.ToInt32(Month_TabMonth.Text) > 12)
+            {
+                return "Please enter Month from 1 to 12";
+            }
+            if (Convert.ToInt32(Year_TabMonth.Text) < 0)
+            {
+                return "Year cant be negative";
+            }
+            if (Convert.ToInt32(Year_TabMonth.Text) >= DateTime.Now.Year)
+            {
+                return "Year exceeds the current year (" + DateTime.Now.Year.ToString() + ")";
+            }
             return string.Empty;
         }
 
@@ -138,6 +150,14 @@ namespace GUI.View
             if (Year_TabYear.Text.ToString() == string.Empty)
             {
                 return "Please enter a Year!";
+            }
+            if (Convert.ToInt32(Year_TabYear.Text) < 0)
+            {
+                return "Year cant be negative";
+            }
+            if (Convert.ToInt32(Year_TabYear.Text) >= DateTime.Now.Year)
+            {
+                return "Year exceeds the current year (" + DateTime.Now.Year.ToString() + ")";
             }
             return string.Empty;
         }
