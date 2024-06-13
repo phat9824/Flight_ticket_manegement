@@ -110,13 +110,7 @@
                         </Grid>
                     </Menu:Btn>
 
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                          Command="{Binding Window9Command}">
-                        <Grid>
-
-                            <TextBlock Text="Add Schedule" Style="{StaticResource Text_Style}" Margin="40,0,0,0"/>
-                        </Grid>
-                    </Menu:Btn>
+                    
                 </StackPanel>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}" Margin="0,102,0,0" VerticalAlignment="Top" Checked="Btn_Checked" Grid.Row="1">

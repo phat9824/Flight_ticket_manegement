@@ -580,7 +580,7 @@
             </Grid.RowDefinitions>
 
             <!--Page Title-->
-            <TextBlock Text="List of flights" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="10 7 0 0"
+            <TextBlock x:Name="page_name" Text="List of flights" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="10 7 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
             <!--Add Button-->
 

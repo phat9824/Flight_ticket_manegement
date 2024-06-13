@@ -85,8 +85,8 @@
                    HorizontalAlignment="Left" VerticalAlignment="Top"
                    Margin="20 10 0 0" Height="43" Width="341"/>
 
-        <TabControl Grid.Row="1">
-            <TabItem Header="Month"
+        <TabControl x:Name="tab_report" Grid.Row="1">
+            <TabItem x:Name="tab1"  Header="Month"
                      Background="LightGray">
                 <!-- Tab 1 -->
                 <Grid>
@@ -127,7 +127,7 @@
                                     Width ="200">
                         </DatePicker>
                         -->
-                        <TextBlock
+                        <TextBlock x:Name="month_txtbl"
                                    Text="Month:"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                    FontSize="20"
@@ -140,7 +140,7 @@
                                  HorizontalAlignment="Center" VerticalAlignment="Center"
                                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         </TextBox>
-                        <TextBlock
+                            <TextBlock x:Name="year_txtbl"
                                    Text="Year: "
                                    HorizontalAlignment="Center" VerticalAlignment="Center"
                                    FontSize="20"
@@ -184,7 +184,7 @@
                     </DataGrid>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <TextBlock 
+                        <TextBlock x:Name="total_txtbl"
                                    Text="Total:"
                                    HorizontalAlignment="Right" VerticalAlignment="Center"
                                    FontSize="20"
@@ -200,7 +200,7 @@
                     
                 </Grid>
             </TabItem>
-            <TabItem Header="Year">
+            <TabItem x:Name="tab2" Header="Year">
                 <Grid>
 
                     <Grid.RowDefinitions>
