@@ -135,6 +135,11 @@ namespace GUI.View
                 };
 
                 
+                if (newParameter.IntermediateAirportCount < 0)
+                {
+                    MessageBox.Show("Number of Intermediate Airport can not be negative");
+                    return;
+                }
 
                 BLL.UpdateDataProcessor prc = new BLL.UpdateDataProcessor();
 
@@ -225,7 +230,7 @@ namespace GUI.View
             {
                 if(char.IsLetter(c))
                 {
-                    return "Please re-enter the coefficient";
+                    return "Please re-enter the Multiplier";
                 }
             }
             return st;
@@ -234,7 +239,13 @@ namespace GUI.View
         {
             if (HasSpecialCharacters(NewClassName.Text))
             {
-                MessageBox.Show("Ticket class' name has special character");
+                MessageBox.Show("Ticket class'name has special character");
+                return;
+            }
+            if (Convert.ToDecimal(NewMultiplier.Text) <= 0)
+            {
+                MessageBox.Show("Ticket class'multiplier must be > 0");
+                return;
             }
             if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
             {
