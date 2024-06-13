@@ -146,7 +146,7 @@ INSERT INTO PERMISSION VALUES (2, 'Staff', 0);
 --ACCOUNT
 
 -- tk: admin@gmail.com; pass: password1
--- tk: staff1@gmail.com; pass: password2121221
+-- tk: staff1@gmail.com; pass: password2
 -- tk: admin1@gmail.com; pass: password3
 INSERT INTO ACCOUNT VALUES ('000', 'admin', '0123456789', 'admin@gmail.com', '1980-01-01', '7c6a180b36896a0a8c02787eeafb0e4c', 1, 0, NULL);
 INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@gmail.com', '1985-02-02', '6cb75f652a9b52798eb6cf2201057c73', 2, 0, NULL);
