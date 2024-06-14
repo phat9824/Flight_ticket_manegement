@@ -233,6 +233,11 @@ namespace GUI.View
                 MessageBox.Show("Airport has special characters", "Error");
                 return;
             }
+            if (new BLL.Airport_BLL().isExist(FormatString(NewAirport.Text.ToString())))
+            {
+                MessageBox.Show("This airport has existed", "Error");
+                return;
+            }
             if (!string.IsNullOrWhiteSpace(NewAirport.Text))
             {
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
