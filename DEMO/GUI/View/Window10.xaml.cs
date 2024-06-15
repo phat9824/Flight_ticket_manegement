@@ -138,10 +138,18 @@ namespace GUI.View
 
                 BLL.UpdateDataProcessor prc = new BLL.UpdateDataProcessor();
 
-                if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
+                if (newParameter.IntermediateAirportCount < 0)
                 {
-                    prc.UpdateIntermediateAirportCount(numIAirports);
-                    //MessageBox.Show($"{numIAirports}");
+                    MessageBox.Show("Ticket class' IntermediateAirport is incorrect");
+                    return;
+                }
+                else
+                {
+                    if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
+                    {
+                        prc.UpdateIntermediateAirportCount(numIAirports);
+                        //MessageBox.Show($"{numIAirports}");
+                    }
                 }
 
                 if (newParameter.CancelTime != parameter.CancelTime)
@@ -200,6 +208,13 @@ namespace GUI.View
             Regex regex = new Regex("[^a-zA-Z0-9]");
             return regex.IsMatch(str);
         }
+
+        static bool PositiveIntegerChecking(string str)
+        {
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^0-9.]");
+            return regex.IsMatch(str);
+        }
         private void Add_Airport_Click(object sender, RoutedEventArgs e)
         {
             if (HasSpecialCharacters(NewAirport.Text))
@@ -235,7 +250,13 @@ namespace GUI.View
             if (HasSpecialCharacters(NewClassName.Text))
             {
                 MessageBox.Show("Ticket class' name has special character");
+                return;
             }
+            if(PositiveIntegerChecking(NewMultiplier.Text))
+            {
+                MessageBox.Show("Ticket class' Multiplier is incorrect");
+                return;
+            }    
             if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
             {
                 string st = check();
