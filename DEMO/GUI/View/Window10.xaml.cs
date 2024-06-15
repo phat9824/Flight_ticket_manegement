@@ -135,18 +135,21 @@ namespace GUI.View
                 };
 
                 
-                if (newParameter.IntermediateAirportCount < 0)
-                {
-                    MessageBox.Show("Number of Intermediate Airport can not be negative");
-                    return;
-                }
 
                 BLL.UpdateDataProcessor prc = new BLL.UpdateDataProcessor();
 
-                if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
+                if (newParameter.IntermediateAirportCount < 0)
                 {
-                    prc.UpdateIntermediateAirportCount(numIAirports);
-                    //MessageBox.Show($"{numIAirports}");
+                    MessageBox.Show("Ticket class' IntermediateAirport is incorrect");
+                    return;
+                }
+                else
+                {
+                    if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
+                    {
+                        prc.UpdateIntermediateAirportCount(numIAirports);
+                        //MessageBox.Show($"{numIAirports}");
+                    }
                 }
 
                 if (newParameter.CancelTime != parameter.CancelTime)
@@ -201,30 +204,16 @@ namespace GUI.View
         }
         static bool HasSpecialCharacters(string str)
         {
-            // Regex pattern để kiểm tra ký tự đặc biệt (ngoại trừ khoảng trắng)
-            string pattern = @"[^\w\sÀ-ỹ]"; // \w bao gồm chữ cái và số, \s là khoảng trắng, À-ỹ cho các ký tự tiếng Việt
-
-            // Tạo đối tượng Regex với pattern
-            Regex regex = new Regex(pattern);
-
-            // Kiểm tra nếu chuỗi có chứa ký tự đặc biệt
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^a-zA-Z0-9]");
             return regex.IsMatch(str);
         }
-        static string FormatString(string str)
+
+        static bool PositiveIntegerChecking(string str)
         {
-            if (string.IsNullOrEmpty(str))
-                return str;
-
-            string[] words = str.Split(' ');
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (words[i].Length > 0)
-                {
-                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
-                }
-            }
-
-            return string.Join(" ", words);
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^0-9.]");
+            return regex.IsMatch(str);
         }
         private void Add_Airport_Click(object sender, RoutedEventArgs e)
         {
@@ -233,15 +222,10 @@ namespace GUI.View
                 MessageBox.Show("Airport has special characters", "Error");
                 return;
             }
-            if (new BLL.Airport_BLL().isExist(FormatString(NewAirport.Text.ToString())))
-            {
-                MessageBox.Show("This airport has existed", "Error");
-                return;
-            }
             if (!string.IsNullOrWhiteSpace(NewAirport.Text))
             {
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
-                prc.insertAirport(FormatString(NewAirport.Text.ToString()));
+                prc.insertAirport(NewAirport.Text.ToString());
                 airports = new ObservableCollection<AirportDTO>(new BLL.Airport_BLL().L_airport());
                 ListAirport.ItemsSource = airports;
                 BLL.UpdateDataProcessor prc2 = new BLL.UpdateDataProcessor();
@@ -256,7 +240,7 @@ namespace GUI.View
             {
                 if(char.IsLetter(c))
                 {
-                    return "Please re-enter the Multiplier";
+                    return "Please re-enter the coefficient";
                 }
             }
             return st;
@@ -265,15 +249,15 @@ namespace GUI.View
         {
             if (HasSpecialCharacters(NewClassName.Text))
             {
-                MessageBox.Show("Ticket class'name has special character");
+                MessageBox.Show("Ticket class' name has special character");
                 return;
             }
-            if (Convert.ToDecimal(NewMultiplier.Text) <= 0)
+            if(PositiveIntegerChecking(NewMultiplier.Text))
             {
-                MessageBox.Show("Ticket class'multiplier must be > 0");
+                MessageBox.Show("Ticket class' Multiplier is incorrect");
                 return;
-            }
-            if (!string.IsNullOrWhiteSpace(FormatString(NewClassName.Text)) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
+            }    
+            if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
             {
                 string st = check();
                 if(st != string.Empty)
