@@ -140,16 +140,14 @@ namespace GUI.View
 
                 if (newParameter.IntermediateAirportCount < 0)
                 {
-                    MessageBox.Show("Ticket class' IntermediateAirport is incorrect");
+                    MessageBox.Show("Number of Intermediate Airport can not be negative");
                     return;
                 }
-                else
+
+                if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
                 {
-                    if (newParameter.IntermediateAirportCount != parameter.IntermediateAirportCount)
-                    {
                         prc.UpdateIntermediateAirportCount(numIAirports);
                         //MessageBox.Show($"{numIAirports}");
-                    }
                 }
 
                 if (newParameter.CancelTime != parameter.CancelTime)
@@ -204,17 +202,41 @@ namespace GUI.View
         }
         static bool HasSpecialCharacters(string str)
         {
-            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
-            Regex regex = new Regex("[^a-zA-Z0-9]");
+            // Regex pattern để kiểm tra ký tự đặc biệt (ngoại trừ khoảng trắng)
+            string pattern = @"[^\w\sÀ-ỹ]"; // \w bao gồm chữ cái và số, \s là khoảng trắng, À-ỹ cho các ký tự tiếng Việt
+
+            // Tạo đối tượng Regex với pattern
+            Regex regex = new Regex(pattern);
+
             return regex.IsMatch(str);
         }
 
-        static bool PositiveIntegerChecking(string str)
+        static string FormatString(string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
+            string[] words = str.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length > 0)
+                {
+                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                }
+            }
+
+            return string.Join(" ", words);
+        }
+
+            static bool PositiveIntegerChecking(string str)
+            {
             // Biểu thức chính quy để kiểm tra ký tự đặc biệt
             Regex regex = new Regex("[^0-9.]");
             return regex.IsMatch(str);
-        }
+            }
+
+
+
         private void Add_Airport_Click(object sender, RoutedEventArgs e)
         {
             if (HasSpecialCharacters(NewAirport.Text))
@@ -222,10 +244,15 @@ namespace GUI.View
                 MessageBox.Show("Airport has special characters", "Error");
                 return;
             }
+            if (new BLL.Airport_BLL().isExist(FormatString(NewAirport.Text.ToString())))
+            {
+                MessageBox.Show("This airport has existed", "Error");
+                return;
+            }
             if (!string.IsNullOrWhiteSpace(NewAirport.Text))
             {
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
-                prc.insertAirport(NewAirport.Text.ToString());
+                prc.insertAirport(FormatString(NewAirport.Text.ToString()));
                 airports = new ObservableCollection<AirportDTO>(new BLL.Airport_BLL().L_airport());
                 ListAirport.ItemsSource = airports;
                 BLL.UpdateDataProcessor prc2 = new BLL.UpdateDataProcessor();
@@ -240,7 +267,7 @@ namespace GUI.View
             {
                 if(char.IsLetter(c))
                 {
-                    return "Please re-enter the coefficient";
+                    return "Please re-enter the Multiplier";
                 }
             }
             return st;
@@ -252,12 +279,12 @@ namespace GUI.View
                 MessageBox.Show("Ticket class' name has special character");
                 return;
             }
-            if(PositiveIntegerChecking(NewMultiplier.Text))
+            if (PositiveIntegerChecking(NewMultiplier.Text))
             {
-                MessageBox.Show("Ticket class' Multiplier is incorrect");
+                MessageBox.Show("Ticket class'multiplier must be > 0");
                 return;
-            }    
-            if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
+            }
+            if (!string.IsNullOrWhiteSpace(FormatString(NewClassName.Text)) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
             {
                 string st = check();
                 if(st != string.Empty)
