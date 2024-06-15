@@ -117,6 +117,43 @@ namespace DAL
             con.Close();
             return cnt > 0;
         }
+        public bool isExist(string name)
+        {
+            int cnt = 0;
+            SqlConnection con = SqlConnectionData.Connect();
+            this.state = string.Empty;
+            try
+            {
+                con.Open();
+                string query = @"select COUNT(*) AS Number
+                                from AIRPORT 
+                                where isDeleted = 0 
+                                AND AirportName = @AirportName";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    // Thiết lập các tham số
+
+                    command.Parameters.AddWithValue("@AirportName", name);
+
+                    // Đọc kết quả truy vấn
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cnt = Convert.ToInt32(reader["Number"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                state = $"Error: {ex.Message}";
+            }
+            // Đóng kết nối
+            con.Close();
+            return cnt > 0;
+        }
         public bool Get_cnt_Airport_Flight(string ID)
         {
             int cnt = 0;
@@ -181,11 +218,6 @@ namespace DAL
             con.Close();
             return rowsAffected;
         }
-
-
-        
-
-
         public string GetState()
         {
             return state;
