@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -193,9 +194,19 @@ namespace GUI.View
 
             LoadParameter();
         }
-
+        static bool HasSpecialCharacters(string str)
+        {
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            return regex.IsMatch(str);
+        }
         private void Add_Airport_Click(object sender, RoutedEventArgs e)
         {
+            if (HasSpecialCharacters(NewAirport.Text))
+            {
+                MessageBox.Show("Airport has special characters", "Error");
+                return;
+            }
             if (!string.IsNullOrWhiteSpace(NewAirport.Text))
             {
                 BLL.Airport_BLL prc = new BLL.Airport_BLL();
@@ -221,6 +232,10 @@ namespace GUI.View
         }
         private void Add_Class_Click(object sender, RoutedEventArgs e)
         {
+            if (HasSpecialCharacters(NewClassName.Text))
+            {
+                MessageBox.Show("Ticket class' name has special character");
+            }
             if (!string.IsNullOrWhiteSpace(NewClassName.Text) && !string.IsNullOrWhiteSpace(NewMultiplier.Text))
             {
                 string st = check();
@@ -248,7 +263,7 @@ namespace GUI.View
                 }
                 if(string.IsNullOrWhiteSpace(NewMultiplier.Text))
                 {
-                    MessageBox.Show("Please enter the coefficient of the ticket class", "Error");
+                    MessageBox.Show("Please enter the multiplier of the ticket class", "Error");
                     return;
                 }
             }

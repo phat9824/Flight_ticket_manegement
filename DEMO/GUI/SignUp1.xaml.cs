@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -161,6 +162,12 @@ namespace GUI
 
         ACCOUNT_BLL accBLL = new ACCOUNT_BLL();
         ACCOUNT User = new ACCOUNT();
+        static bool HasSpecialCharacters(string str)
+        {
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            return regex.IsMatch(str);
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             User.UserName = txtFName.Text.Trim() + " " + txtLName.Text.Trim();
@@ -168,6 +175,11 @@ namespace GUI
             User.Birth = new DateTime((int)Y_comboBox.SelectedValue, (int)M_comboBox.SelectedValue, (int)D_comboBox.SelectedValue);
             User.PasswordUser = txtRePassword.Password.Trim();
             User.Phone = txtPhone.Text.Trim();
+            if (HasSpecialCharacters(User.UserName))
+            {
+                MessageBox.Show("User Name has special character");
+                return;
+            }
             if (Admin_bt.AllowDrop)
             {
                 User.PermissonID = 1;

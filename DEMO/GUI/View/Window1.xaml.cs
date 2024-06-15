@@ -68,6 +68,12 @@ namespace GUI.View
         {
             return Array.TrueForAll(text.ToCharArray(), Char.IsDigit);
         }
+        static bool HasSpecialCharacters(string str)
+        {
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            return regex.IsMatch(str);
+        }
         static bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -118,6 +124,11 @@ namespace GUI.View
             if (!IsValidEmail(Email.Text.ToString()))
             {
                 MessageBox.Show("Invalid Email", "Error");
+                return;
+            }
+            if (HasSpecialCharacters(UserName.Text))
+            {
+                MessageBox.Show("Name has special characters", "Error");
                 return;
             }
 
