@@ -125,7 +125,7 @@
         </Grid.ColumnDefinitions>
 
         <Border CornerRadius="10 10 10 10" Background="#FFA3D2F3">
-            <TextBlock TextWrapping="Wrap" Text="Add member" Margin="115,26,116,528" FontSize="36" Style="{StaticResource titleText1}"  Foreground="#ffffff"/>
+            <TextBlock x:Name="page_name" TextWrapping="Wrap" Text="Add member" Margin="115,26,116,528" FontSize="36" Style="{StaticResource titleText1}"  Foreground="#ffffff"/>
         </Border>
         <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,115,256,461" >
             <Grid Margin="7 9">
@@ -144,10 +144,10 @@
         <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"  Background="White" Margin="30,181,30,395" >
             <Grid Margin="7 9">
 
-                <TextBlock x:Name="textMailAdd"  MouseDown="textMailAdd_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
+                <TextBlock x:Name="textMailAdd" Text="@gmail.com" Opacity="0.6" MouseDown="textMailAdd_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox  x:Name="txtMailAdd" TextChanged="txtMailAdd_TextChanged" Style="{StaticResource textBox}"/>
-                    <TextBlock Text="@gmail.com" VerticalAlignment="Center" Opacity="0.6"/>
+                  
                 </StackPanel>
             </Grid>
         </Border>
@@ -172,21 +172,21 @@
                 <TextBox  x:Name="txtPhone" TextChanged="txtPhone_TextChanged" Style="{StaticResource textBox}"/>
             </Grid>
         </Border>
-        <Label Content="First Name" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD" Margin="27,89,0,0"/>
-        <Label Content="Last Name" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
-        <Label Content="Mail Address" HorizontalAlignment="Left" Margin="27,156,0,0" VerticalAlignment="Top" Width="80" Foreground="#FFFFFDFD"/>
-        <Label Content="What best describes what do you do?" HorizontalAlignment="Left" Margin="27,291,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFFFDFD"/>
+        <Label x:Name="F_name" Content="First Name" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD" Margin="27,89,0,0"/>
+        <Label x:Name="L_name" Content="Last Name" HorizontalAlignment="Left" Margin="252,89,0,0" VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD"/>
+        <Label x:Name="mail"  Content="Email Address" HorizontalAlignment="Left" Margin="27,156,0,0" VerticalAlignment="Top" Width="80" Foreground="#FFFFFDFD"/>
+        <Label x:Name="position" Content="What best describes what do you do?" HorizontalAlignment="Left" Margin="27,291,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFFFDFD"/>
         <RadioButton x:Name="Admin_bt" Content="Admin" HorizontalAlignment="Left" Margin="107,318,0,0" VerticalAlignment="Top" Foreground="White"/>
         <RadioButton x:Name="Staff_bt" Content="Staff" HorizontalAlignment="Left" Margin="280,318,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label Content="Date of birth" HorizontalAlignment="Left" Margin="27,339,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
-        <Label Content="Phone" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD" Margin="27,220,0,0"/>
+        <Label x:Name="birth" Content="Date of birth" HorizontalAlignment="Left" Margin="27,339,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
+        <Label x:Name="phone_number" Content="Phone" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="69" Foreground="#FFFFFDFD" Margin="27,220,0,0"/>
         <ComboBox x:Name="D_comboBox" HorizontalAlignment="Left" Margin="30,365,0,0" VerticalAlignment="Top" Width="96"  />
         <ComboBox x:Name="M_comboBox" HorizontalAlignment="Left" Margin="175,365,0,0" VerticalAlignment="Top" Width="96"/>
         <ComboBox x:Name="Y_comboBox" HorizontalAlignment="Left" Margin="323,365,0,0" VerticalAlignment="Top" Width="96"/>
-        <Label Content="Enter Password" HorizontalAlignment="Left" Margin="27,395,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
-        <Label Content="Repeat Password" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD" Margin="27,462,0,0"/>
-        <Image Source="/Images/close.jpg" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" Margin="0,6,13,0" Height="58" Width="56"/>
-        <Button Content="Add"
+        <Label x:Name="pass" Content="Enter Password" HorizontalAlignment="Left" Margin="27,395,0,0" VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD"/>
+        <Label x:Name="re_pass" Content="Repeat Password" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="93" Foreground="#FFFFFDFD" Margin="27,462,0,0"/>
+        <Image x:Name="close_bt" Source="/Images/close.jpg" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" Margin="0,6,13,0" Height="58" Width="56"/>
+        <Button x:Name="add_bt" Content="Add"
   Style="{StaticResource mainbutton}"
   IsDefault="True" Background="#FFD8EFFF" Foreground="#FF73AFC0" Margin="125,544,129,0" Height="52" VerticalAlignment="Top" Click="Button_Click" />
     </Grid>

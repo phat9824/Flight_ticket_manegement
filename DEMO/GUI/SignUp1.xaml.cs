@@ -173,6 +173,13 @@ namespace GUI
             // Kiểm tra nếu chuỗi có chứa ký tự đặc biệt
             return regex.IsMatch(str);
         }
+        static bool PositiveIntegerChecking(string str)
+        {
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^0-9]");
+            return regex.IsMatch(str);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             User.UserName = txtFName.Text.Trim() + " " + txtLName.Text.Trim();
@@ -183,6 +190,11 @@ namespace GUI
             if (HasSpecialCharacters(User.UserName))
             {
                 MessageBox.Show("User Name has special character");
+                return;
+            }
+            if (PositiveIntegerChecking(User.Phone)) 
+            {
+                MessageBox.Show("User Phone has special character");
                 return;
             }
             if (Admin_bt.AllowDrop)
