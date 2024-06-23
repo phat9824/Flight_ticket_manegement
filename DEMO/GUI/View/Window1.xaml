@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Page Title -->
-            <TextBlock Text="Standard" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="10,10,0,10"
+            <TextBlock x:Name="page_name" Text="Standard" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="10,10,0,10"
                    HorizontalAlignment="Left" Foreground="#121518" Width="130" Grid.ColumnSpan="2"/>
 
             <!-- Avatar and Change Avatar Button -->
@@ -34,7 +34,7 @@
                         <ImageBrush x:Name="AvatarBrush" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Button Content="Change Avatar" Click="ChangeAvatarButton_Click" Height="40" Width="150" Margin="0,20,0,0" Background="#FF1DA2ED"/>
+                <Button x:Name="Changeava_bt" Content="Change Avatar" Click="ChangeAvatarButton_Click" Height="40" Width="150" Margin="0,20,0,0" Background="#FF1DA2ED"/>
             </StackPanel>
 
             <!-- User Information -->
@@ -52,20 +52,20 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Fullname and Birth -->
-                <TextBlock Text="Fullname:" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="21"/>
+                <TextBlock x:Name="F_Name" Text="Fullname:" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="21"/>
                 <TextBox x:Name="UserName" Grid.Row="0" Margin="82,20,275,19"
                      materialDesign:HintAssist.Hint="Nguyen Van A"
                      FontSize="16"
                      VerticalContentAlignment="Center"
                      Padding="0,0,0,-10" Grid.ColumnSpan="3"/>
-                <TextBlock Text="Birth:" Grid.Row="0" Grid.Column="2" Margin="107,17,157,0" FontSize="16" VerticalAlignment="Top" Height="21"/>
+                <TextBlock x:Name="bir_day" Text="Birth:" Grid.Row="0" Grid.Column="2" Margin="107,17,157,0" FontSize="16" VerticalAlignment="Top" Height="21"/>
                 <DatePicker x:Name="Birth"
                         materialDesign:HintAssist.HelperText=""
                         materialDesign:HintAssist.Hint="Pick Date"
                         Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="175,-4,17,0" IsTodayHighlighted="False" FontSize="16" VerticalAlignment="Top" Height="55" Grid.Column="2"/>
 
                 <!-- Email and Phone -->
-                <TextBlock Text="Email:" Grid.Row="1" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
+                <TextBlock x:Name="e_mail" Text="Email:" Grid.Row="1" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
                 <TextBox x:Name="Email" Grid.Row="1" Margin="82,20,275,21"
                      IsReadOnly="False"
                      IsReadOnlyCaretVisible="True"
@@ -73,7 +73,7 @@
                      FontSize="16"
                      VerticalContentAlignment="Center"
                      Padding="0,0,0,-10" Grid.ColumnSpan="3" TextChanged="Email_TextChanged"/>
-                <TextBlock Text="Phone:" Grid.Row="1" Grid.Column="2" Margin="107,19,147,0" FontSize="16" VerticalAlignment="Top" Height="20"/>
+                <TextBlock x:Name="phone_num" Text="Phone:" Grid.Row="1" Grid.Column="2" Margin="107,19,147,0" FontSize="16" VerticalAlignment="Top" Height="20"/>
                 <TextBox x:Name="Phone" Grid.Row="1" Grid.Column="2" Margin="175,20,17,22"
                      materialDesign:HintAssist.Hint="0123456789"
                      FontSize="16"
@@ -82,15 +82,15 @@
                      PreviewTextInput="Phone_PreviewTextInput" RenderTransformOrigin="0.494,0.479"/>
 
                 <!-- Role -->
-                <TextBlock Text="Role:" Grid.Row="2" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
+                <TextBlock x:Name="role" Text="Role:" Grid.Row="2" Grid.Column="0" Margin="10,0,30,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
                 <TextBlock x:Name="Role" Grid.Row="2" Margin="82,0,104,0" FontSize="16" VerticalAlignment="Center" Height="22"/>
 
                 <!-- Buttons -->
-                <Button Content="Change Password"
+                <Button x:Name="changepass_bt" Content="Change Password"
                         Grid.Row="2" Grid.Column="2" Width="178" Margin="0,14,0,25"
                         HorizontalAlignment="Center" Background="#FF1DA2ED"
                         Click="ChangePass_Click"/>
-                <Button Content="Update" Grid.Row="3" Width="188" Margin="258,0,0,26" HorizontalAlignment="Left" Click="UpdateButton_Click" Grid.ColumnSpan="3" Background="#FF1DA2ED"/>
+                <Button x:Name="update_bt" Content="Update" Grid.Row="3" Width="188" Margin="258,0,0,26" HorizontalAlignment="Left" Click="UpdateButton_Click" Grid.ColumnSpan="3" Background="#FF1DA2ED"/>
             </Grid>
 
 

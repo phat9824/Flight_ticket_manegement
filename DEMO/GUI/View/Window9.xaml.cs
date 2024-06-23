@@ -27,6 +27,7 @@ using System.Data.SqlClient;
 using static GUI.View.Window2;
 using TextBox = System.Windows.Controls.TextBox;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace GUI.View
 {
@@ -114,7 +115,12 @@ namespace GUI.View
                 MessageBox.Show(state, "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
+        static bool PositiveIntegerChecking(string str)
+        {
+            // Biểu thức chính quy để kiểm tra ký tự đặc biệt
+            Regex regex = new Regex("[^0-9.]");
+            return regex.IsMatch(str);
+        }
         public string ValidateInput()
         {
             if (SourceAirportID.SelectedIndex == -1 || DestinationAirportID.SelectedIndex == -1)
@@ -145,7 +151,7 @@ namespace GUI.View
             {
                 return "Please select a departure time starting from " + DateTime.Now.ToString("dd/MM/yyyy H:m:s");
             }
-            else if (TicketPrice.Text == string.Empty)
+            else if (TicketPrice.Text == string.Empty && PositiveIntegerChecking(TicketPrice.Text))
             {
                 return "Please enter the ticket price!";
             }
