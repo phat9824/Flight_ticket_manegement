@@ -132,7 +132,7 @@
 
             <Grid Margin="0,-8,0,0">
 
-                <Image Source="/Images/Slice 1.png" Width="500" Margin="-1,4,311,-5"/>
+                <Image x:Name="main_img" Source="/Images/Slice 1.png" Width="500" Margin="-1,4,311,-5"/>
                 <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Margin="473,163,18,205">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
@@ -140,7 +140,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Images/gmail2.png" Height="20"/>
+                        <Image x:Name="mail_img" Source="/Images/gmail2.png" Height="20"/>
                         <TextBlock x:Name="textEmail"  MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}"/>
                         <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}"/>
                     </Grid>
@@ -154,7 +154,7 @@
                             <ColumnDefinition Width="263*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Images/key2.png" Height="20" Margin="0,0,0,1"/>
+                        <Image x:Name="pass_img" Source="/Images/key2.png" Height="20" Margin="0,0,0,1"/>
                         <TextBlock x:Name="textPassword"  MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
                         <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
                     </Grid>

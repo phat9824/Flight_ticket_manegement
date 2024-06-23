@@ -45,7 +45,7 @@ namespace GUI
 
             // Khởi tạo danh sách các năm
             List<int> years = new List<int>();
-            for (int i = currentYear - 120; i <= currentYear; i++)
+            for (int i = currentYear - 80; i <= currentYear; i++)
             {
                 years.Add(i);
             }

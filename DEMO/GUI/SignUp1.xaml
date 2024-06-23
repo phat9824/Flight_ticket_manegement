@@ -147,7 +147,7 @@
                 <TextBlock x:Name="textMailAdd" Text="@gmail.com" Opacity="0.6" MouseDown="textMailAdd_MouseDown" Style="{StaticResource textHint}" Margin="-7,0,-6,0"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox  x:Name="txtMailAdd" TextChanged="txtMailAdd_TextChanged" Style="{StaticResource textBox}"/>
-                  
+                    <TextBlock Text="@gmail.com" VerticalAlignment="Center" Opacity="0.6"/>
                 </StackPanel>
             </Grid>
         </Border>

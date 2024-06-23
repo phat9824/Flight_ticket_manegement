@@ -102,7 +102,7 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="20 10 0 0" Height="43" Width="341"/>
+            <TextBlock x:Name="page_name" Text="Receive Flight Schedule" Grid.Row="0" FontSize="32" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#121518" VerticalAlignment="Top" Margin="20 10 0 0" Height="43" Width="341"/>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -143,7 +143,7 @@
                 </StackPanel>
 
                 <Grid Grid.Column="1">
-                    <TextBlock Text="&#x27f6;"
+                    <TextBlock x:Name="to_icon" Text="&#x27f6;"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontSize="40"
                                Margin="0 0 0 10"/>
@@ -251,27 +251,27 @@
                     </Grid>
                 </StackPanel>
 
-                <TextBlock Grid.Row="0" Grid.Column="0"
+                <TextBlock x:Name="De_day" Grid.Row="0" Grid.Column="0"
                            Text="Departure Day:"
                            Margin="20 0 0 0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            FontSize="15"
                            Opacity="0.66"/>
-                <TextBlock Grid.Row="0" Grid.Column="3"
+                <TextBlock x:Name="De_time" Grid.Row="0" Grid.Column="3"
                            Text="Departure Time:"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            FontSize="15"
                            Opacity="0.66"/>
-                <TextBlock Grid.Row="1" Grid.Column="0"
+                <TextBlock x:Name="F_time" Grid.Row="1" Grid.Column="0"
                            Text="Flight Time:"
                            Margin="20 0 0 0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            FontSize="15"
                            Opacity="0.66"/>
-                <TextBlock Grid.Row="1" Grid.Column="3"
+                <TextBlock x:Name="T_price" Grid.Row="1" Grid.Column="3"
                            Text="Ticket Price:"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
@@ -292,7 +292,7 @@
                     <ColumnDefinition Width="400"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" 
+                <Button x:Name="add_bt" Grid.Column="0" 
                         Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="5 0 0 0"
@@ -302,14 +302,14 @@
                         <TextBlock Text="Add" Margin="5 0 0 0"></TextBlock>
                     </StackPanel>
                 </Button>
-                <TextBlock Grid.Column="1"
+                <TextBlock x:Name="Ticketcls" Grid.Column="1"
                            Text="Ticket Class" 
                            VerticalAlignment="Center" HorizontalAlignment="Center"
                            TextAlignment="Center"
                            Width="160" Height="30" Margin="0 0 0 0"
                            LineHeight="20" FontSize="20"
                            FontWeight="SemiBold"/>
-                <Button Grid.Column="2" Style="{StaticResource gridRemoveButton}"
+                <Button x:Name="reset_bt" Grid.Column="2" Style="{StaticResource gridRemoveButton}"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetTicket_Click">
@@ -408,7 +408,7 @@
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource gridRemoveButton}"
+                                    <Button x:Name="remove_bt" Style="{StaticResource gridRemoveButton}"
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                             Margin="0,0,0,0"
@@ -436,7 +436,7 @@
                     <ColumnDefinition Width="400"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" 
+                <Button x:Name="add_inairport" Grid.Column="0" 
                         Background="#FF1DA2ED"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="5 0 0 0" 
@@ -446,14 +446,14 @@
                         <TextBlock Text="Add" Margin="5 0 0 0"></TextBlock>
                     </StackPanel>
                 </Button>
-                <TextBlock Grid.Column="1"
-                           Text="Intermidate Airport" 
+                <TextBlock x:Name="in_air" Grid.Column="1"
+                           Text="Intermedate Airport" 
                            VerticalAlignment="Center" HorizontalAlignment="Center"
                            TextAlignment="Center"
                            Width="200" Height="30" Margin="0 0 0 0"
                            LineHeight="20" FontSize="20"
                            FontWeight="SemiBold"/>
-                <Button Grid.Column="2" Style="{StaticResource gridRemoveButton}"
+                <Button x:Name="reset_inair" Grid.Column="2" Style="{StaticResource gridRemoveButton}"
                         VerticalAlignment="Center" 
                         Width="160" Height="30" Margin="0 0 5 0" 
                         Click="ResetIA_Click">
@@ -524,7 +524,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Width="100">
-                                        <Button Style="{StaticResource gridRemoveButton}"
+                                        <Button x:Name="remove_inair" Style="{StaticResource gridRemoveButton}"
                                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                                 Margin="10 0 0 0"
@@ -544,7 +544,7 @@
 
             <!--R7___________________________________-->
             <Grid Grid.Row="9" VerticalAlignment="Bottom">
-                <Button Height="50" Width="200" FontSize="20"
+                <Button x:Name="Confirm_bt" Height="50" Width="200" FontSize="20"
                         Content="Confirm"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
