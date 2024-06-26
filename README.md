@@ -19,10 +19,21 @@
 # GIỚI THIỆU MÔN HỌC
 * **Tên môn học:** Nhập môn công nghệ phần mềm
 * **Mã môn học:** SE104
-* **Mã lớp:** SE104.O27.KHCL
+* **Mã lớp:** SE104.O27
 * **Năm học:** HK2 (2023 - 2024)
 * **Giảng viên**: Đặng Việt Dũng
 
 # ĐỒ ÁN CUỐI KÌ
 * **Đề tài:** Phần mềm quản lý thư bán vé máy bay
+
+# HƯỚNG DẪN CÀI ĐẶT
+* Bước 1: Đầu tiên phải đảm bảo bạn đã cài đặt MySQL và C# .Net
+* Bước 2: Khởi tạo database ở file scipt airplanedb trong folder DATABASE
+* Bước 3: Chạy file app mở IDE lên
+![alt text](image.png)
+* Bước 4: Set Up cho sol
+
+<!-- Footer -->
+<p align='center'>Copyright © 2024 Nhóm 15 - SE104.O27</p>
+
 
