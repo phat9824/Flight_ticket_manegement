@@ -30,8 +30,23 @@
 * Bước 1: Đầu tiên phải đảm bảo bạn đã cài đặt MySQL và C# .Net
 * Bước 2: Khởi tạo database ở file scipt airplanedb trong folder DATABASE
 * Bước 3: Chạy file app mở IDE lên
-![alt text](image.png)
-* Bước 4: Set Up cho sol
+![alt text](img/image.png)
+* Bước 4: Set Up cho GUI làm startup Project
+![alt text](img/image-1.png)
+* Bước 5: Vào View -> sever explorer ->  chuột trái DataConnections -> Add Connection
+![alt text](img/image-2.png)
+
+* Bước 6: Điền **Sever name** của MySQL và tên database đã tạo ở SQL
+![alt text](img/image-3.png)
+
+* Bước 7: vô Properties copy **Connection String**
+![alt text](img/image-4.png)
+
+* Bước 8: Mở file DatabaseAccess.cs và paste đường dẫn vừa copy vào biến strcon
+
+![alt text](img/image-5.png)
+
+![alt text](img/image-6.png)
 
 <!-- Footer -->
 <p align='center'>Copyright © 2024 Nhóm 15 - SE104.O27</p>
