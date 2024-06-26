@@ -10,23 +10,17 @@ CREATE TABLE PERMISSION
 )
 CREATE TABLE ACCOUNT
 (
-	UserID VARCHAR(20) PRIMARY KEY,
+	UserID VARCHAR(20) ,
 	UserName NVARCHAR(40) NOT NULL,
 	Phone VARCHAR(20) NULL,
-	Email VARCHAR(60) NULL,
+	Email VARCHAR(60),
 	Birth SMALLDATETIME NOT NULL,
 	PasswordUser VARCHAR(60) NOT NULL,
 	PermissionID INT FOREIGN KEY REFERENCES PERMISSION(PermissionID),
 	isDeleted int,
 	Image VARBINARY(MAX) NULL,
-)
--- tạm để vào
-CREATE TABLE ACC_Image
-(
-	ID VARCHAR(20) PRIMARY KEY,
-	img image,
-	UserID VARCHAR(20) FOREIGN KEY REFERENCES ACCOUNT(UserID),
-	isDeleted int
+
+	PRIMARY KEY(UserID, Email)
 )
 
 
@@ -114,7 +108,7 @@ CREATE TABLE PARAMETER
     CancelTime              time,            -- Cancellation time
 	isDeleted int,
 );
-
+drop table ACCOUNT
 delete from ACCOUNT
 
 select *from FLIGHT
@@ -134,10 +128,10 @@ INSERT INTO PERMISSION VALUES (2, 'Staff', 0);
 
 -- tk: admin@gmail.com; pass: password1
 -- tk: staff1@gmail.com; pass: password2
--- tk: admin1@gmail.com; pass: password3
+-- tk: staff2@gmail.com; pass: password3
 INSERT INTO ACCOUNT VALUES ('000', 'admin', '0123456789', 'admin@gmail.com', '1980-01-01', '7c6a180b36896a0a8c02787eeafb0e4c', 1, 0, NULL);
 INSERT INTO ACCOUNT VALUES ('001', 'staff1', '0123456790', 'staff1@gmail.com', '1985-02-02', '6cb75f652a9b52798eb6cf2201057c73', 2, 0, NULL);
-INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'admin1@gmail.com', '1990-03-03', '819b0643d6b89dc9b579fdfc9094f28e', 2, 0, NULL);
+INSERT INTO ACCOUNT VALUES ('002', 'staff2', '0123456791', 'staff2@gmail.com', '1990-03-03', '819b0643d6b89dc9b579fdfc9094f28e', 2, 0, NULL);
 
 --AIRPORT 
 INSERT INTO AIRPORT VALUES ('000', N'Nội Bài', 0);

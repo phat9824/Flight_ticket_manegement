@@ -57,8 +57,8 @@ namespace GUI.View
             GridRP_Month.ItemsSource = reportsByFlightData;
             reportsByMonthData = ReportByMonthData.ConvertListDTOToObservableCollectionData(listReportByMonthDTO);
             GridRP_Year.ItemsSource = reportsByMonthData;
-            TotalRevenue_Month.Text = ((Int64)0982737132323).ToString();
-            TotalRevenue_Year.Text = ((Int64)123234323111).ToString();
+            TotalRevenue_Month.Text = ((Int64)0).ToString();
+            TotalRevenue_Year.Text = ((Int64)0).ToString();
             //----------END-Test UI-----------------------------------------------------------------------------//
 
         }
@@ -81,9 +81,9 @@ namespace GUI.View
             {
                 return "Year cant be negative";
             }
-            if (Convert.ToInt32(Year_TabMonth.Text) >= DateTime.Now.Year)
+            if (Convert.ToInt32(Year_TabMonth.Text) >= DateTime.Now.Year + 1)
             {
-                return "Year exceeds the current year (" + DateTime.Now.Year.ToString() + ")";
+                return "Year exceeds the current year (" + DateTime.Now.Year.ToString() + 1 + ")";
             }
             return string.Empty;
         }
@@ -155,9 +155,9 @@ namespace GUI.View
             {
                 return "Year cant be negative";
             }
-            if (Convert.ToInt32(Year_TabYear.Text) >= DateTime.Now.Year)
+            if (Convert.ToInt32(Year_TabYear.Text) >= DateTime.Now.Year + 1)
             {
-                return "Year exceeds the current year (" + DateTime.Now.Year.ToString() + ")";
+                return "Year exceeds the current year (" + DateTime.Now.Year.ToString() + 1 + ")";
             }
             return string.Empty;
         }
