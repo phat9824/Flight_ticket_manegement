@@ -27,7 +27,7 @@
 * **Đề tài:** Phần mềm quản lý thư bán vé máy bay
 
 # HƯỚNG DẪN CÀI ĐẶT
-* Bước 1: Đầu tiên phải đảm bảo bạn đã cài đặt MySQL và C# .Net
+* Bước 1: Đầu tiên phải đảm bảo bạn đã cài đặt MySQL và C# .Net và sau đó clone repo này về máy
 * Bước 2: Khởi tạo database ở file scipt airplanedb trong folder DATABASE
 * Bước 3: Chạy file app mở IDE lên
 ![alt text](img/image.png)
@@ -47,6 +47,8 @@
 ![alt text](img/image-5.png)
 
 ![alt text](img/image-6.png)
+
+* Bước 9: Chọn **start** để khởi chạy project
 
 <!-- Footer -->
 <p align='center'>Copyright © 2024 Nhóm 15 - SE104.O27</p>
